@@ -128,8 +128,18 @@ function post(){
 $user_id = $this->input->post('user_id');  
 $applicant_reference_number=$this->input->post('applicant_reference_number');
 $data= $this->db->where('applicant_ref_number',$applicant_reference_number)->get('test_request')->num_rows();
+
 if($data==1){
-  
+
+$assay=$this->input->post('hplc_internal_method');
+ 
+  if($assay='6a'){
+    $actual_test=6;
+  }
+  if($assay='6b'){
+    $actual_test=6;
+  }
+
  $data = array(
 
    'request_type'=>$request_type,
@@ -158,7 +168,7 @@ if($data==1){
    'identification'=>$this->input->post('identification'),
    'dissolution'=>$this->input->post('dissolution'),  
    'friability'=>$this->input->post('friability'),  
-   'assay'=>$this->input->post('assay'),  
+   'assay'=>$actual_test,  
    'disintegration'=>$this->input->post('disintegration'),  
    'content_uniformity'=>$this->input->post('content_uniformity'),  
    'ph_alkalinity'=>$this->input->post('ph_alkalinity'), 
@@ -221,7 +231,7 @@ $data = array(
    'identification'=>$this->input->post('identification'),
    'dissolution'=>$this->input->post('dissolution'),  
    'friability'=>$this->input->post('friability'),  
-   'assay'=>$this->input->post('assay'),  
+   'assay'=>$actual_test,  
    'disintegration'=>$this->input->post('disintegration'),  
    'content_uniformity'=>$this->input->post('content_uniformity'),  
    'ph_alkalinity'=>$this->input->post('ph_alkalinity'), 

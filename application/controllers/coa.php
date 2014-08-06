@@ -16,11 +16,15 @@ class Coa extends CI_Controller{
 		$results = $query->result_array();
 		$data['query_tr'] = $results[0];
 
-		$sql_coa = "SELECT * FROM coa WHERE test_request_id = '$id'";
-		$query_coa = $this->db->query($sql_coa)	;
-		$data['query_coa'] = $query_coa->result_array();
-		$results_c = $query_coa->result_array();
-		$data['query_coa_c'] = $results_c[0];
+		// $sql_coa = "SELECT * FROM coa WHERE test_request_id = '$id'";
+		// $query_coa = $this->db->query($sql_coa)	;
+		// $data['query_coa'] = $query_coa->result_array();
+		// $results_c = $query_coa->result_array();
+		// $data['query_coa_c'] = $results_c[0];
+
+     $data['query_coa']=
+    $this->db->select('*')->get_where('coa', array('test_request_id' => $id))->result_array();
+    
 
 		$this->load->view('coa_view', $data);
 	}

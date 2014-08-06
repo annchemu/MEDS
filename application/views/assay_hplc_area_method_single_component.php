@@ -564,7 +564,7 @@
                     </tr>
                     <tr>
                       <td style="text-align:center;border-bottom:solid 1px #c4c4ff;">1.</td>
-                      <td><input type="text" class="retention_time" id="retention_time_one" name="retention_time_one"></input></td>
+                      <td><input type="text" id="retention_time_one" name="retention_time_one"></input></td>
                       <td><input type="text" id="peak_area_one" name="peak_area_one"></input></td>
                       <td><input type="text" id="asymmetry_one" name="asymmetry_one"></input></td>
                       <td><input type="text" id="resolution_one" name="resolution_one"></input></td>
@@ -572,7 +572,7 @@
                     </tr>
                     <tr>
                       <td style="text-align:center;border-bottom:solid 1px #c4c4ff;">2.</td>
-                      <td><input type="text" class="retention_time" id="retention_time_two" name="retention_time_two" ></input></td>
+                      <td><input type="text" id="retention_time_two" name="retention_time_two" onChange="calculator_two()"></input></td>
                       <td><input type="text" id="peak_area_two" name="peak_area_two" onChange="calculator_two()"></input></td>
                       <td><input type="text" id="asymmetry_two" name="asymmetry_two" onChange="calculator_two()"></input></td>
                       <td><input type="text" id="resolution_two" name="resolution_two" onChange="calculator_two()"></input></td>
@@ -580,7 +580,7 @@
                     </tr>
                     <tr>
                       <td style="text-align:center;border-bottom:solid 1px #c4c4ff;">3.</td>
-                      <td><input type="text" class="retention_time" id="retention_time_three" name="retention_time_three" ></input></td>
+                      <td><input type="text" id="retention_time_three" name="retention_time_three" onChange="calculator_two()"></input></td>
                       <td><input type="text" id="peak_area_three" name="peak_area_three" onChange="calculator_two()"></input></td>
                       <td><input type="text" id="asymmetry_three" name="asymmetry_three" onChange="calculator_two()"></input></td>
                       <td><input type="text" id="resolution_three" name="resolution_three" onChange="calculator_two()"></input></td>
@@ -588,7 +588,7 @@
                     </tr>
                     <tr>
                       <td style="text-align:center;border-bottom:solid 1px #c4c4ff;">4.</td>
-                      <td><input type="text" class="retention_time" id="retention_time_four" name="retention_time_four" ></input></td>
+                      <td><input type="text" id="retention_time_four" name="retention_time_four" onChange="calculator_two()"></input></td>
                       <td><input type="text" id="peak_area_four" name="peak_area_four" onChange="calculator_two()"></input></td>
                       <td><input type="text" id="asymmetry_four" name="asymmetry_four" onChange="calculator_two()"></input></td>
                       <td><input type="text" id="resolution_four" name="resolution_four" onChange="calculator_two()"></input></td>
@@ -596,7 +596,7 @@
                     </tr>
                     <tr>
                       <td style="text-align:center;border-bottom:solid 1px #c4c4ff;">5.</td>
-                      <td><input type="text" class="retention_time" id="retention_time_five" name="retention_time_five" ></input></td>
+                      <td><input type="text" id="retention_time_five" name="retention_time_five" onChange="calculator_two()"></input></td>
                       <td><input type="text" id="peak_area_five" name="peak_area_five" onChange="calculator_two()"></input></td>
                       <td><input type="text" id="asymmetry_five" name="asymmetry_five" onChange="calculator_two()"></input></td>
                       <td><input type="text" id="resolution_five" name="resolution_five" onChange="calculator_two()"></input></td>
@@ -604,7 +604,7 @@
                     </tr>
                     <tr>
                       <td style="text-align:center;border-bottom:solid 1px #c4c4ff;">6.</td>
-                      <td><input type="text" class="retention_time" id="retention_time_six" name="retention_time_six" ></input></td>
+                      <td><input type="text" id="retention_time_six" name="retention_time_six" onChange="calculator_two()"></input></td>
                       <td><input type="text" id="peak_area_six" name="peak_area_six" onChange="calculator_two()"></input></td>
                       <td><input type="text" id="asymmetry_six" name="asymmetry_six" onChange="calculator_two()"></input></td>
                       <td><input type="text" id="resolution_six" name="resolution_six" onChange="calculator_two()"></input></td>
@@ -612,7 +612,7 @@
                     </tr>
                     <tr>
                       <td style="padding:4px;border-bottom:solid 1px #c4c4ff;">Average</td>
-                      <td><input type="text" class="average_retention_time" id="average_retention_time" name="average_retention_time" ></input></td>
+                      <td><input type="text" id="average_retention_time" name="average_retention_time" onChange="calculator_two()"></input></td>
                       <td><input type="text" id="average_peak_area" name="average_peak_area" onChange="calculator_two()"></input></td>
                       <td><input type="text" id="average_asymmetry" name="average_asymmetry" onChange="calculator_two()"></input></td>
                       <td><input type="text" id="average_resolution" name="average_resolution" onChange="calculator_two()"></input></td>
@@ -620,7 +620,7 @@
                     </tr>
                     <tr>
                       <td style="padding:4px;border-bottom:solid 1px #c4c4ff;">SD</td>
-                      <td><input type="text" class="standard_dev_retention_time" id="standard_dev_retention_time" name="standard_dev_retention_time" onChange="calculator_two()" ></input></td>
+                      <td><input type="text" id="standard_dev_retention_time" name="standard_dev_retention_time" onChange="calculator_two()" ></input></td>
                       <td><input type="text" id="standard_dev_peak_area" name="standard_dev_peak_area" onChange="calculator_two()"></input></td>
                       <td><input type="text" id="standard_dev_asymmetry" name="standard_dev_asymmetry" onChange="calculator_two()"></input></td>
                       <td><input type="text" id="standard_dev_resolution" name="standard_dev_resolution" onChange="calculator_two()"></input></td>
@@ -628,7 +628,7 @@
                     </tr>
                     <tr>
                       <td style="padding:4px;border-bottom:solid 1px #c4c4ff;">RSD</td>
-                      <td><input type="text" class="rsd_retention_time" id="rsd_retention_time" name="rsd_retention_time"></input></td>
+                      <td><input type="text" id="rsd_retention_time" name="rsd_retention_time" onChange="calculator_two()"></input></td>
                       <td><input type="text" id="rsd_peak_area" name="rsd_peak_area" onChange="calculator_two()"></input></td>
                       <td><input type="text" id="rsd_asymmetry" name="rsd_asymmetry" onChange="calculator_two()"></input></td>
                       <td><input type="text" id="rsd_resolution" name="rsd_resolution" onChange="calculator_two()"></input></td>

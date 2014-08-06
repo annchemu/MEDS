@@ -234,11 +234,11 @@
 
     <tr>
       <td width = "250px"align="left" style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><u>REGISTRATION NUMBER:</u></td>
-      <td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><input type="text" name="reg_no"></td>
+      <td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><?php echo $query_tr['reference_number'] ?></td>
       <td align="left" style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><u>Request Date:</u></td>
       <td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><?php echo $query_tr['date_time']?></td>
       <td align="left" style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><u>Test Date:</u></td>
-      <td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><?php echo $query_coa_c['date_tested']?></td>
+      <td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><?php if (empty($query_coa)){echo "Test has not been DONE yet";}?></td>
     </tr>  
     <tr>
        <td align="left" style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><u>NAME OF PRODUCT:</u></td>
@@ -246,14 +246,14 @@
     </tr>
     <tr>
         <td align="left" style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><u>CLIENT:</u></td>
-        <td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><input type="text" name="client"></td>       
+        <td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><?php echo $query_tr['applicant_name']?></td>       
         <td align="left" style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><u>MANUFACTURER:</u></td>
         <td colspan="4" style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><?php echo $query_tr['manufacturer_name']?></td>
     </tr>
     <tr>
-      <td colspan="6"style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><b>LABEL CLAIM:<b></td>
+      <td colspan="6"style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><u>LABEL CLAIM:</u></td>
     </tr>
-    <tr><td colspan="6" style ="padding:8px;"><textarea cols ="70" rows ="3" name ="label_claim"></textarea></td></tr>
+    <tr><td colspan="6" style ="padding:8px;"><?php echo $query_tr['label_claim']?></td></tr>
     <tr>
       <td align="left" style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Batch Number:</td>
       <td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><?php echo $query_tr['batch_lot_number']?></td>
@@ -267,9 +267,8 @@
         <h4><u>RESULTS OF ANALYSIS</u></h2></td>      
     </tr>
     <tr>
-      <td colspan="6"align="left" style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><b>Appearance:</b></td>
-    </tr>
-    <tr><td colspan="6" style ="padding:8px;"><textarea name ="appearance" cols ="70" rows ="3"></textarea></td></tr>
+      <td colspan="1"align="left" style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><b>Appearance:</b></td>
+    <<td colspan="5" style ="text-align:left;padding:8px;"><?php echo $query_tr['active_ingredients']?></td></tr>
      <tr>
       <td colspan="6">
       <table width="950px" bgcolor="#c4c4ff" border="0" cellpadding="4px" align="center">
@@ -285,6 +284,12 @@
         <tbody>
           <?php
             $i = 1;
+
+            if(empty($query_coa)){
+                  echo "There's no data currently for display!";
+            }else{
+
+            }
             foreach ($query_coa as $row): 
 
               if ($i ==0) {
@@ -311,7 +316,7 @@
     <tr>
         <td colspan="6"align="left" style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><b>CONCLUSION:*<b></td> 
     </tr>
-    <tr><td colspan="6" style ="padding:8px;"><textarea name ="conclusions" cols ="70" rows ="3"></textarea></td></tr>
+    <tr><td colspan="6" style ="text-align:center;padding:8px;"><textarea name ="conclusions" cols ="160" rows ="3"></textarea></td></tr>
     <tr>
          <td align="left" style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">PREPARED BY:</td>
          <td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><b>Peter Kamau</b><br/>Laboratory Analyst</td>

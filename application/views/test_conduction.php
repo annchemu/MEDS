@@ -115,16 +115,20 @@
                 <th style="text-align:center;border-right: dotted 1px #ddddff;">View Worksheet</th>
                 <th style="text-align:center;border-right: dotted 1px #ddddff;background-color:#ffeea0;">Status</th>
             </tr>
+            <tr>
+              <th colspan="5"style="text-align:center;padding:4px;background-color:#ffffff;border-top: solid 1px #ddddff;"><a class="reagents" href="<?php echo base_url().'assay/assay_reagents/'.$query['a'].'/'.$request[0]['tr'];?>">Test's Reagents</a></th>
+            </tr>
           </thead>
           <tbody>
+            
           <?php
             if($request[0]['assay']==0 || $request[0]['assay']=="" || $request[0]['assay']=="NULL" ){
              
            }else{
             ?>
             <tr>
-                <td style="text-align:center;padding:4px; background-color:#ffffff;border-top: solid 1px #ddddff;"><b>Assay Tests</b></a></td>
-                <td style="text-align:center;padding:4px; background-color:#ffffff;border-top: solid 1px #ddddff;"><a href="<?php echo base_url().'assay/monograph/'.$query['a'].'/'.$request[0]['tr'];?>"></a></td>
+                <td style="text-align:center;padding:4px; background-color:#ffffff;border-top: solid 1px #ddddff;"><b>Assay Tests</b></td>
+                <td style="text-align:left;padding:4px;background-color:#ffffff;border-top: solid 1px #ddddff;"></td>
                 <td style="text-align:center;padding:4px; background-color:#ffffff;border-top: solid 1px #ddddff;"><a href="<?php echo base_url().'assay/worksheet/'.$query['a'].'/'.$request[0]['tr'];?>"></a></td>
                 <td style="text-align:center;padding:4px; background-color:#ffffff;border-top: solid 1px #ddddff;"><a href="<?php echo base_url().'assay/worksheet/'.$query['a'].'/'.$request[0]['tr'].'/'.$request[0]['test_type_id'];?>"></a></td>
               <td 
@@ -165,7 +169,7 @@
                           ?>
                           Hplc Internal Method
                      <?php     
-                     }elseif($hplc_internal_method[0]['test_status']=1){
+                     }elseif(!empty($assay_hplc_internal_method)){
                     
                           echo"style='text-align:left;padding:4px;'>";
                           ?>
@@ -175,7 +179,7 @@
                      else{
                          echo"style='text-align:left;padding:4px;'>";
                    ?>
-                     <a href="<?php echo base_url().'assay/worksheet_internal_method/'.$query['a'].'/'.$request[0]['tr'].'/'.$request[0]['test_type_id'];?>">Hplc Internal Method</a>
+                     <a href="<?php echo base_url().'assay/worksheet_internal_method/'.$query['a'].'/'.$request[0]['tr'].'/'.$request[0]['test_type_id'];?>">Hplc Internal Method</a> 
                 <?php
                 }
                 ?>
@@ -323,7 +327,7 @@
                      }else{
                          echo"style='text-align:center;padding:4px;'>";
                    ?>
-                     <a href="<?php echo base_url().'assay/full_worksheet_hplc_internal_method/'.$query['a'].'/'.$request[0]['tr'].'/'.$request[0]['test_type_id'];?>">view worksheet</a>
+                     <a href="<?php echo base_url().'assay/full_worksheet_hplc_area_method_two_components/'.$query['a'].'/'.$request[0]['tr'].'/'.$request[0]['test_type_id'];?>">view worksheet</a>
                 <?php
                 }
                 ?>
@@ -2375,7 +2379,7 @@
                          echo "Complete";
                      }?>
                 </td>
-            </tr>
+            </tr> 
            <?php
            }
            ?>

@@ -9,6 +9,7 @@ class Coa_List extends CI_Controller{
 	}
 	function records(){
 		$this->load->model('coa_model_list');
+    
 		$data['query'] = $this->coa_model_list->records_list();
 		
 		$this->load->view('coa_view_list', $data);

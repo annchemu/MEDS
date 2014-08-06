@@ -206,7 +206,7 @@
                 </tr>
                 <tr>
                     <td height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-left:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;">SERIAL No.</td>
-                    <td colspan="2" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-right:solid 1px #bfbfbf;"><input type="hidden" name="serial_number" value="<?php echo $assay_monograph_hplc_area_method_two_components[0]['serial_number'];?>"/><?php echo $assay_monograph_hplc_area_method_two_components[0]['serial_number']?></td>
+                    <td colspan="2" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-right:solid 1px #bfbfbf;"><input type="hidden" name="serial_number" value="<?php echo $hplc_area_method_two_components_monograph[0]['serial_number'];?>"/><?php echo $hplc_area_method_two_components_monograph[0]['serial_number']?></td>
                     <td colspan="2" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-right:solid 1px #bfbfbf;">Batch/Lot No.</td>
                     <td colspan="3" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-right:solid 1px #bfbfbf;"><?php echo $query['batch_lot_number']?></input></td>
                 </tr>
