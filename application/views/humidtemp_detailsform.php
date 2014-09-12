@@ -47,6 +47,13 @@
    $acc_status=$user['logged_in']['acc_status'];
    $id_temp=1;
    //var_dump($user);
+   if(empty($user['logged_in']['id'])) {
+       
+      redirect('login','location');  //1. loads the login page in current page div
+
+      echo '<meta http-equiv=refresh content="0;url=base_url();login">'; //3 doesn't work
+
+       }
   ?>
   <div id="header"> 
    <div id="logo" style="padding:8px;color: #0000ff;" align="center"><img src="<?php echo base_url().'images/meds_logo.png';?>" height="35px" width="40px"/>MISSION FOR ESSENTIAL DRUGS AND SUPPLIES</div>
@@ -111,10 +118,11 @@
         <a href="<?php echo base_url().'equipment_maintenance_records/Get';?>"class="sub_menu sub_menu_link first_link">Equipment & Maintenance</a>
         <a href="<?php echo base_url().'reagents_inventory_record/Get';?>"class="sub_menu sub_menu_link first_link">Reagents & Inventory</a>
         <a href="<?php echo base_url().'standard_register_records/Get';?>"class="sub_menu sub_menu_link first_link">Standard Register</a>
-        <a href="<?php echo base_url().'temperature_humidity_list/records/'.$id_temp;?>"class="sub_menu sub_menu_link first_link">Temperature & Humidity</a>
+        <a href="<?php echo base_url().'temperature_humidity_list/records/'.$id_temp;?>"class="current sub_menu sub_menu_link first_link">Temperature & Humidity</a>
         <a href="<?php echo base_url().'outoftolerance_list/records';?>"class="sub_menu sub_menu_link first_link">Out of Tolerance</a>
         <a href="<?php echo base_url().'complaints_list/records';?>" class="sub_menu sub_menu_link first_link">Complaints</a>
         <a href="<?php echo base_url().'coa_list/records';?>"class="sub_menu sub_menu_link first_link">Certificate of Analysis</a>
+        <a href="<?php echo base_url().'finance/index';?>" class="sub_menu sub_menu_link first_link">Finance/Client Billing</a>
     </div>
     <?php
     echo"<div id='sub_menu'";
@@ -141,10 +149,11 @@
         <a href="<?php echo base_url().'equipment_maintenance_records/Get';?>"class="sub_menu sub_menu_link first_link">Equipment & Maintenance</a>
         <a href="<?php echo base_url().'reagents_inventory_record/Get';?>"class="sub_menu sub_menu_link first_link">Reagents & Inventory</a>
         <a href="<?php echo base_url().'standard_register_records/Get';?>"class="sub_menu sub_menu_link first_link">Standard Register</a>
-        <a href="<?php echo base_url().'temperature_humidity_list/records/'.$id_temp;?>"class="sub_menu sub_menu_link first_link">Temperature & Humidity</a>
+        <a href="<?php echo base_url().'temperature_humidity_list/records/'.$id_temp;?>"class="current sub_menu sub_menu_link first_link">Temperature & Humidity</a>
         <a href="<?php echo base_url().'outoftolerance_list/records';?>"class="sub_menu sub_menu_link first_link">Out of Tolerance</a>
         <a href="<?php echo base_url().'complaints_list/records';?>"class="sub_menu sub_menu_link first_link">Complaints</a>
         <a href="<?php echo base_url().'coa_list/records';?>"class="sub_menu sub_menu_link first_link">Certificate of Analysis</a>
+        <a href="<?php echo base_url().'finance/index';?>" class="sub_menu sub_menu_link first_link">Finance/Client Billing</a>
     </div>
     <?php
     echo"<div id='sub_menu'";
@@ -159,7 +168,7 @@
         <a href="<?php echo base_url().'reagents_inventory_record/Get';?>"class="sub_menu sub_menu_link first_link">Reagents & Inventory</a>
         <a href="<?php echo base_url().'equipment_maintenance_records/Get';?>"class="sub_menu sub_menu_link first_link">Equipment</a>
         <a href="<?php echo base_url().'outoftolerance_list/records';?>"class="sub_menu sub_menu_link first_link">Out of Tolerance</a>
-        <a href="<?php echo base_url().'temperature_humidity_list/records/'.$id_temp;?>"class="sub_menu sub_menu_link first_link">Temperature & Humidity</a>
+        <a href="<?php echo base_url().'temperature_humidity_list/records/'.$id_temp;?>"class="current sub_menu sub_menu_link first_link">Temperature & Humidity</a>
     </div>
     <?php
     echo"<div id='sub_menu'";
@@ -187,13 +196,13 @@
         <a href="<?php echo base_url().'equipment_maintenance_records/Get';?>"class="sub_menu sub_menu_link first_link">Equipment</a>
         <a href="<?php echo base_url().'standard_register_records/Get';?>"class="sub_menu sub_menu_link first_link">Standard Register</a>
         <a href="<?php echo base_url().'outoftolerance_list/records';?>"class="sub_menu sub_menu_link first_link">Out of Tolerance</a>
-        <a href="<?php echo base_url().'temperature_humidity_list/records/'.$id_temp;?>"class="sub_menu sub_menu_link first_link">Temperature & Humidity</a>
+        <a href="<?php echo base_url().'temperature_humidity_list/records/'.$id_temp;?>"class="current sub_menu sub_menu_link first_link">Temperature & Humidity</a>
     </div>
   <div id="form_wrapper_lists">
   <div id="freezer" name="menu" style="display:block;">
 	<?php echo validation_errors();?>
 	<?php echo form_open('temperature_humidity_details/Update');?>
-	<table width="950px" bgcolor="#c4c4ff" border="0" cellpadding="4px" align="center" >
+	<table width="950px" class="table_form" bgcolor="#c4c4ff" border="0" cellpadding="4px" align="center" >
 		 <input type="hidden" name="ht_id" value="<?php echo $query['ht_id']; ?>"/>
      <input type ="hidden" name ="ht_location" value ="<?php echo $query['ht_location'];?>">
      <input type="hidden" name"user" value ="<?php echo($user['logged_in']['fname']." ".$user['logged_in']['lname']);?>">
@@ -203,11 +212,11 @@
 		</tr>
 		<tr>
 			<td colspan = "6" align ="center" style="text-align:center;background-color:#ffffff;padding-right:40px;border-bottom: solid 10px #f0f0ff;color: #0000fb;background-color: #e8e8ff;"> 
-				<h4><b>HUMIDITY AND TOLERANCE</b></h4>
+				<h4><b>Humidity and Temperature</b></h4>
 			</td>	
 		</tr>
 		<tr>
-      <td align="left" colspan="6" style="background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">
+      <td align="center" colspan="6" style="background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">
       
        <a href="javascript:slide('freezer');" class="current sub_menu sub_menu_link first_link"><b>Freezer</b></a>
 			<a href="javascript:slide('sample_store');" class="sub_menu sub_menu_link first_link"><b>Sample Stores</b></a>
@@ -219,70 +228,65 @@
       </td>
     </tr>
 		<tr>
-			<td style="background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Date</td>
-			
-			<td colspan="3"style="background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">
+			<td style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Date</td>			
+			<td colspan="3"style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">
 				<input type ="date" name ="ht_date" value ="<?php echo $query['ht_date'];?>">
 			</td>
-			<td style="background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Equipment Used</td>
-			
-			<td colspan="3"style="background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">
+			<td style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Equipment Used</td>			
+			<td colspan="3"style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">
 				<input type ="text" name ="equipment_used" value ="<?php echo $query['equipment_used'];?>">
 			</td>
 	
 		</tr>
 		<tr>
-			<td colspan="6" align="center" 
-					style="text-align:center;background-color:#ffffff;padding-right:40px;border-bottom: solid 10px #f0f0ff;color: #0000fb;background-color: #e8e8ff;">
-				<h3><b>Temperature</b></h3>
-			</td>
-	
+			<td colspan="6" align="center" style="padding:8px;text-align:center;background-color:#ffffff;padding-right:40px;border-bottom: solid 10px #f0f0ff;color: #0000fb;"><b>Temperature</b></td>	
 		</tr>
 		<tr>
-			<td style="background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Minimun Temperature	</td>			
-			<td style="background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> 
+			<td style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Minimun Temperature	</td>			
+			<td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> 
 				<input type "text" name ="min_temp"  id="min_temp" value ="<?php echo $query['min_temp'];?>">	</td>
 	
-	   <td style="background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Correction Factor  </td>     
-      <td style="background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> 
+	    <td style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Correction Factor  </td>     
+      <td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> 
         <input type "text" name ="standard_min_temp" onChange ="calcf()" id="standard_min_temp"value ="<?php echo $query['standard_min_temp'];?>"> </td>
 
-			<td style="background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Minimum Temperature Corrected	</td>			
-			<td style="background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">
+			<td style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Minimum Temperature Corrected	</td>			
+			<td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">
 				<input type ="text" name ="min_temp_corrected" id="min_temp_corrected" value="<?php echo $query['min_temp_corrected']; ?>" ></td>
 	
 		</tr>
 		<tr>
-			<td style="background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Maximum Temperature	</td>			
-			<td style="background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">
+			<td style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Maximum Temperature	</td>			
+			<td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">
 				<input type ="text" name ="max_temp" id="max_temp" value="<?php echo $query['max_temp']; ?>">	</td>
 
-       <td style="background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Correction Factor  </td>     
-      <td style="background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> 
+       <td style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Correction Factor  </td>     
+       <td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> 
         <input type "text" name ="standard_max_temp" onChange ="calc2f()" id="standard_max_temp"value ="<?php echo $query['standard_max_temp'];?>"> </td>  
 	
-			<td style="background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Maximum Temperature Corrected</td>
-				<td style="background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">
+			<td style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Maximum Temperature Corrected</td>
+				<td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">
 				<input type ="text" name ="max_temp_corrected" id="max_temp_corrected" value="<?php echo $query['max_temp_corrected']; ?>"></td>		
 		</tr>
     <tr>
-      <td style="background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> Reason for Editing</td>
-      <td colspan ="6" style="background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> 
+      <td colspan="8" style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> Reason for Editing</td>
+    </tr>
+    <tr>
+      <td colspan ="8" align="center" style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> 
         <textarea id ="comments" name ="comments" rows ="4" cols ="60"><?php echo $query['comments']; ?></textarea></td>
     </tr>
-
-    	<tr>
-      <td colspan="6" style="text-align:center;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;">
-        <input type = "submit" name ="update_humidtemp" id ="save_humidtempref" value ="Submit">
+   	<tr>
+      <td colspan="6" style="padding:8px;text-align:center;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;">
+        <input type = "submit" class="btn" name ="update_humidtemp" id ="save_humidtempref" value ="Submit">
       </td>  
     </tr>
 	</table>
 	</form>
 </div>
 </div>
-       <div id="sample_store" name="menu" style="display:none;"><?php include_once "application/views/sample_store_updateform.php";?></div>
-       <div id="laboratory_area" name="menu" style="display:none;"><?php include_once "application/views/laboratory_area_updateform.php";?></div>  
-       <div id="instrument_room" name="menu" style="display:none;"><?php include_once "application/views/instrument_room_updateform.php";?></div>
-       <div id="refrigerator_form" name="menu" style="display:none;"><?php include_once "application/views/refrigerator_detailsform.php";?></div>
+       <div id="sample_store" name="menu" style="padding-top:140px;display:none;"><?php include_once "application/views/sample_store_updateform.php";?></div>
+       <div id="laboratory_area" name="menu" style="padding-top:140px;display:none;"><?php include_once "application/views/laboratory_area_updateform.php";?></div>  
+       <div id="instrument_room" name="menu" style="padding-top:140px;display:none;"><?php include_once "application/views/instrument_room_updateform.php";?></div>
+       <div id="refrigerator_form" name="menu" style="padding-top:140px;display:none;"><?php include_once "application/views/refrigerator_detailsform.php";?></div>
 </body>		
 </html>

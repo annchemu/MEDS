@@ -18,29 +18,45 @@ class Test_Identification_Chemical_Model extends CI_Model{
 		
 		$data =array(			
 			
+			'chemical_test'=>$this->input->post('chemical_test'),
+			'equipment_number'=>$this->input->post('equipment_number'),
+			'equipment_make'=>$this->input->post('equipment_make'),
 			'sample_container'=>$this->input->post('sample_container'),
 			'container'=>$this->input->post('container'),
 			'sample_weight'=>$this->input->post('sample_weight'),
 			'sample_dilution'=>$this->input->post('sample_dilution'),
 
+			'standard_description'=>$this->input->post('standard_description'),
+			'potency'=>$this->input->post('potency'),
+			'lot_no'=>$this->input->post('lot_no'),
+			'id_no'=>$this->input->post('id_no'),
+
 			'standard_container_2'=>$this->input->post('standard_container_2'),
 			'container_2'=>$this->input->post('container_2'),
 			'standard_weight_2'=>$this->input->post('standard_weight_2'),
 
-			'standard_container_3'=>$this->input->post('standard_container_3'),
-			'container_3'=>$this->input->post('container_3'),
-			'standard_weight_3'=>$this->input->post('standard_weight_3'),
+			// 'standard_container_3'=>$this->input->post('standard_container_3'),
+			// 'container_3'=>$this->input->post('container_3'),
+			// 'standard_weight_3'=>$this->input->post('standard_weight_3'),
 
-			'standard_container_4'=>$this->input->post('standard_container_4'),
-			'container_4'=>$this->input->post('container_4'),
-			'standard_weight_4'=>$this->input->post('standard_weight_4'),
+			// 'standard_container_4'=>$this->input->post('standard_container_4'),
+			// 'container_4'=>$this->input->post('container_4'),
+			// 'standard_weight_4'=>$this->input->post('standard_weight_4'),
 
-			'standard_container_5'=>$this->input->post('standard_container_5'),
-			'container_5'=>$this->input->post('container_5'),
-			'standard_weight_5'=>$this->input->post('standard_weight_5'),
+			// 'standard_container_5'=>$this->input->post('standard_container_5'),
+			// 'container_5'=>$this->input->post('container_5'),
+			// 'standard_weight_5'=>$this->input->post('standard_weight_5'),
 
 			'standard_dilution'=>$this->input->post('standard_dilution'),
 
+			'reagent_description'=>$this->input->post('reagent_description'),
+			'reagent_weight_container_1'=>$this->input->post('reagent_weight_container_1'),
+			'reagent_container_1'=>$this->input->post('reagent_container_1'),
+			'reagent_weight_1'=>$this->input->post('reagent_weight_1'),
+			'reagent_dilution'=>$this->input->post('reagent_dilution'),
+
+			'calculation_mobile'=>$this->input->post('calculation_mobile'),
+			'observation'=>$this->input->post('observation'),
 			'acceptance_criteria'=>$this->input->post('acceptance_criteria'),
 			'results'=>$this->input->post('results'),
 			'comment'=>$this->input->post('comment'),
@@ -49,6 +65,8 @@ class Test_Identification_Chemical_Model extends CI_Model{
 			'status'=>$status,
 			
 			'choice'=>$this->input->post('choice'),
+			'date_done'=>$this->input->post('date_done'),
+			'analyst'=>$this->input->post('analyst'),
 			'supervisor'=>$this->input->post('supervisor'),
 			'date'=>$this->input->post('date'),
 			'further_comments'=>$this->input->post('further_comments'),				

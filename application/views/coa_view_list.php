@@ -10,6 +10,13 @@
   <link href="<?php echo base_url().'style/jquery-ui.css';?>" rel="stylesheet" type="text/css"/>
   <link href="<?php echo base_url().'style/demo_table.css';?>" rel="stylesheet" type="text/css"/>
   
+  <!-- bootstrap reference links  
+  <link href="<?php echo base_url().'bootstrap/css/bootstrap-theme.css.map';?>" rel="stylesheet" type="text/css"/>
+  <link href="<?php echo base_url().'bootstrap/css/bootstrap-theme.min.css';?>" rel="stylesheet" type="text/css"/>
+  <link href="<?php echo base_url().'bootstrap/css/bootstrap.css.map'; ?>" rel="stylesheet" type="text/css"/>
+  <link href="<?php echo base_url().'bootstrap/css/bootstrap-theme.css';?>" rel="stylesheet" type="text/css"/>
+  <link href="<?php echo base_url().'bootstrap/css/bootstrap.min.css';?>" rel="stylesheet" type="text/css"/>  
+   -->
   <!-- bootstrap reference library -->
   <link href="<?php echo base_url().'bootstrap/css/bootstrap.css'; ?>" rel="stylesheet" type="text/css"/>
 
@@ -103,6 +110,7 @@
         <a href="<?php echo base_url().'outoftolerance_list/records';?>"class="sub_menu sub_menu_link first_link">Out of Tolerance</a>
         <a href="<?php echo base_url().'complaints_list/records';?>" class="sub_menu sub_menu_link first_link">Complaints</a>
         <a href="<?php echo base_url().'coa_list/records';?>"class="current sub_menu sub_menu_link first_link">Certificate of Analysis</a>
+        <a href="<?php echo base_url().'finance/index';?>" class="sub_menu sub_menu_link first_link">Finance/Client Billing</a>
     </div>
     <?php
     echo"<div id='sub_menu'";
@@ -133,6 +141,7 @@
         <a href="<?php echo base_url().'outoftolerance_list/records';?>"class="sub_menu sub_menu_link first_link">Out of Tolerance</a>
         <a href="<?php echo base_url().'complaints_list/records';?>"class="sub_menu sub_menu_link first_link">Complaints</a>
         <a href="<?php echo base_url().'coa_list/records';?>"class="current sub_menu sub_menu_link first_link">Certificate of Analysis</a>
+        <a href="<?php echo base_url().'finance/index';?>" class="sub_menu sub_menu_link first_link">Finance/Client Billing</a>
     </div>
     <?php
     echo"<div id='sub_menu'";
@@ -178,53 +187,53 @@
         <a href="<?php echo base_url().'temperature_humidity_list/records/'.$id_temp;?>"class="sub_menu sub_menu_link first_link">Temperature & Humidity</a>
     </div>
     <div id="form_wrapper_lists">
-	<div id="account_lists" style="display: block" name="menu">
-	<table class="subdivider" width="100%">
-	   <tr>
-		    <td colspan="4" align="center" style="border-bottom: solid 10px #c4c4ff;color: #0000fb;background-color: #e8e8ff;"><h5>Certificate of Analysis</h5></td>
-	   </tr>
-	</table>
-	<table id="list" class="list_view_header" width="100%" bgcolor="#ffffff" cellpadding="4px">
-		<thead bgcolor="#efefef">
-			<tr>
-				<th style="text-align:center;border-right: dotted 1px #ddddff;">No.</th>
-				<th style="text-align:center;border-right: dotted 1px #ddddff;">Product Name</th>
-				<th style="text-align:center;border-right: dotted 1px #ddddff;">Manufacturer</th>
+  <div id="account_lists" style="display: block" name="menu">
+  <table class="subdivider" width="100%">
+     <tr>
+        <td colspan="4" align="center" style="border-bottom: solid 10px #c4c4ff;color: #0000fb;background-color: #e8e8ff;"><h5>Certificate of Analysis</h5></td>
+     </tr>
+  </table>
+  <table id="list" class="list_view_header" width="100%" bgcolor="#ffffff" cellpadding="4px">
+    <thead bgcolor="#efefef">
+      <tr>
+        <th style="text-align:center;border-right: dotted 1px #ddddff;">No.</th>
+        <th style="text-align:center;border-right: dotted 1px #ddddff;">Product Name</th>
+        <th style="text-align:center;border-right: dotted 1px #ddddff;">Manufacturer</th>
         <th style="text-align:center;border-right: dotted 1px #ddddff;">Batch Lot No.</th>
-				<th style="text-align:center;border-right: dotted 1px #ddddff;">Date of Manufacturing</th>
-				<th style="text-align:center;border-right: dotted 1px #ddddff;">Expiry Date</th>
+        <th style="text-align:center;border-right: dotted 1px #ddddff;">Date of Manufacturing</th>
+        <th style="text-align:center;border-right: dotted 1px #ddddff;">Expiry Date</th>
         <th style="text-align:center;border-right: dotted 1px #ddddff;">View COA</th>
-			</tr>
-		</thead>
+      </tr>
+    </thead>
 
-		<tbody>
-			<?php
-			$i = 1;
-			foreach ($query as $row): 
+    <tbody>
+      <?php
+      $i = 1;
+      foreach ($query as $row): 
 
-				if ($i ==0) {
-					 echo "<tr>";
-				}
-			?>
-			
-				<td style="text-align: center;border-bottom: solid 1px #c0c0c0;"><?php echo $i;?>.</td>
-				<td style="text-align: center;border-bottom: solid 1px #c0c0c0;"><?php echo $row->active_ingredients;?></td>
+        if ($i ==0) {
+           echo "<tr>";
+        }
+      ?>
+      
+        <td style="text-align: center;border-bottom: solid 1px #c0c0c0;"><?php echo $i;?>.</td>
+        <td style="text-align: center;border-bottom: solid 1px #c0c0c0;"><?php echo $row->active_ingredients;?></td>
         <td style="text-align: center;border-bottom: solid 1px #c0c0c0;"><?php echo $row->manufacturer_name;?></td>
         <td style="text-align: center;border-bottom: solid 1px #c0c0c0;"><?php echo $row->batch_lot_number;?></td>
-				<td style="text-align: center;border-bottom: solid 1px #c0c0c0;"><?php echo $row->date_manufactured;?></td>
-				<td style="text-align: center;border-bottom: solid 1px #c0c0c0;"><?php echo $row->expiry_date;?></td>
+        <td style="text-align: center;border-bottom: solid 1px #c0c0c0;"><?php echo $row->date_manufactured;?></td>
+        <td style="text-align: center;border-bottom: solid 1px #c0c0c0;"><?php echo $row->expiry_date;?></td>
         <td style="text-align: center;"><a href="<?php echo base_url().'coa/view/'.$row->id?>" height="20px" width ="20px"><img src="<?php echo base_url().'images/icons/add_field.png';?>" height="10px" width="10px">Generate COA</a></td>
         
         
-				
-				<?php $i++; ?>
+        
+        <?php $i++; ?>
 
-			</tr>
+      </tr>
 
-			<?php endforeach; ?>
+      <?php endforeach; ?>
 
-		</tbody>
-	</table>	
+    </tbody>
+  </table>  
     </div>
 </div>
 </body>

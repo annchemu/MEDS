@@ -24,6 +24,10 @@
   <script src="<?php echo base_url().'js/jquery-ui.js';?>"></script>
   <script type="text/javascript" src="<?php echo base_url().'js/tabs.js';?>"></script>
   <script type="text/javascript" src="<?php echo base_url().'js/jquery.validate.js';?>"></script>
+  <script type="text/javascript" src="<?php echo base_url().'js/equationstwo.js';?>"></script>
+  <script type="text/javascript" src="<?php echo base_url().'js/equipmentinfo.js';?>"></script>
+  <script type="text/javascript" src="<?php echo base_url().'tinymce/tinymce.min.js';?>"></script>
+  <script type="text/javascript" src="<?php echo base_url().'js/datepicker.js';?>"></script>
   
   <!-- bootstrap reference library -->
   <script src="<?php echo base_url().'js/bootstrap.min.js';?>"></script>
@@ -34,17 +38,29 @@
     $('#list').dataTable({
      "sScrollY":"270px",
      "sScrollX":"100%"
-    });
-     $("#equipment_make").change(function(){
-         var id_number=$(this).val();
-         //append to textbox
-         $("#equipment_number").val(id_number);
-    });     
-     $("#balance_make").change(function(){
-         var id_number=$(this).val();
-         //append to textbox
-         $("#balance_number").val(id_number);
-    });
+    });    
+     tinymce.init({
+    selector: "textarea"
+   });
+     // key up event to trigger computation 
+     $('.compute').keyup(function() {
+
+      var total=0;
+      var class_="."+$(this).attr('id');
+
+      var count=1;
+      $(class_).each(function() {
+       
+     if(count==1){
+          total= parseInt($(this).val());
+         }else{
+           total= total-parseInt($(this).val());
+         }
+         count=count+1;
+   });
+       $(class_+"_final").val(total);
+       // alert(class_)
+     });
    });  
         function standard_weight_calc(){
         var total = document.getElementById('standard_container').value - document.getElementById('container').value;
@@ -121,7 +137,15 @@
        }          
 
   </script>
-
+<script type="text/javascript">
+  
+      $(function() {
+          $('#container').keyup(function() {
+                
+                $('#standard_weight').val((parseInt($('#standard_container').val())) - (parseInt($('#container').val())));
+          });
+    });
+</script>
   </head
   <body>
       <?php
@@ -133,6 +157,13 @@
    $acc_status=$user['logged_in']['acc_status'];
    $id_temp=1;
    //var_dump($user);
+   if(empty($user['logged_in']['id'])) {
+       
+      redirect('login','location');  //loads the login page in current page div
+
+      echo '<meta http-equiv=refresh content="0;url=base_url();login">'; 
+
+       }
   ?>
  <div id="header"> 
   <div id="logo" style="padding:8px;color: #0000ff;" align="center"><img src="<?php echo base_url().'images/meds_logo.png';?>" height="35px" width="40px"/><b>MISSION FOR ESSENTIAL DRUGS AND SUPPLIES</b></div>
@@ -181,7 +212,7 @@
     </tr>
     <tr>
      <td colspan ="6">
-      <table width="100%" bgcolor="#c4c4ff" cellpadding="8px" border="0" align ="center">
+      <table width="100%" class = "table_form" bgcolor="#c4c4ff" cellpadding="8px" border="0" align ="center">
         <tr>
         <td rowspan="2" colspan ="2" style="padding:4px;border-left:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;border-bottom:solid 1px #bfbfbf;text-align:center;background-color:#ffffff;"><img src="<?php echo base_url().'images/meds_logo.png';?>" height="80px" width="90px"/></td>
         <td colspan="6" style="padding:4px;color:#0000ff;border-left:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;border-bottom:solid 1px #bfbfbf;text-align:center;background-color:#ffffff;">MISSION FOR ESSENTIAL DRUGS AND SUPPLIES</td>
@@ -215,7 +246,7 @@
     </tr> 
     <tr>
       <td colspan="6" align="center" style="padding:8px;">
-        <table border="0" align="center" cellpadding="8px" width="100%">
+        <table border="0" class = "table_form" align="center" cellpadding="8px" width="100%">
             <tr>
               <td height="25px" style="padding:8px;border-left:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;">Registration Number: <?php echo $results['laboratory_number'];?></td>
               <td height="25px" style="padding:8px;border-left:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;">Request Date: <?php echo $results['date_time'];?></td>
@@ -253,13 +284,13 @@
     <tr>
         <td colspan = ""align="center" style="background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Balance Make:</td>
         <td colspan = "2" style="background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> 
-            <select id="balance_make" name="balance_make">
+            <select id="equipment_make" name="balance_make">
               <option selected></option>
                <?php
                foreach($query_e as $equipment):
               ?>
                
-               <option value="<?php echo $equipment['id_number'];?>"><?php echo $equipment['model'];?></option>
+               <option value="<?php echo $equipment['id_number'];?>" data-equipmentid="<?php echo $equipment['description']; ?>"><?php echo $equipment['id_number'];?></option>
                 <?php
                 endforeach
                 ?>
@@ -268,7 +299,7 @@
          </td>    
       
         <td align="center" style="background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Balance Number:</td>
-        <td colspan = "2" style="background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><input type ="text" name ="balance_number" id="balance_number"></td>
+        <td colspan = "2" style="background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><input type ="text" name ="balance_number" id="equipmentid"></td>
       </tr>
        <tr>
         <td align="left" colspan ="6" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;" ><b>Standardization of<input type = "text" name ="standardization">M HCl using anhydrous Sodium carbonate</b></td>
@@ -284,21 +315,21 @@
       </tr>
        <tr>
         <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Weight of standard + container (g)</td>
-        <td style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="standard_container" id ="standard_container"> </td>
-        <td style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="standard_container_1" id ="standard_container_1"> </td>
-        <td colspan = "3"style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="standard_container_2" id ="standard_container_2"> </td>
+        <td style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="standard_container"   class="container_1" id ="standard_container"> </td>
+        <td style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="standard_container_1" class="container_2" id ="standard_container_1"> </td>
+        <td colspan = "3"style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="standard_container_2" class="container_3" id ="standard_container_2"> </td>
       </tr>
        <tr>  
         <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Weight of container (g) </td>
-        <td style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="container" id ="container" onchange ="standard_weight_calc()"> </td>
-        <td style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="container_1" id ="container_1"onchange ="standard_weight_calc_2()"> </td>
-        <td colspan = "3"style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="container_2" id ="container_2" onchange ="standard_weight_calc_3()"> </td>
+        <td style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="container"  id ="container_1" class="compute container_1"> </td>
+        <td style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="container_1"id ="container_2" class="compute container_2"> </td>
+        <td colspan = "3"style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="container_2" class=" compute container_3"id ="container_3"> </td>
       </tr>
        <tr>  
         <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Weight of standard (g)</td>
-        <td style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="standard_weight" id ="standard_weight"> </td>
-        <td style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="standard_weight_1" id ="standard_weight_1"> </td>
-        <td colspan = "3"style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="standard_weight_2" id ="standard_weight_2"> </td>
+        <td style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="standard_weight"  class="container_1_final" > </td>
+        <td style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="standard_weight_1"class="container_2_final"  id ="standard_weight_1" > </td>
+        <td colspan = "3"style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="standard_weight_2"  class="container_3_final"id ="standard_weight_2"> </td>
         </tr>
        <tr>
         <td align="left" colspan ="6" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;color: #0000fb;" ><b>Titration volumes</b></td>
@@ -321,10 +352,15 @@
         <td style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="volume_1" id ="volume_1"> </td>
         <td colspan = "3"style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="volume_2" id ="volume_2"> </td>
       </tr>
-        <tr>
-        <td colspan = "6" align="center"style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><u>CALCULATION OF FACTOR = WEIGHT TAKEN</u><br/>VOLUME USED X EQUIVALENT WEIGHT</td>
+      <tr>
+        <td colspan="8" style="padding:8px;border-bottom:solid 1px #c4c4ff;">
+          <table border="0" width="100%" class="table_form" cellpadding="8px" align="center">            
+            <tr>
+              <td colspan = "2" align="right"style="padding: 12px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;color:#0000fb">CALCULATION OF FACTOR = </td><td align="left" style="color:#0000fb;padding: 12px;"><u>WEIGHT TAKEN X VOLUME USED</u> <br/> EQUIVALENT WEIGHT</td>
+            </tr>       
+          </table>
+        </td>
       </tr>
-       
       <tr> 
         <td align="center"colspan ="6" style="padding: 8px;padding: 8px;background-color: #e8e8ff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> </td>
       </tr>
@@ -335,9 +371,9 @@
      <tr>
         <td colspan ="4" align ="center" style="padding: 12px;">
           [<input type ="text" name="det_1_weight" id ="det_1_weight"size ="10" placeholder="WEIGHT TAKEN">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-          <input type ="text" name="det_1_volume" id ="det_1_volume"size ="10" placeholder="VOLUME USED">]&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp*100 <br/><br/>
+          <input type ="text" name="det_1_volume" id ="det_1_volume"size ="10" placeholder="VOLUME USED">]&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp x 100 <br/><br/>
           <input type ="text" name="det_1_equiv_weight" id ="det_1_equiv_weight" size ="10" placeholder="EQUIVALENT WEIGHT" onchange="determination_calc_1()"></td>        
-        <td> =&nbsp &nbsp<input type ="text" name="determination_1" id ="determination_1" size ="10"> % LC</td>
+        <td> =&nbsp &nbsp<input type ="text" name="determination_1" id ="determination_1" size ="10"> </td>
       </tr>
       <tr>
         <td align="center" colspan = "4"style="padding: 12px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <b><u>Determination 2</u></b></td>
@@ -346,9 +382,9 @@
      <tr>
         <td colspan ="4" align ="center" style="padding: 12px;">
           [<input type ="text" name="det_2_weight" id ="det_2_weight"size ="10" placeholder="WEIGHT TAKEN">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-          <input type ="text" name="det_2_volume" id ="det_2_volume"size ="10" placeholder="VOLUME USED">]&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp*100 <br/><br/>
+          <input type ="text" name="det_2_volume" id ="det_2_volume"size ="10" placeholder="VOLUME USED">]&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp x 100 <br/><br/>
           <input type ="text" name="det_2_equiv_weight" id ="det_2_equiv_weight" size ="10" placeholder="EQUIVALENT WEIGHT" onchange="determination_calc_2()"></td>        
-        <td> =&nbsp &nbsp<input type ="text" name="determination_2" id ="determination_2" size ="10"> % LC</td>
+        <td> =&nbsp &nbsp<input type ="text" name="determination_2" id ="determination_2" size ="10"> </td>
       </tr>
       <tr>
         <td align="center" colspan = "4"style="padding: 12px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <b><u>Determination 3</u></b></td>
@@ -357,9 +393,9 @@
      <tr>
         <td colspan ="4" align ="center" style="padding: 12px;">
           [<input type ="text" name="det_3_weight" id ="det_3_weight"size ="10" placeholder="WEIGHT TAKEN">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-          <input type ="text" name="det_3_volume" id ="det_3_volume"size ="10" placeholder="VOLUME USED">]&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp*100 <br/><br/>
+          <input type ="text" name="det_3_volume" id ="det_3_volume"size ="10" placeholder="VOLUME USED">]&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp x 100 <br/><br/>
           <input type ="text" name="det_3_equiv_weight" id ="det_3_equiv_weight" size ="10" placeholder="EQUIVALENT WEIGHT" onchange="determination_calc_3()"></td>        
-        <td> =&nbsp &nbsp<input type ="text" name="determination_3" id ="determination_3" size ="10"> % LC</td>
+        <td> =&nbsp &nbsp<input type ="text" name="determination_3" id ="determination_3" size ="10"> </td>
       </tr>
        <tr> 
         <td align="center"colspan ="6" style="padding: 8px;padding: 8px;background-color: #e8e8ff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> </td>
@@ -379,28 +415,52 @@
         <td align="center"colspan ="6" style="padding: 8px;padding: 8px;background-color: #e8e8ff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> </td>
       </tr>
       <tr>
-        <td align="center"colspan = "2" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-right: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"></td>
-        <td colspan = ""style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-right: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Acceptance Criteria</td>
-        <td align="center"colspan = "" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-right: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Results</td>
-        <td align="left"colspan = "2" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Comments</td>
-      </tr>
-      <tr>  
-        <td colspan = "2"align="center" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-right: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">RSD </td>
-        <td colspan = ""style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><input type ="text" name ="rsd_acceptance_criteria"></td>  
-        <td colspan = ""style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><input type ="text" name ="rsd_results"></td>  
-        <td colspan = "2"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><input type ="text" name ="rsd_comments"></td>  
-      </tr>
-      <tr>      
-        <td colspan = "2"align="center" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-right: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">SD</td>
-        <td colspan = ""style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name ="sd_acceptance_criteria"></td>
-        <td colspan = ""style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name ="sd_results"></td>
-        <td colspan = "2"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name ="sd_comments"></td>
-      </tr>
+                <td colspan="8" style="padding:8px;">
+                  <table border="0" width="80%" cellpadding="8px" align="center">
+                    <tr>
+                      <td colspan="2" style="color:#0000ff;padding:8px;border-bottom:solid 1px #c4c4ff;"><b>Acceptance Criteria</b></td>
+                      <td style="color:#0000ff;padding:8px;border-bottom:solid 1px #c4c4ff;"><b>Results</b></td>
+                      <td style="color:#0000ff;padding:8px;border-bottom:solid 1px #c4c4ff;"><b>Comment</b></td>
+                    </tr>
+                    <tr>
+                      <td><input type="checkbox" id="min" />Not Less than Tolerance</td>
+                      <td style="color:#0000ff;padding:8px;"><input type="text" min="min_tolerance" id="min_tolerance" name="min_tolerance" placeholder="min%" size="5"  onChange="calculation_determinations()" /></td>
+                      <td style="color:#0000ff;padding:8px;"><input type="text" min="min_tolerance" id="nlt_min_tolerance_det" name="det_min" size="4" placeholder="min%" onChange="calculation_determinations()" disabled/> - <input type="text" min="min_tolerance" id="nlt_max_tolerance_det" name="det_max" size="4" placeholder="max%" onChange="calculation_determinations()" disabled/></td>
+                      <td style="color:#0000ff;padding:8px;"><input type="text" min="min_tolerance" id="min_tolerance_comment" name="min_tolerance_comment" disable/></td>
+                    </tr>
+                    <tr>
+                      <td><input type="checkbox" id="max" />Not Greater than Tolerance</td>
+                      <td style="color:#0000ff;padding:8px;"><input type="text" max='max_tolerance' id="max_tolerance" name="max_tolerance" placeholder="max%" size="5"  onChange="calculation_determinations()"/></td>
+                      <td style="color:#0000ff;padding:8px;"><input type="text" max='max_tolerance' id="ngt_min_tolerance_det" name="det_min" size="4" placeholder="min%" onChange="calculation_determinations()" disabled/> - <input type="text" max="max_tolerance" id="ngt_max_tolerance_det" name="det_max" size="4" placeholder="max%" onChange="calculation_determinations()" disabled/></td>
+                      <td style="color:#0000ff;padding:8px;"><input type="text" max='max_tolerance' id ="max_tolerance_comment" name="max_tolerance_comment" disable/></td>
+                    </tr>
+                    <tr>
+                      <td><input type="checkbox" id="range" />Tolerance Range</td>
+                      <td style="color:#0000ff;padding:8px;"><input type="text" range="tolerance_range" id = "tolerance_range_from" name="tolerance_range_from" placeholder="min%" size="5" onChange="calculation_determinations()"> - <input type="text" range="tolerance_range" name="tolerance_range_to" id = "tolerance_range_to" placeholder="max%" size="5" onChange="calculation_determinations()"></td>
+                      <td style="color:#0000ff;padding:8px;"><input type="text" range="tolerance_range" id="range_min_tolerance_det" name="det_min" size="4" placeholder="min%" onChange="calculation_determinations()" disabled/> - <input type="text" id="range_max_tolerance_det" range="tolerance_range" name="det_max" size="4" placeholder="max%" onChange="calculation_determinations()" disabled/></td>
+                      <td style="color:#0000ff;padding:8px;"><input type="text" range="tolerance_range" name="tolerance_range" id ="tolerance_range" disable/></td>
+                    </tr>
+
+                    <tr>
+                      <td>SD</td>
+                      <td style="color:#0000ff;padding:8px;"></td>
+                      <td style="color:#0000ff;padding:8px;"><input type="text" id="determination_sd_2" name="determination_sd" onChange="calculator()" disabled/></td>
+                      <td style="color:#0000ff;padding:8px;"><input type="text" name="sd_results"></input></td>
+                    </tr>
+                    <tr>
+                      <td>RSD %</td>
+                      <td style="color:#0000ff;padding:8px;"></td>
+                      <td style="color:#0000ff;padding:8px;"><input type="text" id="determination_rsd_2" name="determination_sd" onChange="calculator()" disabled/></td>
+                      <td style="color:#0000ff;padding:8px;"><input type="text" name="rsd_comment" disable/></td>
+                    </tr>
+                  </table>
+                </td>
+            </tr>    
        <tr>
         <td align="left" colspan ="6" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;" ><b>Standardization of <input type ="text" name ="sodium_hydroxide"> M Sodium hydroxide using <input type ="text" name ="hcl_vs"> M HCL VS</b></td>
       </tr>
        <tr>
-        <td align="left" colspan ="6" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;color: #0000fb;" ><b>Titration volumes of <input type ="text" name ="hcl_solution"> M HCL solution against <input type ="text" name ="sodium_hydroxide_ml"> ml of <input type ="text" name ="sodium_hydroxide"> M Sodium hydroxide </b></td>
+        <td align="left" colspan ="6" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;color: #0000fb;" ><b>Titration volumes of <input type ="text" name ="hcl_solution" size="5"> M HCL solution against <input type ="text" name ="sodium_hydroxide_ml" size="5"> ml of <input type ="text" name ="sodium_hydroxide" size="5"> M Sodium hydroxide </b></td>
       </tr>
       <tr>
         <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Final burette reading (ml)</td>
@@ -421,49 +481,36 @@
         <td colspan = "3"style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="volume_5" id ="volume_5"> </td>
       </tr>
       <tr>  
-        <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"></td>
-      </tr>
       <tr> 
         <td align="center"colspan ="6" style="padding: 8px;padding: 8px;background-color: #ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;color:#0000fb;"> Use the formula to calculate the factor = M1X V1X F1 = M2 X V2 X F2</td>
       </tr>
       <tr>
-        <td colspan ="4" align ="center" style="padding: 12px;">
-          [<input type ="text" name="second_det_1_weight" id ="second_det_1_weight"size ="10" placeholder="WEIGHT TAKEN">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-          <input type ="text" name="second_det_1_volume" id ="second_det_1_volume"size ="10" placeholder="VOLUME USED">]&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp*100 <br/><br/>
-          <input type ="text" name="second_det_1_equiv_weight" id ="second_det_1_equiv_weight" size ="10" placeholder="EQUIVALENT WEIGHT" onchange="second_determination_calc_1()"></td>        
-        <td> =&nbsp &nbsp<input type ="text" name="second_determination_1" id ="second_determination_1" size ="10"> % LC</td>
+        <td align="left" colspan = "6"style="padding: 12px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <b><u>Determination 2</u></b></td>
       </tr>
       <tr>
-        <td align="center" colspan = "4"style="padding: 12px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <b><u>Determination 2</u></b></td>
-        <td align="center" colspan = "2"style="padding: 12px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"></td>
-      </tr>
-     <tr>
-        <td colspan ="4" align ="center" style="padding: 12px;">
-          [<input type ="text" name="second_det_2_weight" id ="second_det_2_weight"size ="10" placeholder="WEIGHT TAKEN">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-          <input type ="text" name="second_det_2_volume" id ="second_det_2_volume"size ="10" placeholder="VOLUME USED">]&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp*100 <br/><br/>
-          <input type ="text" name="second_det_2_equiv_weight" id ="second_det_2_equiv_weight" size ="10" placeholder="EQUIVALENT WEIGHT" onchange="second_determination_calc_2()"></td>        
-        <td> =&nbsp &nbsp<input type ="text" name="second_determination_2" id ="second_determination_2" size ="10"> % LC</td>
+        <td colspan ="4" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">  <textarea rows ="4" cols ="80" name ="determination_calc"></textarea> </td>        
+        <td> =&nbsp &nbsp<input type ="text" name="second_determination_1" id ="second_determination_1" size ="10"></td>
       </tr>
       <tr>
-        <td align="center" colspan = "4"style="padding: 12px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <b><u>Determination 3</u></b></td>
-        <td align="center" colspan = "2"style="padding: 12px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"></td>
+        <td align="left" colspan = "6"style="padding: 12px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <b><u>Determination 2</u></b></td>
       </tr>
-     <tr>
-        <td colspan ="4" align ="center" style="padding: 12px;">
-          [<input type ="text" name="second_det_3_weight" id ="second_det_3_weight"size ="10" placeholder="WEIGHT TAKEN">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-          <input type ="text" name="second_det_3_volume" id ="second_det_3_volume"size ="10" placeholder="VOLUME USED">]&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp*100 <br/><br/>
-          <input type ="text" name="second_det_3_equiv_weight" id ="second_det_3_equiv_weight" size ="10" placeholder="EQUIVALENT WEIGHT" onchange="second_determination_calc_3()"></td>        
-        <td> =&nbsp &nbsp<input type ="text" name="second_determination_3" id ="second_determination_3" size ="10"> % LC</td>
+      <tr>
+        <td colspan ="4" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">  <textarea rows ="4" cols ="80" name ="determination_calc_2"></textarea> </td>        
+        <td> =&nbsp &nbsp<input type ="text" name="second_determination_2" id ="second_determination_2" size ="10"></td>
       </tr>
-      <tr> 
-        <td align="center"colspan ="6" style="padding: 8px;padding: 8px;background-color: #e8e8ff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> </td>
+      <tr>
+        <td align="left" colspan = "6"style="padding: 12px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <b><u>Determination 3</u></b></td>
+      </tr>
+      <tr>
+        <td colspan ="4" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">  <textarea rows ="4" cols ="80" name ="determination_calc_3"></textarea> </td>        
+        <td> =&nbsp &nbsp<input type ="text" name="second_determination_3" id ="second_determination_3" size ="10"></td>
       </tr>
       <tr> 
         <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> Average % </td>
         <td colspan = "2"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="second_average"></td>
     
         <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> SD</td>
-        <td colspan = "2"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="second_equivalent"></td>
+        <td colspan = "2"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="second_equivalent" ></td>
       </tr>
        <tr>
         <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> RSD</td>
@@ -473,45 +520,80 @@
         <td align="center"colspan ="6" style="padding: 8px;padding: 8px;background-color: #e8e8ff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> </td>
       </tr>
       <tr>
-        <td colspan ="2"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-right: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"></td>
-        <td colspan =""style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-right: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Acceptance Criteria</td>
-        <td align="center"colspan = "" style="padding: 8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Results</td>
-        <td align="center"colspan = "" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Comments</td>
-      </tr>
-      <tr>  
-        <td colspan ="2"align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-right: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">RSD </td>
-        <td colspan = ""style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><input type ="text" name ="second_acceptance_criteria"></td>  
-        <td colspan = ""style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><input type ="text" name ="second_results"></td>  
-        <td colspan = "2"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><input type ="text" name ="second_comments"></td>  
-      </tr>
-      <tr>      
-        <td colspan ="2"align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-right: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">SD</td>
-        <td colspan = ""style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name ="second_acceptance_criteria_1"></td>
-        <td colspan = ""style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name ="second_results_1"></td>
-        <td colspan = "2"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name ="second_comments_1"></td>
-      </tr>
+                <td colspan="8" style="padding:8px;">
+                  <table border="0" width="80%" cellpadding="8px" align="center">
+                    <tr>
+                      <td colspan="2" style="color:#0000ff;padding:8px;border-bottom:solid 1px #c4c4ff;"><b>Acceptance Criteria</b></td>
+                      <td style="color:#0000ff;padding:8px;border-bottom:solid 1px #c4c4ff;"><b>Results</b></td>
+                      <td style="color:#0000ff;padding:8px;border-bottom:solid 1px #c4c4ff;"><b>Comment</b></td>
+                    </tr>
+                    <tr>
+                      <td><input type="checkbox" id="min_2" />Not Less than Tolerance</td>
+                      <td style="color:#0000ff;padding:8px;"><input type="text" min_2="min_tolerance_2" id="min_tolerance_2_2" name="min_tolerance_2" placeholder="min%" size="5"  onChange="calculation_determinations()" /></td>
+                      <td style="color:#0000ff;padding:8px;"><input type="text" min_2="min_tolerance_2" id="nlt_min_tolerance_det_2" name="det_min_2" size="4" placeholder="min%" onChange="calculation_determinations()" disabled/> - <input type="text" min="min_tolerance" id="nlt_max_tolerance_det" name="det_max" size="4" placeholder="max%" onChange="calculation_determinations()" disabled/></td>
+                      <td style="color:#0000ff;padding:8px;"><input type="text" min_2="min_tolerance_2" id="min_tolerance_comment_2" name="min_tolerance_comment_2" disable/></td>
+                    </tr>
+                    <tr>
+                      <td><input type="checkbox" id="max_2" />Not Greater than Tolerance</td>
+                      <td style="color:#0000ff;padding:8px;"><input type="text" max_2='max_tolerance_2' id="max_tolerance_2" name="max_tolerance_2" placeholder="max%" size="5"  onChange="calculation_determinations()"/></td>
+                      <td style="color:#0000ff;padding:8px;"><input type="text" max_2='max_tolerance_2' id="ngt_min_tolerance_det_2" name="det_min_2" size="4" placeholder="min%" onChange="calculation_determinations()" disabled/> - <input type="text" max="max_tolerance" id="ngt_max_tolerance_det" name="det_max" size="4" placeholder="max%" onChange="calculation_determinations()" disabled/></td>
+                      <td style="color:#0000ff;padding:8px;"><input type="text" max_2='max_tolerance_2' id ="max_tolerance_comment_2" name="max_tolerance_comment_2" disable/></td>
+                    </tr>
+                    <tr>
+                      <td><input type="checkbox" id="range_2" />Tolerance Range</td>
+                      <td style="color:#0000ff;padding:8px;"><input type="text" range_2="tolerance_range_2" id = "tolerance_range_from_2" name="tolerance_range_from_2" placeholder="min%" size="5" onChange="calculation_determinations()"> - <input type="text" range="tolerance_range" name="tolerance_range_to" id = "tolerance_range_to" placeholder="max%" size="5" onChange="calculation_determinations()"></td>
+                      <td style="color:#0000ff;padding:8px;"><input type="text" range_2="tolerance_range_2" id="range_min_tolerance_det_2" name="det_min_2" size="4" placeholder="min%" onChange="calculation_determinations()" disabled/> - <input type="text" id="range_max_tolerance_det" range="tolerance_range" name="det_max" size="4" placeholder="max%" onChange="calculation_determinations()" disabled/></td>
+                      <td style="color:#0000ff;padding:8px;"><input type="text" range_2="tolerance_range_2" name="tolerance_range_2" id ="tolerance_range_2" disable/></td>
+                    </tr>
+
+                    <tr>
+                      <td>SD</td>
+                      <td style="color:#0000ff;padding:8px;"></td>
+                      <td style="color:#0000ff;padding:8px;"><input type="text" id="determination_sd_2" name="determination_sd" onChange="calculator()" disabled/></td>
+                      <td style="color:#0000ff;padding:8px;"><input type="text" name="sd_results"></input></td>
+                    </tr>
+                    <tr>
+                      <td>RSD %</td>
+                      <td style="color:#0000ff;padding:8px;"></td>
+                      <td style="color:#0000ff;padding:8px;"><input type="text" id="determination_rsd_2" name="determination_sd" onChange="calculator()" disabled/></td>
+                      <td style="color:#0000ff;padding:8px;"><input type="text" name="rsd_comment" disable/></td>
+                    </tr>
+                  </table>
+                </td>
+            </tr>  
        <tr>
         <td colspan="8" align="left"  style="padding:8px;border-bottom: dotted 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><b>Conclusion</b></td>
       </tr>
-      <tr>
+       <tr>
         <td colspan="8" style="padding:8px;border-bottom:solid 1px #c4c4ff;">
-          <table border="0" width="30%" cellpadding="8px" align="center">
+          <table border="0" width="100%" class="table_form" cellpadding="8px" align="center">
             <tr>    
-              <td style="border-bottom:dottted 1px #c4c4ff;padding:8px;text-align:right;">PASS</input></td>
-              <td style="border-bottom:dottted 1px #c4c4ff;padding:8px;text-align:left;"><input type="radio" name="choice" value="pass"></input></td>
-              <td style="border-bottom:dottted 1px #c4c4ff;padding:8px;text-align:right;">FAIL</input></td>
-              <td style="border-bottom:dottted 1px #c4c4ff;padding:8px;text-align:left;"><input type="radio" name="choice" value="fail"></input></td>
+              <td style="border-bottom:dottted 1px #c4c4ff;padding:8px;text-align:center;"><input type="text" name="choice" id = "choice" disabled></input></td>
             </tr>
           </table>
+          </td>
          </tr>
          <tr>
-       <td colspan="8" style="padding:8px;">
-        <table border="0" width="90%" cellpadding="8px" align="center">
+         <td colspan="8" style="padding:8px;">
+          <table border="0" class="table_form" width="100%" cellpadding="8px" align="center">
           <tr>
-            <td style="border-bottom: dotted 1px #c4c4ff;padding:4px;text-align:right;">Supervisor <input type="text" id="supervisor" name="supervisor"></td>
-            <td style="border-bottom: dotted 1px #c4c4ff;padding:4px;text-align:left;">Date <input type="date"  id="date" name="date"></td>
+            <td style="background-color:#ededfd;border-bottom: dotted 1px #c4c4ff;padding:8px;text-align:cente;">Done by: <input type="hidden" id="done_by" name="done_by" value="<?php echo($user['logged_in']['fname']." ".$user['logged_in']['lname']);?>"><?php echo($user['logged_in']['fname']." ".$user['logged_in']['lname']);?></td>
+            <td style="background-color:#ededfd;border-bottom: dotted 1px #c4c4ff;padding:8px;text-align:right;">Date conducted: <input type="hidden"  id="date" name="date_done" value="<?php echo date("d/m/Y")?>"><?php echo date("d/M/Y")?></td>
           </tr>
-          
+          <tr>
+            <td style="border-bottom: dotted 1px #c4c4ff;padding:4px;text-align:left;">Approved by: 
+            <select id="name" name="name" >
+            <option selected></option>
+             <?php
+             foreach($sql_approved as $user):
+            ?>
+             <option value="<?php  echo $user['fname'];?>"><?php  echo $user['fname'], "&nbsp;",$user['lname'];?></option>
+              <?php
+              endforeach
+              ?>
+          </select></td>
+            <td style="border-bottom: dotted 1px #c4c4ff;padding:4px;text-align:right;">Date: <input type="text"  id="datepicker" name="date" size="10"></td>
+          </tr>
           <tr>
             <td colspan="2" style="padding:4px;">Further Comments:</td>
           </tr>
@@ -522,11 +604,81 @@
       </td>
     </tr>
       <tr>
-        <td style ="padding: 8px;"colspan = "8" align ="center"> <input type ="submit" name ="save_vs_solution" value ="Save VS Solution Data"></td>
+        <td style ="padding: 8px;"colspan = "8" align ="center"> <input type ="submit" class="btn" name ="save_vs_solution" value ="Submit"></td>
       </tr>
     </table>
    </form> 
  </div>
 </div>
   </body>
+  <script>
+  $('#min').change(function() {
+    if($('#min').is(':checked')){
+       $("input[min='min_tolerance']").show();
+       $('#max').prop('disabled', true);
+       $('#range').prop('disabled', true);
+    } else {
+        $("input[min='min_tolerance']").hide();
+       $('#max').prop('disabled', false);
+       $('#range').prop('disabled', false);
+    }
+  }).change();
+  $('#max').change(function() {
+    if($('#max').is(':checked')){
+       $("input[max='max_tolerance']").show();
+       $('#min').prop('disabled', true);
+       $('#range').prop('disabled', true);
+    } else {
+        $("input[max='max_tolerance']").hide();
+        $('#min').prop('disabled', false);
+        $('#range').prop('disabled', false);
+    }
+  }).change();
+  $('#range').change(function() {
+    if($('#range').is(':checked')){
+       $("input[range='tolerance_range']").show();
+        $('#max').prop('disabled', true);
+        $('#min').prop('disabled', true);
+    } else {
+        $("input[range='tolerance_range']").hide();
+        $('#max').prop('disabled', false);
+        $('#min').prop('disabled', false);
+    }
+  }).change();
+
+  //Second acceptance criteria
+  $('#min_2').change(function() {
+    if($('#min_2').is(':checked')){
+       $("input[min_2='min_tolerance_2']").show();
+       $('#max_2').prop('disabled', true);
+       $('#range_2').prop('disabled', true);
+    } else {
+        $("input[min_2='min_tolerance_2']").hide();
+       $('#max_2').prop('disabled', false);
+       $('#range_2').prop('disabled', false);
+    }
+  }).change();
+  $('#max_2').change(function() {
+    if($('#max_2').is(':checked')){
+       $("input[max_2='max_tolerance_2']").show();
+       $('#min_2').prop('disabled', true);
+       $('#range_2').prop('disabled', true);
+    } else {
+        $("input[max_2='max_tolerance_2']").hide();
+        $('#min_2').prop('disabled', false);
+        $('#range_2').prop('disabled', false);
+    }
+  }).change();
+  $('#range_2').change(function() {
+    if($('#range_2').is(':checked')){
+       $("input[range_2='tolerance_range_2']").show();
+        $('#max_2').prop('disabled', true);
+        $('#min_2').prop('disabled', true);
+    } else {
+        $("input[range_2='tolerance_range_2']").hide();
+        $('#max_2').prop('disabled', false);
+        $('#min_2').prop('disabled', false);
+    }
+  }).change();
+</script>
   </html>

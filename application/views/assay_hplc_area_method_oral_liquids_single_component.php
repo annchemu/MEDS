@@ -25,10 +25,14 @@
   <script src="<?php echo base_url().'js/jquery-ui.js';?>"></script>
   <script type="text/javascript" src="<?php echo base_url().'js/tabs.js';?>"></script>
   
-  <!-- bootstrap reference library -->
+ <!-- bootstrap reference library -->
   <script src="<?php echo base_url().'js/bootstrap.min.js';?>"></script>
   <script type="text/javascript" src="<?php echo base_url().'js/Jquery-datatables/jquery.dataTables.js';?>"></script>
   <script type="text/javascript" src="<?php echo base_url().'js/equations.js';?>"></script>
+  <script type="text/javascript" src="<?php echo base_url().'tinymce/tinymce.min.js';?>"></script>
+  <script type="text/javascript" src="<?php echo base_url().'tinymce/textarea_script.js';?>"></script>
+  <script type="text/javascript" src="<?php echo base_url().'js/datepicker.js';?>"></script>
+  <script type="text/javascript" src="<?php echo base_url().'js/equipmentinfo.js';?>"></script>
   <script>
    $(document).ready(function() {
     /* Init DataTables */
@@ -68,6 +72,14 @@
    $acc_status=$user['logged_in']['acc_status'];
    $id_temp=1;
    //var_dump($user);
+
+   if(empty($user['logged_in']['id'])) {
+       
+      redirect('login','location');  //1. loads the login page in current page div
+
+      echo '<meta http-equiv=refresh content="0;url=base_url();login">'; //3 doesn't work
+
+       }
   ?>
   <div id="header"> 
    <div id="logo" style="padding:8px;color: #0000ff;" align="center"><img src="<?php echo base_url().'images/meds_logo.png';?>" height="35px" width="40px"/><b>MISSION FOR ESSENTIAL DRUGS AND SUPPLIES</b></div>
@@ -181,14 +193,11 @@
             </tr>
             <tr>
                <td colspan="8">
-                <table border="0" class="inner_table" width="80%" cellpadding="8px" align="center">
+                <table border="0" class="inner_table" width="55%" cellpadding="8px" align="center">
                   <tr>
                       <td  colspan="0" align="center" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">Sample 1</td>
                       <td  colspan="0" align="center" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">Sample 2</td>
                       <td  colspan="0" align="center" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">Sample 3</td>
-                      <td  colspan="0" align="center" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">Sample 4</td>
-                      <td  colspan="0" align="center" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">Sample 5</td>
-                      <td  colspan="0" align="center" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">Sample 6</td>
                   </tr>
                   <tr>
                       <td  colspan="0" height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
@@ -197,12 +206,6 @@
                       <input type="text" id="weight_sample_two" name="weight_sample_two"></td>
                       <td  colspan="0" height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
                       <input type="text" id="weight_sample_three" name="weight_sample_three" ></td>
-                      <td  colspan="0" height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                      <input type="text" id="weight_sample_four" name="weight_sample_four" ></td>
-                      <td  colspan="0" height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                      <input type="text" id="weight_sample_five" name="weight_sample_five" ></td>
-                      <td  colspan="0" height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                      <input type="text" id="weight_sample_six" name="weight_sample_six" ></td>
                   </tr>
                 </table>
               </td>
@@ -250,7 +253,10 @@
                       <input type="text" id="weight_sample_three" name="weight_sample_three" onChange="calculate_difference()"></td>
                   </tr>
                   <tr>
-                    <td colspan="4"  align="left" style="padding:8px;border-bottom: dotted 1px #c4c4ff;color: #0000fb;background-color: #ffffff;">Dilution: &nbsp;<input type="text" name="dilution" size="40"></td>
+                    <td colspan="7"  align="left" style="padding:8px;border-bottom: dotted 1px #c4c4ff;color: #0000fb;background-color: #ffffff;">Dilution</td>
+                  </tr>
+                  <tr>
+                    <td colspan="7"  align="center" style="padding:8px;border-bottom: dotted 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><textarea name="dilution" cols="160" rows="8"></textarea></td>
                   </tr>
                 </table>
               </td>
@@ -435,7 +441,7 @@
               <td colspan="8" height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><b>The Chromatographic System-Suitability requirements</b></td>
             </tr>
             <tr>
-              <td colspan="8" height="25px" align="left" style="padding:8px;border-bottom: dotted 1px #c4c4ff;color: #000;background-color: #ffffff;">From Chromatograms<br><br> Component 1 <input type="text" name="component_one"></td>
+              <td colspan="8" height="25px" align="left" style="padding:8px;border-bottom: dotted 1px #c4c4ff;color: #0000ff;background-color: #ffffff;">From Chromatograms</td>
             </tr>
             <tr>
                 <td colspan="8" style="padding:8px;">
@@ -539,112 +545,6 @@
                   </table>
                 </td>
             </tr>
-
-            <tr>
-              <td colspan="8" height="25px" align="left" style="padding:8px;border-bottom: dotted 1px #c4c4ff;color: #000;background-color: #ffffff;">Component 2  <input type="text" name="component_two"></td>
-            </tr>
-            <tr>
-                <td colspan="8" style="padding:8px;">
-                  <table class="inner_table" border="0" widt="80%" cellpadding="8px" align="center">
-                    <tr>
-                      <td style="text-align:center;padding:8px;">No.</td>
-                      <td style="text-align:center;padding:8px;">Retention time (minutes)</td>
-                      <td style="text-align:center;padding:8px;">Peak Area</td>
-                      <td style="text-align:center;padding:8px;">Asymmetry</td>
-                      <td style="text-align:center;padding:8px;">Resolution</td>
-                      <td style="text-align:center;padding:8px;">Relative retention time</td>
-                    </tr>
-                    <tr>
-                      <td style="text-align:center;border-bottom:solid 1px #c4c4ff;">1.</td>
-                      <td><input type="text" id="c2_retention_time_one" name="c2_retention_time_one"></input></td>
-                      <td><input type="text" id="c2_peak_area_one" name="c2_peak_area_one"0></input></td>
-                      <td><input type="text" id="c2_asymmetry_one" name="c2_asymmetry_one"></input></td>
-                      <td><input type="text" id="c2_resolution_one" name="c2_resolution_one"></input></td>
-                      <td><input type="text" id="c2_relative_retention_time_one" name="c2_relative_retention_time_one"></input></td>
-                    </tr>
-                    <tr>
-                      <td style="text-align:center;border-bottom:solid 1px #c4c4ff;">2.</td>
-                      <td><input type="text" id="c2_retention_time_two" name="c2_retention_time_two" onChange="calculator()"></input></td>
-                      <td><input type="text" id="c2_peak_area_two" name="c2_peak_area_two" onChange="calculator()"></input></td>
-                      <td><input type="text" id="c2_asymmetry_two" name="c2_asymmetry_two" onChange="calculator()"></input></td>
-                      <td><input type="text" id="c2_resolution_two" name="c2_resolution_two" onChange="calculator()"></input></td>
-                      <td><input type="text" id="c2_relative_retention_time_two" name="c2_relative_retention_time_two" onChange="calculator()"></input></td>
-                    </tr>
-                    <tr>
-                      <td style="text-align:center;border-bottom:solid 1px #c4c4ff;">3.</td>
-                      <td><input type="text" id="c2_retention_time_three" name="c2_retention_time_three" onChange="calculator()"></input></td>
-                      <td><input type="text" id="c2_peak_area_three" name="c2_peak_area_three" onChange="calculator()"></input></td>
-                      <td><input type="text" id="c2_asymmetry_three" name="c2_asymmetry_three" onChange="calculator()"></input></td>
-                      <td><input type="text" id="c2_resolution_three" name="c2_resolution_three" onChange="calculator()"></input></td>
-                      <td><input type="text" id="c2_relative_retention_time_three" name="c2_relative_retention_time_three" onChange="calculator()"></input></td>
-                    </tr>
-                    <tr>
-                      <td style="text-align:center;border-bottom:solid 1px #c4c4ff;">4.</td>
-                      <td><input type="text" id="c2_retention_time_four" name="c2_retention_time_four" onChange="calculator()"></input></td>
-                      <td><input type="text" id="c2_peak_area_four" name="c2_peak_area_four" onChange="calculator()"></input></td>
-                      <td><input type="text" id="c2_asymmetry_four" name="c2_asymmetry_four" onChange="calculator()"></input></td>
-                      <td><input type="text" id="c2_resolution_four" name="c2_resolution_four" onChange="calculator()"></input></td>
-                      <td><input type="text" id="c2_relative_retention_time_four" name="c2_relative_retention_time_four" onChange="calculator()"></input></td>
-                    </tr>
-                    <tr>
-                      <td style="text-align:center;border-bottom:solid 1px #c4c4ff;">5.</td>
-                      <td><input type="text" id="c2_retention_time_five" name="c2_retention_time_five" onChange="calculator()"></input></td>
-                      <td><input type="text" id="c2_peak_area_five" name="c2_peak_area_five" onChange="calculator()"></input></td>
-                      <td><input type="text" id="c2_asymmetry_five" name="c2_asymmetry_five" onChange="calculator()"></input></td>
-                      <td><input type="text" id="c2_resolution_five" name="c2_resolution_five" onChange="calculator()"></input></td>
-                      <td><input type="text" id="c2_relative_retention_time_five" name="c2_relative_retention_time_five" onChange="calculator()"></input></td>
-                    </tr>
-                    <tr>
-                      <td style="text-align:center;border-bottom:solid 1px #c4c4ff;">6.</td>
-                      <td><input type="text" id="c2_retention_time_six" name="c2_retention_time_six" onChange="calculator()"></input></td>
-                      <td><input type="text" id="c2_peak_area_six" name="c2_peak_area_six" onChange="calculator()"></input></td>
-                      <td><input type="text" id="c2_asymmetry_six" name="c2_asymmetry_six" onChange="calculator()"></input></td>
-                      <td><input type="text" id="c2_resolution_six" name="c2_resolution_six" onChange="calculator()"></input></td>
-                      <td><input type="text" id="c2_relative_retention_time_six" name="c2_relative_retention_time_six" onChange="calculator()"></input></td>
-                    </tr>
-                    <tr>
-                      <td style="padding:4px;border-bottom:solid 1px #c4c4ff;">Average</td>
-                      <td><input type="text" id="c2_average_retention_time" name="c2_average_retention_time" onChange="calculator()"></input></td>
-                      <td><input type="text" id="c2_average_peak_area" name="c2_average_peak_area" onChange="calculator()"></input></td>
-                      <td><input type="text" id="c2_average_asymmetry" name="c2_average_asymmetry" onChange="calculator()"></input></td>
-                      <td><input type="text" id="c2_average_resolution" name="c2_average_resolution" onChange="calculator()"></input></td>
-                      <td><input type="text" id="c2_average_relative_retention_time" name="c2_average_relative_retention_time" onChange="calculator()"></input></td>
-                    </tr>
-                    <tr>
-                      <td style="padding:4px;border-bottom:solid 1px #c4c4ff;">SD</td>
-                      <td><input type="text" id="c2_standard_dev_retention_time" name="c2_standard_dev_retention_time" onChange="calculator()"></input></td>
-                      <td><input type="text" id="c2_standard_dev_peak_area" name="c2_standard_dev_peak_area" onChange="calculator()"></input></td>
-                      <td><input type="text" id="c2_standard_dev_asymmetry" name="c2_standard_dev_asymmetry" onChange="calculator()"></input></td>
-                      <td><input type="text" id="c2_standard_dev_resolution" name="c2_standard_dev_resolution" onChange="calculator()"></input></td>
-                      <td><input type="text" id="c2_standard_dev_relative_retention_time" name="c2_standard_dev_relative_retention_time" onChange="calculator()"></input></td>
-                    </tr>
-                    <tr>
-                      <td style="padding:4px;border-bottom:solid 1px #c4c4ff;">RSD</td>
-                      <td><input type="text" id="c2_rsd_retention_time" name="c2_rsd_retention_time" onChange="calculator()"></input></td>
-                      <td><input type="text" id="c2_rsd_peak_area" name="c2_rsd_peak_area" onChange="calculator()"></input></td>
-                      <td><input type="text" id="c2_rsd_asymmetry" name="c2_rsd_asymmetry" onChange="calculator()"></input></td>
-                      <td><input type="text" id="c2_rsd_resolution" name="c2_rsd_resolution" onChange="calculator()"></input></td>
-                      <td><input type="text" id="c2_rsd_relative_retention_time" name="c2_rsd_relative_retention_time" onChange="calculator()"></input></td>
-                    </tr>
-                    <tr>
-                      <td style="padding:4px;border-bottom:solid 1px #c4c4ff;">Acceptance Criteria</td>
-                      <td style="padding:4px;text-align:center;">NMT 2.0%</td>
-                      <td style="padding:4px;text-align:center;">NMT 2.0%</td>
-                      <td style="padding:4px;text-align:center;">NMT 2.0%</td>
-                      <td style="padding:4px;text-align:center;">NLT 3.0%</td>
-                      <td style="padding:4px;text-align:center;">95% to 105%</td>
-                    </tr>
-                    <tr>
-                      <td style="padding:4px;border-bottom:solid 1px #c4c4ff;">Comment</td>
-                      <td><input type="text" id="" name=""></input></td>
-                      <td><input type="text" id="" name=""></input></td>
-                      <td><input type="text" id="" name=""></input></td>
-                      <td><input type="text" id="" name=""></input></td>
-                      <td><input type="text" id="" name=""></input></td>
-                    </tr>
-                  </table>
-                </td>
-            </tr>
             <tr>
               <td colspan="8" height="25px" align="left" style="color:#000;padding:8px;border-bottom: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><b>The Chromatographic Conditions</b></td>
             </tr>
@@ -705,283 +605,11 @@
                   </tr>
                 </table>
             </tr>
-            
-             
             <tr>
               <td colspan="8" height="25px" align="left" style="padding:8px;border-bottom: dotted 1px #c4c4ff;color: #000;background-color: #ffffff;">Chromatographic System- As Per System Stability</td>
             </tr>
             <tr>
-              <td colspan="8" height="25px" align="left" style="padding:8px;border-bottom: dotted 1px #c4c4ff;color: #000;background-color: #ffffff;">Component 1 <input type="text" name="component_one"></input></td>
-            </tr>
-            <tr>
-              <td colspan="8" height="25px" align="left" style="padding:8px;border-bottom: dotted 1px #c4c4ff;color: #000;background-color: #ffffff;">Peak Area From Chromatograms-</td>
-            </tr>
-            <tr>
-                <td colspan="8" style="padding:8px;">
-                  <div class="scroll">
-                  <table border="0" class="inner_table" cellpadding="8px" align="center">
-                    <tr>
-                      <td style="text-align:center;padding:8px;"></td>
-                      <td style="text-align:center;padding:8px;">Std 1</td>
-                      <td style="text-align:center;padding:8px;">Sample 1</td>
-                      <td style="text-align:center;padding:8px;">Sample 2</td>
-                      <td style="text-align:center;padding:8px;">Sample 3</td>
-                      <td style="text-align:center;padding:8px;">Sample 4</td>
-                      <td style="text-align:center;padding:8px;">Sample 5</td>
-                      <td style="text-align:center;padding:8px;">Sample 6</td>
-                      <td style="text-align:center;padding:8px;">Relative retention 95%-105%</td>
-                    </tr>
-                    <tr>
-                      <td style="text-align:center;border-bottom:solid 1px #c4c4ff;">1.</td>
-                      <td><input type="text" id="std_one" name="std_one"></input></td>
-                      <td><input type="text" id="sample_one_one" name="sample_one_one"></input></td>
-                      <td><input type="text" id="sample_one_two" name="sample_one_two"></input></td>
-                      <td><input type="text" id="sample_one_three" name="sample_one_three"></input></td>
-                      <td><input type="text" id="sample_one_four" name="sample_one_four"></input></td>
-                      <td><input type="text" id="sample_one_five" name="sample_one_five"></input></td>
-                      <td><input type="text" id="sample_one_six" name="sample_one_six"></input></td>
-                      <td><input type="text" id="relative_one" name="relative_one"></input></td>
-                    </tr>
-                    <tr>
-                      <td style="text-align:center;border-bottom:solid 1px #c4c4ff;">2.</td>
-                      <td><input type="text" id="std_two" name="std_two" onChange="calc_avg_std()"></input></td>
-                      <td><input type="text" id="sample_two_one" name="sample_two_one" onChange="calc_avg_sample_one()"></input></td>
-                      <td><input type="text" id="sample_two_two" name="sample_two_two" onChange="calc_avg_sample_two()"></input></td>
-                      <td><input type="text" id="sample_two_three" name="sample_two_three" onChange="calc_avg_sample_three()"></input></td>
-                      <td><input type="text" id="sample_two_four" name="sample_two_four" onChange="calc_avg_sample_four()"></input></td>
-                      <td><input type="text" id="sample_two_five" name="sample_two_five" onChange="calc_avg_sample_five()"></input></td>
-                      <td><input type="text" id="sample_two_six" name="sample_two_six" onChange="calc_avg_sample_six()"></input></td>
-                      <td><input type="text" id="relative_two" name="relative_two" onChange="calc_avg_relative()"></input></td>
-                    </tr>
-                    <tr>
-                      <td style="text-align:center;border-bottom:solid 1px #c4c4ff;">3.</td>
-                      <td><input type="text" id="std_three" name="std_three" onChange="calc_avg_std()"></input></td>
-                      <td><input type="text" id="sample_three_one" name="sample_three_one" onChange="calc_avg_sample_one()"></input></td>
-                      <td><input type="text" id="sample_three_two" name="sample_three_two" onChange="calc_avg_sample_two()"></input></td>
-                      <td><input type="text" id="sample_three_three" name="sample_three_three" onChange="calc_avg_sample_three()"></input></td>
-                      <td><input type="text" id="sample_three_four" name="sample_three_four" onChange="calc_avg_sample_four()"></input></td>
-                      <td><input type="text" id="sample_three_five" name="sample_three_five" onChange="calc_avg_sample_five()"></input></td>
-                      <td><input type="text" id="sample_three_six" name="sample_three_six" onChange="calc_avg_sample_six()"></input></td>
-                      <td><input type="text" id="relative_three" name="relative_three" onChange="calc_avg_relative()"></input></td>
-                    </tr>
-                    <tr>
-                      <td style="text-align:center;border-bottom:solid 1px #c4c4ff;">4.</td>
-                      <td><input type="text" id="std_four" name="std_four" onChange="calc_avg_std()"></input></td>
-                      <td><input type="text" id="sample_four_one" name="sample_four_one" onChange="calc_avg_sample_one()"></input></td>
-                      <td><input type="text" id="sample_four_two" name="sample_four_two" onChange="calc_avg_sample_two()"></input></td>
-                      <td><input type="text" id="sample_four_three" name="sample_four_three" onChange="calc_avg_sample_three()"></input></td>
-                      <td><input type="text" id="sample_four_four" name="sample_four_four" onChange="calc_avg_sample_four()"></input></td>
-                      <td><input type="text" id="sample_four_five" name="sample_four_five" onChange="calc_avg_sample_five()"></input></td>
-                      <td><input type="text" id="sample_four_six" name="sample_four_six" onChange="calc_avg_sample_six()"></input></td>
-                      <td><input type="text" id="relative_four" name="relative_four" onChange="calc_avg_relative()"></input></td>
-                    </tr>
-                    <tr>
-                      <td style="text-align:center;border-bottom:solid 1px #c4c4ff;">5.</td>
-                      <td><input type="text" id="std_five" name="std_five" onChange="calc_avg_std()"></input></td>
-                      <td><input type="text" id="sample_five_one" name="sample_five_one" onChange="calc_avg_sample_one()"></input></td>
-                      <td><input type="text" id="sample_five_two" name="sample_five_two" onChange="calc_avg_sample_two()"></input></td>
-                      <td><input type="text" id="sample_five_three" name="sample_five_three" onChange="calc_avg_sample_three()"></input></td>
-                      <td><input type="text" id="sample_five_four" name="sample_five_four" onChange="calc_avg_sample_four()"></input></td>
-                      <td><input type="text" id="sample_five_five" name="sample_five_five" onChange="calc_avg_sample_five()"></input></td>
-                      <td><input type="text" id="sample_five_six" name="sample_five_six" onChange="calc_avg_sample_six()"></input></td>
-                      <td><input type="text" id="relative_five" name="relative_five" onChange="calc_avg_relative()"></input></td>
-                    </tr>
-                    <tr>
-                      <td style="text-align:center;border-bottom:solid 1px #c4c4ff;">Average</td>
-                      <td><input type="text" id="std_average" name="std_average" onChange="calc_avg_std()"></input></td>
-                      <td><input type="text" id="sample_one_average" name="sample_one_average" onChange="calc_avg_sample_one()"></input></td>
-                      <td><input type="text" id="sample_two_average" name="sample_two_average" onChange="calc_avg_sample_two()"></input></td>
-                      <td><input type="text" id="sample_three_average" name="sample_three_average" onChange="calc_avg_sample_three()"></input></td>
-                      <td><input type="text" id="sample_four_average" name="sample_four_average" onChange="calc_avg_sample_four()"></input></td>
-                      <td><input type="text" id="sample_five_average" name="sample_five_average" onChange="calc_avg_sample_five()"></input></td>
-                      <td><input type="text" id="sample_six_average" name="sample_six_average" onChange="calc_avg_sample_six()"></input></td>
-                      <td><input type="text" id="relative_average" name="relative_average" onChange="calc_avg_relative()"></input></td>
-                    </tr>
-                  </table>
-                </div>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="8" style="padding:8px;">
-                  <table border="0" cellpadding="8px" align="center">
-                    <tr>
-                      <td style="color:#0000ff;padding:8px;"><b>Where:</b></td>
-                      <td style="color:#0000ff;padding:8px;">relative retention =</td>
-                      <td style="color:#0000ff;padding:8px;border-bottom:solid 1px #c4c4ff;">retention time of peak of interest</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td></td>
-                      <td></input></td>
-                      <td style="color:#0000ff;padding:8px;">Retention time of reference peak</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                  </table>
-                </td>
-            </tr>
-            <tr>
-              <td  colspan="8" style="color:#0000ff;padding:8px;border-bottom:dotted 1px #c4c4ff;"><b>Calculation of Determinations</b></td>
-            </tr>
-             <tr>
-                <td colspan="8" style="padding:8px;border-bottom:solid 1pf #c4c4ff;">
-                  <table border="0" cellpadding="8px" align="center">
-                    <tr>
-                      <td style="color:#0000ff;padding:8px;border-bottom:solid 1px #c4c4ff;">PK AREA OF SAMPLE x WEIGHT OF STANDARD IN FINAL DILUTION x AVERAGE WT x 100 x DILUTION FACTOXPOTENCY =</td>
-                      <td style="color:#0000ff;padding:8px;border-bottom:solid 1px #c4c4ff;">%LC</td>
-                    </tr>
-                    <tr>
-                      <td colspan="2" style="color:#0000ff;text-align:center;">(PEAK AREA OF STANDARD x WT OF POWDER TAKEN x LABEL CLAIM</td>
-                    </tr>
-                  </table>
-                </td>
-              </tr>
-              <tr>
-                <td colspan="8" style="padding:8px;">
-                  <table border="0" width="80%" cellpadding="8" align="center">
-                    <tr>
-                      <td colspan="2" style="padding:8px;color:#0000ff;text-align:left;border-bottom:solid 1px #c4c4ff;">Determination 1</td>
-                    </tr>
-                    <tr>
-                      <td style="padding:8px;border-bottom:dotted 1px #c4c4ff; text-align:center;"><input type="text" id="d_one_pkt" name="d_one_pkt"  placeholder="(PKT)" size="5"/> x <input type="text" id="d_one_wstd" name="d_one_wstd" placeholder="(WSTD)" size="5"/> x <input type="text" id="d_one_awt" name="d_one_awt" placeholder="(AWT)" size="5"/> x 100 x <input type="text" id="d_one_df" name="d_one_df" placeholder="(DF)" size="5"/> x <input type="text" id="d_one_potency" name="d_one_potency" placeholder="(P)" size="5"/></td>
-                      <td style="padding:8px;">=<input type="text" id="d_one_p_lc" name="d_one_p_lc" onCHange="calc_determination()" placeholder="(%LC)" size="10"/></td>
-                    </tr>
-                    <tr>
-                      <td colspan="2" style="padding:8px;text-align:center;"><input type="text" id="d_one_pkstd" name="d_one_pkstd" placeholder="(PKSTD)" size="5"> x <input type="text" id="d_one_wt" name="d_one_wt" placeholder="(WT)" size="5"> x <input type="text" id="d_one_lc" name="d_one_lc" placeholder="(LC)" size="5" onCHange="calc_determination()"></td>
-                    </tr>
-                    <tr>
-                      <td colspan="2" style="padding:8px;color:#0000ff;text-align:left;border-bottom:solid 1px #c4c4ff;">Determination 2</td>
-                    </tr>
-                    <tr>
-                      <td style="padding:8px;border-bottom:dotted 1px #c4c4ff; text-align:center;"><input type="text" id="d_two_pkt" name="d_two_pkt"  placeholder="(PKT)" size="5"/> x <input type="text" id="d_two_wstd" name="d_two_wstd" placeholder="(WSTD)" size="5"/> x <input type="text" id="d_two_awt" name="d_two_awt" placeholder="(AWT)" size="5"/> x 100 x <input type="text" id="d_two_df" name="d_two_df" placeholder="(DF)" size="5"/> x <input type="text" id="d_two_potency" name="d_two_potency" placeholder="(P)" size="5"/></td>
-                      <td style="padding:8px;">=<input type="text" id="d_two_p_lc" name="d_two_p_lc" onCHange="calc_determination()" placeholder="(%LC)" size="10"/></td>
-                    </tr>
-                    <tr>
-                      <td colspan="2" style="padding:8px;text-align:center;"><input type="text" id="d_two_pkstd" name="d_two_pkstd" placeholder="(PKSTD)" size="5"> x <input type="text" id="d_two_wt" name="d_two_wt" placeholder="(WT)" size="5"> x <input type="text" id="d_two_lc" name="d_two_lc" placeholder="(LC)" size="5" onCHange="calc_determination()"></td>
-                    </tr>
-                    <tr>
-                      <td colspan="2" style="padding:8px;color:#0000ff;text-align:left;border-bottom:solid 1px #c4c4ff;">Determination 3</td>
-                    </tr>
-                    <tr>
-                      <td style="padding:8px;border-bottom:dotted 1px #c4c4ff; text-align:center;"><input type="text" id="d_three_pkt" name="d_three_pkt"  placeholder="(PKT)" size="5"/> x <input type="text" id="d_three_wstd" name="d_three_wstd" placeholder="(WSTD)" size="5"/> x <input type="text" id="d_three_awt" name="d_three_awt" placeholder="(AWT)" size="5"/> x 100 x <input type="text" id="d_three_df" name="d_three_df" placeholder="(DF)" size="5"/> x <input type="text" id="d_three_potency" name="d_three_potency" placeholder="(P)" size="5"/></td>
-                      <td style="padding:8px;">=<input type="text" id="d_three_p_lc" name="d_three_p_lc" onChange="calc_determination()" placeholder="(%LC)" size="10"/></td>
-                    </tr>
-                    <tr>
-                      <td colspan="2" style="padding:8px;text-align:center;"><input type="text" id="d_three_pkstd" name="d_three_pkstd" placeholder="(PKSTD)" size="5"> x <input type="text" id="d_three_wt" name="d_three_wt" placeholder="(WT)" size="5"> x <input type="text" id="d_three_lc" name="d_three_lc" placeholder="(LC)" size="5" onChange="calc_determination()"></td>
-                    </tr>
-                    <tr>
-                      <td colspan="2" style="padding:8px;color:#0000ff;text-align:left;border-bottom:solid 1px #c4c4ff;">Determination 4</td>
-                    </tr>
-                    <tr>
-                      <td style="padding:8px;border-bottom:dotted 1px #c4c4ff; text-align:center;"><input type="text" id="d_four_pkt" name="d_four_pkt"  placeholder="(PKT)" size="5"/> x <input type="text" id="d_four_wstd" name="d_four_wstd" placeholder="(WSTD)" size="5"/> x <input type="text" id="d_four_awt" name="d_four_awt" placeholder="(AWT)" size="5"/> x 100 x <input type="text" id="d_four_df" name="d_four_df" placeholder="(DF)" size="5"/> x <input type="text" id="d_four_potency" name="d_four_potency" placeholder="(P)" size="5"/></td>
-                      <td style="padding:8px;">=<input type="text" id="d_four_p_lc" name="d_four_p_lc" onChange="calc_determination()" placeholder="(%LC)" size="10"/></td>
-                    </tr>
-                    <tr>
-                      <td colspan="2" style="padding:8px;text-align:center;"><input type="text" id="d_four_pkstd" name="d_four_pkstd" placeholder="(PKSTD)" size="5"> x <input type="text" id="d_four_wt" name="d_four_wt" placeholder="(WT)" size="5"> x <input type="text" id="d_four_lc" name="d_four_lc" placeholder="(LC)" size="5" onChange="calc_determination()"></td>
-                    </tr>
-                    <tr>
-                      <td colspan="2" style="padding:8px;color:#0000ff;text-align:left;border-bottom:solid 1px #c4c4ff;">Determination 5</td>
-                    </tr>
-                    <tr>
-                      <td style="padding:8px;border-bottom:dotted 1px #c4c4ff; text-align:center;"><input type="text" id="d_five_pkt" name="d_five_pkt"  placeholder="(PKT)" size="5"/> x <input type="text" id="d_five_wstd" name="d_five_wstd" placeholder="(WSTD)" size="5"/> x <input type="text" id="d_five_awt" name="d_five_awt" placeholder="(AWT)" size="5"/> x 100 x <input type="text" id="d_five_df" name="d_five_df" placeholder="(DF)" size="5"/> x <input type="text" id="d_five_potency" name="d_five_potency" placeholder="(P)" size="5"/></td>
-                      <td style="padding:8px;">=<input type="text" id="d_five_p_lc" name="d_five_p_lc" onChange="calc_determination()" placeholder="(%LC)" size="10"/></td>
-                    </tr>
-                    <tr>
-                      <td colspan="2" style="padding:8px;text-align:center;"><input type="text" id="d_five_pkstd" name="d_five_pkstd" placeholder="(PKSTD)" size="5"> x <input type="text" id="d_five_wt" name="d_five_wt" placeholder="(WT)" size="5"> x <input type="text" id="d_five_lc" name="d_five_lc" placeholder="(LC)" size="5" onChange="calc_determination()"></td>
-                    </tr>
-                    <tr>
-                      <td colspan="2" style="padding:8px;color:#0000ff;text-align:left;border-bottom:solid 1px #c4c4ff;">Determination 6</td>
-                    </tr>
-                    <tr>
-                      <td style="padding:8px;border-bottom:dotted 1px #c4c4ff; text-align:center;"><input type="text" id="d_six_pkt" name="d_six_pkt"  placeholder="(PKT)" size="5"/> x <input type="text" id="d_six_wstd" name="d_six_wstd" placeholder="(WSTD)" size="5"/> x <input type="text" id="d_six_awt" name="d_six_awt" placeholder="(AWT)" size="5"/> x 100 x <input type="text" id="d_six_df" name="d_six_df" placeholder="(DF)" size="5"/> x <input type="text" id="d_six_potency" name="d_six_potency" placeholder="(P)" size="5"/></td>
-                      <td style="padding:8px;">=<input type="text" id="d_six_p_lc" name="d_six_p_lc" onChange="calc_determination()" placeholder="(%LC)" size="10"/></td>
-                    </tr>
-                    <tr>
-                      <td colspan="2" style="padding:8px;text-align:center;"><input type="text" id="d_six_pkstd" name="d_six_pkstd" placeholder="(PKSTD)" size="5"> x <input type="text" id="d_six_wt" name="d_six_wt" placeholder="(WT)" size="5"> x <input type="text" id="d_six_lc" name="d_six_lc" placeholder="(LC)" size="5" onChange="calc_determination()"></td>
-                    </tr>
-                    <tr>
-                      <td colspan="3" style="color:#0000ff;padding:8px;">Average % &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="average"></input></td>
-                    </tr>
-                    <tr>
-                      <td colspan="6" style="color:#0000ff;padding:8px;">Equivalent To &nbsp;<input type="text" name="equivalent_to"></input></td>
-                    </tr>
-                    <tr>
-                      <td colspan="6" style="color:#0000ff;padding:8px;">SD &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="sd"></input></td>
-                    </tr>
-                    <tr>
-                      <td colspan="6" style="color:#0000ff;padding:8px;">RSD &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="rsd"></input></td>
-                    </tr>
-                  </table>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="8" style="padding:8px;">
-                  <table border="0" width="80%" cellpadding="8px" align="center">
-                    <tr>
-                      <td colspan="2" style="color:#0000ff;padding:8px;border-bottom:solid 1px #c4c4ff;"><b>Acceptance Criteria</b></td>
-                      <td style="color:#0000ff;padding:8px;border-bottom:solid 1px #c4c4ff;"><b>Results</b></td>
-                      <td style="color:#0000ff;padding:8px;border-bottom:solid 1px #c4c4ff;"><b>Comment</b></td>
-                    </tr>
-                    <tr>
-                      <td>Content</td>
-                      <td style="color:#0000ff;padding:8px;"><input type="text" name="from" id="from" placeholder="92.5%" size="7"> to <input type="text" name="from" id="to" placeholder="107.5%" size="7">  of the stated amount</td>
-                      <td style="color:#0000ff;padding:8px;"><input type="text" name=""></input></td>
-                      <td style="color:#0000ff;padding:8px;"><input type="text" name=""></input></td>
-                    </tr>
-                    <tr>
-                      <td>SD</td>
-                      <td style="color:#0000ff;padding:8px;"><input type="text" name=""></input></td>
-                      <td style="color:#0000ff;padding:8px;"><input type="text" name=""></input></td>
-                      <td style="color:#0000ff;padding:8px;"><input type="text" name=""></input></td>
-                    </tr>
-                    <tr>
-                      <td>RSD</td>
-                      <td style="color:#0000ff;padding:8px;"><input type="text" name=""></input></td>
-                      <td style="color:#0000ff;padding:8px;"><input type="text" name=""></input></td>
-                      <td style="color:#0000ff;padding:8px;"><input type="text" name=""></input></td>
-                    </tr>
-                  </table>
-                </td>
-            </tr>
-            <tr>
-              <td colspan="8" style="padding:8px;color:#0000ff;border-bottom:solid 1px #c4c4ff;"><b>Chromatography Check List</b></td>
-            </tr>
-            <tr>
-                <td colspan="8" style="padding:8px;border-bottom:dotted 1px #c4c4ff;">
-                  <table border="0" cellpadding="8px" align="center">
-                    <tr>
-                      <td style="color:#0000ff;border-bottom:solid 1px #c4c4ff;padding:8px;">Requirement</td>
-                      <td style="color:#0000ff;padding:8px;border-bottom:solid 1px #c4c4ff;">Tick</td>
-                      <td style="color:#0000ff;padding:8px;border-bottom:solid 1px #c4c4ff;">Comment</td>
-                    </tr>
-                    <tr>
-                      <td style="color:#000;padding:8px;">System Suitability Sequence</td>
-                      <td style="color:#000;padding:8px;"><input type="checkbox" name="sysytem_suitability_sequence" value="Sysytem Suitability Sequence"></input></td>
-                      <td style="color:#000;padding:8px;"><input type="text" name="sysytem_suitability_sequence_comment" size="50"></input></td>
-                    </tr>
-                    <tr>
-                      <td style="color:#000;padding:8px;">Sample Injection sequence</td>
-                      <td style="color:#000;padding:8px;"><input type="checkbox" name="sample_injection_sequence" value="Sample Injection Sequence"></input></td>
-                      <td style="color:#000;padding:8px;"><input type="text" name="Sample_injection_sequence_comment" size="50"></input></td>
-                    </tr>
-                    <tr>
-                      <td style="color:#000;padding:8px;">Chromatograms Attached</td>
-                      <td style="color:#000;padding:8px;"><input type="checkbox" name="chromatograms_attached" value="Chromatograms Attached"></input></td>
-                      <td style="color:#000;padding:8px;"><input type="text" name="chromatograms_attached_comment" size="50"></input></td>
-                    </tr>
-                  </table>
-                </td>
-            </tr>
-            <tr>
-
-            <tr>
-              <td colspan="8" height="25px" align="left" style="padding:8px;border-bottom: dotted 1px #c4c4ff;color: #000;background-color: #ffffff;">Component 2 <input type="text" name="component_two"></input></td>
-            </tr>
-            <tr>
-              <td colspan="8" height="25px" align="left" style="padding:8px;border-bottom: dotted 1px #c4c4ff;color: #000;background-color: #ffffff;">Peak Area From Chromatograms-</td>
+              <td colspan="8" height="25px" align="left" style="padding:8px;border-bottom: dotted 1px #c4c4ff;color: #0000ff;background-color: #ffffff;"><b>Peak Area From Chromatograms</b></td>
             </tr>
             <tr>
                 <td colspan="8" style="padding:8px;">
@@ -993,9 +621,6 @@
                       <td style="text-align:center;padding:8px;">Sample 1</td>
                       <td style="text-align:center;padding:8px;">Sample 2</td>
                       <td style="text-align:center;padding:8px;">Sample 3</td>
-                      <td style="text-align:center;padding:8px;">Sample 4</td>
-                      <td style="text-align:center;padding:8px;">Sample 5</td>
-                      <td style="text-align:center;padding:8px;">Sample 6</td>
                       <td style="text-align:center;padding:8px;">Relative retention 95%-105%</td>
                     </tr>
                     <tr>
@@ -1004,9 +629,6 @@
                       <td><input type="text" id="c2_sample_one_one" name="c2_sample_one_one"></input></td>
                       <td><input type="text" id="c2_sample_one_two" name="c2_sample_one_two"></input></td>
                       <td><input type="text" id="c2_sample_one_three" name="c2_sample_one_three"></input></td>
-                      <td><input type="text" id="c2_sample_one_four" name="c2_sample_one_four"></input></td>
-                      <td><input type="text" id="c2_sample_one_five" name="c2_sample_one_five"></input></td>
-                      <td><input type="text" id="c2_sample_one_six" name="c2_sample_one_six"></input></td>
                       <td><input type="text" id="c2_relative_one" name="c2_relative_one"></input></td>
                     </tr>
                     <tr>
@@ -1015,9 +637,6 @@
                       <td><input type="text" id="c2_sample_two_one" name="c2_sample_two_one" onChange="c2_calc_avg_sample_one()"></input></td>
                       <td><input type="text" id="c2_sample_two_two" name="c2_sample_two_two" onChange="c2_calc_avg_sample_two()"></input></td>
                       <td><input type="text" id="c2_sample_two_three" name="c2_sample_two_three" onChange="c2_calc_avg_sample_three()"></input></td>
-                      <td><input type="text" id="c2_sample_two_four" name="c2_sample_two_four" onChange="c2_calc_avg_sample_four()"></input></td>
-                      <td><input type="text" id="c2_sample_two_five" name="c2_sample_two_five" onChange="c2_calc_avg_sample_five()"></input></td>
-                      <td><input type="text" id="c2_sample_two_six" name="c2_sample_two_six" onChange="c2_calc_avg_sample_six()"></input></td>
                       <td><input type="text" id="c2_relative_two" name="c2_relative_two" onChange="c2_calc_avg_relative()"></input></td>
                     </tr>
                     <tr>
@@ -1026,9 +645,6 @@
                       <td><input type="text" id="c2_sample_three_one" name="c2_sample_three_one" onChange="c2_calc_avg_sample_one()"></input></td>
                       <td><input type="text" id="c2_sample_three_two" name="c2_sample_three_two" onChange="c2_calc_avg_sample_two()"></input></td>
                       <td><input type="text" id="c2_sample_three_three" name="c2_sample_three_three" onChange="c2_calc_avg_sample_three()"></input></td>
-                      <td><input type="text" id="c2_sample_three_four" name="c2_sample_three_four" onChange="c2_calc_avg_sample_four()"></input></td>
-                      <td><input type="text" id="c2_sample_three_five" name="c2_sample_three_five" onChange="c2_calc_avg_sample_five()"></input></td>
-                      <td><input type="text" id="c2_sample_three_six" name="c2_sample_three_six" onChange="c2_calc_avg_sample_six()"></input></td>
                       <td><input type="text" id="c2_relative_three" name="c2_relative_three" onChange="c2_calc_avg_relative()"></input></td>
                     </tr>
                     <tr>
@@ -1037,9 +653,6 @@
                       <td><input type="text" id="c2_sample_four_one" name="c2_sample_four_one" onChange="c2_calc_avg_sample_one()"></input></td>
                       <td><input type="text" id="c2_sample_four_two" name="c2_sample_four_two" onChange="c2_calc_avg_sample_two()"></input></td>
                       <td><input type="text" id="c2_sample_four_three" name="c2_sample_four_three" onChange="c2_calc_avg_sample_three()"></input></td>
-                      <td><input type="text" id="c2_sample_four_four" name="c2_sample_four_four" onChange="c2_calc_avg_sample_four()"></input></td>
-                      <td><input type="text" id="c2_sample_four_five" name="c2_sample_four_five" onChange="c2_calc_avg_sample_five()"></input></td>
-                      <td><input type="text" id="c2_sample_four_six" name="c2_sample_four_six" onChange="c2_calc_avg_sample_six()"></input></td>
                       <td><input type="text" id="c2_relative_four" name="c2_relative_four" onChange="c2_calc_avg_relative()"></input></td>
                     </tr>
                     <tr>
@@ -1048,9 +661,6 @@
                       <td><input type="text" id="c2_sample_five_one" name="c2_sample_five_one" onChange="c2_calc_avg_sample_one()"></input></td>
                       <td><input type="text" id="c2_sample_five_two" name="c2_sample_five_two" onChange="c2_calc_avg_sample_two()"></input></td>
                       <td><input type="text" id="c2_sample_five_three" name="c2_sample_five_three" onChange="c2_calc_avg_sample_three()"></input></td>
-                      <td><input type="text" id="c2_sample_five_four" name="c2_sample_five_four" onChange="c2_calc_avg_sample_four()"></input></td>
-                      <td><input type="text" id="c2_sample_five_five" name="c2_sample_five_five" onChange="c2_calc_avg_sample_five()"></input></td>
-                      <td><input type="text" id="c2_sample_five_six" name="c2_sample_five_six" onChange="c2_calc_avg_sample_six()"></input></td>
                       <td><input type="text" id="c2_relative_five" name="c2_relative_five" onChange="c2_calc_avg_relative()"></input></td>
                     </tr>
                     <tr>
@@ -1059,35 +669,10 @@
                       <td><input type="text" id="c2_sample_one_average" name="c2_sample_one_average" onChange="c2_calc_avg_sample_one()"></input></td>
                       <td><input type="text" id="c2_sample_two_average" name="c2_sample_two_average" onChange="c2_calc_avg_sample_two()"></input></td>
                       <td><input type="text" id="c2_sample_three_average" name="c2_sample_three_average" onChange="c2_calc_avg_sample_three()"></input></td>
-                      <td><input type="text" id="c2_sample_four_average" name="c2_sample_four_average" onChange="c2_calc_avg_sample_four()"></input></td>
-                      <td><input type="text" id="c2_sample_five_average" name="c2_sample_five_average" onChange="c2_calc_avg_sample_five()"></input></td>
-                      <td><input type="text" id="c2_sample_six_average" name="c2_sample_six_average" onChange="c2_calc_avg_sample_six()"></input></td>
                       <td><input type="text" id="c2_relative_average" name="c2_relative_average" onChange="c2_calc_avg_relative()"></input></td>
                     </tr>
                   </table>
                 </div>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="8" style="padding:8px;">
-                  <table border="0" cellpadding="8px" align="center">
-                    <tr>
-                      <td style="color:#0000ff;padding:8px;"><b>Where:</b></td>
-                      <td style="color:#0000ff;padding:8px;">relative retention =</td>
-                      <td style="color:#0000ff;padding:8px;border-bottom:solid 1px #c4c4ff;">retention time of peak of interest</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td></td>
-                      <td></td>
-                      <td style="color:#0000ff;padding:8px;">Retention time of reference peak</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                  </table>
                 </td>
             </tr>
             <tr>
@@ -1140,51 +725,24 @@
                       <td colspan="2" style="padding:8px;text-align:center;"><input type="text" id="c2_d_three_pkstd" name="c2_d_three_pkstd" placeholder="(PKSTD)" size="5"> x <input type="text" id="c2_d_three_wt" name="c2_d_three_wt" placeholder="(WT)" size="5"> x <input type="text" id="c2_d_three_lc" name="c2_d_three_lc" placeholder="(LC)" size="5" onChange="calc_c2_determination()"></td>
                     </tr>
                     <tr>
-                      <td colspan="2" style="padding:8px;color:#0000ff;text-align:left;border-bottom:solid 1px #c4c4ff;">Determination 4</td>
+                      <td colspan="3" style="padding:8px;">Average % &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="determination_average" name="determination_average"  disabled></input></td>
                     </tr>
                     <tr>
-                      <td style="padding:8px;border-bottom:dotted 1px #c4c4ff; text-align:center;"><input type="text" id="c2_d_four_pkt" name="c2_d_four_pkt"  placeholder="(PKT)" size="5"/> x <input type="text" id="c2_d_four_wstd" name="c2_d_four_wstd" placeholder="(WSTD)" size="5"/> x <input type="text" id="c2_d_four_awt" name="c2_d_four_awt" placeholder="(AWT)" size="5"/> x 100 x <input type="text" id="c2_d_four_df" name="c2_d_four_df" placeholder="(DF)" size="5"/> x <input type="text" id="c2_d_four_potency" name="c2_d_four_potency" placeholder="(P)" size="5"/></td>
-                      <td style="padding:8px;">=<input type="text" id="c2_d_four_p_lc" name="c2_d_four_p_lc" onChange="calc_c2_determination()" placeholder="(%LC)" size="10"/></td>
+                      <td colspan="6" style="padding:8px;">Equivalent To &nbsp;<input type="hidden" id="equivalent_to_lc"/><input type="text" id="determination_equivalent_to" name="determination_equivalent_to" disabled/></td>
                     </tr>
                     <tr>
-                      <td colspan="2" style="padding:8px;text-align:center;"><input type="text" id="c2_d_four_pkstd" name="c2_d_four_pkstd" placeholder="(PKSTD)" size="5"> x <input type="text" id="c2_d_four_wt" name="c2_d_four_wt" placeholder="(WT)" size="5"> x <input type="text" id="c2_d_four_lc" name="c2_d_four_lc" placeholder="(LC)" size="5" onChange="calc_c2_determination()"></td>
+                      <td colspan="6" style="padding:8px;">Range %&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="det_min" name="range_det_min" size="4" placeholder="min%" onChange="calc_determination()" disabled></input> - <input type="text" id="det_max" name="range_det_max" size="4" placeholder="max%" onChange="calc_determination()" disabled></input></td>
                     </tr>
                     <tr>
-                      <td colspan="2" style="padding:8px;color:#0000ff;text-align:left;border-bottom:solid 1px #c4c4ff;">Determination 5</td>
+                      <td colspan="6" style="padding:8px;">SD&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="determination_sd" name="determination_sd" disabled></td>
                     </tr>
                     <tr>
-                      <td style="padding:8px;border-bottom:dotted 1px #c4c4ff; text-align:center;"><input type="text" id="c2_d_five_pkt" name="c2_d_five_pkt"  placeholder="(PKT)" size="5"/> x <input type="text" id="c2_d_five_wstd" name="c2_d_five_wstd" placeholder="(WSTD)" size="5"/> x <input type="text" id="c2_d_five_awt" name="c2_d_five_awt" placeholder="(AWT)" size="5"/> x 100 x <input type="text" id="c2_d_five_df" name="c2_d_five_df" placeholder="(DF)" size="5"/> x <input type="text" id="c2_d_five_potency" name="c2_d_five_potency" placeholder="(P)" size="5"/></td>
-                      <td style="padding:8px;">=<input type="text" id="c2_d_five_p_lc" name="c2_d_five_p_lc" onChange="calc_c2_determination()" placeholder="(%LC)" size="10"/></td>
-                    </tr>
-                    <tr>
-                      <td colspan="2" style="padding:8px;text-align:center;"><input type="text" id="c2_d_five_pkstd" name="c2_d_five_pkstd" placeholder="(PKSTD)" size="5"> x <input type="text" id="c2_d_five_wt" name="c2_d_five_wt" placeholder="(WT)" size="5"> x <input type="text" id="c2_d_five_lc" name="c2_d_five_lc" placeholder="(LC)" size="5" onChange="calc_c2_determination()"></td>
-                    </tr>
-                    <tr>
-                      <td colspan="2" style="padding:8px;color:#0000ff;text-align:left;border-bottom:solid 1px #c4c4ff;">Determination 6</td>
-                    </tr>
-                    <tr>
-                      <td style="padding:8px;border-bottom:dotted 1px #c4c4ff; text-align:center;"><input type="text" id="c2_d_six_pkt" name="c2_d_six_pkt"  placeholder="(PKT)" size="5"/> x <input type="text" id="c2_d_six_wstd" name="c2_d_six_wstd" placeholder="(WSTD)" size="5"/> x <input type="text" id="c2_d_six_awt" name="c2_d_six_awt" placeholder="(AWT)" size="5"/> x 100 x <input type="text" id="c2_d_six_df" name="c2_d_six_df" placeholder="(DF)" size="5"/> x <input type="text" id="c2_d_six_potency" name="c2_d_six_potency" placeholder="(P)" size="5"/></td>
-                      <td style="padding:8px;">=<input type="text" id="c2_d_six_p_lc" name="c2_d_six_p_lc" onChange="calc_c2_determination()" placeholder="(%LC)" size="10"/></td>
-                    </tr>
-                    <tr>
-                      <td colspan="2" style="padding:8px;text-align:center;"><input type="text" id="c2_d_six_pkstd" name="c2_d_six_pkstd" placeholder="(PKSTD)" size="5"> x <input type="text" id="c2_d_six_wt" name="c2_d_six_wt" placeholder="(WT)" size="5"> x <input type="text" id="c2_d_six_lc" name="c2_d_six_lc" placeholder="(LC)" size="5" onChange="calc_c2_determination()"></td>
-                    </tr>
-                    <tr>
-                      <td colspan="3" style="color:#0000ff;padding:8px;">Average % &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="average"></input></td>
-                    </tr>
-                    <tr>
-                      <td colspan="6" style="color:#0000ff;padding:8px;">Equivalent To &nbsp;<input type="text" name="equivalent_to"></input></td>
-                    </tr>
-                    <tr>
-                      <td colspan="6" style="color:#0000ff;padding:8px;">SD &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="sd"></input></td>
-                    </tr>
-                    <tr>
-                      <td colspan="6" style="color:#0000ff;padding:8px;">RSD &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="rsd"></input></td>
+                      <td colspan="6" style="padding:8px;">RSD %&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="determination_rsd" name="determination_rsd" onChange="calculator()" disabled></input></td>
                     </tr>
                   </table>
                 </td>
             </tr>
-            <tr>
+             <tr>
                 <td colspan="8" style="padding:8px;">
                   <table border="0" width="80%" cellpadding="8px" align="center">
                     <tr>
@@ -1193,22 +751,34 @@
                       <td style="color:#0000ff;padding:8px;border-bottom:solid 1px #c4c4ff;"><b>Comment</b></td>
                     </tr>
                     <tr>
-                      <td>Content</td>
-                      <td style="color:#0000ff;padding:8px;"><input type="text" name="from" id="from" placeholder="92.5%" size="7"> to <input type="text" name="from" id="to" placeholder="107.5%" size="7">  of the stated amount</td>
-                      <td style="color:#0000ff;padding:8px;"><input type="text" name="c2_"></input></td>
-                      <td style="color:#0000ff;padding:8px;"><input type="text" name="c2_"></input></td>
+                      <td><input type="checkbox" id="min">Not Less than Tolerance</td>
+                      <td style="color:#0000ff;padding:8px;"><input type="text" min="min_tolerance" id="min_tolerance" name="min_tolerance" placeholder="min%" size="5"  onChange="calc_determination()" /></td>
+                      <td style="color:#0000ff;padding:8px;"><input type="text" min="min_tolerance" id="nlt_min_tolerance_det" name="det_min" size="4" placeholder="min%" onChange="calc_determination()" disabled/> - <input type="text" min="min_tolerance" id="nlt_max_tolerance_det" name="det_max" size="4" placeholder="max%" onChange="calc_determination()" disabled/></td>
+                      <td style="color:#0000ff;padding:8px;"><input type="text" min="min_tolerance" id="min_tolerance_comment" name="min_tolerance_comment" disabled/></td>
+                    </tr>
+                    <tr>
+                      <td><input type="checkbox" id="max">Not Greater than Tolerance</td>
+                      <td style="color:#0000ff;padding:8px;"><input type="text" max='max_tolerance' id="max_tolerance" name="max_tolerance" placeholder="max%" size="5"  onChange="calc_determination()"/></td>
+                      <td style="color:#0000ff;padding:8px;"><input type="text" max='max_tolerance' id="ngt_min_tolerance_det" name="det_min" size="4" placeholder="min%" onChange="calc_determination()" disabled/> - <input type="text" max="max_tolerance" id="ngt_max_tolerance_det" name="det_max" size="4" placeholder="max%" onChange="calc_determination()" disabled/></td>
+                      <td style="color:#00ff00;padding:8px;"><input type="text" max='max_tolerance' id="max_tolerance_comment" name="max_tolerance_comment" disabled/></td>
+                    </tr>
+                    <tr>
+                      <td><input type="checkbox" id="range">Tolerance Range</td>
+                      <td style="color:#0000ff;padding:8px;"><input type="text" range="tolerance_range" id="new_min_tolerance_det" name="content_from" placeholder="min%" size="5" onChange="calc_determination()"> - <input type="text" range="tolerance_range" id="new_max_tolerance_det" name="content_to" placeholder="max%" size="5" onChange="calc_determination()"/></td>
+                      <td style="color:#0000ff;padding:8px;"><input type="text" range="tolerance_range" id="range_min_tolerance_det" name="det_min" size="4" placeholder="min%" onChange="calc_determination()" disabled/> - <input type="text" id="range_max_tolerance_det" range="tolerance_range" name="det_max" size="4" placeholder="max%" onChange="calc_determination()" disabled/></td>
+                      <td style="color:#0000ff;padding:8px;"><input type="text" range="tolerance_range" id="range_tolerance_comment" name="range_tolerance_comment" disabled/></td>
                     </tr>
                     <tr>
                       <td>SD</td>
-                      <td style="color:#0000ff;padding:8px;"><input type="text" name="c2_"></input></td>
-                      <td style="color:#0000ff;padding:8px;"><input type="text" name="c2_"></input></td>
-                      <td style="color:#0000ff;padding:8px;"><input type="text" name="c2_"></input></td>
+                      <td style="color:#0000ff;padding:8px;"></td>
+                      <td style="color:#ff0000;padding:8px;"><input type="text" id="results_determination_sd" name="determination_sd"  disabled/></td>
+                      <td style="padding:8px;"><input type="text" name="sd_results"></input></td>
                     </tr>
                     <tr>
-                      <td>RSD</td>
-                      <td style="color:#0000ff;padding:8px;"><input type="text" name="c2_"></input></td>
-                      <td style="color:#0000ff;padding:8px;"><input type="text" name="c2_"></input></td>
-                      <td style="color:#0000ff;padding:8px;"><input type="text" name="c2_"></input></td>
+                      <td>RSD %</td>
+                      <td style="color:#0000ff;padding:8px;"></td>
+                      <td style="color:#ff0000;padding:8px;"><input type="text" id="results_determination_rsd" name="determination_rsd"  disabled/></td>
+                      <td style="padding:8px;"><input type="text" name="rsd_comment" disable/></td>
                     </tr>
                   </table>
                 </td>
@@ -1218,7 +788,7 @@
             </tr>
             <tr>
                 <td colspan="8" style="padding:8px;border-bottom:dotted 1px #c4c4ff;">
-                  <table border="0" cellpadding="8px" align="center">
+                  <table border="0" cellpadding="8px" width="80%" align="center">
                     <tr>
                       <td style="color:#0000ff;border-bottom:solid 1px #c4c4ff;padding:8px;">Requirement</td>
                       <td style="color:#0000ff;padding:8px;border-bottom:solid 1px #c4c4ff;">Tick</td>
@@ -1226,69 +796,18 @@
                     </tr>
                     <tr>
                       <td style="color:#000;padding:8px;">System Suitability Sequence</td>
-                      <td style="color:#000;padding:8px;"><input type="checkbox" name="c2_sysytem_suitability_sequence" value="Sysytem Suitability Sequence"></input></td>
-                      <td style="color:#000;padding:8px;"><input type="text" name="c2_sysytem_suitability_sequence_comment" size="50"></input></td>
+                      <td style="color:#000;padding:8px;"><input type="checkbox" name="sysytem_suitability_sequence" value="Sysytem Suitability Sequence"></input></td>
+                      <td style="color:#000;padding:8px;"><input type="text" name="sysytem_suitability_sequence_comment" size="50"></input></td>
                     </tr>
                     <tr>
                       <td style="color:#000;padding:8px;">Sample Injection sequence</td>
-                      <td style="color:#000;padding:8px;"><input type="checkbox" name="c2_sample_injection_sequence" value="Sample Injection Sequence"></input></td>
-                      <td style="color:#000;padding:8px;"><input type="text" name="c2_Sample_injection_sequence_comment" size="50"></input></td>
+                      <td style="color:#000;padding:8px;"><input type="checkbox" name="sample_injection_sequence" value="Sample Injection Sequence"></input></td>
+                      <td style="color:#000;padding:8px;"><input type="text" name="Sample_injection_sequence_comment" size="50"></input></td>
                     </tr>
                     <tr>
                       <td style="color:#000;padding:8px;">Chromatograms Attached</td>
-                      <td style="color:#000;padding:8px;"><input type="checkbox" name="c2_chromatograms_attached" value="Chromatograms Attached"></input></td>
-                      <td style="color:#000;padding:8px;"><input type="text" name="c2_chromatograms_attached_comment" size="50"></input></td>
-                    </tr>
-                  </table>
-                </td>
-            </tr>
-            <tr>  
-              <td colspan="8" align="left"  style="padding:8px;border-bottom: dotted 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><b>Reagents</b></td>
-            </tr>
-            <tr>
-                <td colspan="8" style="padding:8px;">
-                  <table border="0" cellpadding="8px" align="center">
-                    <tr>
-                      <td style="text-align:center;color:#0000ff;padding:8px;">Test</td>
-                      <td style="text-align:center;color:#0000ff;padding:8px;">Chemical/Reagent</td>
-                      <td style="text-align:center;color:#0000ff;padding:8px;">Batch No.</td>
-                      <td style="text-align:center;color:#0000ff;padding:8px;">Manufacturer</td>
-                    </tr>
-                    <tr>
-                      <td style="border-bottom:dottted 1px #c4c4ff;"><input type="" name=""></input></td>
-                      <td style="border-bottom:dottted 1px #c4c4ff;"><input type="" name=""></input></td>
-                      <td style="border-bottom:dottted 1px #c4c4ff;"><input type="" name=""></input></td>
-                      <td style="border-bottom:dottted 1px #c4c4ff;"><input type="" name=""></input></td>
-                    </tr>
-                    <tr>
-                      <td style="border-bottom:dottted 1px #c4c4ff;"><input type="" name=""></input></td>
-                      <td style="border-bottom:dottted 1px #c4c4ff;"><input type="" name=""></input></td>
-                      <td style="border-bottom:dottted 1px #c4c4ff;"><input type="" name=""></input></td>
-                      <td style="border-bottom:dottted 1px #c4c4ff;"><input type="" name=""></input></td>
-                    </tr>
-                    <tr>
-                      <td style="border-bottom:dottted 1px #c4c4ff;"><input type="" name=""></input></td>
-                      <td style="border-bottom:dottted 1px #c4c4ff;"><input type="" name=""></input></td>
-                      <td style="border-bottom:dottted 1px #c4c4ff;"><input type="" name=""></input></td>
-                      <td style="border-bottom:dottted 1px #c4c4ff;"><input type="" name=""></input></td>
-                    </tr>
-                    <tr>
-                      <td style="border-bottom:dottted 1px #c4c4ff;"><input type="" name=""></input></td>
-                      <td style="border-bottom:dottted 1px #c4c4ff;"><input type="" name=""></input></td>
-                      <td style="border-bottom:dottted 1px #c4c4ff;"><input type="" name=""></input></td>
-                      <td style="border-bottom:dottted 1px #c4c4ff;"><input type="" name=""></input></td>
-                    </tr>
-                    <tr>
-                      <td style="border-bottom:dottted 1px #c4c4ff;"><input type="" name=""></input></td>
-                      <td style="border-bottom:dottted 1px #c4c4ff;"><input type="" name=""></input></td>
-                      <td style="border-bottom:dottted 1px #c4c4ff;"><input type="" name=""></input></td>
-                      <td style="border-bottom:dottted 1px #c4c4ff;"><input type="" name=""></input></td>
-                    </tr>
-                    <tr>
-                      <td style="border-bottom:dottted 1px #c4c4ff;"><input type="" name=""></input></td>
-                      <td style="border-bottom:dottted 1px #c4c4ff;"><input type="" name=""></input></td>
-                      <td style="border-bottom:dottted 1px #c4c4ff;"><input type="" name=""></input></td>
-                      <td style="border-bottom:dottted 1px #c4c4ff;"><input type="" name=""></input></td>
+                      <td style="color:#000;padding:8px;"><input type="checkbox" name="chromatograms_attached" value="Chromatograms Attached"></input></td>
+                      <td style="color:#000;padding:8px;"><input type="text" name="chromatograms_attached_comment" size="50"></input></td>
                     </tr>
                   </table>
                 </td>
@@ -1298,28 +817,29 @@
             </tr>
              <tr>
               <td colspan="8" style="padding:8px;border-bottom:solid 1px #c4c4ff;">
-                <table border="0" width="30%" cellpadding="8px" align="center">
+                <table border="0"  class="table_form" width="100%" cellpadding="8px" align="center">
                   <tr>    
-                    <td style="border-bottom:dottted 1px #c4c4ff;padding:8px;text-align:right;">PASS</input></td>
-                    <td style="border-bottom:dottted 1px #c4c4ff;padding:8px;text-align:left;"><input type="radio" name="choice" value="pass"></input></td>
-                    <td style="border-bottom:dottted 1px #c4c4ff;padding:8px;text-align:right;">FAIL</input></td>
-                    <td style="border-bottom:dottted 1px #c4c4ff;padding:8px;text-align:left;"><input type="radio" name="choice" value="fail"></input></td>
+                    <td style="color:#00CC00;border-bottom:dottted 1px #c4c4ff;padding:8px;text-align:center;"><input type="text" id="test_conclusion" name="test_conclusion" size="30" disabled/></td>
                   </tr>
                 </table>
             </tr>
+            
             <tr>
               <td colspan="8" style="padding:8px;">
-                <table border="0" width="90%" cellpadding="8px" align="center">
+                <table  class="table_form"border="0" width="100%" cellpadding="8px" align="center">
                   <tr>
-                    <td style="border-bottom: dotted 1px #c4c4ff;padding:4px;text-align:right;">Supervisor <input type="text" id="supervisor" name="supervisor"></td>
-                    <td style="border-bottom: dotted 1px #c4c4ff;padding:4px;text-align:left;">Date <input type="date"  id="date" name="date"></td>
+                    <td style="background-color:#ededfd;border-bottom: dotted 1px #c4c4ff;padding:8px;text-align:left;">Done By <input type="hidden" id="done_by" name="done_by" value="<?php echo($user['logged_in']['fname']." ".$user['logged_in']['lname']);?>"><?php echo($user['logged_in']['fname']." ".$user['logged_in']['lname']);?></td>
+                    <td style="background-color:#ededfd;border-bottom: dotted 1px #c4c4ff;padding:8px;text-align:right;">Date Conducted <input type="hidden"  id="date" name="date_done" value="<?php echo date("d/m/Y")?>"><?php echo date("d/M/Y")?></td>
                   </tr>
-                  
+                  <tr>
+                    <td style="border-bottom: dotted 1px #c4c4ff;padding:8px;text-align:left;">Approved By <input type="text" id="supervisor" name="supervisor"></td>
+                    <td style="border-bottom: dotted 1px #c4c4ff;padding:8px;text-align:right;">Date Approved <input type="text"  id="datepicker" name="date_appproved"></td>
+                  </tr>
                   <tr>
                     <td colspan="2" style="padding:4px;">Further Comments:</td>
                   </tr>
                   <tr>
-                    <td colspan="2" style="padding:4px;text-align:center;"><textarea cols="140" rows="5"></textarea></td>
+                    <td colspan="2" style="padding:4px;text-align:center;"><textarea cols="140" rows="5" name="further_comments"></textarea></td>
                   </tr>
                 </table>
               </td>
@@ -1332,4 +852,47 @@
 </div>
 </div>
 </body>
+<script>
+$(document).ready(function() {
+        $("#d_one_lc").change(function()       {
+        var text_wstd = $("#d_one_wstd").val();
+        var text_awt = $("#d_one_awt").val();     
+        var text_df = $("#d_one_df").val();     
+        var text_potency = $("#d_one_potency").val();
+        var text_pkstd = $("#d_one_pkstd").val();
+        var text_wt = $("#d_one_wt").val();     
+        var text_lc = $("#d_one_lc").val();     
+
+
+        $("#d_two_wstd").val(text_wstd);$("#d_two_awt").val(text_awt); $("#d_two_df").val(text_df); $("#d_two_potency").val(text_potency);$("#d_two_pkstd").val(text_pkstd);$("#d_two_wt").val(text_wt);$("#d_two_lc").val(text_lc);$("#equivalent_to_lc").val(text_lc);
+        $("#d_three_wstd").val(text_wstd);$("#d_three_awt").val(text_awt); $("#d_three_df").val(text_df); $("#d_three_potency").val(text_potency);$("#d_three_pkstd").val(text_pkstd);$("#d_three_wt").val(text_wt);$("#d_three_lc").val(text_lc);
+        $("#d_four_wstd").val(text_wstd);$("#d_four_awt").val(text_awt); $("#d_four_df").val(text_df); $("#d_four_potency").val(text_potency);$("#d_four_pkstd").val(text_pkstd);$("#d_four_wt").val(text_wt);$("#d_four_lc").val(text_lc);
+        $("#d_five_wstd").val(text_wstd);$("#d_five_awt").val(text_awt); $("#d_five_df").val(text_df); $("#d_five_potency").val(text_potency);$("#d_five_pkstd").val(text_pkstd);$("#d_five_wt").val(text_wt);$("#d_five_lc").val(text_lc);
+        $("#d_six_wstd").val(text_wstd);$("#d_six_awt").val(text_awt); $("#d_six_df").val(text_df); $("#d_six_potency").val(text_potency);$("#d_six_pkstd").val(text_pkstd);$("#d_six_wt").val(text_wt);$("#d_six_lc").val(text_lc);
+            }); 
+    });
+</script>
+<script>
+  $('#min').change(function() {
+    if($('#min').is(':checked')){
+       $("input[min='min_tolerance']").show();
+    } else {
+        $("input[min='min_tolerance']").hide();
+    }
+  }).change();
+  $('#max').change(function() {
+    if($('#max').is(':checked')){
+       $("input[max='max_tolerance']").show();
+    } else {
+        $("input[max='max_tolerance']").hide();
+    }
+  }).change();
+  $('#range').change(function() {
+    if($('#range').is(':checked')){
+       $("input[range='tolerance_range']").show();
+    } else {
+        $("input[range='tolerance_range']").hide();
+    }
+  }).change();
+</script>
 </html>

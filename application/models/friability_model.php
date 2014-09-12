@@ -9,17 +9,24 @@ class Friability_Model extends CI_Model{
     $assignment_id=$this->input->post('assignment_id');
      $test_request_id=$this->input->post('tr_id');
      
+      $data=$this->db->select_max('id')->get('friability')->result();
+
+      $friability_id=$data[0]->id;
+      $friability_id++;
+
      //Sample Insertion
       $data = array(
      
      'assignment_id'=>$assignment_id,
      'test_request_id'=>$test_request_id,
-     'reference_number'=>$this->input->post('reference_number'),
-     'monograph'=>$this->input->post('assay_monograph')
+     'friability_id'=>$friability_id,
+     'serial_number'=>$this->input->post('serial_number'),
+     'monograph'=>$this->input->post('monograph')
 
     );
+    $this->db->insert('friability_monograph',$data);
      redirect('test/index/'.$assignment_id.'/'.$test_request_id);
-     $this->db->insert('friability',$data);
+    
    }
 
    function process(){

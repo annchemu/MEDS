@@ -9,30 +9,34 @@
   <link href="<?php echo base_url().'style/jquery.tooltip.css';?>" rel="stylesheet" type="text/css"/>
   <link href="<?php echo base_url().'style/jquery-ui.css';?>" rel="stylesheet" type="text/css"/>
   <link href="<?php echo base_url().'style/demo_table.css';?>" rel="stylesheet" type="text/css"/>
+  <link href="datatables/extensions/Tabletools/css/dataTables.tableTools.css" type="text/css" rel="stylesheet"/>
+  <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css"> -->
+  <link rel="stylesheet" href="<?php echo base_url().'jquery-ui.css';?>">
   
-  <!-- bootstrap reference links  
-  <link href="<?php echo base_url().'bootstrap/css/bootstrap-theme.css.map';?>" rel="stylesheet" type="text/css"/>
-  <link href="<?php echo base_url().'bootstrap/css/bootstrap-theme.min.css';?>" rel="stylesheet" type="text/css"/>
-  <link href="<?php echo base_url().'bootstrap/css/bootstrap.css.map'; ?>" rel="stylesheet" type="text/css"/>
-  <link href="<?php echo base_url().'bootstrap/css/bootstrap-theme.css';?>" rel="stylesheet" type="text/css"/>
-  <link href="<?php echo base_url().'bootstrap/css/bootstrap.min.css';?>" rel="stylesheet" type="text/css"/>  
-   -->
+  
   <!-- bootstrap reference library -->
   <link href="<?php echo base_url().'bootstrap/css/bootstrap.css'; ?>" rel="stylesheet" type="text/css"/>
 
   <script src="<?php echo base_url().'js/jquery.js';?>"></script>
+  <script src="<?php echo base_url().'js/jquery-1.11.0.js';?>"></script>
+  <script src="<?php echo base_url().'js/jquery.js';?>"></script>
   <script src="<?php echo base_url().'js/jquery-ui.js';?>"></script>
   <script type="text/javascript" src="<?php echo base_url().'js/tabs.js';?>"></script>
+  <script type="text/javascript" src="<?php echo base_url().'js/Jquery-datatables/jquery.dataTables.js';?>"></script>
+  <script src="<?php echo base_url().'datatables/extensions/Tabletools/js/dataTables.tableTools.js';?>" type="text/javascript"></script>
+  <script src="<?php echo base_url().'datatables/extensions/Tabletools/js/ZeroClipboard.js" type="text/javascript';?>"></script>
+  <script type="text/javascript" src="<?php echo base_url().'js/datepicker.js';?>"></script>
   
   <!-- bootstrap reference library -->
   <script src="<?php echo base_url().'js/bootstrap.min.js';?>"></script>
-  <script type="text/javascript" src="<?php echo base_url().'js/Jquery-datatables/jquery.dataTables.js';?>"></script>
+  
   <script>
    $(document).ready(function() {
     /* Init DataTables */
     $('#list').dataTable({
      "sScrollY":"270px",
      "sScrollX":"100%"
+     
     });
    });
   </script>
@@ -47,6 +51,13 @@
    $acc_status=$user['logged_in']['acc_status'];
    $id_temp=1;
    //var_dump($user);
+   if(empty($user['logged_in']['id'])) {
+       
+      redirect('login','location');  //1. loads the login page in current page div
+
+      echo '<meta http-equiv=refresh content="0;url=base_url();login">'; //3 doesn't work
+
+       }
   ?>
   <div id="header"> 
    <div id="logo" style="padding:8px;color: #0000ff;" align="center"><img src="<?php echo base_url().'images/meds_logo.png';?>" height="35px" width="40px"/>MISSION FOR ESSENTIAL DRUGS AND SUPPLIES</div>
@@ -114,6 +125,8 @@
         <a href="<?php echo base_url().'temperature_humidity_list/records/'.$id_temp;?>"class="sub_menu sub_menu_link first_link">Temperature & Humidity</a>
         <a href="<?php echo base_url().'outoftolerance_list/records';?>"class="sub_menu sub_menu_link first_link">Out of Tolerance</a>
         <a href="<?php echo base_url().'complaints_list/records';?>" class="sub_menu sub_menu_link first_link">Complaints</a>
+        <a href="<?php echo base_url().'coa_list/records';?>"class="sub_menu sub_menu_link first_link">Certificate of Analysis</a>
+        <a href="<?php echo base_url().'finance/index';?>" class="sub_menu sub_menu_link first_link">Finance/Client Billing</a>
     </div>
     <?php
     echo"<div id='sub_menu'";
@@ -143,6 +156,8 @@
         <a href="<?php echo base_url().'temperature_humidity_list/records/'.$id_temp;?>"class="sub_menu sub_menu_link first_link">Temperature & Humidity</a>
         <a href="<?php echo base_url().'outoftolerance_list/records';?>"class="sub_menu sub_menu_link first_link">Out of Tolerance</a>
         <a href="<?php echo base_url().'complaints_list/records';?>"class="sub_menu sub_menu_link first_link">Complaints</a>
+        <a href="<?php echo base_url().'coa_list/records';?>"class="sub_menu sub_menu_link first_link">Certificate of Analysis</a>
+        <a href="<?php echo base_url().'finance/index';?>" class="sub_menu sub_menu_link first_link">Finance/Client Billing</a>
     </div>
     <?php
     echo"<div id='sub_menu'";
@@ -187,23 +202,19 @@
         <a href="<?php echo base_url().'outoftolerance_list/records';?>"class="sub_menu sub_menu_link first_link">Out of Tolerance</a>
         <a href="<?php echo base_url().'temperature_humidity_list/records/'.$id_temp;?>"class="sub_menu sub_menu_link first_link">Temperature & Humidity</a>
     </div>
-
   <div id="form_wrapper_lists">
     <div id="account_lists">
         <table  class="subdivider" border="0" bgcolor="#ffffff"  width="100%" cellpadding="8px" align="center">
-          <tr>
-                <td align="center" colspan ="4"  style="border-bottom: solid 10px #c4c4ff;color: #0000fb;background-color: #e8e8ff;"><h5>Reference Standard Register Records Exhausted</h5></td>
-            </tr>
             <tr>
-                <td align ="left">
-                <a href="<?php echo base_url().'standard_register_records/Get';?>" class=" sub_menu sub_menu_link first_link">Records In Use</a>
-                <a href="<?php echo base_url().'standard_register_records/getExpired';?>" class="sub_menu sub_menu_link first_link">Expired Records</a>
-                <a href="<?php echo base_url().'standard_register_records/getDamaged';?>" class="sub_menu sub_menu_link first_link">Damaged Records</a>
-                <a href="<?php echo base_url().'standard_register_records/getExhausted';?>" class="current sub_menu sub_menu_link first_link">Exhausted Records</a>
+                <td align ="center">
+                <a href="<?php echo base_url().'standard_register_records/Get';?>" class="sub_menu sub_menu_link first_link"><img src="<?php echo base_url().'images/icons/equipmentinuse.png';?>" height="20px" width ="20px">Records In Use</a>
+                <a href="<?php echo base_url().'standard_register_records/getExpired';?>" class="sub_menu sub_menu_link first_link"><img src="<?php echo base_url().'images/icons/withdrawn.png';?>" height="20px" width ="20px">Expired Records</a>
+                <a href="<?php echo base_url().'standard_register_records/getDamaged';?>" class="sub_menu sub_menu_link first_link"><img src="<?php echo base_url().'images/icons/damaged.png';?>" height="25px" width ="25px">Damaged Records</a>
+                <a href="<?php echo base_url().'standard_register_records/getExhausted';?>" class="current sub_menu sub_menu_link first_link"><img src="<?php echo base_url().'images/icons/empty.png';?>" height="20px" width ="20px">Exhausted Records</a>
                 </td>
                 <td align = "right"
                     <?php
-                       if($user['logged_in']['user_type'] ==5 ||$user['logged_in']['user_type'] ==6 ||$user['logged_in']['user_type'] ==7 ){
+                       if($user['logged_in']['user_type'] ==5 ||$user['logged_in']['user_type'] ==7 ){
                         echo "style='padding:4px;display:block;background-color:#ffffff;text-color:#00ff00;'";
                         } else if($user['logged_in']['user_type'] ==8 || $user['logged_in']['user_type'] !=0 || $user['logged_in']['user_type'] ==7 || $user['logged_in']['user_type'] !=1){
                          echo"style='display:none;'";
@@ -213,6 +224,11 @@
                 <a data-target="#standard_form" class="btn" role="button" data-toggle="modal"><img src="<?php echo base_url().'images/icons/add_field.png';?>" height="10px" width="10px">Add Standard Register</a></td>
                 <input type ="hidden" id ="progressbar1" onchange="progressbar()">
             
+            </tr>
+        </table>
+        <table width="100%">
+           <tr>
+              <td align="center" colspan ="4"  style="border-bottom: solid 10px #c4c4ff;color: #0000fb;background-color: #e8e8ff;"><h5>Reference Standard Register Records Exhausted</h5></td>
             </tr>
         </table>
         <table id="list" class="list_view_header"  width="100%" cellpadding="4px">

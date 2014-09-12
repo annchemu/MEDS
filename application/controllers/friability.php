@@ -62,7 +62,7 @@ class Friability extends CI_Controller {
             $this->friability_model->process();
         }
 	}
-     function save_monograph(){
+     function save_friability_monograph(){
        $this->load->model('friability_model');
 
         if ($this->input->post('submit')) {

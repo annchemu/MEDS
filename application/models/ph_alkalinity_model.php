@@ -8,18 +8,23 @@ class Ph_Alkalinity_Model extends CI_Model{
    function process_monograph(){
     $assignment_id=$this->input->post('assignment_id');
      $test_request_id=$this->input->post('tr_id');
-     
+
+      $data=$this->db->select_max('id')->get('ph_alkalinity')->result();
+
+      $ph_alkalinity_id=$data[0]->id;
+      $ph_alkalinity_id++;
      //Sample Insertion
       $data = array(
      
      'assignment_id'=>$assignment_id,
      'test_request_id'=>$test_request_id,
-     'reference_number'=>$this->input->post('reference_number'),
-     'monograph'=>$this->input->post('assay_monograph')
+     'ph_alkalinity_id'=>$ph_alkalinity_id,
+     'serial_number'=>$this->input->post('serial_number'),
+     'monograph'=>$this->input->post('monograph')
 
     );
     
-     $this->db->insert('ph_alkalinity',$data);
+     $this->db->insert('ph_alkalinity_monograph',$data);
       redirect('test/index/'.$assignment_id.'/'.$test_request_id);
    }
    function process(){

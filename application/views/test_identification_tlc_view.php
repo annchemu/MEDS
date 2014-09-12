@@ -23,6 +23,8 @@
   <script src="<?php echo base_url().'js/jquery.js';?>"></script>
   <script src="<?php echo base_url().'js/jquery-ui.js';?>"></script>
   <script type="text/javascript" src="<?php echo base_url().'js/tabs.js';?>"></script>
+  <script type="text/javascript" src="<?php echo base_url().'tinymce/tinymce.min.js';?>"></script>
+  <script type="text/javascript" src="<?php echo base_url().'js/equationstwo.js';?>"></script>
   
   <!-- bootstrap reference library -->
   <script src="<?php echo base_url().'js/bootstrap.min.js';?>"></script>
@@ -35,25 +37,9 @@
      "sScrollX":"100%"
     });
    });
-       function sample_weight_calc(){
-        var total = document.getElementById('sample_container').value - document.getElementById('container').value;
-        document.getElementById('sample_weight').value = total;
-       }
-
-       function standard_weight_calc(){
-        var total = document.getElementById('standard_container').value - document.getElementById('container_1').value;
-        document.getElementById('standard_weight').value = total;
-       }      
-
-       function standard_weight_calc_2(){
-        var total = document.getElementById('standard_container_2').value - document.getElementById('container_2').value;
-        document.getElementById('standard_weight_2').value = total;
-       }
-
-       function standard_weight_calc_3(){
-        var total = document.getElementById('standard_container_3').value - document.getElementById('container_3').value;
-        document.getElementById('standard_weight_3').value = total;
-       }
+     tinymce.init({
+    selector: "textarea"
+   });
   </script>
   </head
   <body>
@@ -218,9 +204,9 @@
         <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Weight of standard + container (g)</td>
         <td style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="tlc_potency_standard_container" id ="standard_container"> </td>
         <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Weight of container (g) </td>
-        <td style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="tlc_potency_container" id ="container_1" onchange ="standard_weight_calc()"> </td>
+        <td style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="tlc_potency_container" id ="container"> </td>
         <td align="left" colspan ="2"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Weight of standard (g)</td>
-        <td  colspan="4"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="tlc_standard_weight"id ="standard_weight"> </td>      
+        <td  colspan="4"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="tlc_standard_weight"id ="standard_weight_1"> </td>      
     </tr>    
     <tr>      
         <td align="left" colspan ="8"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;color:#0000fb;"><u><b>Standard 2</b></u></td>
@@ -253,7 +239,7 @@
         <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Weight of standard + container (g)</td>
         <td style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="tlc_potency_standard_container_2" id ="standard_container_2"> </td>
         <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Weight of container (g) </td>
-        <td style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="tlc_potency_container_2"id ="container_2" onchange="standard_weight_calc_2()"> </td>
+        <td style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="tlc_potency_container_2"id ="container_2"> </td>
         <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Weight of standard (g)</td>
         <td colspan="4"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="tlc_standard_weight_2" id ="standard_weight_2"> </td>
     </tr>
@@ -266,11 +252,11 @@
     </tr>
     <tr>
         <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Weight of standard + container (g)</td>
-        <td style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="tlc_potency_standard_container_3" id ="standard_container_3" > </td>
+        <td style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="tlc_potency_standard_container_3" id ="reagent_weight_container_1" > </td>
         <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Weight of container (g) </td>
-        <td style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="tlc_potency_container_3" id ="container_3"onchange ="standard_weight_calc_3()"> </td>
+        <td style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="tlc_potency_container_3" id ="reagent_container_1"> </td>
         <td align="left" colspan ="2"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Weight of standard (g)</td>
-        <td  colspan="4"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="tlc_standard_weight_3" id="standard_weight_3"> </td>
+        <td  colspan="4"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="tlc_standard_weight_3" id="reagent_weight_1"></td>
     </tr>
     <tr>  
         <td align="left"colspan="" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Dilution</td>

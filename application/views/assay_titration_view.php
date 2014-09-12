@@ -68,6 +68,13 @@
    $acc_status=$user['logged_in']['acc_status'];
    $id_temp=1;
    //var_dump($user);
+   if(empty($user['logged_in']['id'])) {
+       
+      redirect('login','location');  //1. loads the login page in current page div
+
+      echo '<meta http-equiv=refresh content="0;url=base_url();login">'; //3 doesn't work
+
+       }
   ?>
   <div id="header"> 
    <div id="logo" style="padding:8px;color: #0000ff;" align="center"><img src="<?php echo base_url().'images/meds_logo.png';?>" height="35px" width="40px"/><b>MISSION FOR ESSENTIAL DRUGS AND SUPPLIES</b></div>
@@ -363,17 +370,20 @@
                     <tr>
                       <td colspan="2" style="padding:8px;text-align:center;"><input type="text" id="d_three_pkstd" name="d_three_pkstd" placeholder="(PKSTD)" size="5"> x <input type="text" id="d_three_wt" name="d_three_wt" placeholder="(WT)" size="5"> x <input type="text" id="d_three_lc" name="d_three_lc" placeholder="(LC)" size="5" onChange="calc_determination()"></td>
                     </tr>
-                    <tr>
-                      <td colspan="3" style="color:#0000ff;padding:8px;">Average % &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="average"></input></td>
+                     <tr>
+                      <td colspan="3" style="padding:8px;">Average % &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="determination_average" name="determination_average"  disabled></input></td>
                     </tr>
                     <tr>
-                      <td colspan="6" style="color:#0000ff;padding:8px;">Equivalent To &nbsp;<input type="text" name="equivalent_to"></input></td>
+                      <td colspan="6" style="padding:8px;">Equivalent To &nbsp;<input type="hidden" id="equivalent_to_lc"/><input type="text" id="determination_equivalent_to" name="determination_equivalent_to" disabled/></td>
                     </tr>
                     <tr>
-                      <td colspan="6" style="color:#0000ff;padding:8px;">SD &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="sd"></input></td>
+                      <td colspan="6" style="padding:8px;">Range %&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="det_min" name="range_det_min" size="4" placeholder="min%" onChange="calc_determination()" disabled></input> - <input type="text" id="det_max" name="range_det_max" size="4" placeholder="max%" onChange="calc_determination()" disabled></input></td>
                     </tr>
                     <tr>
-                      <td colspan="6" style="color:#0000ff;padding:8px;">RSD &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="rsd"></input></td>
+                      <td colspan="6" style="padding:8px;">SD&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="determination_sd" name="determination_sd" disabled></td>
+                    </tr>
+                    <tr>
+                      <td colspan="6" style="padding:8px;">RSD %&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="determination_rsd" name="determination_rsd"  disabled></input></td>
                     </tr>
                   </table>
                 </td>
@@ -387,39 +397,95 @@
                       <td style="color:#0000ff;padding:8px;border-bottom:solid 1px #c4c4ff;"><b>Comment</b></td>
                     </tr>
                     <tr>
-                      <td>Content</td>
-                      <td style="color:#0000ff;padding:8px;"><input type="text" name="from" id="from" placeholder="92.5%" size="7"> to <input type="text" name="from" id="to" placeholder="107.5%" size="7"> of the stated amount</td>
-                      <td style="color:#0000ff;padding:8px;"><input type="text" name=""></input></td>
-                      <td style="color:#0000ff;padding:8px;"><input type="text" name=""></input></td>
+                      <td><input type="checkbox" id="min">Not Less than Tolerance</td>
+                      <td style="color:#0000ff;padding:8px;"><input type="text" min="min_tolerance" id="min_tolerance" name="min_tolerance" placeholder="min%" size="5"  onChange="calc_determination()" /></td>
+                      <td style="color:#0000ff;padding:8px;"><input type="text" min="min_tolerance" id="nlt_min_tolerance_det" name="det_min" size="4" placeholder="min%" onChange="calc_determination()" disabled/> - <input type="text" min="min_tolerance" id="nlt_max_tolerance_det" name="det_max" size="4" placeholder="max%" onChange="calc_determination()" disabled/></td>
+                      <td style="color:#0000ff;padding:8px;"><input type="text" min="min_tolerance" id="min_tolerance_comment" name="min_tolerance_comment" disabled/></td>
+                    </tr>
+                    <tr>
+                      <td><input type="checkbox" id="max">Not Greater than Tolerance</td>
+                      <td style="color:#0000ff;padding:8px;"><input type="text" max='max_tolerance' id="max_tolerance" name="max_tolerance" placeholder="max%" size="5"  onChange="calc_determination()"/></td>
+                      <td style="color:#0000ff;padding:8px;"><input type="text" max='max_tolerance' id="ngt_min_tolerance_det" name="det_min" size="4" placeholder="min%" onChange="calc_determination()" disabled/> - <input type="text" max="max_tolerance" id="ngt_max_tolerance_det" name="det_max" size="4" placeholder="max%" onChange="calc_determination()" disabled/></td>
+                      <td style="color:#00ff00;padding:8px;"><input type="text" max='max_tolerance' id="max_tolerance_comment" name="max_tolerance_comment" disabled/></td>
+                    </tr>
+                    <tr>
+                      <td><input type="checkbox" id="range">Tolerance Range</td>
+                      <td style="color:#0000ff;padding:8px;"><input type="text" range="tolerance_range" id="new_min_tolerance_det" name="content_from" placeholder="min%" size="5" onChange="calc_determination()"> - <input type="text" range="tolerance_range" id="new_max_tolerance_det" name="content_to" placeholder="max%" size="5" onChange="calc_determination()"/></td>
+                      <td style="color:#0000ff;padding:8px;"><input type="text" range="tolerance_range" id="range_min_tolerance_det" name="det_min" size="4" placeholder="min%" onChange="calc_determination()" disabled/> - <input type="text" id="range_max_tolerance_det" range="tolerance_range" name="det_max" size="4" placeholder="max%" onChange="calc_determination()" disabled/></td>
+                      <td style="color:#0000ff;padding:8px;"><input type="text" range="tolerance_range" id="range_tolerance_comment" name="range_tolerance_comment" disabled/></td>
                     </tr>
                     <tr>
                       <td>SD</td>
-                      <td style="color:#0000ff;padding:8px;"><input type="text" name=""></input></td>
-                      <td style="color:#0000ff;padding:8px;"><input type="text" name=""></input></td>
-                      <td style="color:#0000ff;padding:8px;"><input type="text" name=""></input></td>
+                      <td style="color:#0000ff;padding:8px;"></td>
+                      <td style="color:#ff0000;padding:8px;"><input type="text" id="results_determination_sd" name="determination_sd"  disabled/></td>
+                      <td style="padding:8px;"><input type="text" name="sd_results"></input></td>
                     </tr>
                     <tr>
-                      <td>RSD</td>
-                      <td style="color:#0000ff;padding:8px;"><input type="text" name=""></input></td>
-                      <td style="color:#0000ff;padding:8px;"><input type="text" name=""></input></td>
-                      <td style="color:#0000ff;padding:8px;"><input type="text" name=""></input></td>
+                      <td>RSD %</td>
+                      <td style="color:#0000ff;padding:8px;"></td>
+                      <td style="color:#ff0000;padding:8px;"><input type="text" id="results_determination_rsd" name="determination_rsd"  disabled/></td>
+                      <td style="padding:8px;"><input type="text" name="rsd_comment" disable/></td>
                     </tr>
                   </table>
                 </td>
             </tr>
             <tr>
-              <td colspan="8" style="padding:8px;">
-                <table border="0" width="90%" cellpadding="8px" align="center">
-                  <tr>
-                    <td style="border-bottom: dotted 1px #c4c4ff;padding:4px;text-align:right;">Supervisor <input type="text" id="supervisor" name="supervisor"></td>
-                    <td style="padding:4px;text-align:left;">Date <input type="date"  id="date" name="date"></td>
+              <td colspan="8" style="padding:8px;color:#0000ff;border-bottom:solid 1px #c4c4ff;"><b>Chromatography Check List</b></td>
+            </tr>
+            <tr>
+                <td colspan="8" style="padding:8px;border-bottom:dotted 1px #c4c4ff;">
+                  <table border="0" cellpadding="8px" width="80%" align="center">
+                    <tr>
+                      <td style="color:#0000ff;border-bottom:solid 1px #c4c4ff;padding:8px;">Requirement</td>
+                      <td style="color:#0000ff;padding:8px;border-bottom:solid 1px #c4c4ff;">Tick</td>
+                      <td style="color:#0000ff;padding:8px;border-bottom:solid 1px #c4c4ff;">Comment</td>
+                    </tr>
+                    <tr>
+                      <td style="color:#000;padding:8px;">System Suitability Sequence</td>
+                      <td style="color:#000;padding:8px;"><input type="checkbox" name="sysytem_suitability_sequence" value="Sysytem Suitability Sequence"></input></td>
+                      <td style="color:#000;padding:8px;"><input type="text" name="sysytem_suitability_sequence_comment" size="50"></input></td>
+                    </tr>
+                    <tr>
+                      <td style="color:#000;padding:8px;">Sample Injection sequence</td>
+                      <td style="color:#000;padding:8px;"><input type="checkbox" name="sample_injection_sequence" value="Sample Injection Sequence"></input></td>
+                      <td style="color:#000;padding:8px;"><input type="text" name="Sample_injection_sequence_comment" size="50"></input></td>
+                    </tr>
+                    <tr>
+                      <td style="color:#000;padding:8px;">Chromatograms Attached</td>
+                      <td style="color:#000;padding:8px;"><input type="checkbox" name="chromatograms_attached" value="Chromatograms Attached"></input></td>
+                      <td style="color:#000;padding:8px;"><input type="text" name="chromatograms_attached_comment" size="50"></input></td>
+                    </tr>
+                  </table>
+                </td>
+            </tr>
+            <tr>
+              <td colspan="8" align="left"  style="padding:8px;border-bottom: dotted 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><b>Conclusion</b></td>
+            </tr>
+             <tr>
+              <td colspan="8" style="padding:8px;border-bottom:solid 1px #c4c4ff;">
+                <table border="0"  class="table_form" width="100%" cellpadding="8px" align="center">
+                  <tr>    
+                    <td style="color:#00CC00;border-bottom:dottted 1px #c4c4ff;padding:8px;text-align:center;"><input type="text" id="test_conclusion" name="test_conclusion" size="30" disabled/></td>
                   </tr>
-                  
+                </table>
+            </tr>
+            
+            <tr>
+              <td colspan="8" style="padding:8px;">
+                <table  class="table_form"border="0" width="100%" cellpadding="8px" align="center">
+                  <tr>
+                    <td style="background-color:#ededfd;border-bottom: dotted 1px #c4c4ff;padding:8px;text-align:left;">Done By <input type="hidden" id="done_by" name="done_by" value="<?php echo($user['logged_in']['fname']." ".$user['logged_in']['lname']);?>"><?php echo($user['logged_in']['fname']." ".$user['logged_in']['lname']);?></td>
+                    <td style="background-color:#ededfd;border-bottom: dotted 1px #c4c4ff;padding:8px;text-align:right;">Date Conducted <input type="hidden"  id="date" name="date_done" value="<?php echo date("d/m/Y")?>"><?php echo date("d/M/Y")?></td>
+                  </tr>
+                  <tr>
+                    <td style="border-bottom: dotted 1px #c4c4ff;padding:8px;text-align:left;">Approved By <input type="text" id="supervisor" name="supervisor"></td>
+                    <td style="border-bottom: dotted 1px #c4c4ff;padding:8px;text-align:right;">Date Approved <input type="text"  id="datepicker" name="date_appproved"></td>
+                  </tr>
                   <tr>
                     <td colspan="2" style="padding:4px;">Further Comments:</td>
                   </tr>
                   <tr>
-                    <td colspan="2" style="padding:4px;text-align:center;"><textarea cols="140" rows="5"></textarea></td>
+                    <td colspan="2" style="padding:4px;text-align:center;"><textarea cols="140" rows="5" name="further_comments"></textarea></td>
                   </tr>
                 </table>
               </td>
@@ -432,4 +498,94 @@
 </div>
 </div>
 </body>
+<script>
+$(document).ready(function() {
+        
+      $(".std").keyup(function(){
+        var text_avg_std = $("#std_average").val();
+
+        $("#d_one_pkstd").val(text_avg_std);$("#d_two_pkstd").val(text_avg_std);$("#d_three_pkstd").val(text_avg_std);   
+
+        }); 
+
+       $(".sample_one").keyup(function(){
+        var text_avg_sample_one = $("#sample_a_average").val();
+        $("#d_one_pkt").val(text_avg_sample_one);
+
+        }); 
+
+       $(".sample_two").keyup(function(){
+        var text_avg_sample_two = $("#sample_b_average").val();  
+        $("#d_two_pkt").val(text_avg_sample_two); 
+         
+        });
+
+       $(".sample_three").keyup(function(){
+        var text_avg_sample_three = $("#sample_c_average").val(); 
+        $("#d_three_pkt").val(text_avg_sample_three); 
+         
+        });
+
+       $("#potency_one").keyup(function(){
+        var text_potency = $("#potency_one").val();
+        $("#d_one_potency").val(text_potency); $("#d_two_potency").val(text_potency);$("#d_three_potency").val(text_potency); 
+         
+        });
+
+
+        $("#factor").change(function(){
+        var text_df = $("#d_factor").val();    
+
+        $("#d_one_df").val(text_df);$("#d_two_df").val(text_df); $("#d_three_df").val(text_df);
+        }); 
+
+        $("#d_one_lc").change(function(){
+
+        var text_wstd = $("#d_one_wstd").val();
+        var text_awt = $("#d_one_awt").val();     
+            
+        var text_wt = $("#d_one_wt").val();     
+        var text_lc = $("#d_one_lc").val();     
+
+        $("#d_two_wstd").val(text_wstd);$("#d_two_awt").val(text_awt);$("#d_two_wt").val(text_wt);$("#d_two_lc").val(text_lc);$("#equivalent_to_lc").val(text_lc);
+        $("#d_three_wstd").val(text_wstd);$("#d_three_awt").val(text_awt);$("#d_three_wt").val(text_wt);$("#d_three_lc").val(text_lc);
+        }); 
+    });
+</script>
+<script>
+  $('#min').change(function() {
+    if($('#min').is(':checked')){
+       $("input[min='min_tolerance']").show();
+       $("#max").prop('disabled', true);
+       $("#range").prop('disabled', true);
+
+    } else {
+        $("input[min='min_tolerance']").hide();
+        $("#max").prop('disabled', false);
+        $("#range").prop('disabled', false);
+    }
+  }).change();
+  $('#max').change(function() {
+    if($('#max').is(':checked')){
+       $("input[max='max_tolerance']").show();
+       $("#min").prop('disabled', true);
+       $("#range").prop('disabled', true);
+    } else {
+        $("input[max='max_tolerance']").hide();
+        $("#min").prop('disabled', false);     
+        $("#range").prop('disabled', false);
+    }
+  }).change();
+  $('#range').change(function() {
+    if($('#range').is(':checked')){
+       $("input[range='tolerance_range']").show();
+       $("#max").prop('disabled', true);
+       $("#min").prop('disabled', true);
+    } else {
+        $("input[range='tolerance_range']").hide();
+        $("#max").prop('disabled', false);
+        $("#min").prop('disabled', false);
+    }
+  }).change();
+</script>
 </html>

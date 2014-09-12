@@ -20,11 +20,12 @@ function records(){
 }
 function invoices(){
 	$client_id = $this->uri->segment(3);
+    $data['client_id']=$this->uri->segment(3);
     
     $this->load->model('client_listmodel');
    
     $data['query'] =
-    	$this->client_listmodel->client_invoices_get($client_id);
+    	$this->client_listmodel->client_invoices($client_id);
 
         $this->load->view('client_account_invoices',$data);
     

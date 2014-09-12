@@ -7,10 +7,10 @@ class Equipment_Report extends CI_Controller {
 	}
 
 	function index() {
-		$sql = "SELECT DATE_FORMAT(date,'%v/%x') as period
+		$sql = "SELECT DATE_FORMAT(date,'%m/%d/%x') as period
 				FROM equipment_maintenance 
-				GROUP BY DATE_FORMAT(date,'%v/%x')
-				ORDER BY DATE_FORMAT(date,'%v/%x') asc";
+				GROUP BY DATE_FORMAT(date,'%m/%d/%x')
+				ORDER BY DATE_FORMAT(date,'%m/%d/%x') asc";
 		$query = $this -> db -> query($sql);
 		$results = $query -> result_array();
 		$weeks = array();
@@ -25,7 +25,7 @@ class Equipment_Report extends CI_Controller {
 
 			$sql = "SELECT status as status,id as number
 				    FROM equipment_maintenance 
-				    WHERE DATE_FORMAT(date,'%v/%x')='$week'
+				    WHERE DATE_FORMAT(date,'%m/%d/%x')='$week'
 				    GROUP BY id";
 			$query = $this -> db -> query($sql);
 			$results = $query -> result_array();

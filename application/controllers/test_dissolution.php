@@ -8,14 +8,11 @@ class Test_Dissolution extends CI_Controller{
 		$data['assignment'] = $this->uri->segment(3);
 		$data['test_request'] = $this->uri->segment(4);
 		$test_request = $this->uri->segment(4);
-		$status=0; 
+		$status=0; $user_type=6;
 
 		$sql = "SELECT * FROM test_request WHERE id =$test_request";
 		$query = $this->db->query($sql);
 		$result =$query->result_array();
-		$data['request']=
-    	$this->db->select('assignment.id AS a,assignment.test_request_id,assignment.user_id,assignment.client_id,assignment.reference_number,assignment.assigner_name,assignment.analyst_name,assignment.sample_issued')->get_where('assignment', array('id' => $assignment_id))->result_array();
-
 		$data['results']=$result[0];		
 
 		$query_e=$this->db->get_where('equipment_maintenance', array('status' =>0));
@@ -23,11 +20,67 @@ class Test_Dissolution extends CI_Controller{
 	    $data['query_e']=$results_e;
 
 	    $data['sql_standards']=
-    	$this->db->select('standard_register.reference_number,standard_register.item_description,standard_register.batch_number,standard_register.manufacturer_supplier,standard_register.status')->get_where('standard_register', array('status' => $status))->result_array();
+    	$this->db->select('standard_register.reference_number,standard_register.potency,standard_register.item_description,standard_register.batch_number,standard_register.manufacturer_supplier,standard_register.status')->get_where('standard_register', array('status' => $status))->result_array();
+		// var_dump($results_e);
+		// die;
+		$data['sql_approved']=
+    	$this->db->select('user.fname,user.lname,user.user_type')->get_where('user', array('user_type' => $user_type))->result_array();
+
+		$this->load->view('test_dissolution_view', $data);		
+	}
+	function index_second_stage_uv(){
+		$data['assignment'] = $this->uri->segment(3);
+		$data['test_request'] = $this->uri->segment(4);
+		$test_request = $this->uri->segment(4);
+		$status=0; 
+		$status_first_stage =1;
+
+		$sql = "SELECT * FROM test_request WHERE id =$test_request";
+		$query = $this->db->query($sql);
+		$result =$query->result_array();
+		$data['results']=$result[0];		
+
+		$query_e=$this->db->get_where('equipment_maintenance', array('status' =>0));
+	    $results_e=$query_e->result_array();	    
+	    $data['query_e']=$results_e;
+
+	    $data['sql_standards']=
+    	$this->db->select('standard_register.reference_number,standard_register.potency,standard_register.item_description,standard_register.batch_number,standard_register.manufacturer_supplier,standard_register.status')->get_where('standard_register', array('status' => $status))->result_array();
+		
+		$query_dissolution = $this->db->get_where('diss_data', array('status' => $status_first_stage))->result_array();
+    	$data['sql_dissolution']= $query_dissolution[0];
+		
 		// var_dump($results_e);
 		// die;
 
-		$this->load->view('test_dissolution_view', $data);		
+		$this->load->view('test_dissolution_uv_second_stage_view', $data);		
+	}
+	function index_third_stage_uv(){
+		$data['assignment'] = $this->uri->segment(3);
+		$data['test_request'] = $this->uri->segment(4);
+		$test_request = $this->uri->segment(4);
+		$status=0; 
+		$status_second_stage =2;
+
+		$sql = "SELECT * FROM test_request WHERE id =$test_request";
+		$query = $this->db->query($sql);
+		$result =$query->result_array();
+		$data['results']=$result[0];		
+
+		$query_e=$this->db->get_where('equipment_maintenance', array('status' =>0));
+	    $results_e=$query_e->result_array();	    
+	    $data['query_e']=$results_e;
+
+	    $data['sql_standards']=
+    	$this->db->select('standard_register.reference_number,standard_register.potency,standard_register.item_description,standard_register.batch_number,standard_register.manufacturer_supplier,standard_register.status')->get_where('standard_register', array('status' => $status))->result_array();
+		
+		$query_dissolution = $this->db->get_where('diss_data', array('status' => $status_second_stage))->result_array();
+    	$data['sql_dissolution']= $query_dissolution[0];
+		
+		// var_dump($results_e);
+		// die;
+
+		$this->load->view('test_dissolution_uv_third_stage_view', $data);		
 	}
 	function outofspecification(){
     $assignment_id= $this->uri->segment(3);
@@ -85,6 +138,64 @@ class Test_Dissolution extends CI_Controller{
 		$data['assignment'] = $this->uri->segment(3);
 		$data['test_request'] = $this->uri->segment(4);
 		$test_request = $this->uri->segment(4);
+		$status=0; $user_type=6;
+
+		$sql = "SELECT * FROM test_request WHERE id =$test_request";
+		$query = $this->db->query($sql);
+		$result =$query->result_array();
+
+		$data['results']=$result[0];		
+
+		$query_e=$this->db->get_where('equipment_maintenance', array('status' =>0));
+	    $results_e=$query_e->result_array();	    
+	    $data['query_e']=$results_e;
+
+	    $data['sql_columns']=
+    	$this->db->select('columns.column_type,columns.serial_number,columns.column_dimensions,columns.manufacturer,columns.column_number')->get_where('columns', array('status' => $status))->result_array();
+
+	    $data['sql_standards']=
+    	$this->db->select('standard_register.reference_number,standard_register.potency,standard_register.potency,standard_register.item_description,standard_register.batch_number,standard_register.manufacturer_supplier,standard_register.status')->get_where('standard_register', array('status' => $status))->result_array();
+		// var_dump($results_e);
+		// die;
+
+    	$data['sql_approved']=
+    	$this->db->select('user.fname,user.lname,user.user_type')->get_where('user', array('user_type' => $user_type))->result_array();
+
+		$this->load->view('test_dissolution_delayed_release_view', $data);		
+	}
+	function index_titration_other(){
+		$data['assignment'] = $this->uri->segment(3);
+		$data['test_request'] = $this->uri->segment(4);
+		$test_request = $this->uri->segment(4);
+		$status=0; $user_type=6;
+
+		$sql = "SELECT * FROM test_request WHERE id =$test_request";
+		$query = $this->db->query($sql);
+		$result =$query->result_array();
+
+		$data['results']=$result[0];		
+
+		$query_e=$this->db->get_where('equipment_maintenance', array('status' =>0));
+	    $results_e=$query_e->result_array();	    
+	    $data['query_e']=$results_e;
+
+	    $data['sql_columns']=
+    	$this->db->select('columns.column_type,columns.serial_number,columns.column_dimensions,columns.manufacturer,columns.column_number')->get_where('columns', array('status' => $status))->result_array();
+
+	    $data['sql_standards']=
+    	$this->db->select('standard_register.reference_number,standard_register.potency,standard_register.item_description,standard_register.batch_number,standard_register.manufacturer_supplier,standard_register.status')->get_where('standard_register', array('status' => $status))->result_array();
+		// var_dump($results_e);
+		// die;
+    	$data['sql_approved']=
+    	$this->db->select('user.fname,user.lname,user.user_type')->get_where('user', array('user_type' => $user_type))->result_array();
+
+
+		$this->load->view('dissolution_titration_other_view', $data);		
+	}
+	function index_titration_iodometric(){
+		$data['assignment'] = $this->uri->segment(3);
+		$data['test_request'] = $this->uri->segment(4);
+		$test_request = $this->uri->segment(4);
 		$status=0; 
 
 		$sql = "SELECT * FROM test_request WHERE id =$test_request";
@@ -101,17 +212,105 @@ class Test_Dissolution extends CI_Controller{
     	$this->db->select('columns.column_type,columns.serial_number,columns.column_dimensions,columns.manufacturer,columns.column_number')->get_where('columns', array('status' => $status))->result_array();
 
 	    $data['sql_standards']=
-    	$this->db->select('standard_register.reference_number,standard_register.item_description,standard_register.batch_number,standard_register.manufacturer_supplier,standard_register.status')->get_where('standard_register', array('status' => $status))->result_array();
+    	$this->db->select('standard_register.reference_number,standard_register.potency,standard_register.item_description,standard_register.batch_number,standard_register.manufacturer_supplier,standard_register.status')->get_where('standard_register', array('status' => $status))->result_array();
 		// var_dump($results_e);
 		// die;
 
-		$this->load->view('test_dissolution_delayed_release_view', $data);		
+		$this->load->view('test_dissolution_titration_iodometric', $data);		
+	}
+	function index_delayed_release_second_stage(){
+		$data['assignment'] = $this->uri->segment(3);
+		$data['test_request'] = $this->uri->segment(4);
+		$test_request = $this->uri->segment(4);
+		$status=0; 
+		$status_first_stage =1;
+
+		$sql = "SELECT * FROM test_request WHERE id =$test_request";
+		$query = $this->db->query($sql);
+		$result =$query->result_array();
+
+		$data['results']=$result[0];		
+
+		$data['query_e']=$this->db->get_where('equipment_maintenance', array('status' =>0))->result_array();
+
+	    $data['sql_columns']=
+    	$this->db->select('columns.column_type,columns.serial_number,columns.column_dimensions,columns.manufacturer,columns.column_number')->get_where('columns', array('status' => $status))->result_array();
+
+	    $data['sql_standards']=
+    	$this->db->select('standard_register.reference_number,standard_register.potency,standard_register.item_description,standard_register.batch_number,standard_register.manufacturer_supplier,standard_register.status')->get_where('standard_register', array('status' => $status))->result_array();
+
+    	
+    	$query_dissolution = $this->db->get_where('diss_delayed_release', array('status' => $status_first_stage))->result_array();
+    	$data['sql_dissolution']= $query_dissolution[0];
+		// var_dump($results_e);
+		// die;
+
+		$this->load->view('test_dissolution_delayed_release_second_view', $data);		
+	}
+	function index_delayed_release_third_stage(){
+		$data['assignment'] = $this->uri->segment(3);
+		$data['test_request'] = $this->uri->segment(4);
+		$test_request = $this->uri->segment(4);
+		$status=0; 
+		$status_second_stage =2;
+
+		$sql = "SELECT * FROM test_request WHERE id =$test_request";
+		$query = $this->db->query($sql);
+		$result =$query->result_array();
+
+		$data['results']=$result[0];		
+
+		$data['query_e']=$this->db->get_where('equipment_maintenance', array('status' =>0))->result_array();
+
+	    $data['sql_columns']=
+    	$this->db->select('columns.column_type,columns.serial_number,columns.column_dimensions,columns.manufacturer,columns.column_number')->get_where('columns', array('status' => $status))->result_array();
+
+	    $data['sql_standards']=
+    	$this->db->select('standard_register.reference_number,standard_register.potency,standard_register.item_description,standard_register.batch_number,standard_register.manufacturer_supplier,standard_register.status')->get_where('standard_register', array('status' => $status))->result_array();
+
+    	
+    	$query_dissolution = $this->db->get_where('diss_delayed_release', array('status' => $status_second_stage))->result_array();
+    	$data['sql_dissolution']= $query_dissolution[0];
+		// var_dump($results_e);
+		// die;
+
+		$this->load->view('test_dissolution_delayed_release_third_view', $data);		
 	}
 	function index_enteric_coated(){
 		$data['assignment'] = $this->uri->segment(3);
 		$data['test_request'] = $this->uri->segment(4);
 		$test_request = $this->uri->segment(4);
-		$status=0; 
+		$status=0; $user_type=6; 
+
+		$sql = "SELECT * FROM test_request WHERE id =$test_request";
+		$query = $this->db->query($sql);
+		$result =$query->result_array();
+
+		$data['results']=$result[0];		
+
+		$query_e=$this->db->get_where('equipment_maintenance', array('status' =>0));
+	    $results_e=$query_e->result_array();	    
+	    $data['query_e']=$results_e;
+
+	    $data['sql_columns']=
+    	$this->db->select('columns.column_type,columns.serial_number,columns.column_dimensions,columns.manufacturer,columns.column_number')->get_where('columns', array('status' => $status))->result_array();
+
+		$data['sql_approved']=
+    	$this->db->select('user.fname,user.lname,user.user_type')->get_where('user', array('user_type' => $user_type))->result_array();
+
+	    $data['sql_standards']=
+    	$this->db->select('standard_register.reference_number,standard_register.potency,standard_register.item_description,standard_register.batch_number,standard_register.manufacturer_supplier,standard_register.status')->get_where('standard_register', array('status' => $status))->result_array();
+		// var_dump($results_e);
+		// die;
+
+		$this->load->view('test_dissolution_enteric_coated_view', $data);		
+	}
+	function index_enteric_coated_second_stage(){
+		$data['assignment'] = $this->uri->segment(3);
+		$data['test_request'] = $this->uri->segment(4);
+		$test_request = $this->uri->segment(4);
+		$status=0;
+		$status_first_stage = 1; 
 
 		$sql = "SELECT * FROM test_request WHERE id =$test_request";
 		$query = $this->db->query($sql);
@@ -127,17 +326,50 @@ class Test_Dissolution extends CI_Controller{
     	$this->db->select('columns.column_type,columns.serial_number,columns.column_dimensions,columns.manufacturer,columns.column_number')->get_where('columns', array('status' => $status))->result_array();
 
 	    $data['sql_standards']=
-    	$this->db->select('standard_register.reference_number,standard_register.item_description,standard_register.batch_number,standard_register.manufacturer_supplier,standard_register.status')->get_where('standard_register', array('status' => $status))->result_array();
-		// var_dump($results_e);
+    	$this->db->select('standard_register.reference_number,standard_register.potency,standard_register.item_description,standard_register.batch_number,standard_register.manufacturer_supplier,standard_register.status')->get_where('standard_register', array('status' => $status))->result_array();
+		
+		$query_dissolution = $this->db->get_where('diss_enteric_coated', array('status' => $status_first_stage))->result_array();
+		$data['sql_dissolution']= $query_dissolution[0];
+		// var_dump($query_dissolution);
 		// die;
 
-		$this->load->view('test_dissolution_enteric_coated_view', $data);		
+		$this->load->view('test_dissolution_enteric_coated_second_view', $data);		
+	}
+	function index_enteric_coated_third_stage(){
+		$data['assignment'] = $this->uri->segment(3);
+		$data['test_request'] = $this->uri->segment(4);
+		$test_request = $this->uri->segment(4);
+		$status=0;
+		$status_second_stage = 2; 
+
+		$sql = "SELECT * FROM test_request WHERE id =$test_request";
+		$query = $this->db->query($sql);
+		$result =$query->result_array();
+
+		$data['results']=$result[0];		
+
+		$query_e=$this->db->get_where('equipment_maintenance', array('status' =>0));
+	    $results_e=$query_e->result_array();	    
+	    $data['query_e']=$results_e;
+
+	    $data['sql_columns']=
+    	$this->db->select('columns.column_type,columns.serial_number,columns.column_dimensions,columns.manufacturer,columns.column_number')->get_where('columns', array('status' => $status))->result_array();
+
+	    $data['sql_standards']=
+    	$this->db->select('standard_register.reference_number,standard_register.potency,standard_register.item_description,standard_register.batch_number,standard_register.manufacturer_supplier,standard_register.status')->get_where('standard_register', array('status' => $status))->result_array();
+		
+		$query_dissolution = $this->db->get_where('diss_enteric_coated', array('status' => $status_second_stage))->result_array();
+		$data['sql_dissolution']= $query_dissolution[0];
+		// var_dump($query_dissolution);
+		// die;
+
+		$this->load->view('test_dissolution_enteric_coated_third_view', $data);		
 	}
 	function index_normal(){
 		$data['assignment'] = $this->uri->segment(3);
 		$data['test_request'] = $this->uri->segment(4);
 		$test_request = $this->uri->segment(4);
-		$status=0; 
+		$status=0; $user_type=6;
 
 		$sql = "SELECT * FROM test_request WHERE id =$test_request";
 		$query = $this->db->query($sql);
@@ -154,17 +386,82 @@ class Test_Dissolution extends CI_Controller{
 
 
 	    $data['sql_standards']=
-    	$this->db->select('standard_register.reference_number,standard_register.item_description,standard_register.batch_number,standard_register.manufacturer_supplier,standard_register.status')->get_where('standard_register', array('status' => $status))->result_array();
+    	$this->db->select('standard_register.reference_number,standard_register.potency,standard_register.item_description,standard_register.batch_number,standard_register.manufacturer_supplier,standard_register.status')->get_where('standard_register', array('status' => $status))->result_array();
 		// var_dump($results_e);
 		// die;
 
+		$data['sql_approved']=
+    	$this->db->select('user.fname,user.lname,user.user_type')->get_where('user', array('user_type' => $user_type))->result_array();
+
 		$this->load->view('test_dissolution_hplc_normal_view', $data);		
+	}
+	function index_second_normal(){
+		$data['assignment'] = $this->uri->segment(3);
+		$data['test_request'] = $this->uri->segment(4);
+		$test_request = $this->uri->segment(4);
+		$status=0; 
+		$status_first_stage =1;
+
+		$sql = "SELECT * FROM test_request WHERE id =$test_request";
+		$query = $this->db->query($sql);
+		$result =$query->result_array();
+
+		$data['results']=$result[0];		
+
+		$query_e=$this->db->get_where('equipment_maintenance', array('status' =>0));
+	    $results_e=$query_e->result_array();	    
+	    $data['query_e']=$results_e;
+
+	    $data['sql_columns']=
+	    $this->db->select('columns.column_type,columns.serial_number,columns.column_dimensions,columns.manufacturer,columns.column_number')->get_where('columns', array('status' => $status))->result_array();
+
+
+	    $data['sql_standards']=
+    	$this->db->select('standard_register.reference_number,standard_register.potency,standard_register.item_description,standard_register.batch_number,standard_register.manufacturer_supplier,standard_register.status')->get_where('standard_register', array('status' => $status))->result_array();
+		
+    	$query_dissolution = $this->db->get_where('diss_normal', array('status' => $status_first_stage))->result_array();
+		$data['sql_dissolution']= $query_dissolution[0];
+		// var_dump($results_e);
+		// die;
+
+		$this->load->view('test_dissolution_hplc_normal_second_view', $data);		
+	}
+	function index_third_normal(){
+		$data['assignment'] = $this->uri->segment(3);
+		$data['test_request'] = $this->uri->segment(4);
+		$test_request = $this->uri->segment(4);
+		$status=0;
+		$status_second_stage=2; 
+
+		$sql = "SELECT * FROM test_request WHERE id =$test_request";
+		$query = $this->db->query($sql);
+		$result =$query->result_array();
+
+		$data['results']=$result[0];		
+
+		$query_e=$this->db->get_where('equipment_maintenance', array('status' =>0));
+	    $results_e=$query_e->result_array();	    
+	    $data['query_e']=$results_e;
+
+	    $data['sql_columns']=
+	    $this->db->select('columns.column_type,columns.serial_number,columns.column_dimensions,columns.manufacturer,columns.column_number')->get_where('columns', array('status' => $status))->result_array();
+
+
+	    $data['sql_standards']=
+    	$this->db->select('standard_register.reference_number,standard_register.potency,standard_register.item_description,standard_register.batch_number,standard_register.manufacturer_supplier,standard_register.status')->get_where('standard_register', array('status' => $status))->result_array();
+		
+		$query_dissolution = $this->db->get_where('diss_normal', array('status' => $status_second_stage))->result_array();
+		$data['sql_dissolution']= $query_dissolution[0];
+		// var_dump($results_e);
+		// die;
+
+		$this->load->view('test_dissolution_hplc_normal_third_view', $data);		
 	}
 	function index_two_components(){
 		$data['assignment'] = $this->uri->segment(3);
 		$data['test_request'] = $this->uri->segment(4);
 		$test_request = $this->uri->segment(4);
-		$status=0; 
+		$status=0; $user_type=6;
 
 		$sql = "SELECT * FROM test_request WHERE id =$test_request";
 		$query = $this->db->query($sql);
@@ -177,7 +474,7 @@ class Test_Dissolution extends CI_Controller{
 	    $data['query_e']=$results_e;
 
 	    $data['sql_standards']=
-    	$this->db->select('standard_register.reference_number,standard_register.item_description,standard_register.batch_number,standard_register.manufacturer_supplier,standard_register.status')->get_where('standard_register', array('status' => $status))->result_array();
+    	$this->db->select('standard_register.reference_number,standard_register.potency,standard_register.item_description,standard_register.batch_number,standard_register.manufacturer_supplier,standard_register.status')->get_where('standard_register', array('status' => $status))->result_array();
 		
     	$data['sql_columns']=
 	    $this->db->select('columns.column_type,columns.serial_number,columns.column_dimensions,columns.manufacturer,columns.column_number')->get_where('columns', array('status' => $status))->result_array();
@@ -185,7 +482,74 @@ class Test_Dissolution extends CI_Controller{
 		// var_dump($results_e);
 		// die;
 
+	    $data['sql_approved']=
+    	$this->db->select('user.fname,user.lname,user.user_type')->get_where('user', array('user_type' => $user_type))->result_array();
+
 		$this->load->view('test_dissolution_two_components_view', $data);		
+	}
+		function index_two_components_second_stage(){
+		$data['assignment'] = $this->uri->segment(3);
+		$data['test_request'] = $this->uri->segment(4);
+		$test_request = $this->uri->segment(4);
+		$status_first_stage=1; 
+		$status=0; 
+
+		$sql = "SELECT * FROM test_request WHERE id =$test_request";
+		$query = $this->db->query($sql);
+		$result =$query->result_array();
+
+		$data['results']=$result[0];		
+
+		$query_e=$this->db->get_where('equipment_maintenance', array('status' =>0));
+	    $results_e=$query_e->result_array();	    
+	    $data['query_e']=$results_e;
+
+	    $data['sql_standards']=
+    	$this->db->select('standard_register.reference_number,standard_register.potency,standard_register.item_description,standard_register.batch_number,standard_register.manufacturer_supplier,standard_register.status')->get_where('standard_register', array('status' => $status))->result_array();
+		
+    	$data['sql_columns']=
+	    $this->db->select('columns.column_type,columns.serial_number,columns.column_dimensions,columns.manufacturer,columns.column_number')->get_where('columns', array('status' => $status))->result_array();
+
+	    $query_dissolution = $this->db->get_where('diss_two_components', array('status' => $status_first_stage))->result_array();
+		$data['sql_dissolution']= $query_dissolution[0];
+		$query_dissolution_two = $this->db->get_where('diss_two_component_two', array('status' => $status_first_stage))->result_array();
+		$data['sql_dissolution_two']= $query_dissolution_two[0];
+		// var_dump($results_e);
+		// die;
+
+		$this->load->view('test_dissolution_two_components_second_view', $data);		
+	}
+	function index_two_components_third_stage(){
+		$data['assignment'] = $this->uri->segment(3);
+		$data['test_request'] = $this->uri->segment(4);
+		$test_request = $this->uri->segment(4);
+		$status_second_stage=2; 
+		$status=0; 
+
+		$sql = "SELECT * FROM test_request WHERE id =$test_request";
+		$query = $this->db->query($sql);
+		$result =$query->result_array();
+
+		$data['results']=$result[0];		
+
+		$query_e=$this->db->get_where('equipment_maintenance', array('status' =>0));
+	    $results_e=$query_e->result_array();	    
+	    $data['query_e']=$results_e;
+
+	    $data['sql_standards']=
+    	$this->db->select('standard_register.reference_number,standard_register.potency,standard_register.item_description,standard_register.batch_number,standard_register.manufacturer_supplier,standard_register.status')->get_where('standard_register', array('status' => $status))->result_array();
+		
+    	$data['sql_columns']=
+	    $this->db->select('columns.column_type,columns.serial_number,columns.column_dimensions,columns.manufacturer,columns.column_number')->get_where('columns', array('status' => $status))->result_array();
+
+	    $query_dissolution = $this->db->get_where('diss_two_components', array('status' => $status_second_stage))->result_array();
+		$data['sql_dissolution']= $query_dissolution[0];
+		$query_dissolution_two = $this->db->get_where('diss_two_component_two', array('status' => $status_second_stage))->result_array();
+		$data['sql_dissolution_two']= $query_dissolution_two[0];
+		// var_dump($results_e);
+		// die;
+
+		$this->load->view('test_dissolution_two_components_third_view', $data);		
 	}
 
 	function worksheet(){
@@ -199,6 +563,20 @@ class Test_Dissolution extends CI_Controller{
 
 		if ($this->input->post('save_dissolution')) {
 			$this->test_dissolution_model->save_worksheet($assignment,$test);
+		}
+	}
+	function worksheet_second_stage(){
+		$this->load->model('test_dissolution_model');
+
+		if ($this->input->post('save_dissolution')) {
+			$this->test_dissolution_model->save_second_worksheet();
+		}
+	}
+	function worksheet_third_stage(){
+		$this->load->model('test_dissolution_model');
+
+		if ($this->input->post('save_dissolution')) {
+			$this->test_dissolution_model->save_third_worksheet();
 		}
 	}
 	function index_hplc(){
@@ -220,7 +598,6 @@ class Test_Dissolution extends CI_Controller{
 
 		$this->load->view('test_dissolution_hplc_view', $data);
 	}
-
 	function worksheet_hplc(){
 		$assignment =$this->uri->segment(3);
 		$test =$this->uri->segment(4);
@@ -239,12 +616,44 @@ class Test_Dissolution extends CI_Controller{
 			$this->test_dissolution_normal_model->save_worksheet();
 		}
 	}
+	function worksheet_normal_second_hplc(){	
+
+		$this->load->model('test_dissolution_normal_model');
+
+		if ($this->input->post('save_normal_hplc')) {
+			$this->test_dissolution_normal_model->save_second_worksheet();
+		}
+	}
+	function worksheet_normal_third_hplc(){	
+
+		$this->load->model('test_dissolution_normal_model');
+
+		if ($this->input->post('save_normal_hplc')) {
+			$this->test_dissolution_normal_model->save_third_worksheet();
+		}
+	}
 	function worksheet_enteric_coated_hplc(){	
 
 		$this->load->model('test_dissolution_enteric_coated_model');
 
 		if ($this->input->post('save_enteric_coated_hplc')) {
 			$this->test_dissolution_enteric_coated_model->save_worksheet();
+		}
+	}
+	function worksheet_enteric_coated_hplc_second_stage(){	
+
+		$this->load->model('test_dissolution_enteric_coated_model');
+
+		if ($this->input->post('save_enteric_coated_hplc')) {
+			$this->test_dissolution_enteric_coated_model->save_second_stage_worksheet();
+		}
+	}
+	function worksheet_enteric_coated_hplc_third_stage(){	
+
+		$this->load->model('test_dissolution_enteric_coated_model');
+
+		if ($this->input->post('save_enteric_coated_hplc')) {
+			$this->test_dissolution_enteric_coated_model->save_third_stage_worksheet();
 		}
 	}
 	function worksheet_two_components_hplc(){	
@@ -255,12 +664,44 @@ class Test_Dissolution extends CI_Controller{
 			$this->test_dissolution_two_components_model->save_worksheet();
 		}
 	}
+	function worksheet_two_components_hplc_second_stage(){	
+
+		$this->load->model('test_dissolution_two_components_model');
+
+		if ($this->input->post('save_two_components_hplc')) {
+			$this->test_dissolution_two_components_model->save_second_worksheet();
+		}
+	}
+	function worksheet_two_components_hplc_third_stage(){	
+
+		$this->load->model('test_dissolution_two_components_model');
+
+		if ($this->input->post('save_two_components_hplc')) {
+			$this->test_dissolution_two_components_model->save_third_worksheet();
+		}
+	}
 	function worksheet_delayed_release_hplc(){	
 
 		$this->load->model('test_dissolution_delayed_release_model');
 
 		if ($this->input->post('save_delayed_release_hplc')) {
 			$this->test_dissolution_delayed_release_model->save_worksheet();
+		}
+	}
+	function worksheet_delayed_release_second_stage_hplc(){	
+
+		$this->load->model('test_dissolution_delayed_release_model');
+
+		if ($this->input->post('save_delayed_release_hplc')) {
+			$this->test_dissolution_delayed_release_model->save_second_worksheet();
+		}
+	}
+	function worksheet_delayed_release_third_stage_hplc(){	
+
+		$this->load->model('test_dissolution_delayed_release_model');
+
+		if ($this->input->post('save_delayed_release_hplc')) {
+			$this->test_dissolution_delayed_release_model->save_third_worksheet();
 		}
 	}
 	function monograph_uv(){

@@ -24,6 +24,10 @@
   <script src="<?php echo base_url().'js/jquery-ui.js';?>"></script>
   <script type="text/javascript" src="<?php echo base_url().'js/tabs.js';?>"></script>
   <script type="text/javascript" src="<?php echo base_url().'js/jquery.validate.js';?>"></script>
+  <script type="text/javascript" src="<?php echo base_url().'tinymce/tinymce.min.js';?>"></script>
+  <script type="text/javascript" src="<?php echo base_url().'js/equationstwo.js';?>"></script>
+  <script type="text/javascript" src="<?php echo base_url().'js/equipmentinfo.js';?>"></script>
+  <script type="text/javascript" src="<?php echo base_url().'js/datepicker.js';?>"></script>
   
   <!-- bootstrap reference library -->
   <script src="<?php echo base_url().'js/bootstrap.min.js';?>"></script>
@@ -35,299 +39,12 @@
      "sScrollY":"270px",
      "sScrollX":"100%"
     });
-    $("#equipment_make").change(function(){
-         var id_number=$(this).val();
-         //append to textbox
-         $("#balance_number").val(id_number);
-    });
-    $("#name").on('change',function(){
-      var dimensions=$(this).find(":selected").data("dimensions");
-      var serial_number=$(this).find(":selected").data("serialnumber");
-      var manufacturer=$(this).find(":selected").data("manufacturer");
-      $("#length").val(dimensions);
-      $("#serial_no").val(serial_number);
-      $("#manufacturer").val(manufacturer);
-    });
+     tinymce.init({
+    selector: "textarea"
+   });
    });
   </script>
   
-  <script>
-       function standard_weight_calc(){
-        var total = document.getElementById('standard_container').value - document.getElementById('container').value;
-        document.getElementById('standard_weight_1').value = total;
-       }
-
-       function standard_weight_calc_2(){
-        var total = document.getElementById('standard_container_1').value - document.getElementById('container_1').value;
-        document.getElementById('standard_weight_2').value = total;
-       }
-
-       function average_retention_time(){
-        var total = parseInt(document.getElementById('rt_1').value) + parseInt(document.getElementById('rt_2').value)+
-                    parseInt(document.getElementById('rt_3').value) + parseInt(document.getElementById('rt_4').value)+
-                    parseInt(document.getElementById('rt_5').value) + parseInt(document.getElementById('rt_6').value);
-        document.getElementById('rt_avg').value = (total)/6;
-       }
-
-       function average_peak_area(){
-        var total = parseInt(document.getElementById('peak_area_1').value) + parseInt(document.getElementById('peak_area_2').value)+
-                    parseInt(document.getElementById('peak_area_3').value) + parseInt(document.getElementById('peak_area_4').value)+
-                    parseInt(document.getElementById('peak_area_5').value) + parseInt(document.getElementById('peak_area_6').value);
-                    document.getElementById('peak_area_avg').value = (total)/6;
-       }
-
-       function average_asymmetry(){
-        var total = parseInt(document.getElementById('asymmetry_1').value) + parseInt(document.getElementById('asymmetry_2').value)+
-                    parseInt(document.getElementById('asymmetry_3').value) + parseInt(document.getElementById('asymmetry_4').value)+
-                    parseInt(document.getElementById('asymmetry_5').value) + parseInt(document.getElementById('asymmetry_6').value);
-                    document.getElementById('asymmetry_avg').value = (total)/6;
-       }
-    
-       function average_resolution(){
-        var total = parseInt(document.getElementById('resolution_1').value) + parseInt(document.getElementById('resolution_2').value)+
-                    parseInt(document.getElementById('resolution_3').value) + parseInt(document.getElementById('resolution_4').value)+
-                    parseInt(document.getElementById('resolution_5').value) + parseInt(document.getElementById('resolution_6').value);
-                    document.getElementById('resolution_avg').value = (total)/6;
-       }
-       function avg_standard(){
-        var total = parseInt(document.getElementById('sample_1').value) + parseInt(document.getElementById('sample_2').value)+
-                    parseInt(document.getElementById('sample_3').value) + parseInt(document.getElementById('sample_4').value)+
-                    parseInt(document.getElementById('sample_5').value); 
-                    document.getElementById('avg').value = (total)/5;
-       }
-       function second_avg_standard(){
-        var total = parseInt(document.getElementById('second_sample_1').value) + parseInt(document.getElementById('second_sample_2').value)+
-                    parseInt(document.getElementById('second_sample_3').value) + parseInt(document.getElementById('second_sample_4').value)+
-                    parseInt(document.getElementById('second_sample_5').value); 
-                    document.getElementById('second_avg').value = (total)/5;
-       }
-       function avg_sample1(){
-        var total = parseInt(document.getElementById('sample_1_s1').value) + parseInt(document.getElementById('sample_2_s1').value)+
-                    parseInt(document.getElementById('sample_3_s1').value) + parseInt(document.getElementById('sample_4_s1').value)+
-                    parseInt(document.getElementById('sample_5_s1').value); 
-                    document.getElementById('avg_s1').value = (total)/5;
-       }
-       function second_avg_sample1(){
-        var total = parseInt(document.getElementById('second_sample_1_s1').value) + parseInt(document.getElementById('second_sample_2_s1').value)+
-                    parseInt(document.getElementById('second_sample_3_s1').value) + parseInt(document.getElementById('second_sample_4_s1').value)+
-                    parseInt(document.getElementById('second_sample_5_s1').value); 
-                    document.getElementById('second_avg_s1').value = (total)/5;
-       }
-       
-       function avg_sample2(){
-        var total = parseInt(document.getElementById('sample_1_s2').value) + parseInt(document.getElementById('sample_2_s2').value)+
-                    parseInt(document.getElementById('sample_3_s2').value) + parseInt(document.getElementById('sample_4_s2').value)+
-                    parseInt(document.getElementById('sample_5_s2').value); 
-                    document.getElementById('avg_s2').value = (total)/5;
-       }
-       function second_avg_sample2(){
-        var total = parseInt(document.getElementById('second_sample_1_s2').value) + parseInt(document.getElementById('second_sample_2_s2').value)+
-                    parseInt(document.getElementById('second_sample_3_s2').value) + parseInt(document.getElementById('second_sample_4_s2').value)+
-                    parseInt(document.getElementById('second_sample_5_s2').value); 
-                    document.getElementById('second_avg_s2').value = (total)/5;
-       }
-       function avg_sample3(){
-        var total = parseInt(document.getElementById('sample_1_s3').value) + parseInt(document.getElementById('sample_2_s3').value)+
-                    parseInt(document.getElementById('sample_3_s3').value) + parseInt(document.getElementById('sample_4_s3').value)+
-                    parseInt(document.getElementById('sample_5_s3').value); 
-                    document.getElementById('avg_s3').value = (total)/5;
-       }
-       function second_avg_sample3(){
-        var total = parseInt(document.getElementById('second_sample_1_s3').value) + parseInt(document.getElementById('second_sample_2_s3').value)+
-                    parseInt(document.getElementById('second_sample_3_s3').value) + parseInt(document.getElementById('second_sample_4_s3').value)+
-                    parseInt(document.getElementById('second_sample_5_s3').value); 
-                    document.getElementById('second_avg_s3').value = (total)/5;
-       }
-       function avg_sample4(){
-        var total = parseInt(document.getElementById('sample_1_s4').value) + parseInt(document.getElementById('sample_2_s4').value)+
-                    parseInt(document.getElementById('sample_3_s4').value) + parseInt(document.getElementById('sample_4_s4').value)+
-                    parseInt(document.getElementById('sample_5_s4').value); 
-                    document.getElementById('avg_s4').value = (total)/5;
-       }
-       function second_avg_sample4(){
-        var total = parseInt(document.getElementById('second_sample_1_s4').value) + parseInt(document.getElementById('second_sample_2_s4').value)+
-                    parseInt(document.getElementById('second_sample_3_s4').value) + parseInt(document.getElementById('second_sample_4_s4').value)+
-                    parseInt(document.getElementById('second_sample_5_s4').value); 
-                    document.getElementById('second_avg_s4').value = (total)/5;
-       }
-       function avg_sample5(){
-        var total = parseInt(document.getElementById('sample_1_s5').value) + parseInt(document.getElementById('sample_2_s5').value)+
-                    parseInt(document.getElementById('sample_3_s5').value) + parseInt(document.getElementById('sample_4_s5').value)+
-                    parseInt(document.getElementById('sample_5_s5').value); 
-                    document.getElementById('avg_s5').value = (total)/5;
-       }
-       function second_avg_sample5(){
-        var total = parseInt(document.getElementById('second_sample_1_s5').value) + parseInt(document.getElementById('second_sample_2_s5').value)+
-                    parseInt(document.getElementById('second_sample_3_s5').value) + parseInt(document.getElementById('second_sample_4_s5').value)+
-                    parseInt(document.getElementById('second_sample_5_s5').value); 
-                    document.getElementById('second_avg_s5').value = (total)/5;
-       }
-       function avg_sample6(){
-        var total = parseInt(document.getElementById('sample_1_s6').value) + parseInt(document.getElementById('sample_2_s6').value)+
-                    parseInt(document.getElementById('sample_3_s6').value) + parseInt(document.getElementById('sample_4_s6').value)+
-                    parseInt(document.getElementById('sample_5_s6').value); 
-                    document.getElementById('avg_s6').value = (total)/5;
-       }
-       function second_avg_sample6(){
-        var total = parseInt(document.getElementById('second_sample_1_s6').value) + parseInt(document.getElementById('second_sample_2_s6').value)+
-                    parseInt(document.getElementById('second_sample_3_s6').value) + parseInt(document.getElementById('second_sample_4_s6').value)+
-                    parseInt(document.getElementById('second_sample_5_s6').value); 
-                    document.getElementById('second_avg_s6').value = (total)/5;
-       }
-       function determination_calc_1(){
-        var upper = parseInt(document.getElementById('det_1_pkt').value) * parseInt(document.getElementById('det_1_wstd').value)*
-                    parseInt(document.getElementById('det_1_df').value) * parseInt(document.getElementById('det_1_potency').value);  
-
-        var lower = parseInt(document.getElementById('det_1_pkstd').value) * parseInt(document.getElementById('det_1_lc').value);
-        var total = (upper/lower)*100;
-        
-                    document.getElementById('determination_1').value = total;
-       }
-       function second_determination_calc_1(){
-        var upper = parseInt(document.getElementById('second_det_1_pkt').value) * parseInt(document.getElementById('second_det_1_wstd').value)*
-                    parseInt(document.getElementById('second_det_1_df').value) * parseInt(document.getElementById('second_det_1_potency').value);  
-
-        var lower = parseInt(document.getElementById('second_det_1_pkstd').value) * parseInt(document.getElementById('second_det_1_lc').value);
-        var total = (upper/lower)*100;
-        
-                    document.getElementById('second_determination_1').value = total;
-       }
-       function determination_calc_2(){
-        var upper = parseInt(document.getElementById('det_2_pkt').value) * parseInt(document.getElementById('det_2_wstd').value)*
-                    parseInt(document.getElementById('det_2_df').value) * parseInt(document.getElementById('det_2_potency').value);  
-
-        var lower = parseInt(document.getElementById('det_2_pkstd').value) * parseInt(document.getElementById('det_2_lc').value);
-        var total = (upper/lower)*100;
-        
-                    document.getElementById('determination_2').value = total;
-       }
-       function second_determination_calc_2(){
-        var upper = parseInt(document.getElementById('second_det_2_pkt').value) * parseInt(document.getElementById('second_det_2_wstd').value)*
-                    parseInt(document.getElementById('second_det_2_df').value) * parseInt(document.getElementById('second_det_2_potency').value);  
-
-        var lower = parseInt(document.getElementById('second_det_2_pkstd').value) * parseInt(document.getElementById('second_det_2_lc').value);
-        var total = (upper/lower)*100;
-        
-                    document.getElementById('second_determination_2').value = total;
-       }
-       function determination_calc_3(){
-        var upper = parseInt(document.getElementById('det_3_pkt').value) * parseInt(document.getElementById('det_3_wstd').value)*
-                    parseInt(document.getElementById('det_3_df').value) * parseInt(document.getElementById('det_3_potency').value);  
-
-        var lower = parseInt(document.getElementById('det_3_pkstd').value) * parseInt(document.getElementById('det_3_lc').value);
-        var total = (upper/lower)*100;
-        
-                    document.getElementById('determination_3').value = total;
-       }
-       function second_determination_calc_3(){
-        var upper = parseInt(document.getElementById('second_det_3_pkt').value) * parseInt(document.getElementById('second_det_3_wstd').value)*
-                    parseInt(document.getElementById('second_det_3_df').value) * parseInt(document.getElementById('second_det_3_potency').value);  
-
-        var lower = parseInt(document.getElementById('second_det_3_pkstd').value) * parseInt(document.getElementById('second_det_3_lc').value);
-        var total = (upper/lower)*100;
-        
-                    document.getElementById('second_determination_3').value = total;
-       }
-       function determination_calc_4(){
-        var upper = parseInt(document.getElementById('det_4_pkt').value) * parseInt(document.getElementById('det_4_wstd').value)*
-                    parseInt(document.getElementById('det_4_df').value) * parseInt(document.getElementById('det_4_potency').value);  
-
-        var lower = parseInt(document.getElementById('det_4_pkstd').value) * parseInt(document.getElementById('det_4_lc').value);
-        var total = (upper/lower)*100;
-        
-                    document.getElementById('determination_4').value = total;
-       }
-       function second_determination_calc_4(){
-        var upper = parseInt(document.getElementById('second_det_4_pkt').value) * parseInt(document.getElementById('second_det_4_wstd').value)*
-                    parseInt(document.getElementById('second_det_4_df').value) * parseInt(document.getElementById('second_det_4_potency').value);  
-
-        var lower = parseInt(document.getElementById('second_det_4_pkstd').value) * parseInt(document.getElementById('second_det_4_lc').value);
-        var total = (upper/lower)*100;
-        
-                    document.getElementById('second_determination_4').value = total;
-       }
-       function determination_calc_5(){
-        var upper = parseInt(document.getElementById('det_5_pkt').value) * parseInt(document.getElementById('det_5_wstd').value)*
-                    parseInt(document.getElementById('det_5_df').value) * parseInt(document.getElementById('det_5_potency').value);  
-
-        var lower = parseInt(document.getElementById('det_5_pkstd').value) * parseInt(document.getElementById('det_5_lc').value);
-        var total = (upper/lower)*100;
-        
-                    document.getElementById('determination_5').value = total;
-       }
-       function second_determination_calc_5(){
-        var upper = parseInt(document.getElementById('second_det_5_pkt').value) * parseInt(document.getElementById('second_det_5_wstd').value)*
-                    parseInt(document.getElementById('second_det_5_df').value) * parseInt(document.getElementById('second_det_5_potency').value);  
-
-        var lower = parseInt(document.getElementById('second_det_5_pkstd').value) * parseInt(document.getElementById('second_det_5_lc').value);
-        var total = (upper/lower)*100;
-        
-                    document.getElementById('second_determination_5').value = total;
-       }
-       function determination_calc_6(){
-        var upper = parseInt(document.getElementById('det_6_pkt').value) * parseInt(document.getElementById('det_6_wstd').value)*
-                    parseInt(document.getElementById('det_6_df').value) * parseInt(document.getElementById('det_6_potency').value);  
-
-        var lower = parseInt(document.getElementById('det_6_pkstd').value) * parseInt(document.getElementById('det_6_lc').value);
-        var total = (upper/lower)*100;
-        
-                    document.getElementById('determination_6').value = total;
-       }
-       function second_determination_calc_6(){
-        var upper = parseInt(document.getElementById('second_det_6_pkt').value) * parseInt(document.getElementById('second_det_6_wstd').value)*
-                    parseInt(document.getElementById('second_det_6_df').value) * parseInt(document.getElementById('second_det_6_potency').value);  
-
-        var lower = parseInt(document.getElementById('second_det_6_pkstd').value) * parseInt(document.getElementById('second_det_6_lc').value);
-        var total = (upper/lower)*100;
-        
-                    document.getElementById('second_determination_6').value = total;
-       }
-       function sd_retention_time(){
-        var average_retention_time = (parseInt(document.getElementById('rt_1').value) + parseInt(document.getElementById('rt_2').value)+parseInt(document.getElementById('rt_3').value) + parseInt(document.getElementById('rt_4').value)+parseInt(document.getElementById('rt_5').value) + parseInt(document.getElementById('rt_6').value))/6;
-        var samples_retention_time = [parseInt(document.getElementById('rt_1').value), parseInt(document.getElementById('rt_2').value),parseInt(document.getElementById('rt_3').value), parseInt(document.getElementById('rt_4').value),parseInt(document.getElementById('rt_5').value), parseInt(document.getElementById('rt_6').value)];            
-        var variance_retention_time=0;
-
-        for(var i=0;i<samples_retention_time.length; i++){
-           variance_retention_time += Math.pow((samples_retention_time [i]-average_retention_time),2);
-         }
-         var standard_deviation_retention_time= Math.sqrt((variance_retention_time)/i);
-         document.getElementById('rt_sd').value = standard_deviation_retention_time;
-       }
-       function sd_peak_area(){
-        var average_peak_area = (parseInt(document.getElementById('peak_area_1').value) + parseInt(document.getElementById('peak_area_2').value)+parseInt(document.getElementById('peak_area_3').value) + parseInt(document.getElementById('peak_area_4').value)+parseInt(document.getElementById('peak_area_5').value)+parseInt(document.getElementById('peak_area_6').value))/6;
-        var samples_peak_area = [parseInt(document.getElementById('peak_area_1').value), parseInt(document.getElementById('peak_area_2').value), parseInt(document.getElementById('peak_area_3').value),  parseInt(document.getElementById('peak_area_4').value), parseInt(document.getElementById('peak_area_5').value), parseInt(document.getElementById('peak_area_6').value)];
-        var variance_peak_area = 0;
-
-        for(var i=0;i<samples_peak_area.length; i++){
-           variance_peak_area += Math.pow((samples_peak_area [i]-average_peak_area),2);         
-         }
-          var standard_deviation_peak_area= Math.sqrt((variance_peak_area)/i);
-          document.getElementById('peak_area_sd').value = standard_deviation_peak_area;
-       }
-       function sd_asymmetry(){
-        var average_asymmetry = (parseInt(document.getElementById('asymmetry_1').value) + parseInt(document.getElementById('asymmetry_2').value)+parseInt(document.getElementById('asymmetry_3').value) + parseInt(document.getElementById('asymmetry_4').value)+parseInt(document.getElementById('asymmetry_5').value) + parseInt(document.getElementById('asymmetry_6').value))/6;
-        var samples_asymmetry =[parseInt(document.getElementById('asymmetry_1').value), parseInt(document.getElementById('asymmetry_2').value), parseInt(document.getElementById('asymmetry_3').value), parseInt(document.getElementById('asymmetry_4').value), parseInt(document.getElementById('asymmetry_5').value), parseInt(document.getElementById('asymmetry_6').value)];
-        var variance_asymmetry =0;
-
-        for(var i=0;i<samples_asymmetry.length; i++){
-           variance_asymmetry += Math.pow((samples_asymmetry [i]-average_asymmetry),2);         
-         }
-         var standard_deviation_asymmetry= Math.sqrt((variance_asymmetry)/i);
-         document.getElementById('asymmetry_sd').value = standard_deviation_asymmetry;
-       }
-       function sd_resolution(){
-        var average_resolution = (parseInt(document.getElementById('resolution_1').value) + parseInt(document.getElementById('resolution_2').value)+ parseInt(document.getElementById('resolution_3').value) + parseInt(document.getElementById('resolution_4').value)+ parseInt(document.getElementById('resolution_5').value) + parseInt(document.getElementById('resolution_6').value))/6;
-        var samples_resolution = [parseInt(document.getElementById('resolution_1').value), parseInt(document.getElementById('resolution_2').value),parseInt(document.getElementById('resolution_3').value), parseInt(document.getElementById('resolution_4').value),parseInt(document.getElementById('resolution_5').value), parseInt(document.getElementById('resolution_6').value)];
-        var variance_resolution=0;
-      
-       for(var i=0;i<samples_resolution.length; i++){
-           variance_resolution += Math.pow((samples_resolution [i]-average_resolution),2);         
-         }
-
-        var standard_deviation_resolution= Math.sqrt((variance_resolution)/i);
-        document.getElementById('resolution_sd').value = standard_deviation_resolution;
-      }
-   </script>
   </head
   <body>
       <?php
@@ -339,6 +56,13 @@
    $acc_status=$user['logged_in']['acc_status'];
    $id_temp=1;
    //var_dump($user);
+   if(empty($user['logged_in']['id'])) {
+       
+      redirect('login','location');  //loads the login page in current page div
+
+      echo '<meta http-equiv=refresh content="0;url=base_url();login">'; 
+
+       }
   ?>
   <div id="header"> 
   <div id="logo" style="padding:8px;color: #0000ff;" align="center"><img src="<?php echo base_url().'images/meds_logo.png';?>" height="35px" width="40px"/><b>MISSION FOR ESSENTIAL DRUGS AND SUPPLIES</b></div>
@@ -382,12 +106,13 @@
 <table width="950" class ="table_form" border="0" cellpadding="4px" align="center">
      <input type="hidden" name ="assignment" value ="<?php echo $assignment;?>"><input type="hidden" name ="test_request" value ="<?php echo $test_request;?>">
       <input type="hidden" name ="analyst" value ="<?php echo $user['logged_in']['fname']." ".$user['logged_in']['lname'];?>"> 
+      <input type ="hidden" id = "label_claim" value=" <?php echo $results['label_claim'];?>">
       <tr>
        <td colspan="6"  style="padding: 8px;text-align:right;background-color:#fdfdfd;padding:8px;border-bottom:solid 1px #bfbfbf;"><a href="<?php echo base_url().'test/index/'.$assignment.'/'.$test_request?>"><img src="<?php echo base_url().'images/icons/assign.png';?>" height="20px" width="20px">Back to Test Lists</a></td>
     </tr>
     <tr>
      <td colspan ="6">
-      <table width="100%" bgcolor="#c4c4ff" cellpadding="8px" border="0" align ="center">
+      <table width="100%" class="table_form" bgcolor="#c4c4ff" cellpadding="8px" border="0" align ="center">
          <tr>
             <td rowspan="2" colspan ="2" style="padding:4px;border-left:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;border-bottom:solid 1px #bfbfbf;text-align:center;background-color:#ffffff;"><img src="<?php echo base_url().'images/meds_logo.png';?>" height="80px" width="90px"/></td>
             <td colspan="6" style="padding:4px;color:#0000ff;border-left:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;border-bottom:solid 1px #bfbfbf;text-align:center;background-color:#ffffff;">MISSION FOR ESSENTIAL DRUGS AND SUPPLIES</td>
@@ -421,7 +146,7 @@
     </tr> 
     <tr>
       <td colspan="6" align="center" style="padding:8px;">
-        <table border="0" align="center" cellpadding="8px" width="100%">
+        <table border="0" align="center" class="table_form" cellpadding="8px" width="100%">
             <tr>
               <td height="25px" style="padding:8px;border-left:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;">Registration Number: <?php echo $results['laboratory_number'];?></td>
               <td height="25px" style="padding:8px;border-left:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;">Request Date: <?php echo $results['date_time'];?></td>
@@ -463,7 +188,7 @@
                foreach($query_e as $equipment):
               ?>
                
-               <option value="<?php echo $equipment['id_number'];?>"><?php echo $equipment['model'];?></option>
+               <option value="<?php echo $equipment['id_number'];?>" data-equipmentid="<?php echo $equipment['description']; ?>"><?php echo $equipment['id_number'];?></option>
                 <?php
                 endforeach
                 ?> 
@@ -472,7 +197,7 @@
          </td>    
       
         <td colspan=""align="center" style="padding:8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">ID Number:</td>
-        <td colspan = "2" style="padding:8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><input type ="text" name ="equipment_number" id="balance_number"></td>
+        <td colspan = "2" style="padding:8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><input type ="text" name ="equipment_number" id="equipmentid"></td>
       </tr>
       <tr>
         <td align="left" colspan ="6" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;color: #0000fb;" ><b>Preparation of Dissolution Medium</b></td>
@@ -509,12 +234,26 @@
         <td style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="temperature"> </td>        
         <td style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="actual_temperature"> </td>        
         <td colspan = "3"style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="temperature_comment"> </td>
-      </tr>
+      </tr> 
       <tr>
-        <td colspan = "6"align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: solid 1px #bfbfbf;color: #0000fb;"><b>Sample Preparation</b></td>
-      </tr>
-       <tr>
-        <td colspan = "6" align="center"style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><textarea cols="80" rows="4" name = "sample_preparation"></textarea></td>
+        <td colspan=""align="center" style="padding:8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Balance Make:</td>
+        <td colspan = "2" style="padding:8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> 
+            <select id ="equipment_balance" name="balance_make">
+              <option selected></option>
+               <?php
+               foreach($query_e as $equipment):
+              ?>
+               
+               <option value="<?php echo $equipment['id_number'];?>" data-idnumber="<?php echo $equipment['description'];?>"><?php echo $equipment['id_number'];?></option>
+                <?php
+                endforeach
+                ?> 
+              
+            </select>
+         </td>    
+      
+        <td colspan=""align="center" style="padding:8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">ID Number:</td>
+        <td colspan = "2" style="padding:8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><input type ="text" name ="balance_number" id="idnumber"></td>
       </tr>
        <tr>
         <td colspan = "6"align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;color: #0000fb;"><b>Weight of Standard</b></td>
@@ -531,7 +270,7 @@
                foreach($sql_standards as $s_name):
               ?>
                
-               <option value="<?php  echo $s_name['item_description'];?>"><?php  echo $s_name['item_description'];?></option>
+               <option value="<?php  echo $s_name['item_description'];?>" data-idno="<?php  echo $s_name['reference_number'];?>" data-lotno="<?php  echo $s_name['batch_number'];?>"><?php  echo $s_name['item_description'];?></option>
                 <?php
                 endforeach
                 ?>
@@ -540,84 +279,45 @@
       </tr>
       <tr>
         <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Potency:</td>
-        <td colspan = "" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="potency"> </td>
+        <td colspan = "" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="potency" id="potency"> </td>
         <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Lot No.:</td>
-        <td colspan = "" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="lot_no"> </td>
+        <td colspan = "" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="lot_no" id="lot_no"> </td>
         <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">ID No.:</td>
-        <td colspan = ""style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="id_no"> </td>
+        <td colspan = ""style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="id_no" id ="id_no"> </td>
       </tr>
        <tr>
-        <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Weight of standard + container (g)</td>
-        <td style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="standard_container" id ="standard_container"> </td>
-        <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Weight of container (g) </td>
-        <td style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="container" id ="container" onchange ="standard_weight_calc()"> </td>
-        <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Weight of standard (g)</td>
-        <td style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="standard_weight_1" id ="standard_weight_1"> </td>
+        <td colspan ="2"align="center" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Weight of standard + container (g)</td>
+        <td colspan ="4"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="standard_container" id ="standard_container"> </td>
+       </tr>
+       <tr>  
+        <td colspan ="2"align="center" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Weight of container (g) </td>
+        <td colspan ="4"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="container" id ="container"> </td>
+       </tr>
+       <tr>  
+        <td colspan ="2"align="center" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Weight of standard (g)</td>
+        <td colspan ="4"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="standard_weight_1" id ="standard_weight_1"> </td>
        </tr>  
       <tr>  
-        <td colspan ="2"align="left" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Dilution</td>
-        <td colspan ="4" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">  <textarea rows ="4" cols ="80" name ="standard_dilution"></textarea> </td>
+        <td colspan ="6"align="left" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Dilution</td>
+       </tr>  
+      <tr>   
+        <td colspan ="6" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">  <textarea rows ="4" cols ="80" name ="standard_dilution"></textarea> </td>
       </tr>  
+      <tr>
+        <td colspan = "6"align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: solid 1px #bfbfbf;color: #0000fb;"><b>Sample Preparation</b></td>
+      </tr>
+       <tr>
+        <td colspan = "6" align="center"style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><textarea cols="80" rows="4" name = "sample_preparation"></textarea></td>
+      </tr>
+      <tr>        
+        <td colspan = "4" align = "center"style="padding: 12px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: solid 1px #bfbfbf;color:#0000fb;"><b>Dilution Factor:</b> [<input type ="text" name = "df_1" id = "df_1" size = "10"> X <input type ="text" name = "df_2" id = "df_2" size = "10">] / <input type ="text" name = "df_3" id = "df_3" size = "10"></td>
+        <td colspan = "2" align = "left"style="padding: 12px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: solid 1px #bfbfbf;">= <input type ="text" name = "dilution_factor" id = "dilution_factor" size = "10"> </td>
+      </tr>
       <tr>
         <td align="left" colspan ="6" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;color: #0000fb;" ><b>Determination of content- HPLC</b></td>
       </tr> 
       <tr>
         <td align="left" colspan ="6" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;color: #0000fb;" >System suitability </td>
-      </tr> 
-      <tr>
-        <td colspan=""align="center" style="padding:8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Balance Make:</td>
-        <td colspan = "2" style="padding:8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> 
-            <select id ="equipment_make" name="balance_make">
-              <option selected></option>
-               <?php
-               foreach($query_e as $equipment):
-              ?>
-               
-               <option value="<?php echo $equipment['id_number'];?>"><?php echo $equipment['model'];?></option>
-                <?php
-                endforeach
-                ?> 
-              
-            </select>
-         </td>    
-      
-        <td colspan=""align="center" style="padding:8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">ID Number:</td>
-        <td colspan = "2" style="padding:8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><input type ="text" name ="balance_number" id="balance_number"></td>
-      </tr>
-      <tr>
-        <td colspan="2"align="center" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;color:#0000fb;"><b>Standard Description:<b></td>
-       
-      </tr>
-      <tr>
-        <td align="center" colspan = "" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> 
-          <select id="standard_description" name="standard_description_1" >
-              <option selected></option>
-               <?php
-               foreach($sql_standards as $s_name):
-              ?>
-               
-               <option value="<?php  echo $s_name['item_description'];?>"><?php  echo $s_name['item_description'];?></option>
-                <?php
-                endforeach
-                ?>
-            </select></td>
-        <td style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Potency: <input type ="text" name="potency_1"></td><td> Lot No.:<input type ="text" name="lot_no_1"> </td><td>ID No.:<input type ="text" name="id_no_1"> </td>       
-      </tr>
-       <tr>
-        <td colspan="2"align="center" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Weight of standard + container (g)</td>         
-        <td colspan="4"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="standard_container_1" id ="standard_container_1"> </td>
-      </tr>
-      <tr>
-        <td colspan="2"align="center" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Weight of container (g) </td>
-        <td colspan="4"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="container_1" id ="container_1" onchange ="standard_weight_calc_2()"> </td>
-      </tr>
-      <tr>
-        <td colspan="2"align="center" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Weight of standard (g)</td>
-        <td colspan="4"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="standard_weight_2" id ="standard_weight_2"> </td>
-      </tr> 
-      <tr>
-        <td colspan="2"align="center" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Dilution</td>
-        <td colspan ="4" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">  <textarea rows ="4" cols ="80" name ="standard_dilution"></textarea> </td>
       </tr> 
       <tr>
         <td align="left" colspan ="6" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;color:#0000fb;" ><b>Mobile Phase Preparation</b></td>
@@ -661,20 +361,20 @@
         </td>
       </tr>
       <tr>
-        <td colspan ="3"align="right" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Column Pressure:</td>
-        <td colspan ="3"align="left"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="column_pressure"> </td>       
+        <td colspan ="2"align="right" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Column Pressure:</td>
+        <td colspan ="4"align="left"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="column_pressure"> <select name="column_pressure_select"><option value="Bar">Bar</option><option value="MPA">MPA</option><option value="PSI">PSI</option></select> </td>            
       </tr>       
       <tr>  
-        <td colspan ="3"align="right" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Column Oven Pressure:</td>
-        <td colspan ="3"align="left"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="column_oven_pressure"> </td>       
+        <td colspan ="2"align="right" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Column Oven Pressure:</td>
+        <td colspan ="4"align="left"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="column_oven_pressure"> <select name="column_oven_pressure_select"><option value="Fahrenheit">F</option><option value="Celsius">C</option></select> </td>       
       </tr>
       <tr>
-        <td colspan ="3"align="right" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Mobile Phase Flow rate:</td>
-        <td colspan ="3"align="left"style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="flow_rate"> </td>       
+        <td colspan ="2"align="right" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Mobile Phase Flow rate:</td>
+        <td colspan ="4"align="left"style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="flow_rate"> mls/min</td>       
       </tr>       
       <tr>
-        <td colspan ="3"align="right" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Detection of Wavelength:</td>
-        <td colspan ="3"align="left"style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="wavelength"> </td>       
+        <td colspan ="2"align="right" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Detection of Wavelength:</td>
+        <td colspan ="4"align="left"style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="wavelength"> nm</td>       
       </tr>  
       <tr>
         <td align="left" colspan ="6" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;color:#0000fb;" ><b>Suitability summary</b><br/>From chromatograms on -  </td>
@@ -688,6 +388,7 @@
                 <td align="center"><b>Peak Area</b></td>
                 <td align="center"><b>Asymmetry</b></td>
                 <td align="center"><b>Resolution</b></td>
+                <td align="center"><b>Other</b></td>
               </tr>
            
               <tr>
@@ -696,41 +397,47 @@
                 <td style="padding: 8px;"><input type = "text" name ="peak_area_1" id ="peak_area_1"></td >
                 <td style="padding: 8px;"><input type = "text" name ="asymmetry_1" id="asymmetry_1"></td>
                 <td style="padding: 8px;"><input type = "text" name ="resolution_1" id ="resolution_1"></td>
+                <td style="padding: 8px;"><input type = "text" name ="other_1" id ="other_1"></td>
               </tr>
               <tr>
                 <td align="center"style="padding: 8px;">2.</td>
-                <td style="padding: 8px;"><input type = "text" name ="rt_2" id ="rt_2"></td>
-                <td style="padding: 8px;"><input type = "text" name ="peak_area_2" id ="peak_area_2"></td>
-                <td style="padding: 8px;"><input type = "text" name ="asymmetry_2" id="asymmetry_2"></td>
-                <td style="padding: 8px;"><input type = "text" name ="resolution_2" id ="resolution_2"></td>
+                <td style="padding: 8px;"><input type = "text" name ="rt_2" id ="rt_2" onchange="calculation_average(); calculation_sd()"></td>
+                <td style="padding: 8px;"><input type = "text" name ="peak_area_2" id ="peak_area_2" onchange="calculation_average(); calculation_sd()"></td>
+                <td style="padding: 8px;"><input type = "text" name ="asymmetry_2" id="asymmetry_2" onchange="calculation_average(); calculation_sd()"></td>
+                <td style="padding: 8px;"><input type = "text" name ="resolution_2" id ="resolution_2" onchange="calculation_average(); calculation_sd()"></td>
+                <td style="padding: 8px;"><input type = "text" name ="other_2" id ="other_2" onchange="calculation_average(); calculation_sd()"></td>
               </tr>
               <tr>
                 <td align="center"style="padding: 8px;">3.</td>
-                <td style="padding: 8px;"><input type = "text" name ="rt_3" id ="rt_3"></td>
-                <td style="padding: 8px;"><input type = "text" name ="peak_area_3" id ="peak_area_3"></td>
-                <td style="padding: 8px;"><input type = "text" name ="asymmetry_3" id="asymmetry_3"></td>
-                <td style="padding: 8px;"><input type = "text" name ="resolution_3" id ="resolution_3"></td>
+                <td style="padding: 8px;"><input type = "text" name ="rt_3" id ="rt_3" onchange="calculation_average(); calculation_sd()"></td>
+                <td style="padding: 8px;"><input type = "text" name ="peak_area_3" id ="peak_area_3" onchange="calculation_average(); calculation_sd()"></td>
+                <td style="padding: 8px;"><input type = "text" name ="asymmetry_3" id="asymmetry_3" onchange="calculation_average(); calculation_sd()"></td>
+                <td style="padding: 8px;"><input type = "text" name ="resolution_3" id ="resolution_3" onchange="calculation_average(); calculation_sd()"></td>
+                <td style="padding: 8px;"><input type = "text" name ="other_3" id ="other_3" onchange="calculation_average(); calculation_sd()"></td>
               </tr>
               <tr>
                 <td align="center"style="padding: 8px;">4.</td>
-                <td style="padding: 8px;"><input type = "text" name ="rt_4" id ="rt_4"></td>
-                <td style="padding: 8px;"><input type = "text" name ="peak_area_4" id ="peak_area_4"></td>
-                <td style="padding: 8px;"><input type = "text" name ="asymmetry_4" id="asymmetry_4"></td>
-                <td style="padding: 8px;"><input type = "text" name ="resolution_4" id ="resolution_4"></td>
+                <td style="padding: 8px;"><input type = "text" name ="rt_4" id ="rt_4" onchange="calculation_average(); calculation_sd()"></td>
+                <td style="padding: 8px;"><input type = "text" name ="peak_area_4" id ="peak_area_4" onchange="calculation_average(); calculation_sd()"></td>
+                <td style="padding: 8px;"><input type = "text" name ="asymmetry_4" id="asymmetry_4" onchange="calculation_average(); calculation_sd()"></td>
+                <td style="padding: 8px;"><input type = "text" name ="resolution_4" id ="resolution_4" onchange="calculation_average(); calculation_sd()"></td>
+                <td style="padding: 8px;"><input type = "text" name ="other_4" id ="other_4" onchange="calculation_average(); calculation_sd()"></td>
               </tr>
               <tr>
                 <td align="center"style="padding: 8px;">5.</td>
-                <td style="padding: 8px;"><input type = "text" name ="rt_5" id="rt_5"></td>
-                <td style="padding: 8px;"><input type = "text" name ="peak_area_5" id ="peak_area_5"></td>
-                <td style="padding: 8px;"><input type = "text" name ="asymmetry_5" id="asymmetry_5"></td>
-                <td style="padding: 8px;"><input type = "text" name ="resolution_5" id ="resolution_5"></td>
+                <td style="padding: 8px;"><input type = "text" name ="rt_5" id="rt_5" onchange="calculation_average(); calculation_sd()"></td>
+                <td style="padding: 8px;"><input type = "text" name ="peak_area_5" id ="peak_area_5" onchange="calculation_average(); calculation_sd()"></td>
+                <td style="padding: 8px;"><input type = "text" name ="asymmetry_5" id="asymmetry_5" onchange="calculation_average(); calculation_sd()"></td>
+                <td style="padding: 8px;"><input type = "text" name ="resolution_5" id ="resolution_5" onchange="calculation_average(); calculation_sd()"></td>
+                <td style="padding: 8px;"><input type = "text" name ="other_5" id ="other_5" onchange="calculation_average(); calculation_sd()"></td>
               </tr>
               <tr>
                 <td align="center"style="padding: 8px;">6.</td>
-                <td style="padding: 8px;"><input type = "text" name ="rt_6" id="rt_6" onchange="average_retention_time(); sd_retention_time()"></td>
-                <td style="padding: 8px;"><input type = "text" name ="peak_area_6" id ="peak_area_6" onchange ="average_peak_area(); sd_peak_area()"></td>
-                <td style="padding: 8px;"><input type = "text" name ="asymmetry_6" id ="asymmetry_6" onchange ="average_asymmetry(); sd_asymmetry()"></td>
-                <td style="padding: 8px;"><input type = "text" name ="resolution_6"id ="resolution_6"onchange ="average_resolution(); sd_resolution()"></td>
+                <td style="padding: 8px;"><input type = "text" name ="rt_6" id="rt_6" onchange="calculation_average(); calculation_sd()"></td>
+                <td style="padding: 8px;"><input type = "text" name ="peak_area_6" id ="peak_area_6" onchange="calculation_average(); calculation_sd()"></td>
+                <td style="padding: 8px;"><input type = "text" name ="asymmetry_6" id ="asymmetry_6" onchange="calculation_average(); calculation_sd()"></td>
+                <td style="padding: 8px;"><input type = "text" name ="resolution_6"id ="resolution_6"onchange="calculation_average(); calculation_sd()"></td>
+                <td style="padding: 8px;"><input type = "text" name ="other_6"id ="other_6"onchange="calculation_average(); calculation_sd()"></td>
               </tr>
               <tr>
                 <td align="center"style="padding: 8px;">Average</td>
@@ -738,6 +445,7 @@
                 <td style="padding: 8px;"><input type = "text" name ="peak_area_avg" id ="peak_area_avg" ></td>
                 <td style="padding: 8px;"><input type = "text" name ="asymmetry_avg" id="asymmetry_avg"></td>
                 <td style="padding: 8px;"><input type = "text" name ="resolution_avg" id ="resolution_avg"></td>
+                <td style="padding: 8px;"><input type = "text" name ="other_avg" id ="other_avg"></td>
               </tr>
               <tr>
                 <td align="center"style="padding: 8px;">SD</td>
@@ -745,13 +453,15 @@
                 <td style="padding: 8px;"><input type = "text" name ="peak_area_sd" id ="peak_area_sd"></td>
                 <td style="padding: 8px;"><input type = "text" name ="asymmetry_sd" id ="asymmetry_sd"></td>
                 <td style="padding: 8px;"><input type = "text" name ="resolution_sd" id ="resolution_sd"></td>
+                <td style="padding: 8px;"><input type = "text" name ="other_sd" id ="other_sd"></td>
               </tr>
               <tr>
                 <td align="center"style="padding: 8px;">RSD</td>
-                <td style="padding: 8px;"><input type = "text" name ="rt_rsd"></td>
-                <td style="padding: 8px;"><input type = "text" name ="peak_area_rsd"></td>
-                <td style="padding: 8px;"><input type = "text" name ="asymmetry_rsd"></td>
-                <td style="padding: 8px;"><input type = "text" name ="resolution_rsd"></td>
+                <td style="padding: 8px;"><input type = "text" id = "rt_rsd" name ="rt_rsd"></td>
+                <td style="padding: 8px;"><input type = "text" id = "peak_area_rsd" name ="peak_area_rsd"></td>
+                <td style="padding: 8px;"><input type = "text" id = "asymmetry_rsd" name ="asymmetry_rsd"></td>
+                <td style="padding: 8px;"><input type = "text" id = "resolution_rsd" name ="resolution_rsd"></td>
+                <td style="padding: 8px;"><input type = "text" id = "other_rsd" name ="other_rsd" id ="other_rsd"></td>
               </tr>
               <tr>
                 <td align="center"style="padding: 8px;">Acceptance Criteria</td>
@@ -759,6 +469,7 @@
                 <td style="padding: 8px;">NMT 2.0%</td>
                 <td style="padding: 8px;">NMT 2.0%</td>
                 <td style="padding: 8px;">NLT 5.0%</td>
+                <td style="padding: 8px;"><input type="text" name="other_ac" id="other_ac" placeholder ="NLT"></td>
                 
               </tr>
               <tr>
@@ -767,15 +478,13 @@
                 <td style="padding: 8px;"><input type = "text" name ="peak_area_comment"></td>
                 <td style="padding: 8px;"><input type = "text" name ="asymmetry_comment"></td>
                 <td style="padding: 8px;"><input type = "text" name ="resolution_comment"></td>
+                <td style="padding: 8px;"><input type = "text" name ="other_comment" id ="other_comment"></td>
               </tr>
             </table>
         </td>
       </tr>
       <tr>
         <td align="left" colspan ="6" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: sollid 1px #bfbfbf;color:#0000fb;" ><b>Component 1: <input type ="text" name ="component_1"></td>
-      </tr>
-      <tr>
-        <td align="center" colspan ="6" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;" ><b>After <input type ="text" name ="minutes"> minutes</td>
       </tr>
       <tr><td align="left" colspan ="6" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;color:#0000fb;" ><b>Peak Area from chromatograms - </b></td>
       </tr> 
@@ -793,71 +502,80 @@
               <td align="center" style="padding: 8px;"><b>Sample 5</b></td>
               <td align="center" style="padding: 8px;"><b>Sample 6</b></td>
             </tr>
-         
-            <tr>
-              <td align="center"style="padding: 8px;">1.</td>
-              <td style="padding: 8px;"><input type = "text" name ="sample_1" id ="sample_1"></td>
-              <td style="padding: 8px;"><input type = "text" name ="sample_1_s1" id ="sample_1_s1"></td>
-              <td style="padding: 8px;"><input type = "text" name ="sample_1_s2" id ="sample_1_s2"></td>
-              <td style="padding: 8px;"><input type = "text" name ="sample_1_s3" id ="sample_1_s3"></td>
-              <td style="padding: 8px;"><input type = "text" name ="sample_1_s4" id ="sample_1_s4"></td>
-              <td style="padding: 8px;"><input type = "text" name ="sample_1_s5" id ="sample_1_s5"></td>
-              <td style="padding: 8px;"><input type = "text" name ="sample_1_s6" id ="sample_1_s6"></td>
-            </tr>
-            <tr>
-              <td align="center"style="padding: 8px;">2.</td>
-              <td style="padding: 8px;"><input type = "text" name ="sample_2" id ="sample_2"></td>
-              <td style="padding: 8px;"><input type = "text" name ="sample_2_s1" id ="sample_2_s1"></td>
-              <td style="padding: 8px;"><input type = "text" name ="sample_2_s2" id ="sample_2_s2"></td>
-              <td style="padding: 8px;"><input type = "text" name ="sample_2_s3" id ="sample_2_s3"></td>
-              <td style="padding: 8px;"><input type = "text" name ="sample_2_s4" id ="sample_2_s4"></td>
-              <td style="padding: 8px;"><input type = "text" name ="sample_2_s5" id ="sample_2_s5"></td>
-              <td style="padding: 8px;"><input type = "text" name ="sample_2_s6" id ="sample_2_s6"></td>
-            </tr>
-            <tr>
-              <td align="center"style="padding: 8px;">3.</td>
-              <td style="padding: 8px;"><input type = "text" name ="sample_3" id ="sample_3"></td>
-              <td style="padding: 8px;"><input type = "text" name ="sample_3_s1" id ="sample_3_s1"></td>
-              <td style="padding: 8px;"><input type = "text" name ="sample_3_s2" id ="sample_3_s2"></td>
-              <td style="padding: 8px;"><input type = "text" name ="sample_3_s3" id ="sample_3_s3"></td>
-              <td style="padding: 8px;"><input type = "text" name ="sample_3_s4" id ="sample_3_s4"></td>
-              <td style="padding: 8px;"><input type = "text" name ="sample_3_s5" id ="sample_3_s5"></td>
-              <td style="padding: 8px;"><input type = "text" name ="sample_3_s6" id ="sample_3_s6"></td>
-            </tr>
-            <tr>
-              <td align="center"style="padding: 8px;">4.</td>
-              <td style="padding: 8px;"><input type = "text" name ="sample_4" id ="sample_4"></td>
-              <td style="padding: 8px;"><input type = "text" name ="sample_4_s1" id ="sample_4_s1"></td>
-              <td style="padding: 8px;"><input type = "text" name ="sample_4_s2" id ="sample_4_s2"></td>
-              <td style="padding: 8px;"><input type = "text" name ="sample_4_s3" id ="sample_4_s3"></td>
-              <td style="padding: 8px;"><input type = "text" name ="sample_4_s4" id ="sample_4_s4"></td>
-              <td style="padding: 8px;"><input type = "text" name ="sample_4_s5" id ="sample_4_s5"></td>
-              <td style="padding: 8px;"><input type = "text" name ="sample_4_s6" id ="sample_4_s6"></td>
-            </tr>
-             <tr>
-              <td align="center"style="padding: 8px;">5.</td>
-              <td style="padding: 8px;"><input type = "text" name ="sample_5" id ="sample_5" onchange ="avg_standard()"></td>
-              <td style="padding: 8px;"><input type = "text" name ="sample_5_s1" id ="sample_5_s1" onchange ="avg_sample1()"></td>
-              <td style="padding: 8px;"><input type = "text" name ="sample_5_s2" id ="sample_5_s2" onchange ="avg_sample2()"></td>
-              <td style="padding: 8px;"><input type = "text" name ="sample_5_s3" id ="sample_5_s3" onchange ="avg_sample3()"></td>
-              <td style="padding: 8px;"><input type = "text" name ="sample_5_s4" id ="sample_5_s4" onchange ="avg_sample4()"></td>
-              <td style="padding: 8px;"><input type = "text" name ="sample_5_s5" id ="sample_5_s5" onchange ="avg_sample5()"></td>
-              <td style="padding: 8px;"><input type = "text" name ="sample_5_s6" id ="sample_5_s6" onchange ="avg_sample6()"></td>
-            </tr>
-            <tr>
-              <td align="center"style="padding: 8px;">Average</td>
-              <td style="padding: 8px;"><input type = "text" name ="avg" id ="avg"></td>
-              <td style="padding: 8px;"><input type = "text" name ="avg_s1" id ="avg_s1"></td>
-              <td style="padding: 8px;"><input type = "text" name ="avg_s2" id ="avg_s2"></td>
-              <td style="padding: 8px;"><input type = "text" name ="avg_s3" id ="avg_s3"></td>
-              <td style="padding: 8px;"><input type = "text" name ="avg_s4" id ="avg_s4"></td>
-              <td style="padding: 8px;"><input type = "text" name ="avg_s5" id ="avg_s5"></td>
-              <td style="padding: 8px;"><input type = "text" name ="avg_s6" id ="avg_s6"></td>
-            </tr>
+                 <tr>
+                  <td align="center"style="padding: 8px;">1.</td>
+                  <td style="padding: 8px;"><input type = "text" class = "standard" name ="sample_1" id ="sample_1"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_1" name ="sample_1_s1" id ="sample_1_s1"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_2" name ="sample_1_s2" id ="sample_1_s2"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_3" name ="sample_1_s3" id ="sample_1_s3"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_4" name ="sample_1_s4" id ="sample_1_s4"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_5" name ="sample_1_s5" id ="sample_1_s5"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_6" name ="sample_1_s6" id ="sample_1_s6"></td>
+                </tr>
+                <tr>
+                  <td align="center"style="padding: 8px;">2.</td>
+                  <td style="padding: 8px;"><input type = "text" class = "standard" name ="sample_2" id ="sample_2"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_1" name ="sample_2_s1" id ="sample_2_s1"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_2" name ="sample_2_s2" id ="sample_2_s2"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_3" name ="sample_2_s3" id ="sample_2_s3"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_4" name ="sample_2_s4" id ="sample_2_s4"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_5" name ="sample_2_s5" id ="sample_2_s5"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_6" name ="sample_2_s6" id ="sample_2_s6"></td>
+                </tr>
+                <tr>
+                  <td align="center"style="padding: 8px;">3.</td>
+                  <td style="padding: 8px;"><input type = "text" class = "standard" name ="sample_3" id ="sample_3"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_1" name ="sample_3_s1" id ="sample_3_s1"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_2" name ="sample_3_s2" id ="sample_3_s2"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_3" name ="sample_3_s3" id ="sample_3_s3"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_4" name ="sample_3_s4" id ="sample_3_s4"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_5" name ="sample_3_s5" id ="sample_3_s5"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_6" name ="sample_3_s6" id ="sample_3_s6"></td>
+                </tr>
+                <tr>
+                  <td align="center"style="padding: 8px;">4.</td>
+                  <td style="padding: 8px;"><input type = "text" class = "standard" name ="sample_4" id ="sample_4"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_1" name ="sample_4_s1" id ="sample_4_s1"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_2" name ="sample_4_s2" id ="sample_4_s2"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_3" name ="sample_4_s3" id ="sample_4_s3"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_4" name ="sample_4_s4" id ="sample_4_s4"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_5" name ="sample_4_s5" id ="sample_4_s5"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_6" name ="sample_4_s6" id ="sample_4_s6"></td>
+                </tr>
+                 <tr>
+                  <td align="center"style="padding: 8px;">5.</td>
+                  <td style="padding: 8px;"><input type = "text" class = "standard" name ="sample_5" id ="sample_5"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_1" name ="sample_5_s1" id ="sample_5_s1" onchange ="avg_sample1()"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_2" name ="sample_5_s2" id ="sample_5_s2" onchange ="avg_sample2()"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_3" name ="sample_5_s3" id ="sample_5_s3" onchange ="avg_sample3()"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_4" name ="sample_5_s4" id ="sample_5_s4" onchange ="avg_sample4()"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_5" name ="sample_5_s5" id ="sample_5_s5" onchange ="avg_sample5()"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_6" name ="sample_5_s6" id ="sample_5_s6" onchange ="avg_sample6()"></td>
+                </tr>
+                <tr>
+                  <td align="center"style="padding: 8px;">Average</td>
+                  <td style="padding: 8px;"><input type = "text" class = "standard_avg" name ="avg" id ="avg"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_1_avg" name ="avg_s1" id ="avg_s1"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_2_avg" name ="avg_s2" id ="avg_s2"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_3_avg" name ="avg_s3" id ="avg_s3"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_4_avg" name ="avg_s4" id ="avg_s4"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_5_avg" name ="avg_s5" id ="avg_s5"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_6_avg" name ="avg_s6" id ="avg_s6"></td>
+                </tr>
          </table>
          </div>
         </td>
       </tr>
+      <tr>
+        <td colspan="8" style="padding:8px;border-bottom:solid 1px #c4c4ff;">
+          <table border="0" width="100%" class="table_form" cellpadding="8px" align="center">            
+            <tr>        
+              <td colspan = "6" align = "center"style="padding: 12px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: solid 1px #bfbfbf;">RETENTION TIME: <input type = "text" name ="sample_rrt_avg" id ="sample_value" placeholder="RT of SAMPLE"> / <input type = "text" name ="sample_rrt_avg" id ="std_value" placeholder ="RT of STD"></td>
+              <td colspan = "6" align = "center"style="padding: 12px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: solid 1px #bfbfbf;"> =<input type = "text" name ="sample_rrt_avg" id ="sample_rrt_avg"></td>
+            </tr>             
+          </table>
+          </td>
+        </tr> 
       <tr>        
         <td colspan = "6" align = "center"style="padding: 12px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: solid 1px #bfbfbf;color:#0000fb;"> <u>PEAK OF SAMPLE (PKT) * WT OF STANDARD IN FINAL DILUTION * DILUTION FACTOR(DF) * 100 * POTENCY (P) </u> <br/> PEAK AREA OF STANDARD(PKSTD) * LABEL CLAIM (LC)</td>
       </tr>
@@ -872,7 +590,8 @@
           <input type ="text" name="det_1_df" id ="det_1_df" size ="10" placeholder="DF">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <input type ="text" name="det_1_potency" id ="det_1_potency" size ="10" placeholder="Potency">*100 <br/><br/>
           <input type ="text" name="det_1_pkstd" id ="det_1_pkstd" size ="10" placeholder="PKSTD">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-          <input type ="text" name="det_1_lc" id ="det_1_lc" size ="10" placeholder="LC" onchange="determination_calc_1()"></td>
+          <input type ="text" name="det_1_awt" id ="det_1_awt" size ="10" placeholder="AWT" onchange="calculation_determinations()">
+          <input type ="text" name="det_1_lc" id ="det_1_lc" size ="10" placeholder="LC" onchange="calculation_determinations()"></td>
         <td> =&nbsp &nbsp<input type ="text" name="determination_1" id ="determination_1" size ="10"> % LC</td>
       </tr>
       <tr>
@@ -886,7 +605,8 @@
           <input type ="text" name="det_2_df"id="det_2_df" size ="10" placeholder="DF">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <input type ="text" name="det_2_potency" id ="det_2_potency" size ="10" placeholder="Potency">*100 <br/><br/>
           <input type ="text" name="det_2_pkstd" id ="det_2_pkstd" size ="10" placeholder="PKSTD">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-          <input type ="text" name="det_2_lc" id ="det_2_lc" size ="10" placeholder="LC"onchange="determination_calc_2()"></td>        
+          <input type ="text" name="det_2_awt" id ="det_2_awt" size ="10" placeholder="AWT" onchange="calculation_determinations()">
+          <input type ="text" name="det_2_lc" id ="det_2_lc" size ="10" placeholder="LC"onchange="calculation_determinations()"></td>        
         <td>=&nbsp &nbsp <input type ="text" name="determination_2"id ="determination_2" size ="10">% LC </td>
       </tr>
       <tr>  
@@ -900,7 +620,8 @@
           <input type ="text" name="det_3_df" id ="det_3_df" size ="10" placeholder="DF">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <input type ="text" name="det_3_potency" id ="det_3_potency" size ="10" placeholder="Potency">*100 <br/><br/>
           <input type ="text" name="det_3_pkstd" id ="det_3_pkstd" size ="10" placeholder="PKSTD">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-          <input type ="text" name="det_3_lc" id ="det_3_lc" size ="10" placeholder="LC" onchange="determination_calc_3()"></td>        
+          <input type ="text" name="det_3_awt" id ="det_3_awt" size ="10" placeholder="AWT" onchange="calculation_determinations()">
+          <input type ="text" name="det_3_lc" id ="det_3_lc" size ="10" placeholder="LC" onchange="calculation_determinations()"></td>        
         <td>=&nbsp &nbsp <input type ="text" name="determination_3" id ="determination_3" size ="10">% LC </td>
       </tr>
       <tr>
@@ -914,7 +635,8 @@
           <input type ="text" name="det_4_df" id ="det_4_df" size ="10" placeholder="DF">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <input type ="text" name="det_4_potency" id ="det_4_potency" size ="10" placeholder="Potency">*100 <br/><br/>
           <input type ="text" name="det_4_pkstd" id ="det_4_pkstd" size ="10" placeholder="PKSTD">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-          <input type ="text" name="det_4_lc" id ="det_4_lc" size ="10" placeholder="LC" onchange="determination_calc_4()"></td>        
+          <input type ="text" name="det_4_awt" id ="det_4_awt" size ="10" placeholder="AWT" onchange="calculation_determinations()">
+          <input type ="text" name="det_4_lc" id ="det_4_lc" size ="10" placeholder="LC" onchange="calculation_determinations()"></td>        
         <td>=&nbsp &nbsp <input type ="text" name="determination_4" id ="determination_4" size ="10">% LC </td>
       </tr> 
       <tr>  
@@ -928,7 +650,8 @@
           <input type ="text" name="det_5_df" id ="det_5_df" size ="10" placeholder="DF">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <input type ="text" name="det_5_potency" id ="det_5_potency" size ="10" placeholder="Potency">*100 <br/><br/>
           <input type ="text" name="det_5_pkstd" id ="det_5_pkstd" size ="10" placeholder="PKSTD">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-          <input type ="text" name="det_5_lc" id ="det_5_lc" size ="10" placeholder="LC" onchange="determination_calc_5()"></td>        
+          <input type ="text" name="det_5_awt" id ="det_5_awt" size ="10" placeholder="AWT" onchange="calculation_determinations()">
+          <input type ="text" name="det_5_lc" id ="det_5_lc" size ="10" placeholder="LC" onchange="calculation_determinations()"></td>        
         <td>=&nbsp &nbsp <input type ="text" name="determination_5" id ="determination_5" size ="10">% LC </td>
       </tr> 
       <tr> 
@@ -942,7 +665,8 @@
           <input type ="text" name="det_6_df" id ="det_6_df" size ="10" placeholder="DF">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <input type ="text" name="det_6_potency" id ="det_6_potency" size ="10" placeholder="Potency">*100 <br/><br/>
           <input type ="text" name="det_6_pkstd" id ="det_6_pkstd" size ="10" placeholder="PKSTD">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-          <input type ="text" name="det_6_lc" id ="det_6_lc" size ="10" placeholder="LC" onchange="determination_calc_6()"></td>        
+          <input type ="text" name="det_6_awt" id ="det_6_awt" size ="10" placeholder="AWT" onchange="calculation_determinations()">
+          <input type ="text" name="det_6_lc" id ="det_6_lc" size ="10" placeholder="LC" onchange="calculation_determinations()"></td>        
         <td>=&nbsp &nbsp <input type ="text" name="determination_6" id ="determination_6" size ="10">% LC </td>
       </tr> 
       <tr> 
@@ -950,17 +674,17 @@
       </tr>
       <tr> 
         <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> Average % </td>
-        <td colspan = "2"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="average"></td>
+        <td colspan = "2"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" id = "determination_avg" name="average"></td>
     
         <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> Equivalent to</td>
-        <td colspan = "2"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="equivalent"></td>
+        <td colspan = "2"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="equivalent" id ="equivalent"></td>
       </tr>
        <tr> 
         <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> Range </td>
-        <td colspan = "2"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="range"></td>
+        <td colspan = "2"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" size = "5" id = "range_min" name="range_min" > to <input type ="text" size = "5" id = "range_max" name="range_max"></td>
       
         <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> RSD</td>
-        <td colspan = "2"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="rsd"></td>
+        <td colspan = "2"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" id = "determination_rsd" name="rsd"></td>
       </tr>
  <tr>
         <td align="left" colspan ="6" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: solid 1px #bfbfbf;color:#0000fb;" ><b>Component 2: <input type ="text" name ="component_2"></td>
@@ -987,83 +711,91 @@
          
             <tr>
               <td align="center"style="padding: 8px;">1.</td>
-              <td style="padding: 8px;"><input type = "text" name ="second_sample_1" id ="second_sample_1"></td>
-              <td style="padding: 8px;"><input type = "text" name ="second_sample_1_s1" id ="second_sample_1_s1"></td>
-              <td style="padding: 8px;"><input type = "text" name ="second_sample_1_s2" id ="second_sample_1_s2"></td>
-              <td style="padding: 8px;"><input type = "text" name ="second_sample_1_s3" id ="second_sample_1_s3"></td>
-              <td style="padding: 8px;"><input type = "text" name ="second_sample_1_s4" id ="second_sample_1_s4"></td>
-              <td style="padding: 8px;"><input type = "text" name ="second_sample_1_s5" id ="second_sample_1_s5"></td>
-              <td style="padding: 8px;"><input type = "text" name ="second_sample_1_s6" id ="second_sample_1_s6"></td>
+              <td style="padding: 8px;"><input type = "text" class = "second_standard" name ="second_sample_1" id ="second_sample_1"></td>
+              <td style="padding: 8px;"><input type = "text" class ="second_sample_1" name ="second_sample_1_s1" id ="second_sample_1_s1"></td>
+              <td style="padding: 8px;"><input type = "text" class ="second_sample_2" name ="second_sample_1_s2" id ="second_sample_1_s2"></td>
+              <td style="padding: 8px;"><input type = "text" class ="second_sample_3" name ="second_sample_1_s3" id ="second_sample_1_s3"></td>
+              <td style="padding: 8px;"><input type = "text" class ="second_sample_4" name ="second_sample_1_s4" id ="second_sample_1_s4"></td>
+              <td style="padding: 8px;"><input type = "text" class ="second_sample_5" name ="second_sample_1_s5" id ="second_sample_1_s5"></td>
+              <td style="padding: 8px;"><input type = "text" class ="second_sample_6" name ="second_sample_1_s6" id ="second_sample_1_s6"></td>
             </tr>
             <tr>
               <td align="center"style="padding: 8px;">2.</td>
-              <td style="padding: 8px;"><input type = "text" name ="second_sample_2" id ="second_sample_2"></td>
-              <td style="padding: 8px;"><input type = "text" name ="second_sample_2_s1" id ="second_sample_2_s1"></td>
-              <td style="padding: 8px;"><input type = "text" name ="second_sample_2_s2" id ="second_sample_2_s2"></td>
-              <td style="padding: 8px;"><input type = "text" name ="second_sample_2_s3" id ="second_sample_2_s3"></td>
-              <td style="padding: 8px;"><input type = "text" name ="second_sample_2_s4" id ="second_sample_2_s4"></td>
-              <td style="padding: 8px;"><input type = "text" name ="second_sample_2_s5" id ="second_sample_2_s5"></td>
-              <td style="padding: 8px;"><input type = "text" name ="second_sample_2_s6" id ="second_sample_2_s6"></td>
+              <td style="padding: 8px;"><input type = "text" class = "second_standard" name ="second_sample_2" id ="second_sample_2"></td>
+              <td style="padding: 8px;"><input type = "text" class ="second_sample_1" name ="second_sample_2_s1" id ="second_sample_2_s1"></td>
+              <td style="padding: 8px;"><input type = "text" class ="second_sample_2" name ="second_sample_2_s2" id ="second_sample_2_s2"></td>
+              <td style="padding: 8px;"><input type = "text" class ="second_sample_3" name ="second_sample_2_s3" id ="second_sample_2_s3"></td>
+              <td style="padding: 8px;"><input type = "text" class ="second_sample_4" name ="second_sample_2_s4" id ="second_sample_2_s4"></td>
+              <td style="padding: 8px;"><input type = "text" class ="second_sample_5" name ="second_sample_2_s5" id ="second_sample_2_s5"></td>
+              <td style="padding: 8px;"><input type = "text" class ="second_sample_6" name ="second_sample_2_s6" id ="second_sample_2_s6"></td>
             </tr>
             <tr>
               <td align="center"style="padding: 8px;">3.</td>
-              <td style="padding: 8px;"><input type = "text" name ="second_sample_3" id ="second_sample_3"></td>
-              <td style="padding: 8px;"><input type = "text" name ="second_sample_3_s1" id ="second_sample_3_s1"></td>
-              <td style="padding: 8px;"><input type = "text" name ="second_sample_3_s2" id ="second_sample_3_s2"></td>
-              <td style="padding: 8px;"><input type = "text" name ="second_sample_3_s3" id ="second_sample_3_s3"></td>
-              <td style="padding: 8px;"><input type = "text" name ="second_sample_3_s4" id ="second_sample_3_s4"></td>
-              <td style="padding: 8px;"><input type = "text" name ="second_sample_3_s5" id ="second_sample_3_s5"></td>
-              <td style="padding: 8px;"><input type = "text" name ="second_sample_3_s6" id ="second_sample_3_s6"></td>
+              <td style="padding: 8px;"><input type = "text" class = "second_standard" name ="second_sample_3" id ="second_sample_3"></td>
+              <td style="padding: 8px;"><input type = "text" class ="second_sample_1" name ="second_sample_3_s1" id ="second_sample_3_s1"></td>
+              <td style="padding: 8px;"><input type = "text" class ="second_sample_2" name ="second_sample_3_s2" id ="second_sample_3_s2"></td>
+              <td style="padding: 8px;"><input type = "text" class ="second_sample_3" name ="second_sample_3_s3" id ="second_sample_3_s3"></td>
+              <td style="padding: 8px;"><input type = "text" class ="second_sample_4" name ="second_sample_3_s4" id ="second_sample_3_s4"></td>
+              <td style="padding: 8px;"><input type = "text" class ="second_sample_5" name ="second_sample_3_s5" id ="second_sample_3_s5"></td>
+              <td style="padding: 8px;"><input type = "text" class ="second_sample_6" name ="second_sample_3_s6" id ="second_sample_3_s6"></td>
             </tr>
             <tr>
               <td align="center"style="padding: 8px;">4.</td>
-              <td style="padding: 8px;"><input type = "text" name ="second_sample_4" id ="second_sample_4"></td>
-              <td style="padding: 8px;"><input type = "text" name ="second_sample_4_s1" id ="second_sample_4_s1"></td>
-              <td style="padding: 8px;"><input type = "text" name ="second_sample_4_s2" id ="second_sample_4_s2"></td>
-              <td style="padding: 8px;"><input type = "text" name ="second_sample_4_s3" id ="second_sample_4_s3"></td>
-              <td style="padding: 8px;"><input type = "text" name ="second_sample_4_s4" id ="second_sample_4_s4"></td>
-              <td style="padding: 8px;"><input type = "text" name ="second_sample_4_s5" id ="second_sample_4_s5"></td>
-              <td style="padding: 8px;"><input type = "text" name ="second_sample_4_s6" id ="second_sample_4_s6"></td>
+              <td style="padding: 8px;"><input type = "text" class = "second_standard" name ="second_sample_4" id ="second_sample_4"></td>
+              <td style="padding: 8px;"><input type = "text" class ="second_sample_1" name ="second_sample_4_s1" id ="second_sample_4_s1"></td>
+              <td style="padding: 8px;"><input type = "text" class ="second_sample_2" name ="second_sample_4_s2" id ="second_sample_4_s2"></td>
+              <td style="padding: 8px;"><input type = "text" class ="second_sample_3" name ="second_sample_4_s3" id ="second_sample_4_s3"></td>
+              <td style="padding: 8px;"><input type = "text" class ="second_sample_4" name ="second_sample_4_s4" id ="second_sample_4_s4"></td>
+              <td style="padding: 8px;"><input type = "text" class ="second_sample_5" name ="second_sample_4_s5" id ="second_sample_4_s5"></td>
+              <td style="padding: 8px;"><input type = "text" class ="second_sample_6" name ="second_sample_4_s6" id ="second_sample_4_s6"></td>
             </tr>
              <tr>
               <td align="center"style="padding: 8px;">5.</td>
-              <td style="padding: 8px;"><input type = "text" name ="second_sample_5" id ="second_sample_5" onchange ="second_avg_standard()"></td>
-              <td style="padding: 8px;"><input type = "text" name ="second_sample_5_s1" id ="second_sample_5_s1" onchange ="second_avg_sample1()"></td>
-              <td style="padding: 8px;"><input type = "text" name ="second_sample_5_s2" id ="second_sample_5_s2" onchange ="second_avg_sample2()"></td>
-              <td style="padding: 8px;"><input type = "text" name ="second_sample_5_s3" id ="second_sample_5_s3" onchange ="second_avg_sample3()"></td>
-              <td style="padding: 8px;"><input type = "text" name ="second_sample_5_s4" id ="second_sample_5_s4" onchange ="second_avg_sample4()"></td>
-              <td style="padding: 8px;"><input type = "text" name ="second_sample_5_s5" id ="second_sample_5_s5" onchange ="second_avg_sample5()"></td>
-              <td style="padding: 8px;"><input type = "text" name ="second_sample_5_s6" id ="second_sample_5_s6" onchange ="second_avg_sample6()"></td>
+              <td style="padding: 8px;"><input type = "text" class = "second_standard" name ="second_sample_5" id ="second_sample_5" onchange ="second_avg_standard()"></td>
+              <td style="padding: 8px;"><input type = "text" class ="second_sample_1" name ="second_sample_5_s1" id ="second_sample_5_s1" onchange ="second_avg_sample1()"></td>
+              <td style="padding: 8px;"><input type = "text" class ="second_sample_2" name ="second_sample_5_s2" id ="second_sample_5_s2" onchange ="second_avg_sample2()"></td>
+              <td style="padding: 8px;"><input type = "text" class ="second_sample_3" name ="second_sample_5_s3" id ="second_sample_5_s3" onchange ="second_avg_sample3()"></td>
+              <td style="padding: 8px;"><input type = "text" class ="second_sample_4" name ="second_sample_5_s4" id ="second_sample_5_s4" onchange ="second_avg_sample4()"></td>
+              <td style="padding: 8px;"><input type = "text" class ="second_sample_5" name ="second_sample_5_s5" id ="second_sample_5_s5" onchange ="second_avg_sample5()"></td>
+              <td style="padding: 8px;"><input type = "text" class ="second_sample_6" name ="second_sample_5_s6" id ="second_sample_5_s6" onchange ="second_avg_sample6()"></td>
             </tr>
             <tr>
               <td align="center"style="padding: 8px;">Average</td>
-              <td style="padding: 8px;"><input type = "text" name ="second_avg" id = "second_avg"></td>
-              <td style="padding: 8px;"><input type = "text" name ="second_avg_s1" id = "second_avg_s1"></td>
-              <td style="padding: 8px;"><input type = "text" name ="second_avg_s2" id = "second_avg_s2"></td>
-              <td style="padding: 8px;"><input type = "text" name ="second_avg_s3" id = "second_avg_s3"></td>
-              <td style="padding: 8px;"><input type = "text" name ="second_avg_s4" id = "second_avg_s4"></td>
-              <td style="padding: 8px;"><input type = "text" name ="second_avg_s5" id = "second_avg_s5"></td>
-              <td style="padding: 8px;"><input type = "text" name ="second_avg_s6" id = "second_avg_s6"></td>
+              <td style="padding: 8px;"><input type = "text" class = "second_standard_avg" name ="second_avg" id = "second_avg"></td>
+              <td style="padding: 8px;"><input type = "text" class ="second_sample_1_avg" name ="second_avg_s1" id = "second_avg_s1"></td>
+              <td style="padding: 8px;"><input type = "text" class ="second_sample_2_avg" name ="second_avg_s2" id = "second_avg_s2"></td>
+              <td style="padding: 8px;"><input type = "text" class ="second_sample_3_avg" name ="second_avg_s3" id = "second_avg_s3"></td>
+              <td style="padding: 8px;"><input type = "text" class ="second_sample_4_avg" name ="second_avg_s4" id = "second_avg_s4"></td>
+              <td style="padding: 8px;"><input type = "text" class ="second_sample_5_avg" name ="second_avg_s5" id = "second_avg_s5"></td>
+              <td style="padding: 8px;"><input type = "text" class ="second_sample_6_avg" name ="second_avg_s6" id = "second_avg_s6"></td>
             </tr>
           </table>
          </div>
         </td>
       </tr>
-      <tr>        
-        <td colspan = "6" align = "center"style="padding: 12px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: solid 1px #bfbfbf;color:#0000fb;"> <u>PEAK OF SAMPLE (PKT) * WT OF STANDARD IN FINAL DILUTION * DILUTION FACTOR(DF) * 100 * POTENCY (P) </u> <br/> PEAK AREA OF STANDARD(PKSTD) * LABEL CLAIM (LC)</td>
-      </tr>
+      <tr>
+        <td colspan="8" style="padding:8px;border-bottom:solid 1px #c4c4ff;">
+          <table border="0" width="100%" class="table_form" cellpadding="8px" align="center">            
+            <tr>        
+              <td colspan = "6" align = "center"style="padding: 12px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: solid 1px #bfbfbf;">RETENTION TIME: <input type = "text" name ="sample_rrt_avg" id ="sample_value" placeholder="RT of SAMPLE"> / <input type = "text" name ="sample_rrt_avg" id ="std_value" placeholder ="RT of STD"></td>
+              <td colspan = "6" align = "center"style="padding: 12px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: solid 1px #bfbfbf;"> =<input type = "text" name ="sample_rrt_avg" id ="sample_rrt_avg"></td>
+            </tr>             
+          </table>
+          </td>
+        </tr> 
       <tr>
         <td align="center" colspan = "4"style="padding: 12px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <b><u>Determination 1</u></b></td>
         <td align="center" colspan = "2"style="padding: 12px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"></td>
       </tr>
       <tr>
         <td colspan ="4" align ="center" style="padding: 12px;">
-          <input type ="text" name="second_det_1_pkt" id ="second_det_1_pkt" size ="10" placeholder="PKT">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          <input type ="text" name="second_det_1_pkt" id ="second_det_1_pkt" size ="10" placeholder="PKT" onchange="calculation_determinations()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <input type ="text" name="second_det_1_wstd" id ="second_det_1_wstd" size ="10" placeholder="WSTD">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <input type ="text" name="second_det_1_df" id ="second_det_1_df" size ="10" placeholder="DF">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <input type ="text" name="second_det_1_potency" id ="second_det_1_potency" size ="10" placeholder="Potency">*100 <br/><br/>
-          <input type ="text" name="second_det_1_pkstd" id ="second_det_1_pkstd" size ="10" placeholder="PKSTD">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-          <input type ="text" name="second_det_1_lc" id ="second_det_1_lc" size ="10" placeholder="LC" onchange="second_determination_calc_1()"></td>
+          <input type ="text" name="second_det_1_pkstd" id ="second_det_1_pkstd" size ="10" placeholder="PKSTD" onchange="calculation_determinations()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          <input type ="text" name="second_det_1_awt" id ="second_det_1_awt" size ="10" placeholder="AWT" onchange="calculation_determinations()">
+          <input type ="text" name="second_det_1_lc" id ="second_det_1_lc" size ="10" placeholder="LC" onchange="calculation_determinations()"></td>
         <td> =&nbsp &nbsp<input type ="text" name="second_determination_1" id ="second_determination_1" size ="10"> % LC</td>
       </tr>
       <tr>
@@ -1072,12 +804,13 @@
       </tr>
       <tr>
         <td colspan ="4" align ="center" style="padding: 12px;">
-          <input type ="text" name="second_det_2_pkt" id="second_det_2_pkt" size ="10" placeholder="PKT">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          <input type ="text" name="second_det_2_pkt" id="second_det_2_pkt" size ="10" placeholder="PKT" onchange="calculation_determinations()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <input type ="text" name="second_det_2_wstd" id ="second_det_2_wstd" size ="10" placeholder="WSTD">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <input type ="text" name="second_det_2_df"id="second_det_2_df" size ="10" placeholder="DF">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <input type ="text" name="second_det_2_potency" id ="second_det_2_potency" size ="10" placeholder="Potency">*100 <br/><br/>
-          <input type ="text" name="second_det_2_pkstd" id ="second_det_2_pkstd" size ="10" placeholder="PKSTD">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-          <input type ="text" name="second_det_2_lc" id ="second_det_2_lc" size ="10" placeholder="LC"onchange="second_determination_calc_2()"></td>        
+          <input type ="text" name="second_det_2_pkstd" id ="second_det_2_pkstd" size ="10" placeholder="PKSTD" onchange="calculation_determinations()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          <input type ="text" name="second_det_2_awt" id ="second_det_2_awt" size ="10" placeholder="AWT" onchange="calculation_determinations()">
+          <input type ="text" name="second_det_2_lc" id ="second_det_2_lc" size ="10" placeholder="LC"onchange="calculation_determinations()"></td>        
         <td>=&nbsp &nbsp <input type ="text" name="second_determination_2"id ="second_determination_2" size ="10">% LC </td>
       </tr>
       <tr>  
@@ -1086,12 +819,13 @@
       </tr> 
       <tr>  
         <td colspan ="4" align ="center" style="padding: 12px;">
-          <input type ="text" name="second_det_3_pkt" id ="second_det_3_pkt"size ="10" placeholder="PKT">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          <input type ="text" name="second_det_3_pkt" id ="second_det_3_pkt"size ="10" placeholder="PKT" onchange="calculation_determinations()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <input type ="text" name="second_det_3_wstd" id ="second_det_3_wstd"size ="10" placeholder="WSTD">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <input type ="text" name="second_det_3_df" id ="second_det_3_df" size ="10" placeholder="DF">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <input type ="text" name="second_det_3_potency" id ="second_det_3_potency" size ="10" placeholder="Potency">*100 <br/><br/>
-          <input type ="text" name="second_det_3_pkstd" id ="second_det_3_pkstd" size ="10" placeholder="PKSTD">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-          <input type ="text" name="second_det_3_lc" id ="second_det_3_lc" size ="10" placeholder="LC" onchange="second_determination_calc_3()"></td>        
+          <input type ="text" name="second_det_3_pkstd" id ="second_det_3_pkstd" size ="10" placeholder="PKSTD" onchange="calculation_determinations()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          <input type ="text" name="second_det_3_awt" id ="second_det_3_awt" size ="10" placeholder="AWT" onchange="calculation_determinations()">
+          <input type ="text" name="second_det_3_lc" id ="second_det_3_lc" size ="10" placeholder="LC" onchange="calculation_determinations()"></td>        
         <td>=&nbsp &nbsp <input type ="text" name="second_determination_3" id ="second_determination_3" size ="10">% LC </td>
       </tr>
       <tr>
@@ -1100,12 +834,13 @@
       </tr> 
       <tr>  
         <td colspan ="4" align ="center" style="padding: 12px;">
-          <input type ="text" name="second_det_4_pkt" id ="second_det_4_pkt" size ="10" placeholder="PKT">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          <input type ="text" name="second_det_4_pkt" id ="second_det_4_pkt" size ="10" placeholder="PKT" onchange="calculation_determinations()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <input type ="text" name="second_det_4_wstd" id ="second_det_4_wstd" size ="10" placeholder="WSTD">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <input type ="text" name="second_det_4_df" id ="second_det_4_df" size ="10" placeholder="DF">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <input type ="text" name="second_det_4_potency" id ="second_det_4_potency" size ="10" placeholder="Potency">*100 <br/><br/>
-          <input type ="text" name="second_det_4_pkstd" id ="second_det_4_pkstd" size ="10" placeholder="PKSTD">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-          <input type ="text" name="second_det_4_lc" id ="second_det_4_lc" size ="10" placeholder="LC" onchange="second_determination_calc_4()"></td>        
+          <input type ="text" name="second_det_4_pkstd" id ="second_det_4_pkstd" size ="10" placeholder="PKSTD" onchange="calculation_determinations()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          <input type ="text" name="second_det_4_awt" id ="second_det_4_awt" size ="10" placeholder="AWT" onchange="calculation_determinations()">
+          <input type ="text" name="second_det_4_lc" id ="second_det_4_lc" size ="10" placeholder="LC" onchange="calculation_determinations()"></td>        
         <td>=&nbsp &nbsp <input type ="text" name="second_determination_4" id ="second_determination_4" size ="10">% LC </td>
       </tr> 
       <tr>  
@@ -1114,12 +849,13 @@
       </tr> 
       <tr>  
         <td colspan ="4" align ="center" style="padding: 12px;">
-          <input type ="text" name="second_det_5_pkt" id ="second_det_5_pkt" size ="10" placeholder="PKT">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          <input type ="text" name="second_det_5_pkt" id ="second_det_5_pkt" size ="10" placeholder="PKT" onchange="calculation_determinations()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <input type ="text" name="second_det_5_wstd" id ="second_det_5_wstd" size ="10" placeholder="WSTD">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <input type ="text" name="second_det_5_df" id ="second_det_5_df" size ="10" placeholder="DF">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <input type ="text" name="second_det_5_potency" id ="second_det_5_potency" size ="10" placeholder="Potency">*100 <br/><br/>
-          <input type ="text" name="second_det_5_pkstd" id ="second_det_5_pkstd" size ="10" placeholder="PKSTD">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-          <input type ="text" name="second_det_5_lc" id ="second_det_5_lc" size ="10" placeholder="LC" onchange="second_determination_calc_5()"></td>        
+          <input type ="text" name="second_det_5_pkstd" id ="second_det_5_pkstd" size ="10" placeholder="PKSTD" onchange="calculation_determinations()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          <input type ="text" name="second_det_5_awt" id ="second_det_5_awt" size ="10" placeholder="AWT" onchange="calculation_determinations()">
+          <input type ="text" name="second_det_5_lc" id ="second_det_5_lc" size ="10" placeholder="LC" onchange="calculation_determinations()"></td>        
         <td>=&nbsp &nbsp <input type ="text" name="second_determination_5" id ="second_determination_5" size ="10">% LC </td>
       </tr> 
       <tr> 
@@ -1128,12 +864,13 @@
       </tr> 
       <tr>  
         <td colspan ="4" align ="center" style="padding: 12px;">
-          <input type ="text" name="second_det_6_pkt" id ="second_det_6_pkt" size ="10" placeholder="PKT">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          <input type ="text" name="second_det_6_pkt" id ="second_det_6_pkt" size ="10" placeholder="PKT" onchange="calculation_determinations()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <input type ="text" name="second_det_6_wstd" id ="second_det_6_wstd" size ="10" placeholder="WSTD">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <input type ="text" name="second_det_6_df" id ="second_det_6_df" size ="10" placeholder="DF">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <input type ="text" name="second_det_6_potency" id ="second_det_6_potency" size ="10" placeholder="Potency">*100 <br/><br/>
-          <input type ="text" name="second_det_6_pkstd" id ="second_det_6_pkstd" size ="10" placeholder="PKSTD">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-          <input type ="text" name="second_det_6_lc" id ="second_det_6_lc" size ="10" placeholder="LC" onchange="second_determination_calc_6()"></td>        
+          <input type ="text" name="second_det_6_pkstd" id ="second_det_6_pkstd" size ="10" placeholder="PKSTD" onchange="calculation_determinations()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          <input type ="text" name="second_det_6_awt" id ="second_det_6_awt" size ="10" placeholder="AWT" onchange="calculation_determinations()">
+          <input type ="text" name="second_det_6_lc" id ="second_det_6_lc" size ="10" placeholder="LC" onchange="calculation_determinations()"></td>        
         <td>=&nbsp &nbsp <input type ="text" name="second_determination_6" id ="second_determination_6" size ="10">% LC </td>
       </tr>  
       <tr> 
@@ -1141,18 +878,60 @@
       </tr>
       <tr> 
         <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> Average % </td>
-        <td colspan = "2"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="second_average"></td>
+        <td colspan = "2"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" id = "second_determination_avg" name="second_average"></td>
     
         <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> Equivalent to</td>
-        <td colspan = "2"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="second_equivalent"></td>
+        <td colspan = "2"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="second_equivalent" id ="second_equivalent"></td>
       </tr>
        <tr> 
         <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> Range </td>
-        <td colspan = "2"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="second_range"></td>
+        <td colspan = "2"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><input type ="text" size = "5" id = "s_range_min" name="s_range_min" > to <input type ="text" size = "5" id = "s_range_max" name="s_range_max"></td>
       
         <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> RSD</td>
-        <td colspan = "2"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="second_rsd"></td>
-      </tr>        
+        <td colspan = "2"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" id = "second_determination_rsd" name="second_rsd"></td>
+      </tr>  
+       <tr>
+        <td colspan="8" style="padding:8px;">
+          <table border="0" width="80%" cellpadding="8px" align="center">
+            <tr>
+              <td colspan="2" style="color:#0000ff;padding:8px;border-bottom:solid 1px #c4c4ff;"><b>Acceptance Criteria</b></td>
+              <td style="color:#0000ff;padding:8px;border-bottom:solid 1px #c4c4ff;"><b>Results</b></td>
+              <td style="color:#0000ff;padding:8px;border-bottom:solid 1px #c4c4ff;"><b>Comment</b></td>
+            </tr>
+            <tr>
+              <td><input type="checkbox" id="min" />Not Less than Tolerance</td>
+              <td style="color:#0000ff;padding:8px;"><input type="text" min="min_tolerance" id="min_tolerance" name="min_tolerance" placeholder="min%" size="5"  onChange="calc_determination()" /></td>
+              <td style="color:#0000ff;padding:8px;"><input type="text" min="min_tolerance" id="nlt_min_tolerance_det" name="det_min" size="4" placeholder="min%" onChange="calc_determination()" disabled/> - <input type="text" min="min_tolerance" id="nlt_max_tolerance_det" name="det_max" size="4" placeholder="max%" onChange="calc_determination()" disabled/></td>
+              <td style="color:#0000ff;padding:8px;"><input type="text" min="min_tolerance" id="min_tolerance_comment" name="min_tolerance_comment" disable/></td>
+            </tr>
+            <tr>
+              <td><input type="checkbox" id="max" />Not Greater than Tolerance</td>
+              <td style="color:#0000ff;padding:8px;"><input type="text" max='max_tolerance' id="max_tolerance" name="max_tolerance" placeholder="max%" size="5"  onChange="calc_determination()"/></td>
+              <td style="color:#0000ff;padding:8px;"><input type="text" max='max_tolerance' id="ngt_min_tolerance_det" name="det_min" size="4" placeholder="min%" onChange="calc_determination()" disabled/> - <input type="text" max="max_tolerance" id="ngt_max_tolerance_det" name="det_max" size="4" placeholder="max%" onChange="calc_determination()" disabled/></td>
+              <td style="color:#0000ff;padding:8px;"><input type="text" max='max_tolerance' name="content_comment" disable/></td>
+            </tr>
+            <tr>
+              <td><input type="checkbox" id="range" />Tolerance Range</td>
+              <td style="color:#0000ff;padding:8px;"><input type="text" range="tolerance_range" name="content_from" placeholder="min%" size="5"> - <input type="text" range="tolerance_range" name="content_to" placeholder="max%" size="5"></td>
+              <td style="color:#0000ff;padding:8px;"><input type="text" range="tolerance_range" id="range_min_tolerance_det" name="det_min" size="4" placeholder="min%" onChange="calc_determination()" disabled/> - <input type="text" id="range_max_tolerance_det" range="tolerance_range" name="det_max" size="4" placeholder="max%" onChange="calc_determination()" disabled/></td>
+              <td style="color:#0000ff;padding:8px;"><input type="text" range="tolerance_range" name="content_comment" disable/></td>
+            </tr>
+
+            <tr>
+              <td>SD</td>
+              <td style="color:#0000ff;padding:8px;"></td>
+              <td style="color:#0000ff;padding:8px;"><input type="text" id="determination_sd_2" name="determination_sd" onChange="calculator()" disabled/></td>
+              <td style="color:#0000ff;padding:8px;"><input type="text" name="sd_results"></input></td>
+            </tr>
+            <tr>
+              <td>RSD %</td>
+              <td style="color:#0000ff;padding:8px;"></td>
+              <td style="color:#0000ff;padding:8px;"><input type="text" id="determination_rsd_2" name="determination_sd" onChange="calculator()" disabled/></td>
+              <td style="color:#0000ff;padding:8px;"><input type="text" name="rsd_comment" disable/></td>
+            </tr>
+          </table>
+        </td>
+    </tr>                
       <tr>
         <td colspan="8" style="padding:8px;color:#0000ff;border-bottom:solid 1px #c4c4ff;"><b>Chromatography Check List</b></td>
       </tr>
@@ -1187,23 +966,23 @@
       </tr>
       <tr>
         <td colspan="8" style="padding:8px;border-bottom:solid 1px #c4c4ff;">
-          <table border="0" width="30%" cellpadding="8px" align="center">
+          <table border="0" width="100%" class="table_form" cellpadding="8px" align="center">
             <tr>    
-              <td style="border-bottom:dottted 1px #c4c4ff;padding:8px;text-align:right;">PASS</input></td>
-              <td style="border-bottom:dottted 1px #c4c4ff;padding:8px;text-align:left;"><input type="radio" name="choice" value="pass"></input></td>
-              <td style="border-bottom:dottted 1px #c4c4ff;padding:8px;text-align:right;">FAIL</input></td>
-              <td style="border-bottom:dottted 1px #c4c4ff;padding:8px;text-align:left;"><input type="radio" name="choice" value="fail"></input></td>
-            </tr>
+              <td style="border-bottom:dottted 1px #c4c4ff;padding:8px;text-align:center;"><input type="text" id="choice" name="choice"></td>
+              </tr>
           </table>
          </tr>
          <tr>
        <td colspan="8" style="padding:8px;">
-        <table border="0" width="90%" cellpadding="8px" align="center">
+        <table border="0" width="100%" class="table_form" cellpadding="8px" align="center">
           <tr>
-            <td style="border-bottom: dotted 1px #c4c4ff;padding:4px;text-align:right;">Supervisor <input type="text" id="supervisor" name="supervisor"></td>
-            <td style="border-bottom: dotted 1px #c4c4ff;padding:4px;text-align:left;">Date <input type="date"  id="date" name="date"></td>
+          <tr>
+            <td style="background-color:#ededfd;border-bottom: dotted 1px #c4c4ff;padding:8px;text-align:cente;">Done by: <input type="hidden" id="done_by" name="done_by" value="<?php echo($user['logged_in']['fname']." ".$user['logged_in']['lname']);?>"><?php echo($user['logged_in']['fname']." ".$user['logged_in']['lname']);?></td>
+            <td style="background-color:#ededfd;border-bottom: dotted 1px #c4c4ff;padding:8px;text-align:right;">Date conducted: <input type="hidden"  id="date" name="date_done" value="<?php echo date("d/m/Y")?>"><?php echo date("d/M/Y")?></td>
           </tr>
-          
+            <td style="border-bottom: dotted 1px #c4c4ff;padding:4px;text-align:left;">Supervisor <input type="text" id="supervisor" name="supervisor"></td>
+            <td style="border-bottom: dotted 1px #c4c4ff;padding:4px;text-align:right;">Date <input type="text"  id="datepicker" name="date"></td>
+          </tr>          
           <tr>
             <td colspan="2" style="padding:4px;">Further Comments:</td>
           </tr>
@@ -1214,11 +993,46 @@
       </td>
     </tr>
       <tr>
-        <td style ="padding: 8px;"colspan = "6" align ="center"> <input type ="submit" name ="save_two_components_hplc" value ="Save Dissolution Data"></td>
+        <td style ="padding: 8px;"colspan = "6" align ="center"> <input type ="submit" class="btn" name ="save_two_components_hplc" value ="Submit"></td>
       </tr>
     </table>
    </form> 
  </div>
 </div>
   </body>
+  <script>
+  $('#min').change(function() {
+    if($('#min').is(':checked')){
+       $("input[min='min_tolerance']").show();
+       $('#max').prop('disabled', true);
+       $('#range').prop('disabled', true);
+    } else {
+        $("input[min='min_tolerance']").hide();
+       $('#max').prop('disabled', false);
+       $('#range').prop('disabled', false);
+    }
+  }).change();
+  $('#max').change(function() {
+    if($('#max').is(':checked')){
+       $("input[max='max_tolerance']").show();
+       $('#min').prop('disabled', true);
+       $('#range').prop('disabled', true);
+    } else {
+        $("input[max='max_tolerance']").hide();
+        $('#min').prop('disabled', false);
+        $('#range').prop('disabled', false);
+    }
+  }).change();
+  $('#range').change(function() {
+    if($('#range').is(':checked')){
+       $("input[range='tolerance_range']").show();
+        $('#max').prop('disabled', true);
+        $('#min').prop('disabled', true);
+    } else {
+        $("input[range='tolerance_range']").hide();
+        $('#max').prop('disabled', false);
+        $('#min').prop('disabled', false);
+    }
+  }).change();
+</script>
   </html>

@@ -7,59 +7,6 @@ class Test_Dissolution_Model extends CI_Model{
 
 	function save_worksheet($assignment,$test){
 		$test =$this->input->post('test');
-		$asignment =$this->input->post('assignment');
-		$equipment_make=$this->input->post('equipment_make');
-		$equipment_no=$this->input->post('equipment_no');
-		$hcl_prepaparation=$this->input->post('hcl_prepaparation');
-		$apparatus=$this->input->post('apparatus');
-		$actual_apparatus=$this->input->post('actual_apparatus');
-		$apparatus_comment=$this->input->post('apparatus_comment');
-		$rotation=$this->input->post('rotation');
-		$actual_rotation=$this->input->post('actual_rotation');
-		$rotation_comment=$this->input->post('rotation_comment');
-		$time=$this->input->post('time');
-		$actual_time=$this->input->post('actual_time');
-		$time_comment=$this->input->post('time_comment');
-		$temperature=$this->input->post('temperature');
-		$actual_temperature=$this->input->post('actual_temperature');
-		$temperature_comment=$this->input->post('temperature_comment');
-		$sample_preparation=$this->input->post('sample_preparation');
-		$standard_weight =$this->input->post('standard_weight');
-		$standard_description =$this->input->post('standard_description');
-		$potency=$this->input->post('potency');
-		$equipment_no=$this->input->post('equipment_no');
-		$lot_no=$this->input->post('lot_no');
-		$id_no=$this->input->post('id_no');
-		$potency_standard_container=$this->input->post('potency_standard_container');
-		$potency_container=$this->input->post('potency_container');
-		$standard_weight_1 =$this->input->post('standard_weight_1');
-		$standard_dilution=$this->input->post('standard_dilution');
-		$first_absorbance=$this->input->post('first_absorbance');
-		$second_absorbance=$this->input->post('second_absorbance');
-		$difference_standard=$this->input->post('difference_standard');
-		$difference_s1=$this->input->post('difference_s1');
-		$difference_s2=$this->input->post('difference_s2');
-		$difference_s3=$this->input->post('difference_s3');
-		$difference_s4=$this->input->post('difference_s4');
-		$difference_s5=$this->input->post('difference_s5');
-		$difference_s6=$this->input->post('difference_s6');
-		$content =$this->input->post('content');
-		$determination_1=$this->input->post('determination_1');
-		$determination_2=$this->input->post('determination_2');
-		$determination_3=$this->input->post('determination_3');
-		$determination_4=$this->input->post('determination_4');
-		$determination_5=$this->input->post('determination_5');
-		$determination_6=$this->input->post('determination_6');
-		$average=$this->input->post('average');
-		$equivalent=$this->input->post('equivalent');
-		$range=$this->input->post('range');
-		$rsd=$this->input->post('rsd');
-		$acceptance_criteria=$this->input->post('acceptance_criteria');
-		$results=$this->input->post('results');
-		$comment=$this->input->post('comment');
-		$coa_method_used=$this->input->post('coa_method_used');
-		$coa_results=$this->input->post('coa_results');
-		$coa_specification=$this->input->post('coa_specification');
 		$test_request=$this->input->post('test_request');
 		$assignment=$this->input->post('assignment');
 		$status =1;
@@ -67,60 +14,203 @@ class Test_Dissolution_Model extends CI_Model{
 		$analyst= $this->input->post('analyst');
 		
 		$data =array(
-			'equipment_make'=>$equipment_make,
-			'equipment_no'=>$equipment_no,
-			'hcl_prepaparation'=>$hcl_prepaparation,
-			'apparatus'=>$apparatus,
-			'actual_apparatus'=>$actual_apparatus, 
-			'apparatus_comment'=>$apparatus_comment, 
-			'rotation'=>$rotation,
-			'actual_rotation'=>$actual_rotation, 
-			'rotation_comment'=>$rotation_comment,
-			'time'=>$time,  
-			'actual_time'=>$actual_time, 
-			'time_comment'=>$time_comment,
-			'temperature'=>$temperature,
-			'actual_temperature'=>$actual_temperature,
-			'temperature_comment'=>$temperature_comment,
-			'sample_preparation'=>$sample_preparation,
-			'standard_weight'=>$standard_weight,
-			'standard_description'=>$standard_description,
-			'potency'=>$potency,
-			'lot_no'=>$lot_no,
-			'id_no'=>$id_no, 
-			'potency_standard_container'=>$potency_standard_container, 
-			'potency_container'=>$potency_container,
-			'standard_weight_1'=>$standard_weight_1,
-			'standard_dilution'=>$standard_dilution, 
-			'first_absorbance'=>$first_absorbance,
-			'second_absorbance'=>$second_absorbance,  
-			'difference_standard'=>$difference_standard, 
-			'difference_s1'=>$difference_s1,
-			'difference_s2'=>$difference_s2,
-			'difference_s3'=>$difference_s3,
-			'difference_s4'=>$difference_s4,
-			'difference_s5'=>$difference_s5,
-			'difference_s6'=>$difference_s6,
-			'content'=>$content,
-			'determination_1'=>$determination_1,
-			'determination_2'=>$determination_2,
-			'determination_3'=>$determination_3,
-			'determination_4'=>$determination_4, 
-			'determination_5'=>$determination_5, 
-			'determination_6'=>$determination_6,
-			'average'=>$average, 
-			'equivalent'=>$equivalent,
-			'range'=>$range, 
-			'rsd'=>$rsd,
-			'acceptance_criteria'=>$acceptance_criteria,  
-			'results'=>$results, 
-			'comment'=>$comment,
-			'coa_method_used'=>$coa_method_used,
-			'coa_results'=>$coa_results,
-			'coa_specification'=>$coa_specification,			
+			'equipment_make'=>$this->input->post('equipment_make'),
+			'equipment_number'=>$this->input->post('equipment_number'),
+			'hcl_prepaparation'=>$this->input->post('hcl_prepaparation'),
+			
+			'apparatus'=>$this->input->post('apparatus'),
+			'actual_apparatus'=>$this->input->post('actual_apparatus'), 
+			'apparatus_comment'=>$this->input->post('apparatus_comment'), 
+			'rotation'=>$this->input->post('rotation'),
+			'actual_rotation'=>$this->input->post('actual_rotation'), 
+			'rotation_comment'=>$this->input->post('rotation_comment'),
+			'time'=>$this->input->post('time'), 
+			'actual_time'=>$this->input->post('actual_time,'), 
+			'time_comment'=>$this->input->post('time_comment'),
+			'temperature'=>$this->input->post('temperature'),
+			'actual_temperature'=>$this->input->post('actual_temperature'),
+			'temperature_comment'=>$this->input->post('temperature_comment'),
+			
+			'standard_preparation'=>$this->input->post('standard_preparation'),
+			'standard_weight'=>$this->input->post('standard_weight'),
+			'standard_description'=>$this->input->post('standard_description'),
+			'potency'=>$this->input->post('potency'),
+			'lot_no'=>$this->input->post('lot_no'),
+			'id_no'=>$this->input->post('id_no') ,
+			'potency_standard_container'=>$this->input->post('potency_standard_container'),
+			'potency_container'=>$this->input->post('potency_container'),
+			'standard_weight_1'=>$this->input->post('standard_weight_1'),
+			'standard_dilution'=>$this->input->post('standard_dilution'), 
+			
+			'first_absorbance'=>$this->input->post('first_absorbance'),
+			'second_absorbance'=>$this->input->post('second_absorbance') ,
+			'difference_standard'=>$this->input->post('difference_standard'), 
+			'difference_s1'=>$this->input->post('difference_s1'),
+			'difference_s2'=>$this->input->post('difference_s2'),
+			'difference_s3'=>$this->input->post('difference_s3'),
+			'difference_s4'=>$this->input->post('difference_s4'),
+			'difference_s5'=>$this->input->post('difference_s5'),
+			'difference_s6'=>$this->input->post('difference_s6'),
+			
+			'content'=>$this->input->post('content'),
+			'df_1'=>$this->input->post('df_1'),
+			'df_2'=>$this->input->post('df_2'),
+			'df_3'=>$this->input->post('df_3'),
+			'dilution_factor'=>$this->input->post('dilution_factor'),
+			'determination_1'=>$this->input->post('determination_1'),
+			'determination_2'=>$this->input->post('determination_2'),
+			'determination_3'=>$this->input->post('determination_3'),
+			'determination_4'=>$this->input->post('determination_4,'), 
+			'determination_5'=>$this->input->post('determination_5,'), 
+			'determination_6'=>$this->input->post('determination_6'),
+			'average'=>$this->input->post('average'), 
+			'equivalent'=>$this->input->post('equivalent'),
+			'range_min'=>$this->input->post('range_min'), 
+			'range_max'=>$this->input->post('range_max'), 
+			'rsd'=>$this->input->post('rsd'),
+			'content_from'=>$this->input->post('content_from'),  
+			'content_to'=>$this->input->post('content_to'),  
+			'acceptance_criteria'=>$this->input->post('acceptance_criteria'),  
+			'results'=>$this->input->post('results'), 
+			'comment'=>$this->input->post('comment'),		
 			'test_request'=>$test_request,
 			'assignment'=>$assignment,
 			'status' =>$status,
+			'sysytem_suitability_sequence'=>$this->input->post('sysytem_suitability_sequence'),
+			'sysytem_suitability_sequence_comment'=>$this->input->post('sysytem_suitability_sequence_comment'),
+			'sample_injection_sequence'=>$this->input->post('sample_injection_sequence'),
+			'chromatograms_attached_comment'=>$this->input->post('chromatograms_attached_comment'),
+			'chromatograms_attached'=>$this->input->post('chromatograms_attached'),
+			'sample_injection_sequence_comment'=>$this->input->post('Sample_injection_sequence_comment'),
+			'choice'=>$this->input->post('choice'),
+			'supervisor'=>$this->input->post('supervisor'),
+			'date'=>$this->input->post('date'),
+			'analyst'=>$this->input->post('analyst'),	
+			'date_done'=>$this->input->post('date_done'),	
+			'further_comments'=>$this->input->post('further_comments'),	
+
+			);
+		$this->db->insert('diss_data', $data);
+
+		$determination_data = array(
+			'test_request'=>$test_request,
+			'det_1_pkt'=>$this->input->post('det_1_pkt'),
+			'det_1_wstd'=>$this->input->post('det_1_wstd'),
+			'det_1_df'=>$this->input->post('det_1_df'),
+			'det_1_potency'=>$this->input->post('det_1_potency'),
+			'det_1_pkstd'=>$this->input->post('det_1_pkstd'),
+			'det_1_lc'=>$this->input->post('det_1_lc'),
+			'determination_1'=>$this->input->post('determination_1'),
+
+			'det_2_pkt'=>$this->input->post('det_2_pkt'),
+			'det_2_wstd'=>$this->input->post('det_2_wstd'),
+			'det_2_df'=>$this->input->post('det_2_df'),
+			'det_2_potency'=>$this->input->post('det_2_potency'),
+			'det_2_pkstd'=>$this->input->post('det_2_pkstd'),
+			'det_2_lc'=>$this->input->post('det_2_lc'),
+			'determination_2'=>$this->input->post('determination_2'),
+
+			'det_3_pkt'=>$this->input->post('det_3_pkt'),
+			'det_3_wstd'=>$this->input->post('det_3_wstd'),
+			'det_3_df'=>$this->input->post('det_3_df'),
+			'det_3_potency'=>$this->input->post('det_3_potency'),
+			'det_3_pkstd'=>$this->input->post('det_3_pkstd'),
+			'det_3_lc'=>$this->input->post('det_3_lc'),
+			'determination_3'=>$this->input->post('determination_3'),
+
+			'det_4_pkt'=>$this->input->post('det_4_pkt'),
+			'det_4_wstd'=>$this->input->post('det_4_wstd'),
+			'det_4_df'=>$this->input->post('det_4_df'),
+			'det_4_potency'=>$this->input->post('det_4_potency'),
+			'det_4_pkstd'=>$this->input->post('det_4_pkstd'),
+			'det_4_lc'=>$this->input->post('det_4_lc'),
+			'determination_4'=>$this->input->post('determination_4'),
+
+			'det_5_pkt'=>$this->input->post('det_5_pkt'),
+			'det_5_wstd'=>$this->input->post('det_5_wstd'),
+			'det_5_df'=>$this->input->post('det_5_df'),
+			'det_5_potency'=>$this->input->post('det_5_potency'),
+			'det_5_pkstd'=>$this->input->post('det_5_pkstd'),
+			'det_5_lc'=>$this->input->post('det_5_lc'),
+			'determination_5'=>$this->input->post('determination_5'),
+
+			'det_6_pkt'=>$this->input->post('det_6_pkt'),
+			'det_6_wstd'=>$this->input->post('det_6_wstd'),
+			'det_6_df'=>$this->input->post('det_6_df'),
+			'det_6_potency'=>$this->input->post('det_6_potency'),
+			'det_6_pkstd'=>$this->input->post('det_6_pkstd'),
+			'det_6_lc'=>$this->input->post('det_6_lc'),
+			'determination_6'=>$this->input->post('determination_6'),
+			);
+
+			$this->db->insert('diss_uv_determinations', $determination_data);
+
+		redirect('test/index/'.$assignment.'/'.$test_request);
+/*
+		$status_data = array('request_status'=>$status);
+		$this->db->update('test_request', $status_data);*/
+		
+
+	}
+	function save_second_worksheet(){
+		$test_request=$this->input->post('test_request');
+		$assignment=$this->input->post('assignment');
+		$second_status =2;
+		$test_type='Dissolution by UV, Second Stage';
+		$analyst= $this->input->post('analyst');
+		
+		$data =array(
+			'equipment_make'=>$this->input->post('equipment_make'),
+			'equipment_no'=>$this->input->post('equipment_no'),
+			'hcl_prepaparation'=>$this->input->post('hcl_prepaparation'),
+			'apparatus'=>$this->input->post('apparatus'),
+			'actual_apparatus'=>$this->input->post('actual_apparatus'), 
+			'apparatus_comment'=>$this->input->post('apparatus_comment'), 
+			'rotation'=>$this->input->post('rotation'),
+			'actual_rotation'=>$this->input->post('actual_rotation'), 
+			'rotation_comment'=>$this->input->post('rotation_comment'),
+			'time'=>$this->input->post('time'), 
+			'actual_time'=>$this->input->post('actual_time,'), 
+			'time_comment'=>$this->input->post('time_comment'),
+			'temperature'=>$this->input->post('temperature'),
+			'actual_temperature'=>$this->input->post('actual_temperature'),
+			'temperature_comment'=>$this->input->post('temperature_comment'),
+			'sample_preparation'=>$this->input->post('sample_preparation'),
+			'standard_weight'=>$this->input->post('standard_weight'),
+			'standard_description'=>$this->input->post('standard_description'),
+			'potency'=>$this->input->post('potency'),
+			'lot_no'=>$this->input->post('lot_no'),
+			'id_no'=>$this->input->post('id_no') ,
+			'potency_standard_container'=>$this->input->post('potency_standard_container'),
+			'potency_container'=>$this->input->post('potency_container'),
+			'standard_weight_1'=>$this->input->post('standard_weight_1'),
+			'standard_dilution'=>$this->input->post('standard_dilution'), 
+			'first_absorbance'=>$this->input->post('first_absorbance'),
+			'second_absorbance'=>$this->input->post('second_absorbance') ,
+			'difference_standard'=>$this->input->post('difference_standard'), 
+			'difference_s1'=>$this->input->post('difference_s1'),
+			'difference_s2'=>$this->input->post('difference_s2'),
+			'difference_s3'=>$this->input->post('difference_s3'),
+			'difference_s4'=>$this->input->post('difference_s4'),
+			'difference_s5'=>$this->input->post('difference_s5'),
+			'difference_s6'=>$this->input->post('difference_s6'),
+			'content'=>$this->input->post('content'),
+			'determination_1'=>$this->input->post('determination_1'),
+			'determination_2'=>$this->input->post('determination_2'),
+			'determination_3'=>$this->input->post('determination_3'),
+			'determination_4'=>$this->input->post('determination_4,'), 
+			'determination_5'=>$this->input->post('determination_5,'), 
+			'determination_6'=>$this->input->post('determination_6'),
+			'average'=>$this->input->post('average'), 
+			'equivalent'=>$this->input->post('equivalent'),
+			'range'=>$this->input->post('range'), 
+			'rsd'=>$this->input->post('rsd'),
+			'acceptance_criteria'=>$this->input->post('acceptance_criteria'),  
+			'results'=>$this->input->post('results'), 
+			'comment'=>$this->input->post('comment'),		
+			'test_request'=>$test_request,
+			'assignment'=>$assignment,
+			'status' =>$second_status,
 			'sysytem_suitability_sequence'=>$this->input->post('sysytem_suitability_sequence'),
 			'sysytem_suitability_sequence_comment'=>$this->input->post('sysytem_suitability_sequence_comment'),
 			'sample_injection_sequence'=>$this->input->post('sample_injection_sequence'),
@@ -135,19 +225,150 @@ class Test_Dissolution_Model extends CI_Model{
 			);
 		$this->db->insert('diss_data', $data);
 
-		$coa_data = array('coa_method_used'=>$coa_method_used,
-			'coa_results'=>$coa_results,
-			'coa_specification'=>$coa_specification,
-			'test_request_id'=>$test_request,
-			'assignment_id'=>$assignment,
-			'test_type'=>$test_type,
-			'analyst'=>$analyst,
+		$determination_data = array(
+			'test_request'=>$test_request,
+			'status' =>$second_status,
+			'det_1_pkt'=>$this->input->post('det_1_pkt'),
+			'det_1_wstd'=>$this->input->post('det_1_wstd'),
+			'det_1_df'=>$this->input->post('det_1_df'),
+			'det_1_potency'=>$this->input->post('det_1_potency'),
+			'det_1_pkstd'=>$this->input->post('det_1_pkstd'),
+			'det_1_lc'=>$this->input->post('det_1_lc'),
+			'determination_1'=>$this->input->post('determination_1'),
 
+			'det_2_pkt'=>$this->input->post('det_2_pkt'),
+			'det_2_wstd'=>$this->input->post('det_2_wstd'),
+			'det_2_df'=>$this->input->post('det_2_df'),
+			'det_2_potency'=>$this->input->post('det_2_potency'),
+			'det_2_pkstd'=>$this->input->post('det_2_pkstd'),
+			'det_2_lc'=>$this->input->post('det_2_lc'),
+			'determination_2'=>$this->input->post('determination_2'),
+
+			'det_3_pkt'=>$this->input->post('det_3_pkt'),
+			'det_3_wstd'=>$this->input->post('det_3_wstd'),
+			'det_3_df'=>$this->input->post('det_3_df'),
+			'det_3_potency'=>$this->input->post('det_3_potency'),
+			'det_3_pkstd'=>$this->input->post('det_3_pkstd'),
+			'det_3_lc'=>$this->input->post('det_3_lc'),
+			'determination_3'=>$this->input->post('determination_3'),
+
+			'det_4_pkt'=>$this->input->post('det_4_pkt'),
+			'det_4_wstd'=>$this->input->post('det_4_wstd'),
+			'det_4_df'=>$this->input->post('det_4_df'),
+			'det_4_potency'=>$this->input->post('det_4_potency'),
+			'det_4_pkstd'=>$this->input->post('det_4_pkstd'),
+			'det_4_lc'=>$this->input->post('det_4_lc'),
+			'determination_4'=>$this->input->post('determination_4'),
+
+			'det_5_pkt'=>$this->input->post('det_5_pkt'),
+			'det_5_wstd'=>$this->input->post('det_5_wstd'),
+			'det_5_df'=>$this->input->post('det_5_df'),
+			'det_5_potency'=>$this->input->post('det_5_potency'),
+			'det_5_pkstd'=>$this->input->post('det_5_pkstd'),
+			'det_5_lc'=>$this->input->post('det_5_lc'),
+			'determination_5'=>$this->input->post('determination_5'),
+
+			'det_6_pkt'=>$this->input->post('det_6_pkt'),
+			'det_6_wstd'=>$this->input->post('det_6_wstd'),
+			'det_6_df'=>$this->input->post('det_6_df'),
+			'det_6_potency'=>$this->input->post('det_6_potency'),
+			'det_6_pkstd'=>$this->input->post('det_6_pkstd'),
+			'det_6_lc'=>$this->input->post('det_6_lc'),
+			'determination_6'=>$this->input->post('determination_6'),
 			);
-		$this->db->insert('coa', $coa_data);
+
+			$this->db->insert('diss_uv_determinations', $determination_data);
+
+		redirect('test/index/'.$assignment.'/'.$test_request);
+/*
+		$status_data = array('request_status'=>$status);
+		$this->db->update('test_request', $status_data);*/
+		
+
+	}
+	function save_third_worksheet(){
+		$test_request=$this->input->post('test_request');
+		$assignment=$this->input->post('assignment');
+		$third_status =3;
+		$test_type='Dissolution by UV, Third Stage';
+		$analyst= $this->input->post('analyst');
+		
+		$data =array(
+			'equipment_make'=>$this->input->post('equipment_make'),
+			'equipment_no'=>$this->input->post('equipment_no'),
+			'hcl_prepaparation'=>$this->input->post('hcl_prepaparation'),
+			'apparatus'=>$this->input->post('apparatus'),
+			'actual_apparatus'=>$this->input->post('actual_apparatus'), 
+			'apparatus_comment'=>$this->input->post('apparatus_comment'), 
+			'rotation'=>$this->input->post('rotation'),
+			'actual_rotation'=>$this->input->post('actual_rotation'), 
+			'rotation_comment'=>$this->input->post('rotation_comment'),
+			'time'=>$this->input->post('time'), 
+			'actual_time'=>$this->input->post('actual_time,'), 
+			'time_comment'=>$this->input->post('time_comment'),
+			'temperature'=>$this->input->post('temperature'),
+			'actual_temperature'=>$this->input->post('actual_temperature'),
+			'temperature_comment'=>$this->input->post('temperature_comment'),
+			'sample_preparation'=>$this->input->post('sample_preparation'),
+			'standard_weight'=>$this->input->post('standard_weight'),
+			'standard_description'=>$this->input->post('standard_description'),
+			'potency'=>$this->input->post('potency'),
+			'lot_no'=>$this->input->post('lot_no'),
+			'id_no'=>$this->input->post('id_no') ,
+			'potency_standard_container'=>$this->input->post('potency_standard_container'),
+			'potency_container'=>$this->input->post('potency_container'),
+			'standard_weight_1'=>$this->input->post('standard_weight_1'),
+			'standard_dilution'=>$this->input->post('standard_dilution'), 
+			'first_absorbance'=>$this->input->post('first_absorbance'),
+			'second_absorbance'=>$this->input->post('second_absorbance') ,
+			'difference_standard'=>$this->input->post('difference_standard'), 
+			
+			'difference_s1'=>$this->input->post('difference_s1'),
+			'difference_s2'=>$this->input->post('difference_s2'),
+			'difference_s3'=>$this->input->post('difference_s3'),
+			'difference_s4'=>$this->input->post('difference_s4'),
+			'difference_s5'=>$this->input->post('difference_s5'),
+			'difference_s6'=>$this->input->post('difference_s6'),
+			'difference_s7'=>$this->input->post('difference_s7'),
+			'difference_s8'=>$this->input->post('difference_s8'),
+			'difference_s9'=>$this->input->post('difference_s9'),
+			'difference_s10'=>$this->input->post('difference_s10'),
+			'difference_s11'=>$this->input->post('difference_s11'),
+			'difference_s12'=>$this->input->post('difference_s12'),
+
+			'content'=>$this->input->post('content'),
+			'determination_1'=>$this->input->post('determination_1'),
+			'determination_2'=>$this->input->post('determination_2'),
+			'determination_3'=>$this->input->post('determination_3'),
+			'determination_4'=>$this->input->post('determination_4,'), 
+			'determination_5'=>$this->input->post('determination_5,'), 
+			'determination_6'=>$this->input->post('determination_6'),
+			'average'=>$this->input->post('average'), 
+			'equivalent'=>$this->input->post('equivalent'),
+			'range'=>$this->input->post('range'), 
+			'rsd'=>$this->input->post('rsd'),
+			'acceptance_criteria'=>$this->input->post('acceptance_criteria'),  
+			'results'=>$this->input->post('results'), 
+			'comment'=>$this->input->post('comment'),		
+			'test_request'=>$test_request,
+			'assignment'=>$assignment,
+			'status' =>$third_status,
+			'sysytem_suitability_sequence'=>$this->input->post('sysytem_suitability_sequence'),
+			'sysytem_suitability_sequence_comment'=>$this->input->post('sysytem_suitability_sequence_comment'),
+			'sample_injection_sequence'=>$this->input->post('sample_injection_sequence'),
+			'chromatograms_attached_comment'=>$this->input->post('chromatograms_attached_comment'),
+			'chromatograms_attached'=>$this->input->post('chromatograms_attached'),
+			'sample_injection_sequence_comment'=>$this->input->post('Sample_injection_sequence_comment'),
+			'choice'=>$this->input->post('choice'),
+			'supervisor'=>$this->input->post('supervisor'),
+			'date'=>$this->input->post('date'),
+			'further_comments'=>$this->input->post('further_comments'),	
+			);
+		$this->db->insert('diss_data', $data);
 
 		$determination_data = array(
 			'test_request'=>$test_request,
+			'status' =>$third_status,
 			'det_1_pkt'=>$this->input->post('det_1_pkt'),
 			'det_1_wstd'=>$this->input->post('det_1_wstd'),
 			'det_1_df'=>$this->input->post('det_1_df'),

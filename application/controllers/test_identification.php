@@ -8,12 +8,16 @@ class Test_Identification extends CI_Controller{
 		$data['assignment'] = $this->uri->segment(3);
 		$data['test_request'] = $this->uri->segment(4);
 		$test_request = $this->uri->segment(4);
+		$user_type=6;
 		
 		$sql = "SELECT * FROM test_request WHERE id =$test_request";
 		$query = $this->db->query($sql);
 		$result =$query->result_array();
 		$data['results']=$result[0];
 		
+		$data['sql_approved']=
+    	$this->db->select('user.fname,user.lname,user.user_type')->get_where('user', array('user_type' => $user_type))->result_array();
+
 		$this->load->view('test_identification_view', $data);
 		
 	}
@@ -21,7 +25,7 @@ class Test_Identification extends CI_Controller{
 		$data['assignment'] = $this->uri->segment(3);
 		$data['test_request'] = $this->uri->segment(4);
 		$test_request = $this->uri->segment(4);
-		$status =0;
+		$status =0;$user_type=6;
 		
 		$sql = "SELECT * FROM test_request WHERE id =$test_request";
 		$query = $this->db->query($sql);
@@ -33,8 +37,14 @@ class Test_Identification extends CI_Controller{
 	    $data['query_e']=$results_e;
 
 	    $data['sql_standards']=
-    	$this->db->select('standard_register.reference_number,standard_register.item_description,standard_register.batch_number,standard_register.manufacturer_supplier,standard_register.status')->get_where('standard_register', array('status' => $status))->result_array();
+    	$this->db->select('standard_register.reference_number,standard_register.potency,standard_register.item_description,standard_register.batch_number,standard_register.manufacturer_supplier,standard_register.status')->get_where('standard_register', array('status' => $status))->result_array();
+		
+		$data['sql_reagents']=
+    	$this->db->select('reagents_inventory_record.certificate_number,reagents_inventory_record.item_description,reagents_inventory_record.batch_number,reagents_inventory_record.manufacturer_supplier,reagents_inventory_record.status')->get_where('reagents_inventory_record', array('status' => $status))->result_array();
 				
+		$data['sql_approved']=
+    	$this->db->select('user.fname,user.lname,user.user_type')->get_where('user', array('user_type' => $user_type))->result_array();
+
 		$this->load->view('test_identification_chemical_view', $data);
 		
 	}
@@ -42,7 +52,7 @@ class Test_Identification extends CI_Controller{
 		$data['assignment'] = $this->uri->segment(3);
 		$data['test_request'] = $this->uri->segment(4);
 		$test_request = $this->uri->segment(4);
-		$status =0;
+		$status =0;$user_type=6;
 		
 		$sql = "SELECT * FROM test_request WHERE id =$test_request";
 		$query = $this->db->query($sql);
@@ -57,8 +67,14 @@ class Test_Identification extends CI_Controller{
 	    $data['query_e']=$results_e;
 
 	    $data['sql_standards']=
-    	$this->db->select('standard_register.reference_number,standard_register.item_description,standard_register.batch_number,standard_register.manufacturer_supplier,standard_register.status')->get_where('standard_register', array('status' => $status))->result_array();
-				
+    	$this->db->select('standard_register.reference_number,standard_register.potency,standard_register.item_description,standard_register.batch_number,standard_register.manufacturer_supplier,standard_register.status')->get_where('standard_register', array('status' => $status))->result_array();
+		
+		$data['sql_reagents']=
+    	$this->db->select('reagents_inventory_record.certificate_number,reagents_inventory_record.item_description,reagents_inventory_record.batch_number,reagents_inventory_record.manufacturer_supplier,reagents_inventory_record.status')->get_where('reagents_inventory_record', array('status' => $status))->result_array();
+		
+		$data['sql_approved']=
+    	$this->db->select('user.fname,user.lname,user.user_type')->get_where('user', array('user_type' => $user_type))->result_array();
+		
 		$this->load->view('test_identification_hplc_view', $data);
 		
 	}
@@ -66,7 +82,7 @@ class Test_Identification extends CI_Controller{
 		$data['assignment'] = $this->uri->segment(3);
 		$data['test_request'] = $this->uri->segment(4);
 		$test_request = $this->uri->segment(4);
-		$status =0;
+		$status =0;$user_type=6;
 		
 		$sql = "SELECT * FROM test_request WHERE id =$test_request";
 		$query = $this->db->query($sql);
@@ -78,8 +94,14 @@ class Test_Identification extends CI_Controller{
 	    $data['query_e']=$results_e;
 
 	    $data['sql_standards']=
-    	$this->db->select('standard_register.reference_number,standard_register.item_description,standard_register.batch_number,standard_register.manufacturer_supplier,standard_register.status')->get_where('standard_register', array('status' => $status))->result_array();
-				
+    	$this->db->select('standard_register.reference_number,standard_register.potency,standard_register.item_description,standard_register.batch_number,standard_register.manufacturer_supplier,standard_register.status')->get_where('standard_register', array('status' => $status))->result_array();
+		
+		$data['sql_reagents']=
+    	$this->db->select('reagents_inventory_record.certificate_number,reagents_inventory_record.item_description,reagents_inventory_record.batch_number,reagents_inventory_record.manufacturer_supplier,reagents_inventory_record.status')->get_where('reagents_inventory_record', array('status' => $status))->result_array();
+		
+		$data['sql_approved']=
+    	$this->db->select('user.fname,user.lname,user.user_type')->get_where('user', array('user_type' => $user_type))->result_array();
+		
 		$this->load->view('test_identification_thin_layer_view', $data);
 		
 	}
@@ -87,7 +109,7 @@ class Test_Identification extends CI_Controller{
 		$data['assignment'] = $this->uri->segment(3);
 		$data['test_request'] = $this->uri->segment(4);
 		$test_request = $this->uri->segment(4);
-		$status =0;
+		$status =0;$user_type=6;
 
 		$sql = "SELECT * FROM test_request WHERE id =$test_request";
 		$query = $this->db->query($sql);
@@ -95,41 +117,38 @@ class Test_Identification extends CI_Controller{
 		$data['results']=$result[0];
 
 		$data['sql_standards']=
-    	$this->db->select('standard_register.reference_number,standard_register.item_description,standard_register.batch_number,standard_register.manufacturer_supplier,standard_register.status')->get_where('standard_register', array('status' => $status))->result_array();
+    	$this->db->select('standard_register.reference_number,standard_register.potency,standard_register.item_description,standard_register.batch_number,standard_register.manufacturer_supplier,standard_register.status')->get_where('standard_register', array('status' => $status))->result_array();
 		
+		$data['sql_reagents']=
+    	$this->db->select('reagents_inventory_record.certificate_number,reagents_inventory_record.item_description,reagents_inventory_record.batch_number,reagents_inventory_record.manufacturer_supplier,reagents_inventory_record.status')->get_where('reagents_inventory_record', array('status' => $status))->result_array();
 		
+		$data['sql_approved']=
+    	$this->db->select('user.fname,user.lname,user.user_type')->get_where('user', array('user_type' => $user_type))->result_array();
+
 		$this->load->view('test_identification_uv_view', $data);
 	}
 	function index_infrared(){
 		$data['assignment'] = $this->uri->segment(3);
 		$data['test_request'] = $this->uri->segment(4);
 		$test_request = $this->uri->segment(4);
+		$user_type=6;$status=0;
 
 		$sql = "SELECT * FROM test_request WHERE id =$test_request";
 		$query = $this->db->query($sql);
-		$result =$query->result_array();
-
+		$result =$query->result_array(); 
 		$data['results']=$result[0];
-		
-		$this->load->view('test_identification_infrared_view', $data);
-	}
-	function index_tlc(){
-		$data['assignment'] = $this->uri->segment(3);
-		$data['test_request'] = $this->uri->segment(4);
-		$test_request = $this->uri->segment(4);
-		$status =0;
 
-		$sql = "SELECT * FROM test_request WHERE id =$test_request";
-		$query = $this->db->query($sql);
-		$result =$query->result_array();
-		$data['results']=$result[0];
+	    $data['query_e']=$this->db->get_where('equipment_maintenance', array('status' =>0))->result_array();
 
 		$data['sql_standards']=
-    	$this->db->select('standard_register.reference_number,standard_register.item_description,standard_register.batch_number,standard_register.manufacturer_supplier,standard_register.status')->get_where('standard_register', array('status' => $status))->result_array();
-		
-		
-		$this->load->view('test_identification_tlc_view', $data);
+    	$this->db->select('standard_register.reference_number,standard_register.potency,standard_register.item_description,standard_register.batch_number,standard_register.manufacturer_supplier,standard_register.status')->get_where('standard_register', array('status' => $status))->result_array();
+				
+		$data['sql_approved']=
+    	$this->db->select('user.fname,user.lname,user.user_type')->get_where('user', array('user_type' => $user_type))->result_array();
+
+		$this->load->view('test_identification_infrared_view', $data);
 	}
+	
 	function worksheet_assay(){
 		$this->load->model('test_identification_model');
 		if ($this->input->post('save_identification')) {
@@ -190,7 +209,7 @@ class Test_Identification extends CI_Controller{
 
 		$data['results']=$result[0];
 
-		$query_e=$this->db->get_where('identification', array('test_request' =>$test_request));
+		$query_e=$this->db->get_where('identification_from_assay', array('test_request' =>$test_request));
 	    $results_e=$query_e->result_array();
 	    $assay_id = $results_e[0]['id'];
 	    $data['query_e']=$results_e[0];
@@ -235,7 +254,7 @@ class Test_Identification extends CI_Controller{
 
 		$data['results']=$result[0];
 
-		$query_e=$this->db->get_where('identification', array('test_request' =>$test_request));
+		$query_e=$this->db->get_where('identification_infrared', array('test_request' =>$test_request));
 	    $results_e=$query_e->result_array();
 	    $data['query_e']=$results_e[0];
 

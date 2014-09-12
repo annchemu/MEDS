@@ -10,6 +10,7 @@ class Test_Loss_Drying extends CI_Controller{
 		$data['test_request'] = $this->uri->segment(4);
 		$test_request = $this->uri->segment(4);
 		$status=0; 
+		$user_type=6;
 
 		$sql = "SELECT * FROM test_request WHERE id =$test_request";
 		$query = $this->db->query($sql);
@@ -22,9 +23,11 @@ class Test_Loss_Drying extends CI_Controller{
 	    $data['query_e']=$results_e;
 
 	    $data['sql_standards']=
-    	$this->db->select('standard_register.reference_number,standard_register.item_description,standard_register.batch_number,standard_register.manufacturer_supplier,standard_register.status')->get_where('standard_register', array('status' => $status))->result_array();
+    	$this->db->select('standard_register.reference_number,standard_register.potency,standard_register.item_description,standard_register.batch_number,standard_register.manufacturer_supplier,standard_register.status')->get_where('standard_register', array('status' => $status))->result_array();
 		// var_dump($results_e);
 		// die;
+    	$data['sql_approved']=
+    	$this->db->select('user.fname,user.lname,user.user_type')->get_where('user', array('user_type' => $user_type))->result_array();
 
 		$this->load->view('test_loss_drying_view', $data);		
 	}
