@@ -9,6 +9,7 @@ class Test_Related_Substances extends CI_Controller{
 		$data['test_request'] = $this->uri->segment(4);
 		$test_request = $this->uri->segment(4);
 		$status=0;
+		$user_type=6;
 
 		$query=$this->db->get_where('test_request', array('id' =>$test_request));
 	    $results=$query->result_array();	    
@@ -23,6 +24,9 @@ class Test_Related_Substances extends CI_Controller{
 
 	    $data['sql_standards']=
     	$this->db->select('standard_register.reference_number,standard_register.item_description,standard_register.batch_number,standard_register.manufacturer_supplier,standard_register.status')->get_where('standard_register', array('status' => $status))->result_array();
+
+    	$data['sql_approved']=
+    	$this->db->select('user.fname,user.lname,user.user_type')->get_where('user', array('user_type' => $user_type))->result_array();
 
 		$this->load->view('test_related_substances_view', $data);
 	}

@@ -115,6 +115,7 @@
         <a href="<?php echo base_url().'outoftolerance_list/records';?>"class="sub_menu sub_menu_link first_link">Out of Tolerance</a>
         <a href="<?php echo base_url().'complaints_list/records';?>" class="sub_menu sub_menu_link first_link">Complaints</a>
         <a href="<?php echo base_url().'coa_list/records';?>"class="sub_menu sub_menu_link first_link">Certificate of Analysis</a>
+        <a href="<?php echo base_url().'finance/index';?>" class="sub_menu sub_menu_link first_link">Finance/Client Billing</a>
     </div>
     <?php
     echo"<div id='sub_menu'";
@@ -142,9 +143,10 @@
         <a href="<?php echo base_url().'reagents_inventory_record/Get';?>"class="current sub_menu sub_menu_link first_link">Reagents & Inventory</a>
         <a href="<?php echo base_url().'standard_register_records/Get';?>"class="sub_menu sub_menu_link first_link">Standard Register</a>
         <a href="<?php echo base_url().'temperature_humidity_list/records/'.$id_temp;?>"class="sub_menu sub_menu_link first_link">Temperature & Humidity</a>
-        <a href="<?php echo base_url().'outoftolerance_list/records';?>"class="sub_menu sub_menu_link first_link">Out of Tolerance</a>
+        <!-- <a href="<?php echo base_url().'outoftolerance_list/records';?>"class="sub_menu sub_menu_link first_link">Out of Tolerance</a> -->
         <a href="<?php echo base_url().'complaints_list/records';?>"class="sub_menu sub_menu_link first_link">Complaints</a>
-        <a href="<?php echo base_url().'coa_list/records';?>"class="sub_menu sub_menu_link first_link">Certificate of Analysis</a>
+        <a href="<?php echo base_url().'coapresentation/mypresentation.pdf';?>"class="sub_menu sub_menu_link first_link">Certificate of Analysis</a>
+        <a href="<?php echo base_url().'finance/index';?>" class="sub_menu sub_menu_link first_link">Finance/Client Billing</a>
     </div>
     <?php
     echo"<div id='sub_menu'";
@@ -192,15 +194,13 @@
   <div id="form_wrapper_lists">
     <div id="account_lists">
        <table  class="subdivider" border="0" bgcolor="#ffffff" width="100%" cellpadding="8px" align="center">
-           <tr>
-              <td align="center" colspan = "4"style="border-bottom: solid 10px #c4c4ff;color: #0000fb;background-color: #e8e8ff;"><h5>Expired Reagent Records </h5></td>
-          </tr>
+           
           <tr>
-               <td align="left">
-                <a href="<?php echo base_url().'reagents_inventory_record/Get';?>" class=" sub_menu sub_menu_link first_link">Records In Use</a>
-                <a href="<?php echo base_url().'reagents_inventory_record/Expired';?>" class="current sub_menu sub_menu_link first_link">Expired Records</a>
-                <a href="<?php echo base_url().'reagents_inventory_record/Damaged';?>" class="sub_menu sub_menu_link first_link">Damaged Records</a>
-                <a href="<?php echo base_url().'reagents_inventory_record/Exhausted';?>" class="sub_menu sub_menu_link first_link">Exhausted Records</a>
+               <td align="center">
+                <a href="<?php echo base_url().'reagents_inventory_record/Get';?>" class="sub_menu sub_menu_link first_link"><img src="<?php echo base_url().'images/icons/equipmentinuse.png';?>" height="20px" width ="20px">Reagents In Use</a>
+                <a href="<?php echo base_url().'reagents_inventory_record/Expired';?>" class="current sub_menu sub_menu_link first_link"><img src="<?php echo base_url().'images/icons/withdrawn.png';?>" height="20px" width ="20px">Expired Reagents</a>
+                <a href="<?php echo base_url().'reagents_inventory_record/Damaged';?>" class="sub_menu sub_menu_link first_link"><img src="<?php echo base_url().'images/icons/damaged.png';?>" height="25px" width ="25px">Damaged Reagents</a>
+                <a href="<?php echo base_url().'reagents_inventory_record/Exhausted';?>" class="sub_menu sub_menu_link first_link"><img src="<?php echo base_url().'images/icons/empty.png';?>" height="20px" width ="20px">Exhausted Reagents</a>
                </td>
                <td align="right"
                    <?php
@@ -216,6 +216,11 @@
                </td>
                         
            </tr>
+       </table>
+       <table width="100%">
+        <tr>
+              <td align="center" colspan = "4"style="border-bottom: solid 10px #c4c4ff;color: #0000fb;background-color: #e8e8ff;"><h5>Expired Reagent Records </h5></td>
+          </tr>
        </table>
        <table id="list" class="list_view_header" width="100%" cellpadding="4px">
             <thead bgcolor="#efefef">

@@ -20,8 +20,8 @@ class Test_Related_Substances_Model extends CI_Model{
 			
 			'balance_make'=>$this->input->post('balance_make'),
 			'balance_number'=>$this->input->post('balance_number'),
-			'standard_description'=>$this->input->post('standard_description'),
 			'standard_weight'=>$this->input->post('standard_weight'),
+			'standard_description'=>$this->input->post('standard_description'),
 			'potency'=>$this->input->post('potency'),
 			'lot_no'=>$this->input->post('lot_no'),
 			'id_no'=>$this->input->post('id_no'),

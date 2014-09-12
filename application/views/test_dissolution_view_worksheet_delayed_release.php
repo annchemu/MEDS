@@ -643,7 +643,7 @@
         <td colspan="8" align="left"  style="padding:8px;border-bottom: dotted 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><b>Conclusion</b></td>
       </tr>
       <tr>
-        <td colspan="8" style="padding:8px;border-bottom:solid 1px #c4c4ff;"><?php echo $query_e['choice'];?></td>
+        <td colspan="8" style="padding:8px;border-bottom:solid 1px #c4c4ff;"><?php if ($query_e['choice'] = 0){echo "Failed";}elseif($query_e['choice'] = 1){echo "Passed";}?></td>
          <tr>
        <td colspan="8" style="padding:8px;">
         <table border="0" width="90%" cellpadding="8px" align="center">

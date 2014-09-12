@@ -40,6 +40,24 @@
          $("#equipment_number").val(id_number);
     });
    });
+
+   $("input,select,textarea").autosave({
+      url: "autosave7.php",//set the php file that updates the database
+      method: "post",
+      grouped: true,//send data for all fields with the autosave
+               success: function(data) {//on a successful update...
+                $("#message").html("Data saved successfully").show();//...show a message...
+                  setTimeout('fadeMessage()',1500);//...and then fade it out after an interval
+                },
+              send: function(){//on a save...
+                $("#message").html("Sending data....");//..show a message
+                },
+        dataType: "html"
+    });   
+  
+  //      function fadeMessage(){
+  //   $('#message').fadeOut('slow');//just a function to fade out the message
+  // }
   </script>
   </head
   <body>

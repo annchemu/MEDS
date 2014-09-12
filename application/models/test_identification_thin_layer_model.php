@@ -17,54 +17,63 @@ class Test_Identification_Thin_Layer_Model extends CI_Model{
 		$analyst= $this->input->post('analyst');
 		
 		$data =array(			
+			'equipment_number'=>$this->input->post('equipment_number'),
+			'equipment_make'=>$this->input->post('equipment_make'),
+			'sample_weight_container'=>$this->input->post('sample_weight_container'),
+			'sample_container'=>$this->input->post('sample_container'),
+			'sample_weight'=>$this->input->post('sample_weight'),
+			'sample_dilution'=>$this->input->post('sample_dilution'),
+
+			'standard_description_1'=>$this->input->post('standard_description'),
+			// 'standard_description_2'=>$this->input->post('standard_description_2'),
+			// 'standard_description_3'=>$this->input->post('standard_description_3'),
+			// 'standard_description_4'=>$this->input->post('standard_description_4'),
+
+			'potency'=>$this->input->post('potency'),
+			'lot_no'=>$this->input->post('lot_no'),
+			'id_no'=>$this->input->post('id_no'),
+
 			'standard_container'=>$this->input->post('standard_container'),
 			'container'=>$this->input->post('container'),
-			'standard_weight_1'=>$this->input->post('standard_weight_1'),
-			'standard_dilution'=>$this->input->post('standard_dilution'),
+			'standard_weight'=>$this->input->post('standard_weight'),
 
-			'standard_description_1'=>$this->input->post('standard_description_1'),
-			'standard_description_2'=>$this->input->post('standard_description_2'),
-			'standard_description_3'=>$this->input->post('standard_description_3'),
-			'standard_description_4'=>$this->input->post('standard_description_4'),
+			// 'standard_container_3'=>$this->input->post('standard_container_3'),
+			// 'container_3'=>$this->input->post('container_3'),
+			// 'standard_weight_3'=>$this->input->post('standard_weight_3'),
 
-			'standard_container_2'=>$this->input->post('standard_container_2'),
-			'container_2'=>$this->input->post('container_2'),
-			'standard_weight_2'=>$this->input->post('standard_weight_2'),
-
-			'standard_container_3'=>$this->input->post('standard_container_3'),
-			'container_3'=>$this->input->post('container_3'),
-			'standard_weight_3'=>$this->input->post('standard_weight_3'),
-
-			'standard_container_4'=>$this->input->post('standard_container_4'),
-			'container_4'=>$this->input->post('container_4'),
-			'standard_weight_4'=>$this->input->post('standard_weight_4'),
+			// 'standard_container_4'=>$this->input->post('standard_container_4'),
+			// 'container_4'=>$this->input->post('container_4'),
+			// 'standard_weight_4'=>$this->input->post('standard_weight_4'),
 
 			'reagent_1'=>$this->input->post('reagent_1'),
-			'reagent_2'=>$this->input->post('reagent_2'),
-			'reagents_3'=>$this->input->post('reagent_3'),
-			'reagents_4'=>$this->input->post('reagent_4'),
+			// 'reagent_2'=>$this->input->post('reagent_2'),
+			// 'reagents_3'=>$this->input->post('reagent_3'),
+			// 'reagents_4'=>$this->input->post('reagent_4'),
 
-			'standard_container_5'=>$this->input->post('standard_container_5'),
-			'container_5'=>$this->input->post('container_5'),
-			'standard_weight_5'=>$this->input->post('standard_weight_5'),
+			'reagent_weight_container_1'=>$this->input->post('reagent_weight_container_1'),
+			'reagent_container_1'=>$this->input->post('reagent_container_1'),
+			'reagent_weight_1'=>$this->input->post('reagent_weight_1'),
 
-			'standard_container_6'=>$this->input->post('standard_container_6'),
-			'container_6'=>$this->input->post('container_6'),
-			'standard_weight_6'=>$this->input->post('standard_weight_6'),
+			// 'standard_container_6'=>$this->input->post('standard_container_6'),
+			// 'reagent_container_1'=>$this->input->post('reagent_container_1'),
+			// 'standard_weight_6'=>$this->input->post('standard_weight_6'),
 
-			'standard_container_7'=>$this->input->post('standard_container_7'),
-			'container_7'=>$this->input->post('container_7'),
-			'standard_weight_7'=>$this->input->post('standard_weight_7'),
+			// 'standard_container_7'=>$this->input->post('standard_container_7'),
+			// 'container_7'=>$this->input->post('container_7'),
+			// 'standard_weight_7'=>$this->input->post('standard_weight_7'),
 
-			'standard_container_8'=>$this->input->post('standard_container_8'),
-			'container_8'=>$this->input->post('container_8'),
-			'standard_weight_8'=>$this->input->post('standard_weight_8'),
+			// 'standard_container_8'=>$this->input->post('standard_container_8'),
+			// 'container_8'=>$this->input->post('container_8'),
+			// 'standard_weight_8'=>$this->input->post('standard_weight_8'),
 
-			'standard_container_9'=>$this->input->post('standard_container_9'),
-			'container_9'=>$this->input->post('container_9'),
-			'standard_weight_9'=>$this->input->post('standard_weight_9'),
+			// 'standard_container_9'=>$this->input->post('standard_container_9'),
+			// 'container_9'=>$this->input->post('container_9'),
+			// 'standard_weight_9'=>$this->input->post('standard_weight_9'),
 
 			'mobile_phase'=>$this->input->post('mobile_phase'),
+			'impurity_1'=>$this->input->post('impurity_1'),
+			'impurity_2'=>$this->input->post('impurity_2'),
+
 			'solvent_std_1'=>$this->input->post('solvent_std_1'),
 			'solvent_std_2'=>$this->input->post('solvent_std_2'),
 			'solvent_sample'=>$this->input->post('solvent_sample'),
@@ -83,12 +92,8 @@ class Test_Identification_Thin_Layer_Model extends CI_Model{
 			'rf_impurity_1'=>$this->input->post('rf_impurity_1'),
 			'rf_impurity_2'=>$this->input->post('rf_impurity_2'),
 
-			'rr_std_1'=>$this->input->post('rr_std_1'),
-			'rr_std_2'=>$this->input->post('rr_std_2'),
-			'rr_sample'=>$this->input->post('rr_sample'),
-			'rr_impurity_1'=>$this->input->post('rr_impurity_1'),
-			'rr_impurity_2'=>$this->input->post('rr_impurity_2'),
-
+			'rr_value'=>$this->input->post('rr_value'),
+			
 			'acceptance_criteria'=>$this->input->post('acceptance_criteria'),
 			'results'=>$this->input->post('results'),
 			'comment'=>$this->input->post('comment'),

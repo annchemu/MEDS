@@ -37,7 +37,7 @@ Class New_Usermodel extends CI_Model{
    
    'fname'=>$this->input->post('fname'),
    'lname'=>$this->input->post('lname'),
-   'username'=>$this->input->post('username'),
+   'username'=>$this->input->post('uname'),
    'email'=>$this->input->post('email'),
    'telephone'=>$this->input->post('telephone'),
    'user_type'=>$this->input->post('user_type'),

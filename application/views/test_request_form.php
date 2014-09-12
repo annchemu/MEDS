@@ -271,7 +271,7 @@
                   <td height="25px" colspan="4" style="padding:4px;text-align:left;"><input type="text"  class="field" size="80" name="active_ingredients" id="active_ingredients"><span id="active_ingredients_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="active_ingredients_r" style="color:red; display:none">Fill this</span></td>
               </tr>
               <tr>
-                  <td height="25px" width="200px" style="padding:4px;text-align: left;">Lable Claim</td>
+                  <td height="25px" width="200px" style="padding:4px;text-align: left;">Label Claim</td>
                   <td height="25px" colspan="4" style="padding:4px;text-align:left;"><input type="text" class="field" size="80" name="lable_claim" id="lable_claim"><span id="lable_claim_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="lable_claim_r" style="color:red; display:none">Fill this</span></td>
               </tr>
                <tr>
@@ -304,10 +304,10 @@
               </tr>
               <tr>
                   <td height="25px" style="padding:4px;text-align: left;">Date of Manufacture</td>
-                  <td height="25px" style="padding:4px;text-align: left;"><input type="date"  name="date_of_manufacture" id="date_of_manufacture"><span id="date_of_manufacture_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="date_of_manufacture_r" style="color:red; display:none">Fill this</span></td>
+                  <td height="25px" style="padding:4px;text-align: left;"><input type="text" class="datepicker" name="date_of_manufacture" id="datepicker"><span id="date_of_manufacture_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="date_of_manufacture_r" style="color:red; display:none">Fill this</span></td>
                   <td style="padding:4px;"></td>
                   <td style="padding:4px;text-align: left;">Expiry/Retest Date</td>
-                  <td style="padding:4px;text-align: left;"><input type="date" class="field" id="expiry_retest_date" name="expiry_retest_date"><span id="expiry_retest_date_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="expiry_retest_date_r" style="color:red; display:none">Fill this</span></td>
+                  <td style="padding:4px;text-align: left;"><input type="text" class="field datepicker" id="" name="expiry_retest_date"><span id="expiry_retest_date_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="expiry_retest_date_r" style="color:red; display:none">Fill this</span></td>
               <tr>
               </tr>
                   <td style="padding:4px;text-align:left;">Quantity Submitted</td>

@@ -23,6 +23,10 @@
   <script src="<?php echo base_url().'js/jquery.js';?>"></script>
   <script src="<?php echo base_url().'js/jquery-ui.js';?>"></script>
   <script type="text/javascript" src="<?php echo base_url().'js/tabs.js';?>"></script>
+  <script type="text/javascript" src="<?php echo base_url().'tinymce/tinymce.min.js';?>"></script>
+  <script type="text/javascript" src="<?php echo base_url().'js/equipmentinfo.js';?>"></script>
+  <script type="text/javascript" src="<?php echo base_url().'js/equationstwo.js';?>"></script>
+  <script type="text/javascript" src="<?php echo base_url().'js/datepicker.js';?>"></script>
   
   <!-- bootstrap reference library -->
   <script src="<?php echo base_url().'js/bootstrap.min.js';?>"></script>
@@ -35,11 +39,10 @@
      "sScrollX":"100%"
     });
    });
-   function sample_weight_calc(){
-        var total = document.getElementById('sample_container').value - document.getElementById('container').value;
-        document.getElementById('sample_weight').value = total;
-       }
-  </script>
+     tinymce.init({
+    selector: "textarea"
+   });
+   </script>
   </head
   <body>
     <?php
@@ -51,6 +54,13 @@
    $acc_status=$user['logged_in']['acc_status'];
    $id_temp=1;
    //var_dump($user);
+   if(empty($user['logged_in']['id'])) {
+       
+      redirect('login','location');  //loads the login page in current page div
+
+      echo '<meta http-equiv=refresh content="0;url=base_url();login">'; 
+
+       }
   ?>
    <div id="header"> 
   <div id="logo" style="padding:8px;color: #0000ff;" align="center"><img src="<?php echo base_url().'images/meds_logo.png';?>" height="35px" width="40px"/><b>MISSION FOR ESSENTIAL DRUGS AND SUPPLIES</b></div>
@@ -99,7 +109,7 @@
      </tr>
      <tr>
       <td colspan ="6" style="padding:8px;">
-       <table width="100%" bgcolor="#c4c4ff" cellpadding="8px" border="0" align ="center">
+       <table width="100%" bgcolor="#c4c4ff" class="table_form" cellpadding="8px" border="0" align ="center">
      <tr>
           <td colspan ="2" style="padding:4px;border-left:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;border-bottom:solid 1px #bfbfbf;text-align:center;background-color:#ffffff;"><img src="<?php echo base_url().'images/meds_logo.png';?>" height="80px" width="90px"/></td>
           <td colspan="4" style="padding:4px;color:#0000ff;border-left:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;border-bottom:solid 1px #bfbfbf;text-align:center;background-color:#ffffff;">MISSION FOR ESSENTIAL DRUGS AND SUPPLIES</td>
@@ -128,9 +138,12 @@
             <td colspan="" style="padding:4px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;">USER TYPE</td>
             <td colspan="2" style="padding:4px;border-right:solid 1px #bfbfbf;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;"><?php echo $user['logged_in']['role'];?></td>
       </tr>
+       </table>
+      </td>
+     </tr>
       <tr>
       <td colspan="6" align="center" style="padding:8px;">
-        <table border="0" align="center" cellpadding="8px" width="100%">
+        <table border="0" align="center" class="table_form" cellpadding="8px" width="100%">
             <tr>
               <td height="25px" style="padding:8px;border-left:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;">Registration Number: <?php echo $results['laboratory_number'];?></td>
               <td height="25px" style="padding:8px;border-left:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;">Request Date: <?php echo $results['date_time'];?></td>
@@ -161,26 +174,55 @@
         <td colspan ="6" align="center"style="padding: 8px;text-align:center;background-color:#ffffff;padding-right:40px;border-bottom: solid 10px #f0f0ff;color: #0000fb;background-color: #e8e8ff;"> MEDS Identification by Infrared Test Form</td>
       </tr>
       <tr>
-        <td align="left" colspan ="3" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;color:#0000fb;" ><b>Weight of sample taken (g)</b></td>
-        <td colspan ="3" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="infrared_sample_weight" size="40"> </td>
+        <td colspan=""align="center" style="padding:8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Equipment Number:</td>
+        <td colspan = "" style="padding:8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> 
+            <select id ="equipment_make" name="equipment_make">
+              <option selected></option>
+               <?php
+               foreach($query_e as $equipment):
+              ?>
+               
+               <option value="<?php echo $equipment['id_number'];?>" data-equipmentid="<?php echo $equipment['description']; ?>"><?php echo $equipment['id_number'];?></option>
+                <?php
+                endforeach
+                ?> 
+              
+            </select>
+         </td>    
+      
+        <td colspan=""align="center" style="padding:8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Equipment Make:</td>
+        <td colspan = "4" style="padding:8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><input type = "text" name = "balance_number" id ="equipmentid" size="40"></td>
+      </tr>      
+      <tr>
+        <td colspan ="2"align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;color:#0000fb;"><b>Standard Preparation</b></td>
+     </tr>  
+      <tr>
+        <td align="left" colspan ="2" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;color:#0000fb;" >Weight of sample taken (g)</td>
+        <td colspan ="4" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="infrared_sample_weight" size="40"> </td>
       </tr>
       <tr>
-        <td colspan="6" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;color:#0000fb;"><b>Calculation:</b></td>
+        <td colspan="6" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;color:#0000fb;">Calculation:</td>
       </tr>
        <tr>
         <td colspan="6" align="center" style="padding: 8px;background-color:#ffffff;"><textarea cols="90" rows="3" name= "infrared_calculation"></textarea></td>
       </tr>
       <tr>
-        <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Weight of sample + container (g)</td>
-        <td colspan ="2" align ="left"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="infrared_sample_container" id ="sample_container"> </td>
-        <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Weight of container (g) </td>
-        <td colspan="2"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="infrared_container" id ="container" onchange="sample_weight_calc()"> </td>
+        <td colspan ="2"align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Weight of sample + container (g)</td>
+        <td colspan ="4"align ="left"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="infrared_sample_container" id ="sample_weight_container"> </td>
+     </tr>
+      <tr>
+        <td colspan ="2"align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Weight of container (g) </td>
+        <td colspan ="4"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="infrared_container" id ="sample_container"> </td>
       </tr>
       <tr>
-        <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Weight of sample (g)</td>
-        <td colspan="2"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="infrared_sample_weight_1" id ="sample_weight"></td>
-        <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Dilution </td>
-        <td colspan="2"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <textarea rows ="4" cols ="50" name ="infrared_sample_dilution"> </textarea></td>
+        <td colspan ="2"align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Weight of sample (g)</td>
+        <td colspan ="4"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="infrared_sample_weight_1" id ="sample_weight"></td>
+      </tr>
+      <tr>
+        <td colspan ="6"align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Dilution </td>
+       </tr>
+      <tr>
+        <td colspan="6"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <textarea rows ="4" cols ="50" name ="infrared_sample_dilution"> </textarea></td>
       </tr>
       <tr> 
         <td align="center"colspan ="6" style="padding: 8px;padding: 8px;background-color: #e8e8ff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> </td>
@@ -210,7 +252,7 @@
             </tr>
             <tr>
               <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Weight of sample + container (g)</td>
-              <td colspan ="2" align ="left"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="infrared_sample_container_2"></td>
+              <td align ="left"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="infrared_sample_container_2"></td>
               <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Weight of container (g) </td>
               <td colspan="2"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="infrared_container_2"> </td>
               </tr>
@@ -222,50 +264,113 @@
             </tr>
           </table>
         </td>  
+      </tr>      
+      <tr>
+        <td colspan ="2"align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;color:#0000fb;"><b>Standard Preparation</b></td>
+     </tr>    
+    <tr>
+        <td align="center" colspan ="2" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Standard Description:</td>
+        <td colspan = "4" align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">          
+          <select id="standard_description" name="standard_description" >
+              <option selected></option>
+               <?php
+               foreach($sql_standards as $s_name):
+              ?>
+               
+               <option value="<?php  echo $s_name['item_description'];?>"data-idno="<?php  echo $s_name['reference_number'];?>" data-lotno="<?php  echo $s_name['batch_number'];?>"data-potency="<?php  echo $s_name['potency'];?>"><?php  echo $s_name['item_description'];?></option>
+                <?php
+                endforeach
+                ?>
+            </select>
+        </td>        
+    </tr>
+      <tr>
+        <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Potency:</td>
+        <td colspan = "" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="potency" id="potency"> </td>
+        <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Lot No.:</td>
+        <td colspan = "" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="lot_no" id="lot_no"> </td>
+        <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">ID No.:</td>
+        <td colspan = ""style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="id_no" id ="id_no"> </td>
+      </tr>    
+      <tr>
+        <td colspan ="2"align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Weight of standard + container (g)</td>
+        <td colspan ="4"align ="left"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="infrared_standard_container" id ="standard_container"> </td>
+     </tr>
+      <tr>
+        <td colspan ="2"align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Weight of container (g) </td>
+        <td colspan ="4"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="infrared_container_2" id ="container"> </td>
       </tr>
       <tr>
-        <td style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-right: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Acceptance Criteria</td>
-        <td colspan = "2" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><textarea cols ="50" rows="3" name="infrared_acceptance_criteria"></textarea></td>      
-        <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-right: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Results </td>
-        <td colspan = "2"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <textarea cols ="50" rows="3" name="infrared_results"></textarea></td> 
+        <td colspan ="2"align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Weight of standard (g)</td>
+        <td colspan ="4"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="infrared_standard_weight" id ="standard_weight_1"></td>
+      </tr>
+      <tr>
+        <td colspan ="6"align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Dilution </td>
+       </tr>
+      <tr>
+        <td colspan="6"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <textarea rows ="4" cols ="50" name ="infrared_standard_dilution"> </textarea></td>
+      </tr>
+      <tr>
+        <td colspan = "6" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-right: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;color:#0000fb;"><b>Acceptance Criteria</b></td>
+      </tr>
+      <tr>
+        <td colspan = "6" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><textarea cols ="50" rows="3" name="infrared_acceptance_criteria"></textarea></td>      
+      </tr>
+      <tr>
+        <td colspan = "6" align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-right: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;color:#0000fb;"><b>Results</b> </td>
+      </tr>
+      <tr>
+        <td colspan = "6" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <textarea cols ="50" rows="3" name="infrared_results"></textarea></td> 
       </tr>
       <tr>      
-        <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-right: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Comments</td>
-        <td colspan = "5"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <textarea cols ="90" rows="3" name="infrared_comment"></textarea> </td>
+        <td colspan = "6" align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-right: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;color:#0000fb;"><b>Comments</b></td>
+       </tr>
+      <tr>
+        <td colspan = "6"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <textarea cols ="90" rows="3" name="infrared_comment"></textarea> </td>
       </tr>   
        <tr>
         <td colspan="8" align="left"  style="padding:8px;border-bottom: dotted 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><b>Conclusion</b></td>
       </tr>
       <tr>
         <td colspan="8" style="padding:8px;border-bottom:solid 1px #c4c4ff;">
-          <table border="0" width="30%" cellpadding="8px" align="center">
+          <table border="0" width="100%" class="table_form" cellpadding="8px" align="center">
             <tr>    
-              <td style="border-bottom:dottted 1px #c4c4ff;padding:8px;text-align:right;">PASS</input></td>
-              <td style="border-bottom:dottted 1px #c4c4ff;padding:8px;text-align:left;"><input type="radio" name="choice" value="passed"></input></td>
-              <td style="border-bottom:dottted 1px #c4c4ff;padding:8px;text-align:right;">FAIL</input></td>
-              <td style="border-bottom:dottted 1px #c4c4ff;padding:8px;text-align:left;"><input type="radio" name="choice" value="failed"></input></td>
+              <td style="border-bottom:dottted 1px #c4c4ff;padding:8px;text-align:center;"><input type="text" name="choice" id = "choice" ></input></td>
             </tr>
           </table>
          </tr>
          <tr>
        <td colspan="8" style="padding:8px;">
-        <table border="0" width="90%" cellpadding="8px" align="center">
+        <table border="0" class="table_form" width="100%" cellpadding="8px" align="center">
           <tr>
-            <td style="border-bottom: dotted 1px #c4c4ff;padding:4px;text-align:right;">Supervisor <input type="text" id="supervisor" name="supervisor"></td>
-            <td style="border-bottom: dotted 1px #c4c4ff;padding:4px;text-align:left;">Date <input type="date"  id="date" name="date"></td>
+            <td style="background-color:#ededfd;border-bottom: dotted 1px #c4c4ff;padding:8px;text-align:cente;">Done by: <input type="hidden" id="done_by" name="done_by" value="<?php echo($user['logged_in']['fname']." ".$user['logged_in']['lname']);?>"><?php echo($user['logged_in']['fname']." ".$user['logged_in']['lname']);?></td>
+            <td style="background-color:#ededfd;border-bottom: dotted 1px #c4c4ff;padding:8px;text-align:right;">Date conducted: <input type="hidden"  id="date" name="date_done" value="<?php echo date("d/m/Y")?>"><?php echo date("d/M/Y")?></td>
           </tr>
-          
+          <tr>
+            <td style="border-bottom: dotted 1px #c4c4ff;padding:4px;text-align:left;">Approved by:
+             <select id="name" name="supervisor" >
+            <option selected></option>
+             <?php
+             foreach($sql_approved as $user):
+            ?>
+             <option value="<?php  echo $user['fname'];?>"><?php  echo $user['fname'], "&nbsp;",$user['lname'];?></option>
+              <?php
+              endforeach
+              ?>
+          </select></td>
+            <td style="border-bottom: dotted 1px #c4c4ff;padding:4px;text-align:right;">Date: <input type="text"  id="datepicker" name="date" size="10"></td>
+          </tr>
           <tr>
             <td colspan="2" style="padding:4px;">Further Comments:</td>
           </tr>
           <tr>
-            <td colspan="2" style="padding:4px;text-align:center;"><textarea cols="140" rows="5" name ="futher_comments"></textarea></td>
+            <td colspan="2" style="padding:4px;text-align:center;"><textarea cols="140" rows="5" name ="further_comments"></textarea></td>
           </tr>
         </table>
       </td>
     </tr>
       <tr>
-        <td colspan = "6" align ="center"> <input type ="submit" name ="save_infrared_identification" value ="Save Identifcation Data"></td>
+        <td colspan = "6" align ="center"> <input type ="submit" class="btn" name ="save_infrared_identification" value ="Submit"></td>
       </tr>
     </table>
    </form> 

@@ -315,7 +315,7 @@
                   <td height="25px" colspan="4" style="padding:4px;text-align:left;"><input type="text"  class="fieldc" size="80" name="cactive_ingredients" id="cactive_ingredients"><span id="cactive_ingredients_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="cactive_ingredients_r" style="color:red; display:none">Fill this</span></td>
               </tr>
               <tr>
-                  <td height="25px" width="200px" style="padding:4px;text-align: left;">Lable Claim</td>
+                  <td height="25px" width="200px" style="padding:4px;text-align: left;">Label Claim</td>
                   <td height="25px" colspan="4" style="padding:4px;text-align:left;"><input type="text" class="fieldc" size="80" name="clable_claim" id="clable_claim"><span id="clable_claim_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="clable_claim_r" style="color:red; display:none">Fill this</span></td>
               </tr>
                <tr>
