@@ -61,7 +61,7 @@
    });
   </script>
 
-  </head
+  </head>
   <body>
       <?php
    $user=$this->session->userdata;
@@ -72,6 +72,13 @@
    $acc_status=$user['logged_in']['acc_status'];
    $id_temp=1;
    //var_dump($user);
+   if(empty($user['logged_in']['id'])) {
+       
+      redirect('login','location');  //loads the login page in current page div
+
+      echo '<meta http-equiv=refresh content="0;url=base_url();login">'; 
+
+       }
   ?>
 <div id="header"> 
   <div id="logo" style="padding:8px;color: #0000ff;" align="center"><img src="<?php echo base_url().'images/meds_logo.png';?>" height="35px" width="40px"/><b>MISSION FOR ESSENTIAL DRUGS AND SUPPLIES</b></div>
@@ -543,6 +550,7 @@
       <tr>
         <td align="center" colspan = "4" style="padding: 12px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <b><u>Determination 4</u></b></td>
         <td align="center" colspan = "2" style="padding: 12px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"></td>
+<<<<<<< HEAD
       </tr> 
       <tr>  
         <td colspan ="4" align ="center" style="padding: 12px;">
@@ -558,6 +566,23 @@
       </tr> 
       <tr>  
         <td colspan ="4" align ="center" style="padding: 12px;">
+=======
+      </tr> 
+      <tr>  
+        <td colspan ="4" align ="center" style="padding: 12px;">
+          <input type ="text" name="det_4_pkt" id ="det_4_pkt" size ="10" placeholder="A(SAMPLE)" onchange="calculation_determinations()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp x 10
+          <input type ="text" name="det_4_df" id ="det_4_df" size ="10" placeholder="DF">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp x 100 <br/><br/>A(1%, 1cm)/1000
+          <input type ="text" name="det_4_pkstd" id ="det_4_pkstd" size ="10" placeholder="A(STD)" onchange="calculation_determinations()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          <input type ="text" name="det_4_lc" id ="det_4_lc" size ="10" placeholder="LC" onchange="calculation_determinations()"></td>        
+        <td>=&nbsp &nbsp <input type ="text" name="determination_4" id ="determination_4" size ="10">% LC </td>
+      </tr> 
+      <tr>  
+        <td align="center" colspan = "4"style="padding: 12px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <b><u>Determination 5</u></b></td>
+        <td align="center" colspan = "2"style="padding: 12px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"></td>
+      </tr> 
+      <tr>  
+        <td colspan ="4" align ="center" style="padding: 12px;">
+>>>>>>> c78940a4bec4abee8b24b85c34b4cfe980f30dc8
           <input type ="text" name="det_5_pkt" id ="det_5_pkt" size ="10" placeholder="A(SAMPLE)" onchange="calculation_determinations()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp x 10
           <input type ="text" name="det_5_df" id ="det_5_df" size ="10" placeholder="DF">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp x 100 <br/><br/>A(1%, 1cm)/1000
           <input type ="text" name="det_5_pkstd" id ="det_5_pkstd" size ="10" placeholder="A(STD)" onchange="calculation_determinations()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
@@ -604,6 +629,18 @@
       <tr>
         <td colspan="8" style="padding:8px;">
           <table border="0" width="80%" cellpadding="8px" align="center">
+<<<<<<< HEAD
+            <tr>
+              <td colspan="2" style="color:#0000ff;padding:8px;border-bottom:solid 1px #c4c4ff;"><b>Acceptance Criteria</b></td>
+              <td style="color:#0000ff;padding:8px;border-bottom:solid 1px #c4c4ff;"><b>Results</b></td>
+              <td style="color:#0000ff;padding:8px;border-bottom:solid 1px #c4c4ff;"><b>Comment</b></td>
+            </tr>
+            <tr>
+              <td><input type="checkbox" id="min" />Not Less than Tolerance</td>
+              <td style="color:#0000ff;padding:8px;"><input type="text" min="min_tolerance" id="min_tolerance" name="min_tolerance" placeholder="min%" size="5"  onChange="calculation_determinations()" /></td>
+              <td style="color:#0000ff;padding:8px;"><input type="text" min="min_tolerance" id="nlt_min_tolerance_det" name="det_min" size="4" placeholder="min%" onChange="calculation_determinations()" disabled/> - <input type="text" min="min_tolerance" id="nlt_max_tolerance_det" name="det_max" size="4" placeholder="max%" onChange="calc_determination()" disabled/></td>
+              <td style="color:#0000ff;padding:8px;"><input type="text" min="min_tolerance" id="min_tolerance_comment" name="min_tolerance_comment" disabled/></td>
+=======
             <tr>
               <td colspan="2" style="color:#0000ff;padding:8px;border-bottom:solid 1px #c4c4ff;"><b>Acceptance Criteria</b></td>
               <td style="color:#0000ff;padding:8px;border-bottom:solid 1px #c4c4ff;"><b>Results</b></td>
@@ -626,6 +663,21 @@
               <td style="color:#0000ff;padding:8px;"><input type="text" range="tolerance_range" id = "tolerance_range_from" name="tolerance_range_from" placeholder="min%" size="5" onChange="calculation_determinations()"> - <input type="text" range="tolerance_range" name="tolerance_range_to" id = "tolerance_range_to" placeholder="max%" size="5" onChange="calculation_determinations()"></td>
               <td style="color:#0000ff;padding:8px;"><input type="text" range="tolerance_range" id="range_min_tolerance_det" name="det_min" size="4" placeholder="min%" onChange="calculation_determinations()" disabled/> - <input type="text" id="range_max_tolerance_det" range="tolerance_range" name="det_max" size="4" placeholder="max%" onChange="calculation_determinations()" disabled/></td>
               <td style="color:#0000ff;padding:8px;"><input type="text" range="tolerance_range" name="tolerance_range" id ="tolerance_range" disable/></td>
+>>>>>>> c78940a4bec4abee8b24b85c34b4cfe980f30dc8
+            </tr>
+
+            <tr>
+<<<<<<< HEAD
+              <td><input type="checkbox" id="max" />Not Greater than Tolerance</td>
+              <td style="color:#0000ff;padding:8px;"><input type="text" max='max_tolerance' id="max_tolerance" name="max_tolerance" placeholder="max%" size="5"  onChange="calculation_determinations()"/></td>
+              <td style="color:#0000ff;padding:8px;"><input type="text" max='max_tolerance' id="ngt_min_tolerance_det" name="det_min" size="4" placeholder="min%" onChange="calculation_determinations()" disabled/> - <input type="text" max="max_tolerance" id="ngt_max_tolerance_det" name="det_max" size="4" placeholder="max%" onChange="calc_determination()" disabled/></td>
+              <td style="color:#0000ff;padding:8px;"><input type="text" max='max_tolerance' name="content_comment" disabled/></td>
+            </tr>
+            <tr>
+              <td><input type="checkbox" id="range" />Tolerance Range</td>
+              <td style="color:#0000ff;padding:8px;"><input type="text" range="tolerance_range" id = "tolerance_range_from" name="tolerance_range_from" placeholder="min%" size="5" onChange="calculation_determinations()"> - <input type="text" range="tolerance_range" name="tolerance_range_to" id = "tolerance_range_to" placeholder="max%" size="5" onChange="calculation_determinations()"></td>
+              <td style="color:#0000ff;padding:8px;"><input type="text" range="tolerance_range" id="range_min_tolerance_det" name="det_min" size="4" placeholder="min%" onChange="calculation_determinations()" disabled/> - <input type="text" id="range_max_tolerance_det" range="tolerance_range" name="det_max" size="4" placeholder="max%" onChange="calculation_determinations()" disabled/></td>
+              <td style="color:#0000ff;padding:8px;"><input type="text" range="tolerance_range" name="tolerance_range" id ="tolerance_range" disable/></td>
             </tr>
 
             <tr>
@@ -635,6 +687,14 @@
               <td style="color:#0000ff;padding:8px;"><input type="text" name="sd_results"></input></td>
             </tr>
             <tr>
+=======
+              <td>SD</td>
+              <td style="color:#0000ff;padding:8px;"></td>
+              <td style="color:#0000ff;padding:8px;"><input type="text" id="determination_sd_2" name="determination_sd" onChange="calculator()" disabled/></td>
+              <td style="color:#0000ff;padding:8px;"><input type="text" name="sd_results"></input></td>
+            </tr>
+            <tr>
+>>>>>>> c78940a4bec4abee8b24b85c34b4cfe980f30dc8
               <td>RSD %</td>
               <td style="color:#0000ff;padding:8px;"></td>
               <td style="color:#0000ff;padding:8px;"><input type="text" id="determination_rsd_2" name="determination_sd" onChange="calculator()" disabled/></td>

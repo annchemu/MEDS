@@ -44,4 +44,9 @@ $(document).ready(function() {
       $("#column_serial_number").val(serial_number);
       $("#column_manufacturer").val(manufacturer);
     });
+    $("#analyst").on('change',function(){
+      var assigneruserid=$(this).find(":selected").data("assigneruserid");
+      $("#assigneruserid").val(assigneruserid);
+      
+    });
   });

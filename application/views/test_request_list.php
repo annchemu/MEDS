@@ -242,10 +242,19 @@
               <a data-target="#clients_request" role="button" class="sub_menu sub_menu_link first_link" data-toggle="modal"><img src="<?php echo base_url().'images/icons/add_field.png'?>" height="10px" width="10px">Add Client Request</a>
             </td>
         </tr>
-      <div id="unassigned_test_requests" name="menu" style="display:none;"><?php include_once "application/views/unassigned_test_request_list.php";?></div>
-      <div id="test_request" class="modal fade" role="dialog" aria-labelledby="meds" aria-hidden="true"><?php include_once "application/views/test_request_form.php";?></div>  
-      <div id="clients_request" class="modal fade" role="dialog" aria-labelledby="client" aria-hidden="true"><?php include_once "application/views/client_test_request_form.php";?></div>
-      
+        <?php
+        if($user['logged_in']['user_type'] ==5 ){
+          ?>
+          <div id="assigned_test_requests" name="menu" style="display:none;"><?php include_once "application/views/assigned_analyst_tests.php";?></div>
+      <?php
+        }elseif($user['logged_in']['user_type'] ==6){
+      ?>
+          <div id="unassigned_test_requests" name="menu" style="display:none;"><?php include_once "application/views/unassigned_test_request_list.php";?></div>
+          <div id="test_request" class="modal fade" role="dialog" aria-labelledby="meds" aria-hidden="true"><?php include_once "application/views/test_request_form.php";?></div>  
+          <div id="clients_request" class="modal fade" role="dialog" aria-labelledby="client" aria-hidden="true"><?php include_once "application/views/client_test_request_form.php";?></div>
+      <?php
+        }
+      ?>   
 </div>
 </div>
 </body>
