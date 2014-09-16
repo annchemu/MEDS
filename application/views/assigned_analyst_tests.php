@@ -208,7 +208,7 @@
             echo"style='display:none;'";
           }
         ?>
-       ><a href="<?php echo base_url().'test/index/'.$row->id.'/'.$test_request_id.'/'.$row->test_type_id;?>">Test</a></td>
+       ><a href="<?php echo base_url().'test/index/'.$row->id.'/'.$row->test_request_id;?>">Test</a></td>
        <?php
          $i++;
        ?>
