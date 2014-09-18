@@ -271,7 +271,7 @@
                foreach($sql_standards as $s_name):
               ?>
                
-               <option value="<?php  echo $s_name['item_description'];?>"data-idno="<?php  echo $s_name['reference_number'];?>" data-lotno="<?php  echo $s_name['batch_number'];?>"><?php  echo $s_name['item_description'];?></option>
+               <option value="<?php  echo $s_name['item_description'];?>"data-idno="<?php  echo $s_name['reference_number'];?>"data-potency="<?php  echo $s_name['potency'];?>" data-lotno="<?php  echo $s_name['batch_number'];?>"><?php  echo $s_name['item_description'];?></option>
                 <?php
                 endforeach
                 ?>
@@ -369,7 +369,7 @@
       </tr>
       <tr>  
         <td colspan ="2"align="right" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Column Oven Pressure:</td>
-        <td colspan ="4"align="left"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="column_oven_pressure"> <select name="column_oven_pressure_select"><option value="F">F</option><option value="C">C</option></select> </td>       
+        <td colspan ="4"align="left"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="column_oven_pressure"> <select name="column_oven_pressure_select"><option value="C">Celcius</option><option value="F">Fahrenheit</option></select> </td>       
       </tr>
       <tr>
         <td colspan ="2"align="right" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Mobile Phase Flow rate:</td>
@@ -467,11 +467,11 @@
             </tr>
             <tr>
               <td align="center"style="padding: 8px;">Acceptance Criteria</td>
-              <td style="padding: 8px;"><input type="text" id="rt_ac" name="rt_ac" placeholder ="NMT 2.0%"></td>
-              <td style="padding: 8px;"><input type="text" id="peak_area_ac" name="peak_area_ac" placeholder ="NMT 2.0%"></td>
-              <td style="padding: 8px;"><input type="text" id="assymetry_ac" name="assymetry_ac" placeholder ="NMT 2.0%"></td>
-              <td style="padding: 8px;"><input type="text" id="resolution_ac" name="resolution_ac" placeholder ="NLT 5.0%"></td>
-              <td style="padding: 8px;"><input type="text" id="other_ac" name="other_ac" placeholder ="NLT"></td>
+              <td style="padding: 8px;"><input type="text" id="rt_ac" name="rt_ac" placeholder ="NMT 2.0%" onchange="calculation_sd()"></td>
+              <td style="padding: 8px;"><input type="text" id="peak_area_ac" name="peak_area_ac" placeholder ="NMT 2.0%" onchange="calculation_sd()"></td>
+              <td style="padding: 8px;"><input type="text" id="assymetry_ac" name="assymetry_ac" placeholder ="NMT 2.0%" onchange="calculation_sd()"></td>
+              <td style="padding: 8px;"><input type="text" id="resolution_ac" name="resolution_ac" placeholder ="NLT 5.0%" onchange="calculation_sd()"></td>
+              <td style="padding: 8px;"><input type="text" id="other_ac" name="other_ac" placeholder ="NLT" onchange="calculation_sd()"></td>
               
             </tr>
             <tr>

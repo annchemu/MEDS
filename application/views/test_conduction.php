@@ -2110,26 +2110,18 @@
            <?php
            }
            ?>
-
-           <?php
+ <?php
             if($request[0]['dissolution']==0 || $request[0]['dissolution']=="" || $request[0]['dissolution']=="NULL" ){
              
            }else{
             ?>
             <tr>
-                <td style="text-align:center;padding:4px;background-color:#ffffff;"><b>Dissolution</b></td>
-                <td style='text-align:left;padding:4px;background-color:#ffffff;'></td>
-                <td style='text-align:center;padding:4px;background-color:#ffffff;'></td>
-                <td style='text-align:center;padding:4px;background-color:#ffffff;'></td>
-                <td style='text-align:center;padding:4px;background-color:#ffffff;'></td>
-               </tr>
-            <tr>
-                <td style="text-align:center;padding:4px;"><b></b></a></td>
+                <td style="text-align:center;padding:4px;"><b>Dissolution</b></a></td>
                 <td style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_dissolution/monograph_uv/'.$query['a'].'/'.$request[0]['tr'];?>">Monograph</a></td>
                 <td 
                 <?php 
                       if(empty($monograph_diss_uv)){
-                          echo"style='text-align:left;padding:4px;color:#000;background-color:#ffffff;'>";
+                          echo"style='text-align:left;padding:4px;color:#000;background-color:#ffffff;border-bottom:solid 1px #bfbfbf;'>";
                           echo "Please Fill The By UV Monograph First";
                           
                      }else{
@@ -2138,6 +2130,8 @@
                      <?php   
                      }
                      ?>
+               
+
                 <td 
                 <?php 
                       if(empty($diss_uv)){
@@ -2163,12 +2157,49 @@
                 </td>
             </tr>
             <tr>
+                <td style="text-align:center;padding:4px;"></td>
+                <td style="text-align:center;padding:4px;"></td>
+                <td 
+                <?php 
+                      if(@$diss_uv[0]['choice']==1 && @$diss_uv[0]['status']==1|| @$diss_uv[0]['choice']==0 && @$diss_uv[0]['status']==0){                  
+                      
+                          echo"style='text-align:center;padding:4px;color:#000;background-color:#ffffff;border-bottom:solid 1px #bfbfbf;'>";
+                          echo "Second Stage";
+                          
+                     }
+                     else{
+                      ?>
+                        style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_dissolution/index_second_stage_uv/'.$query['a'].'/'.$request[0]['tr'];?>">By UV: Second Stage</a></td>
+                     <?php   
+                     }
+                     ?>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+                <td style="text-align:center;padding:4px;"></td>
+                <td style="text-align:center;padding:4px;"></td>
+                <td 
+                <?php 
+                      if(@$diss_uv[0]['choice']==0 && @$diss_uv[0]['status']==2 || @$diss_uv[0]['choice']==0 && @$diss_uv[0]['status']==3 || @$diss_uv[0]['choice']==1 && @$diss_uv[0]['status']==3 ){                  
+                      
+                      ?>style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_dissolution/index_third_stage_uv/'.$query['a'].'/'.$request[0]['tr'];?>">By UV: Third Stage</a></td>
+                      <?php
+                     }else{
+                        
+                         echo"style='text-align:center;padding:4px;color:#000;background-color:#ffffff;border-bottom:solid 1px #bfbfbf;'>";
+                         echo "Third Stage";
+                     } ?>
+                <td></td>
+              <td></td>
+            </tr>
+            <tr>
                 <td style="text-align:center;padding:4px;"></a></td>
                 <td style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_dissolution/monograph_delayed_release/'.$query['a'].'/'.$request[0]['tr'];?>">Monograph</a></td>
                 <td 
                 <?php 
                       if(empty($monograph_dissolution_delayed)){
-                           echo"style='text-align:left;padding:4px;color:#000;background-color:#ffffff;'>";
+                           echo"style='text-align:left;padding:4px;color:#000;background-color:#ffffff;border-bottom:solid 1px #bfbfbf;'>";
                           echo "Please Fill The Delayed Release Tablets Monograph First";
                           
                      }else{
@@ -2181,7 +2212,7 @@
                 <?php 
                       if(empty($dissolution_delayed)){
                     
-                          echo"style='text-align:center;padding:4px;'>";
+                          echo"style='text-align:center;padding:4px;border-bottom:solid 1px #bfbfbf;'>";
                           echo "View Worksheet";
                      }else{
                       ?>
@@ -2202,13 +2233,49 @@
                 </td>
             </tr>
             <tr>
+                <td style="text-align:center;padding:4px;"></td>
+                <td style="text-align:center;padding:4px;"></td>
+                <td 
+                <?php 
+                      if(@$dissolution_delayed[0]['choice']==1 && @$dissolution_delayed[0]['status']==1|| @$dissolution_delayed[0]['choice']==0 && @$dissolution_delayed[0]['status']==0){                  
+                      
+                          echo"style='text-align:center;padding:4px;color:#000;background-color:#ffffff;border-bottom:solid 1px #bfbfbf;'>";
+                          echo "Second Stage";
+                          
+                     }
+                     else{
+                      ?>
+                        style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_dissolution/index_delayed_release_second_stage/'.$query['a'].'/'.$request[0]['tr'];?>">Delayed Release: Second Stage</a></td>
+                     <?php   
+                     }
+                     ?>
+                <td></td>
+              <td></td>
+            </tr>
+            <tr>
+                <td style="text-align:center;padding:4px;"></td>
+                <td style="text-align:center;padding:4px;"></td>
+                <td 
+                <?php 
+                      if(@$dissolution_delayed[0]['choice']==0 && @$dissolution_delayed[0]['status']==2 || @$dissolution_delayed[0]['choice']==0 && @$dissolution_delayed[0]['status']==3 || @$dissolution_delayed[0]['choice']==1 && @$dissolution_delayed[0]['status']==3 ){                  
+                      
+                      ?>style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_dissolution/index_delayed_release_third_stage/'.$query['a'].'/'.$request[0]['tr'];?>"> Delayed Release: Third Stage</a></td><?php
+                     }else{
+                        
+                         echo"style='text-align:center;padding:4px;color:#000;background-color:#ffffff;border-bottom:solid 1px #bfbfbf;'>";
+                         echo "Third Stage";
+                     } ?>
+                <td></td>
+              <td></td>
+            </tr>
+            <tr>
                 <td style="text-align:center;padding:4px;"></a></td>
                 <td style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_dissolution/monograph_enteric_coated/'.$query['a'].'/'.$request[0]['tr'];?>">Monograph</a></td>
                 <td 
                  <?php 
                       if(empty($monograph_dissolution_enteric_coated)){
                     
-                          echo"style='text-align:left;padding:4px;'>";
+                          echo"style='text-align:left;padding:4px;border-bottom:solid 1px #bfbfbf;'>";
                           echo "Enteric Coated Tablets";
                      }else{
                       ?>
@@ -2220,7 +2287,7 @@
                 <?php 
                       if(empty($dissolution_enteric_coated)){
                     
-                          echo"style='text-align:center;padding:4px;'>";
+                          echo"style='text-align:center;padding:4px;border-bottom:solid 1px #bfbfbf;'>";
                           echo "View Worksheet";
                      }else{
                       ?>
@@ -2241,13 +2308,48 @@
                 </td>
             </tr>
             <tr>
+                <td style="text-align:center;padding:4px;"></td>
+                <td style="text-align:center;padding:4px;"></td>
+                <td 
+                <?php 
+                      if(@$dissolution_enteric_coated[0]['choice']==1 && @$dissolution_enteric_coated[0]['status']==1|| @$dissolution_enteric_coated[0]['choice']==0 && @$dissolution_enteric_coated[0]['status']==0){                  
+                      
+                          echo"style='text-align:center;padding:4px;color:#000;background-color:#ffffff;border-bottom:solid 1px #bfbfbf;'>";
+                          echo "Second Stage";
+                          
+                     }
+                     else{
+                      ?>
+                        style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_dissolution/index_enteric_coated_second_stage/'.$query['a'].'/'.$request[0]['tr'];?>">Enteric Coated: Second Stage</a></td>
+                     <?php   
+                     }
+                     ?>
+                <td></td>
+              <td></td>
+            </tr>
+            <tr>
+                <td style="text-align:center;padding:4px;"></td>
+                <td style="text-align:center;padding:4px;"></td>
+                <td 
+                <?php 
+                      if(@$dissolution_enteric_coated[0]['choice']==0 && @$dissolution_enteric_coated[0]['status']==2 || @$dissolution_enteric_coated[0]['choice']==0 && @$dissolution_enteric_coated[0]['status']==3 || @$dissolution_enteric_coated[0]['choice']==1 && @$dissolution_enteric_coated[0]['status']==3 ){                  
+                      
+                      ?>style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_dissolution/index_enteric_coated_third_stage/'.$query['a'].'/'.$request[0]['tr'];?>"> Enteric Coated: Third Stage</a></td><?php
+                     }else{
+                        
+                         echo"style='text-align:center;padding:4px;color:#000;background-color:#ffffff;border-bottom:solid 1px #bfbfbf;'>";echo "Third Stage";
+                     } ?>
+                <td></td>
+              <td></td>
+            </tr>
+            <tr>
                 <td style="text-align:center;padding:4px;"></a></td>
                 <td style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_dissolution/monograph_normal_hplc/'.$query['a'].'/'.$request[0]['tr'];?>">Monograph</a></td>
                 <td  
                  <?php 
                       if(empty($monograph_dissolution_normal_hplc)){
                     
-                          echo"style='text-align:left;padding:4px;'>";
+                          echo"style='text-align:left;padding:4px;border-bottom:solid 1px #bfbfbf;'>";
                           echo "Normal Tablets";
                      }else{
                       ?>
@@ -2259,7 +2361,7 @@
                 <?php 
                       if(empty($dissolution_normal_hplc)){
                     
-                          echo"style='text-align:center;padding:4px;'>";
+                          echo"style='text-align:center;padding:4px;border-bottom:solid 1px #bfbfbf;'>";
                           echo "View Worksheet";
                      }else{
                       ?>
@@ -2280,13 +2382,48 @@
                 </td>
             </tr>
             <tr>
+                <td style="text-align:center;padding:4px;"></td>
+                <td style="text-align:center;padding:4px;"></td>
+                <td 
+                <?php 
+                      if(@$dissolution_normal_hplc[0]['choice']==1 && @$dissolution_normal_hplc[0]['status']==1|| @$dissolution_normal_hplc[0]['choice']==0 && @$dissolution_normal_hplc[0]['status']==0){                  
+                      
+                          echo"style='text-align:center;padding:4px;color:#000;background-color:#ffffff;border-bottom:solid 1px #bfbfbf;'>";
+                          echo "Second Stage";
+                          
+                     }
+                     else{
+                      ?>
+                        style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_dissolution/index_second_normal/'.$query['a'].'/'.$request[0]['tr'];?>">Normal Tablets: Second Stage</a></td>
+                     <?php   
+                     }
+                     ?>
+                <td></td>
+              <td></td>
+            </tr>
+            <tr>
+                <td style="text-align:center;padding:4px;"></td>
+                <td style="text-align:center;padding:4px;"></td>
+                <td 
+                <?php 
+                      if(@$dissolution_normal_hplc[0]['choice']==0 && @$dissolution_normal_hplc[0]['status']==2 || @$dissolution_normal_hplc[0]['choice']==0 && @$dissolution_normal_hplc[0]['status']==3 || @$dissolution_normal_hplc[0]['choice']==1 && @$dissolution_normal_hplc[0]['status']==3 ){                  
+                      
+                      ?>style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_dissolution/index_third_normal/'.$query['a'].'/'.$request[0]['tr'];?>">Normal Tablets: Third Stage</a></td><?php
+                     }else{
+                        
+                         echo"style='text-align:center;padding:4px;color:#000;background-color:#ffffff;border-bottom:solid 1px #bfbfbf;'>";echo "Third Stage";
+                     } ?>
+                <td></td>
+              <td></td>
+            </tr>
+            <tr>
                 <td style="text-align:center;padding:4px;"></a></td>
                 <td style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_dissolution/monograph_two_components/'.$query['a'].'/'.$request[0]['tr'];?>">Monograph</a></td>
                 <td 
                 <?php 
                       if(empty($monograph_dissolution_two_component)){
                     
-                          echo"style='text-align:left;padding:4px;'>";
+                          echo"style='text-align:left;padding:4px;border-bottom:solid 1px #bfbfbf;'>";
                           echo "Two Component Tablets";
                      }else{
                       ?>
@@ -2298,7 +2435,7 @@
                 <?php 
                       if(empty($dissolution_two_component)){
                     
-                          echo"style='text-align:center;padding:4px;'>";
+                          echo"style='text-align:center;padding:4px;border-bottom:solid 1px #bfbfbf;'>";
                           echo "Not Yet Done";
                      }else{
                          ?>
@@ -2317,6 +2454,41 @@
                          echo "Complete";
                      }?>
                 </td>
+            </tr>
+             <tr>
+                <td style="text-align:center;padding:4px;"></td>
+                <td style="text-align:center;padding:4px;"></td>
+                <td 
+                <?php 
+                      if(@$dissolution_two_component[0]['choice']==1 && @$dissolution_two_component[0]['status']==1|| @$dissolution_two_component[0]['choice']==0 && @$dissolution_two_component[0]['status']==0){                  
+                      
+                          echo"style='text-align:center;padding:4px;color:#000;background-color:#ffffff;border-bottom:solid 1px #bfbfbf;'>";
+                          echo "Second Stage";
+                          
+                     }
+                     else{
+                      ?>
+                        style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_dissolution/index_two_components_second_stage/'.$query['a'].'/'.$request[0]['tr'];?>">Two Component: Second Stage</a></td>
+                     <?php   
+                     }
+                     ?>
+               <td></td>
+              <td></td>
+            </tr>
+            <tr>
+                <td style="text-align:center;padding:4px;"></td>
+                <td style="text-align:center;padding:4px;"></td>
+                <td 
+                <?php 
+                      if(@$dissolution_two_component[0]['choice']==0 && @$dissolution_two_component[0]['status']==2 || @$dissolution_two_component[0]['choice']==0 && @$dissolution_two_component[0]['status']==3 || @$dissolution_two_component[0]['choice']==1 && @$dissolution_two_component[0]['status']==3 ){                  
+                      
+                      ?>style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_dissolution/index_two_components_third_stage/'.$query['a'].'/'.$request[0]['tr'];?>">Two Component: Third Stage</a></td><?php
+                     }else{
+                        
+                         echo"style='text-align:center;padding:4px;color:#000;background-color:#ffffff;border-bottom:solid 1px #bfbfbf;'>";echo "Third Stage";
+                     } ?>
+                <td></td>
+              <td></td>
             </tr>
            <?php  
            }
