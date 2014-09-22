@@ -784,8 +784,7 @@
               ?>
           </select></td>
             <td style="border-bottom: dotted 1px #c4c4ff;padding:4px;text-align:right;">Date <input type="text"  id="datepicker" name="date"></td>
-          </tr>
-          
+          </tr>          
           <tr>
             <td colspan="2" style="padding:4px;">Further Comments:</td>
           </tr>

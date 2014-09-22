@@ -420,12 +420,12 @@
               ?>>
                 <a
                     <?php
-                    if($row->assignment_name!="0"){
+                    if($row->assigner_user_id!="0"){
                         echo"style='display:block;text-align: center;'";
                     ?> href="<?php echo base_url().'worksheet/'.$row->tr;?>">Worksheet
                 </a>
                     <?php
-                    }elseif($row->assignment_name==0){
+                    }elseif($row->assigner_user_id==0){
                     ?>
                 <a
                     <?php

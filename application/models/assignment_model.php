@@ -18,6 +18,7 @@ if($nw_qty==0 || $nw_qty=="" || $nw_qty=="NULL" ){
   $reference_number= $this->input->post('reference_number');
 
   $user_id = $this->input->post('user_id');
+  $analyst_assigned_id= $this->input->post('assigneruserid');
   $test_request_id = $this->input->post('tr_id');
   $analyst_name= $this->input->post('analyst');
   $client_id= $this->input->post('client_id');
@@ -34,7 +35,8 @@ if($nw_qty==0 || $nw_qty=="" || $nw_qty=="NULL" ){
    'analyst_name'=>$analyst_name,
    'assigner_name'=>$this->input->post('user_name'),
    'test_request_id'=>$test_request_id,
-   'user_id'=>$user_id,
+   'assigner_user_id'=>$user_id,
+   'analyst_assigned_id'=>$analyst_assigned_id,
    'client_id'=>$client_id,
    'sample_issued'=>$samples_issued
    );
@@ -45,7 +47,6 @@ if($nw_qty==0 || $nw_qty=="" || $nw_qty=="NULL" ){
   );
   
   $data_three = array(
-   'assignment_name'=>$analyst_name,
    'quantity_remaining'=>$difference,
    'new_quantity'=>$difference
    
@@ -64,6 +65,7 @@ if($nw_qty==0 || $nw_qty=="" || $nw_qty=="NULL" ){
   $reference_number= $this->input->post('reference_number');
 
   $user_id = $this->input->post('user_id');
+  $analyst_assigned_id= $this->input->post('assigneruserid');
   $test_request_id = $this->input->post('tr_id');
   $analyst_name= $this->input->post('analyst');
   $client_id= $this->input->post('client_id');
@@ -80,7 +82,8 @@ if($nw_qty==0 || $nw_qty=="" || $nw_qty=="NULL" ){
    'analyst_name'=>$analyst_name,
    'assigner_name'=>$this->input->post('user_name'),
    'test_request_id'=>$test_request_id,
-   'user_id'=>$user_id,
+   'assigner_user_id'=>$user_id,
+   'analyst_assigned_id'=>$analyst_assigned_id,
    'client_id'=>$client_id,
    'sample_issued'=>$samples_issued
    );
@@ -91,7 +94,6 @@ if($nw_qty==0 || $nw_qty=="" || $nw_qty=="NULL" ){
   );
   
   $data_three = array(
-   'assignment_name'=>$analyst_name,
    'quantity_remaining'=>$difference,
    'new_quantity'=>$difference
    
