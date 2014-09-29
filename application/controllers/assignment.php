@@ -18,7 +18,7 @@ function index(){
     //$results=$query->result_array();
     
     $data['request']=
-    $this->db->select('test_request.id AS tid,test_request.client_id,test_request.request_type,test_request.quantity_submitted,test_request.quantity_type')->get_where('test_request', array('id' => $id))->result_array();
+    $this->db->select('test_request.id AS tid,test_request.client_id,test_request.request_type,test_request.quantity_remaining,test_request.quantity_submitted,test_request.quantity_type')->get_where('test_request', array('id' => $id))->result_array();
     $query=$this->db->get_where('user', array('user_type' => $type_id));
     $results=$query->result_array();
     
@@ -31,11 +31,12 @@ function index(){
 }
 
 function save(){
+    $tr_id=$this->uri->segment(3);
     
     $this->load->model('assignment_model');        
 	
     if($this->input->post('submit')){
-        $this->assignment_model->process();                
+        $this->assignment_model->process($tr_id);                
     }
     redirect('test_request_list/GetA');
 }

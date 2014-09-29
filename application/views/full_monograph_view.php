@@ -193,7 +193,7 @@
     <div id="form_wrapper_lists">
      <div id="account_lists">
       <?php echo validation_errors(); ?>
-      <?php echo form_open('content_uniformity/save',array('id'=>'content_uniformity_view'));?>
+      <?php echo form_open('content_uniformity/save_friability_monograph',array('id'=>'content_uniformity_view'));?>
        <table width="100%" cellpadding="8px" border="0" align="center">
         <input type="hidden" name="tr_id" value="<?php echo $query['tr'];?>"></input>
         <input type="hidden" name="assignment_id" value="<?php echo $request[0]['a'];?>"></input> 

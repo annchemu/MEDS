@@ -76,10 +76,9 @@
        <table width="75%" class="table_form" border="0" cellpadding="4px" align="center">
         <input type="hidden" name="tr_id" value="<?php echo $query['tr'];?>"></input>
         <input type="hidden" name="assignment_id" value="<?php echo $request[0]['a'];?>"></input>
-        <input type="hidden" name="test_type_id" value="<?php echo $query['test_type_id'];?>"></input>
         <tr>
-            <td colspan="4" style="text-align:left;padding:8px;backgroun-color:#fffff;border-bottom:solid 1px #bfbfbf;"><a href="<?php  echo base_url().'assay/outofspecification/'.$request[0]['a'].'/'.$query['tr'].'/'.$query['test_type_id'];?>"><img src="<?php echo base_url().'images/icons/ot.png';?>" height="25px" width="25px">Raise an Out of Specification Investigation</a></td>
-            <td colspan="4" style="text-align:right;padding:8px;backgroun-color:#fffff;border-bottom:solid 1px #bfbfbf;"><a href="<?php echo base_url().'test/index/'.$request[0]['a'].'/'.$query['tr'].'/'.$query['test_type_id'];?>"><img src="<?php echo base_url().'images/icons/view.png';?>" height="25px" width="25px">Back To Test Lists</a></td>
+            <td colspan="4" style="text-align:left;padding:8px;backgroun-color:#fffff;border-bottom:solid 1px #bfbfbf;"><a href="<?php  echo base_url().'assay/outofspecification/'.$request[0]['a'].'/'.$query['tr'].'/';?>"><img src="<?php echo base_url().'images/icons/ot.png';?>" height="25px" width="25px">Raise an Out of Specification Investigation</a></td>
+            <td colspan="4" style="text-align:right;padding:8px;backgroun-color:#fffff;border-bottom:solid 1px #bfbfbf;"><a href="<?php echo base_url().'test/index/'.$request[0]['a'].'/'.$query['tr'].'/';?>"><img src="<?php echo base_url().'images/icons/view.png';?>" height="25px" width="25px">Back To Test Lists</a></td>
         </tr>
         <tr>
           <td colspan="8" align="center" style="padding:8px;">
@@ -182,8 +181,6 @@
                       <td  align="center" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">Weight 1</td>
                       <td  align="center" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">Weight 2</td>
                       <td  align="center" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">weight 3</td>    
-                      <td  align="center" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">Weight 4</td>
-                      <td  align="center" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">Weight 5</td>
                   </tr>
                   <tr>
                       <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
@@ -194,10 +191,7 @@
                       <?php echo $hplc_internal_method[0]['weight_of_sample_container_w2'];?></td>
                       <td  height="25px" align="center" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
                       <?php echo $hplc_internal_method[0]['weight_of_sample_container_w3'];?></td>
-                      <td  height="25px" align="center" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                      <?php echo $hplc_internal_method[0]['weight_of_sample_container_w4'];?></td>
-                      <td  height="25px" align="center" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                      <?php echo $hplc_internal_method[0]['weight_of_sample_container_w5'];?></td>
+                      
                   </tr>
                   <tr>
                       <td height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
@@ -208,10 +202,7 @@
                       <?php echo $hplc_internal_method[0]['weight_of_container_w2'];?></td>
                       <td  height="25px" align="center" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
                       <?php echo $hplc_internal_method[0]['weight_of_container_w3'];?></td>
-                      <td  height="25px" align="center" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                      <?php echo $hplc_internal_method[0]['weight_of_container_w4'];?></td>
-                      <td  height="25px" align="center" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                      <?php echo $hplc_internal_method[0]['weight_of_container_w5'];?></td>
+                      
                   </tr>
                   <tr>
                       <td height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
@@ -222,10 +213,7 @@
                       <?php echo $hplc_internal_method[0]['weight_of_sample_w2'];?></td>
                       <td  height="25px" align="center" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
                       <?php echo $hplc_internal_method[0]['weight_of_sample_w3'];?></td>
-                      <td  height="25px" align="center" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                      <?php echo $hplc_internal_method[0]['weight_of_sample_w4'];?></td>
-                      <td  height="25px" align="center" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                      <?php echo $hplc_internal_method[0]['weight_of_sample_w5'];?></td>
+                      
                   </tr>
                   <tr>
                     <td colspan="6"  align="left" style="padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">Dilution: </td>
@@ -261,34 +249,34 @@
               <table class="table_form" width="80%" border="0" align="center" cellpadding="8px"> 
                 <tr>
                     <td  align="left" style="padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">Standard Description:</td>
-                    <td  align="center" style="padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;"><?php echo $hplc_internal_method[0]['standard_description'];?>
+                    <td  align="center" style="padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;"><?php echo $hplc_internal_method[0]['standard_description_one'];?>
                     </td>
                 </tr>
                  <tr>
                     <td  align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
                     Potency</td>
                     <td  height="20px" align="center" style="padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                    <?php echo $hplc_internal_method[0]['potency'];?></td>
+                    <?php echo $hplc_internal_method[0]['potency_one'];?></td>
                 </tr>
                 <tr>
                     <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
                     Weight of standard + container(g) here</td>
                     <td  height="25px" align="center" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                    <?php echo $hplc_internal_method[0]['weight_standard_container_std'];?></td>
+                    <?php echo $hplc_internal_method[0]['weight_standard_container_std_one'];?></td>
                   
                 </tr>
                 <tr>
                     <td height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
                     Weight of container(g)</td>
                     <td height="25px" align="center" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                    <?php echo $hplc_internal_method[0]['weight_container_of_std'];?></td>
+                    <?php echo $hplc_internal_method[0]['weight_container_of_std_one'];?></td>
                     
                 </tr>
                 <tr>
                     <td height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
                     Weight of standard(g)</td>
                     <td height="25px" align="center" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                    <?php echo $hplc_internal_method[0]['weight_of_standard'];?></td>
+                    <?php echo $hplc_internal_method[0]['weight_of_standard_one'];?></td>
                     
                 </tr>
                 <tr>
@@ -331,50 +319,57 @@
                       <td  align="center" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">weight 3</td>
                       <td  align="center" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">Weight 4</td>
                       <td  align="center" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">weight 5</td>
+                      <td  align="center" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">weight 6</td>
                     </tr>
                     <tr>
                         <td  height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
                         Weight of Sample + container(g)</td>
                         <td  height="25px" align="center" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                        <?php echo $hplc_internal_method[0]['weight_of_sample_container_w1_two'];?></td>
+                        <?php echo $hplc_internal_method[0]['weight_of_reagent_container_w1'];?></td>
                         <td  height="25px" align="center" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                        <?php echo $hplc_internal_method[0]['weight_of_sample_container_w2_two'];?></td>
+                        <?php echo $hplc_internal_method[0]['weight_of_reagent_container_w2'];?></td>
                         <td  height="25px" align="center" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                        <?php echo $hplc_internal_method[0]['weight_of_sample_container_w3_two'];?></td>
+                        <?php echo $hplc_internal_method[0]['weight_of_reagent_container_w3'];?></td>
                         <td  height="25px" align="center" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                        <?php echo $hplc_internal_method[0]['weight_of_sample_container_w3_two'];?></td>
+                        <?php echo $hplc_internal_method[0]['weight_of_reagent_container_w4'];?></td>
                         <td  height="25px" align="center" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                        <?php echo $hplc_internal_method[0]['weight_of_sample_container_w4_two'];?></td>
+                        <?php echo $hplc_internal_method[0]['weight_of_reagent_container_w5'];?></td>
+                        <td  height="25px" align="center" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
+                        <?php echo $hplc_internal_method[0]['weight_of_reagent_container_w6'];?></td>
                       
                     </tr>
                     <tr>
                         <td height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
                         Weight of container(g)</td>
                         <td height="25px" align="center" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                        <?php echo $hplc_internal_method[0]['weight_of_container_w1_two'];?></td>
+                        <?php echo $hplc_internal_method[0]['weight_of_container_w1_reagent'];?></td>
                         <td height="25px" align="center" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                        <?php echo $hplc_internal_method[0]['weight_of_container_w2_two'];?></td>
+                        <?php echo $hplc_internal_method[0]['weight_of_container_w2_reagent'];?></td>
                         <td height="25px" align="center" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                        <?php echo $hplc_internal_method[0]['weight_of_container_w3_two'];?></td>
+                        <?php echo $hplc_internal_method[0]['weight_of_container_w3_reagent'];?></td>
                         <td height="25px" align="center" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                        <?php echo $hplc_internal_method[0]['weight_of_container_w4_two'];?></td>
+                        <?php echo $hplc_internal_method[0]['weight_of_container_w4_reagent'];?></td>
                         <td height="25px" align="center" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                        <?php echo $hplc_internal_method[0]['weight_of_container_w5_two'];?></td>
+                        <?php echo $hplc_internal_method[0]['weight_of_container_w5_reagent'];?></td>
+                        <td height="25px" align="center" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
+                        <?php echo $hplc_internal_method[0]['weight_of_container_w6_reagent'];?></td>
                         
                     </tr>
                     <tr>
                         <td height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
                         Weight of Sample(g)</td>
                         <td height="25px" align="center" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                        <?php echo $hplc_internal_method[0]['weight_of_sample_w1_two'];?></td>
+                        <?php echo $hplc_internal_method[0]['weight_of_reagent_w1'];?></td>
                         <td height="25px" align="center" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                        <?php echo $hplc_internal_method[0]['weight_of_sample_w2_two'];?></td>
+                        <?php echo $hplc_internal_method[0]['weight_of_reagent_w2'];?></td>
                         <td height="25px" align="center" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                        <?php echo $hplc_internal_method[0]['weight_of_sample_w3_two'];?></td>
+                        <?php echo $hplc_internal_method[0]['weight_of_reagent_w3'];?></td>
                         <td height="25px" align="center" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                        <?php echo $hplc_internal_method[0]['weight_of_sample_w4_two'];?></td>
+                        <?php echo $hplc_internal_method[0]['weight_of_reagent_w4'];?></td>
                         <td height="25px" align="center" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                        <?php echo $hplc_internal_method[0]['weight_of_sample_w5_two'];?></td>
+                        <?php echo $hplc_internal_method[0]['weight_of_reagent_w5'];?></td>
+                        <td height="25px" align="center" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
+                        <?php echo $hplc_internal_method[0]['weight_of_reagent_w6'];?></td>
                         
                     </tr>
                 </table>
@@ -591,37 +586,37 @@
                     </tr>
                     <tr>
                       <td style="text-align:center;border-bottom:solid 1px #c4c4ff;border-right:solid 1px #c4c4ff;border-top:solid 1px #c4c4ff;">1.</td>
-                      <td style="text-align:center;padding:8px;background-color:#ffffff;border-bottom:dotted 1px #c4c4ff;border-top:solid 1px #c4c4ff;"><?php echo $hplc_internal_method_peak_area_chromatograms[0]['sd_one'];?></td>
-                      <td style="text-align:center;padding:8px;background-color:#ffffff;border-bottom:dotted 1px #c4c4ff;border-top:solid 1px #c4c4ff;"><?php echo $hplc_internal_method_peak_area_chromatograms[0]['internal_std_one_one'];?></td>
-                      <td style="text-align:center;padding:8px;background-color:#ffffff;border-bottom:dotted 1px #c4c4ff;border-top:solid 1px #c4c4ff;"><?php echo $hplc_internal_method_peak_area_chromatograms[0]['ratio_std_one_one'];?></td>
+                      <td style="text-align:center;padding:8px;background-color:#ffffff;border-bottom:dotted 1px #c4c4ff;border-top:solid 1px #c4c4ff;"><?php echo $hplc_internal_method_peak_area_chromatograms[0]['std_one'];?></td>
+                      <td style="text-align:center;padding:8px;background-color:#ffffff;border-bottom:dotted 1px #c4c4ff;border-top:solid 1px #c4c4ff;"><?php echo $hplc_internal_method_peak_area_chromatograms[0]['internal_std_a_one'];?></td>
+                      <td style="text-align:center;padding:8px;background-color:#ffffff;border-bottom:dotted 1px #c4c4ff;border-top:solid 1px #c4c4ff;"><?php echo $hplc_internal_method_peak_area_chromatograms[0]['ratio_std_a_one'];?></td>
 
-                      <td style="text-align:center;padding:8px;background-color:#ffffff;border-bottom:dotted 1px #c4c4ff;border-top:solid 1px #c4c4ff;"><?php echo $hplc_internal_method_peak_area_chromatograms[0]['sample_one_one'];?></td>
-                      <td style="text-align:center;padding:8px;background-color:#ffffff;border-bottom:dotted 1px #c4c4ff;border-top:solid 1px #c4c4ff;border-top:solid 1px #c4c4ff;"><?php echo $hplc_internal_method_peak_area_chromatograms[0]['internal_std_one_two'];?></td>
-                      <td style="text-align:center;padding:8px;background-color:#ffffff;border-bottom:dotted 1px #c4c4ff;border-top:solid 1px #c4c4ff;"><?php echo $hplc_internal_method_peak_area_chromatograms[0]['ratio_std_one_two'];?></td>
+                      <td style="text-align:center;padding:8px;background-color:#ffffff;border-bottom:dotted 1px #c4c4ff;border-top:solid 1px #c4c4ff;"><?php echo $hplc_internal_method_peak_area_chromatograms[0]['sample_a_one'];?></td>
+                      <td style="text-align:center;padding:8px;background-color:#ffffff;border-bottom:dotted 1px #c4c4ff;border-top:solid 1px #c4c4ff;border-top:solid 1px #c4c4ff;"><?php echo $hplc_internal_method_peak_area_chromatograms[0]['internal_std_b_one'];?></td>
+                      <td style="text-align:center;padding:8px;background-color:#ffffff;border-bottom:dotted 1px #c4c4ff;border-top:solid 1px #c4c4ff;"><?php echo $hplc_internal_method_peak_area_chromatograms[0]['ratio_std_b_one'];?></td>
 
-                      <td style="text-align:center;padding:8px;background-color:#ffffff;border-bottom:dotted 1px #c4c4ff;border-top:solid 1px #c4c4ff;"><?php echo $hplc_internal_method_peak_area_chromatograms[0]['sample_one_two'];?></td>
-                      <td style="text-align:center;padding:8px;background-color:#ffffff;border-bottom:dotted 1px #c4c4ff;border-top:solid 1px #c4c4ff;"><?php echo $hplc_internal_method_peak_area_chromatograms[0]['internal_std_one_three'];?></td>
-                      <td style="text-align:center;padding:8px;background-color:#ffffff;border-bottom:dotted 1px #c4c4ff;border-top:solid 1px #c4c4ff;"><?php echo $hplc_internal_method_peak_area_chromatograms[0]['ratio_std_one_three'];?></td>
+                      <td style="text-align:center;padding:8px;background-color:#ffffff;border-bottom:dotted 1px #c4c4ff;border-top:solid 1px #c4c4ff;"><?php echo $hplc_internal_method_peak_area_chromatograms[0]['sample_b_one'];?></td>
+                      <td style="text-align:center;padding:8px;background-color:#ffffff;border-bottom:dotted 1px #c4c4ff;border-top:solid 1px #c4c4ff;"><?php echo $hplc_internal_method_peak_area_chromatograms[0]['internal_std_c_one'];?></td>
+                      <td style="text-align:center;padding:8px;background-color:#ffffff;border-bottom:dotted 1px #c4c4ff;border-top:solid 1px #c4c4ff;"><?php echo $hplc_internal_method_peak_area_chromatograms[0]['ratio_std_c_one'];?></td>
 
-                      <td style="text-align:center;padding:8px;background-color:#ffffff;border-bottom:dotted 1px #c4c4ff;border-top:solid 1px #c4c4ff;"><?php echo $hplc_internal_method_peak_area_chromatograms[0]['sample_one_three'];?></td>
-                      <td style="text-align:center;padding:8px;background-color:#ffffff;border-bottom:dotted 1px #c4c4ff;border-top:solid 1px #c4c4ff;"><?php echo $hplc_internal_method_peak_area_chromatograms[0]['internal_std_one_four'];?></td>
-                      <td style="text-align:center;padding:8px;background-color:#ffffff;border-bottom:dotted 1px #c4c4ff;border-top:solid 1px #c4c4ff;"><?php echo $hplc_internal_method_peak_area_chromatograms[0]['ratio_std_one_four'];?></td>
+                      <td style="text-align:center;padding:8px;background-color:#ffffff;border-bottom:dotted 1px #c4c4ff;border-top:solid 1px #c4c4ff;"><?php echo $hplc_internal_method_peak_area_chromatograms[0]['sample_c_one'];?></td>
+                      <td style="text-align:center;padding:8px;background-color:#ffffff;border-bottom:dotted 1px #c4c4ff;border-top:solid 1px #c4c4ff;"><?php echo $hplc_internal_method_peak_area_chromatograms[0]['internal_std_d_one'];?></td>
+                      <td style="text-align:center;padding:8px;background-color:#ffffff;border-bottom:dotted 1px #c4c4ff;border-top:solid 1px #c4c4ff;"><?php echo $hplc_internal_method_peak_area_chromatograms[0]['ratio_std_d_one'];?></td>
 
-                      <td style="text-align:center;padding:8px;background-color:#ffffff;border-bottom:dotted 1px #c4c4ff;border-top:solid 1px #c4c4ff;"><?php echo $hplc_internal_method_peak_area_chromatograms[0]['sample_one_four'];?></td>
-                      <td style="text-align:center;padding:8px;background-color:#ffffff;border-bottom:dotted 1px #c4c4ff;border-top:solid 1px #c4c4ff;"><?php echo $hplc_internal_method_peak_area_chromatograms[0]['internal_std_one_five'];?></td>
-                      <td style="text-align:center;padding:8px;background-color:#ffffff;border-bottom:dotted 1px #c4c4ff;border-top:solid 1px #c4c4ff;"><?php echo $hplc_internal_method_peak_area_chromatograms[0]['ratio_std_one_five'];?></td>
+                      <td style="text-align:center;padding:8px;background-color:#ffffff;border-bottom:dotted 1px #c4c4ff;border-top:solid 1px #c4c4ff;"><?php echo $hplc_internal_method_peak_area_chromatograms[0]['sample_d_one'];?></td>
+                      <td style="text-align:center;padding:8px;background-color:#ffffff;border-bottom:dotted 1px #c4c4ff;border-top:solid 1px #c4c4ff;"><?php echo $hplc_internal_method_peak_area_chromatograms[0]['internal_std_e_one'];?></td>
+                      <td style="text-align:center;padding:8px;background-color:#ffffff;border-bottom:dotted 1px #c4c4ff;border-top:solid 1px #c4c4ff;"><?php echo $hplc_internal_method_peak_area_chromatograms[0]['ratio_std_e_one'];?></td>
 
-                      <td style="text-align:center;padding:8px;background-color:#ffffff;border-bottom:dotted 1px #c4c4ff;border-top:solid 1px #c4c4ff;"><?php echo $hplc_internal_method_peak_area_chromatograms[0]['sample_one_five'];?></td>
-                      <td style="text-align:center;padding:8px;background-color:#ffffff;border-bottom:dotted 1px #c4c4ff;border-top:solid 1px #c4c4ff;"><?php echo $hplc_internal_method_peak_area_chromatograms[0]['internal_std_one_six'];?></td>
-                      <td style="text-align:center;padding:8px;background-color:#ffffff;border-bottom:dotted 1px #c4c4ff;border-top:solid 1px #c4c4ff;"><?php echo $hplc_internal_method_peak_area_chromatograms[0]['ratio_std_one_six'];?></td>
+                      <td style="text-align:center;padding:8px;background-color:#ffffff;border-bottom:dotted 1px #c4c4ff;border-top:solid 1px #c4c4ff;"><?php echo $hplc_internal_method_peak_area_chromatograms[0]['sample_e_one'];?></td>
+                      <td style="text-align:center;padding:8px;background-color:#ffffff;border-bottom:dotted 1px #c4c4ff;border-top:solid 1px #c4c4ff;"><?php echo $hplc_internal_method_peak_area_chromatograms[0]['internal_std_f_one'];?></td>
+                      <td style="text-align:center;padding:8px;background-color:#ffffff;border-bottom:dotted 1px #c4c4ff;border-top:solid 1px #c4c4ff;"><?php echo $hplc_internal_method_peak_area_chromatograms[0]['ratio_std_e_one'];?></td>
 
-                      <td style="text-align:center;padding:8px;background-color:#ffffff;border-bottom:dotted 1px #c4c4ff;border-top:solid 1px #c4c4ff;"><?php echo $hplc_internal_method_peak_area_chromatograms[0]['sample_one_six'];?></td>
-                      <td style="text-align:center;padding:8px;background-color:#ffffff;border-bottom:dotted 1px #c4c4ff;border-top:solid 1px #c4c4ff;"><?php echo $hplc_internal_method_peak_area_chromatograms[0]['internal_std_one_seven'];?></td>
-                      <td style="text-align:center;padding:8px;background-color:#ffffff;border-bottom:dotted 1px #c4c4ff;border-top:solid 1px #c4c4ff;"><?php echo $hplc_internal_method_peak_area_chromatograms[0]['ratio_std_one_seven'];?></td>
+                      <td style="text-align:center;padding:8px;background-color:#ffffff;border-bottom:dotted 1px #c4c4ff;border-top:solid 1px #c4c4ff;"><?php echo $hplc_internal_method_peak_area_chromatograms[0]['sample_f_one'];?></td>
+                      <td style="text-align:center;padding:8px;background-color:#ffffff;border-bottom:dotted 1px #c4c4ff;border-top:solid 1px #c4c4ff;"><?php echo $hplc_internal_method_peak_area_chromatograms[0]['internal_std_g_one'];?></td>
+                      <td style="text-align:center;padding:8px;background-color:#ffffff;border-bottom:dotted 1px #c4c4ff;border-top:solid 1px #c4c4ff;"><?php echo $hplc_internal_method_peak_area_chromatograms[0]['ratio_std_f_one'];?></td>
                     </tr>
                     <tr>
                       <td style="text-align:center;border-bottom:solid 1px #c4c4ff;border-right:solid 1px #c4c4ff;">2.</td>
-                      <td style="text-align:center;padding:8px;background-color:#ffffff;border-bottom:dotted 1px #c4c4ff;"><?php echo $hplc_internal_method_peak_area_chromatograms[0]['sd_two'];?></td>
+                      <td style="text-align:center;padding:8px;background-color:#ffffff;border-bottom:dotted 1px #c4c4ff;"><?php echo $hplc_internal_method_peak_area_chromatograms[0]['std_two'];?></td>
                       <td style="text-align:center;padding:8px;background-color:#ffffff;border-bottom:dotted 1px #c4c4ff;"><?php echo $hplc_internal_method_peak_area_chromatograms[0]['internal_std_two_one'];?></td>
                       <td style="text-align:center;padding:8px;background-color:#ffffff;border-bottom:dotted 1px #c4c4ff;"><?php echo $hplc_internal_method_peak_area_chromatograms[0]['ratio_std_two_one'];?></td>
 
@@ -652,7 +647,7 @@
                     </tr>
                     <tr>
                       <td style="text-align:center;border-bottom:solid 1px #c4c4ff;border-right:solid 1px #c4c4ff;">3.</td>
-                      <td style="text-align:center;padding:8px;background-color:#ffffff;border-bottom:dotted 1px #c4c4ff;"><?php echo $hplc_internal_method_peak_area_chromatograms[0]['sd_three'];?></td>
+                      <td style="text-align:center;padding:8px;background-color:#ffffff;border-bottom:dotted 1px #c4c4ff;"><?php echo $hplc_internal_method_peak_area_chromatograms[0]['std_three'];?></td>
                       <td style="text-align:center;padding:8px;background-color:#ffffff;border-bottom:dotted 1px #c4c4ff;"><?php echo $hplc_internal_method_peak_area_chromatograms[0]['internal_std_three_one'];?></td>
                       <td style="text-align:center;padding:8px;background-color:#ffffff;border-bottom:dotted 1px #c4c4ff;"><?php echo $hplc_internal_method_peak_area_chromatograms[0]['ratio_std_three_one'];?></td>
 
@@ -682,7 +677,7 @@
                     </tr>
                     <tr>
                       <td style="text-align:center;border-bottom:solid 1px #c4c4ff;border-right:solid 1px #c4c4ff;">4.</td>
-                      <td style="text-align:center;padding:8px;background-color:#ffffff;border-bottom:dotted 1px #c4c4ff;"><?php echo $hplc_internal_method_peak_area_chromatograms[0]['sd_four'];?></input></td>
+                      <td style="text-align:center;padding:8px;background-color:#ffffff;border-bottom:dotted 1px #c4c4ff;"><?php echo $hplc_internal_method_peak_area_chromatograms[0]['std_four'];?></input></td>
                       <td style="text-align:center;padding:8px;background-color:#ffffff;border-bottom:dotted 1px #c4c4ff;"><?php echo $hplc_internal_method_peak_area_chromatograms[0]['internal_std_four_one'];?></td>
                       <td style="text-align:center;padding:8px;background-color:#ffffff;border-bottom:dotted 1px #c4c4ff;"><?php echo $hplc_internal_method_peak_area_chromatograms[0]['ratio_std_four_one'];?></td>
 
@@ -712,7 +707,7 @@
                     </tr>
                     <tr>
                       <td style="text-align:center;border-bottom:solid 1px #c4c4ff;border-right:solid 1px #c4c4ff;">5.</td>
-                      <td style="text-align:center;padding:8px;background-color:#ffffff;border-bottom:dotted 1px #c4c4ff;"><?php echo $hplc_internal_method_peak_area_chromatograms[0]['sd_five'];?></td>
+                      <td style="text-align:center;padding:8px;background-color:#ffffff;border-bottom:dotted 1px #c4c4ff;"><?php echo $hplc_internal_method_peak_area_chromatograms[0]['std_five'];?></td>
                       <td style="text-align:center;padding:8px;background-color:#ffffff;border-bottom:dotted 1px #c4c4ff;"><?php echo $hplc_internal_method_peak_area_chromatograms[0]['internal_std_five_one'];?></td>
                       <td style="text-align:center;padding:8px;background-color:#ffffff;border-bottom:dotted 1px #c4c4ff;"><?php echo $hplc_internal_method_peak_area_chromatograms[0]['ratio_std_five_one'];?></td>
 

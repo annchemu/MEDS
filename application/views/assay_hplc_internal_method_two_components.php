@@ -90,9 +90,8 @@
        <table width="75%" class="table_form" border="0" cellpadding="4px" align="center">
         <input type="hidden" name="tr_id" value="<?php echo $query['tr'];?>"></input>
         <input type="hidden" name="assignment_id" value="<?php echo $request[0]['a'];?>"></input>    
-        <input type="hidden" name="test_type_id" value="<?php echo $query['test_type_id'];?>"></input>
         <tr>
-            <td colspan="8" style="text-align:right;padding:8px;backgroun-color:#fffff;border-bottom:solid 1px #bfbfbf;"><a href="<?php echo base_url().'test/index/'.$request[0]['a'].'/'.$query['tr'].'/'.$query['test_type_id'];?>"><img src="<?php echo base_url().'images/icons/view.png';?>" height="25px" width="25px">Back To Test Lists</a></td>
+            <td colspan="8" style="text-align:right;padding:8px;backgroun-color:#fffff;border-bottom:solid 1px #bfbfbf;"><a href="<?php echo base_url().'test/index/'.$request[0]['a'].'/'.$query['tr'].'/';?>"><img src="<?php echo base_url().'images/icons/view.png';?>" height="25px" width="25px">Back To Test Lists</a></td>
         </tr>
         <tr>
           <td colspan="8" align="center" style="padding:8px;">

@@ -24,6 +24,7 @@ class Test_Identification extends CI_Controller{
 	function index_chemical(){		
 		$data['assignment'] = $this->uri->segment(3);
 		$data['test_request'] = $this->uri->segment(4);
+		$data['no_of_tests'] = $this->uri->segment(5);
 		$test_request = $this->uri->segment(4);
 		$status =0;$user_type=6;
 		

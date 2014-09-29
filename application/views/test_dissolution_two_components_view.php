@@ -270,7 +270,7 @@
                foreach($sql_standards as $s_name):
               ?>
                
-               <option value="<?php  echo $s_name['item_description'];?>" data-idno="<?php  echo $s_name['reference_number'];?>" data-lotno="<?php  echo $s_name['batch_number'];?>"><?php  echo $s_name['item_description'];?></option>
+               <option value="<?php  echo $s_name['item_description'];?>" data-potency="<?php  echo $s_name['potency'];?>"data-idno="<?php  echo $s_name['reference_number'];?>" data-lotno="<?php  echo $s_name['batch_number'];?>"><?php  echo $s_name['item_description'];?></option>
                 <?php
                 endforeach
                 ?>
@@ -465,10 +465,10 @@
               </tr>
               <tr>
                 <td align="center"style="padding: 8px;">Acceptance Criteria</td>
-                <td style="padding: 8px;">NMT 2.0%</td>
-                <td style="padding: 8px;">NMT 2.0%</td>
-                <td style="padding: 8px;">NMT 2.0%</td>
-                <td style="padding: 8px;">NLT 5.0%</td>
+                <td style="padding: 8px;"><input type="text" name="rt_ac" id="rt_ac" placeholder ="NMT 2.0%"></td>
+                <td style="padding: 8px;"><input type="text" name="peak_area_ac" id="peak_area_ac" placeholder ="NMT 2.0%"></td>
+                <td style="padding: 8px;"><input type="text" name="asymmetry_ac" id="asymmetry_ac" placeholder ="NMT 2.0%"></td>
+                <td style="padding: 8px;"><input type="text" name="resolutiion_ac" id="resolutiion_ac" placeholder ="NLT 5.0%"></td>
                 <td style="padding: 8px;"><input type="text" name="other_ac" id="other_ac" placeholder ="NLT"></td>
                 
               </tr>
@@ -566,16 +566,7 @@
          </div>
         </td>
       </tr>
-      <tr>
-        <td colspan="8" style="padding:8px;border-bottom:solid 1px #c4c4ff;">
-          <table border="0" width="100%" class="table_form" cellpadding="8px" align="center">            
-            <tr>        
-              <td colspan = "6" align = "center"style="padding: 12px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: solid 1px #bfbfbf;">RETENTION TIME: <input type = "text" name ="sample_rrt_avg" id ="sample_value" placeholder="RT of SAMPLE"> / <input type = "text" name ="sample_rrt_avg" id ="std_value" placeholder ="RT of STD"></td>
-              <td colspan = "6" align = "center"style="padding: 12px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: solid 1px #bfbfbf;"> =<input type = "text" name ="sample_rrt_avg" id ="sample_rrt_avg"></td>
-            </tr>             
-          </table>
-          </td>
-        </tr> 
+      
       <tr>        
         <td colspan = "6" align = "center"style="padding: 12px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: solid 1px #bfbfbf;color:#0000fb;"> <u>PEAK OF SAMPLE (PKT) * WT OF STANDARD IN FINAL DILUTION * DILUTION FACTOR(DF) * 100 * POTENCY (P) </u> <br/> PEAK AREA OF STANDARD(PKSTD) * LABEL CLAIM (LC)</td>
       </tr>
@@ -589,8 +580,7 @@
           <input type ="text" name="det_1_wstd" id ="det_1_wstd" size ="10" placeholder="WSTD">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <input type ="text" name="det_1_df" id ="det_1_df" size ="10" placeholder="DF">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <input type ="text" name="det_1_potency" id ="det_1_potency" size ="10" placeholder="Potency">*100 <br/><br/>
-          <input type ="text" name="det_1_pkstd" id ="det_1_pkstd" size ="10" placeholder="PKSTD">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-          <input type ="text" name="det_1_awt" id ="det_1_awt" size ="10" placeholder="AWT" onchange="calculation_determinations()">
+          <input type ="text" name="det_1_pkstd" id ="det_1_pkstd" size ="10" placeholder="PKSTD" onchange="calculation_determinations()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <input type ="text" name="det_1_lc" id ="det_1_lc" size ="10" placeholder="LC" onchange="calculation_determinations()"></td>
         <td> =&nbsp &nbsp<input type ="text" name="determination_1" id ="determination_1" size ="10"> % LC</td>
       </tr>
@@ -600,12 +590,11 @@
       </tr>
       <tr>
         <td colspan ="4" align ="center" style="padding: 12px;">
-          <input type ="text" name="det_2_pkt" id="det_2_pkt" size ="10" placeholder="PKT">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          <input type ="text" name="det_2_pkt" id="det_2_pkt" size ="10" placeholder="PKT" onchange="calculation_determinations()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <input type ="text" name="det_2_wstd" id ="det_2_wstd" size ="10" placeholder="WSTD">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <input type ="text" name="det_2_df"id="det_2_df" size ="10" placeholder="DF">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <input type ="text" name="det_2_potency" id ="det_2_potency" size ="10" placeholder="Potency">*100 <br/><br/>
-          <input type ="text" name="det_2_pkstd" id ="det_2_pkstd" size ="10" placeholder="PKSTD">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-          <input type ="text" name="det_2_awt" id ="det_2_awt" size ="10" placeholder="AWT" onchange="calculation_determinations()">
+          <input type ="text" name="det_2_pkstd" id ="det_2_pkstd" size ="10" placeholder="PKSTD" onchange="calculation_determinations()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <input type ="text" name="det_2_lc" id ="det_2_lc" size ="10" placeholder="LC"onchange="calculation_determinations()"></td>        
         <td>=&nbsp &nbsp <input type ="text" name="determination_2"id ="determination_2" size ="10">% LC </td>
       </tr>
@@ -615,12 +604,11 @@
       </tr> 
       <tr>  
         <td colspan ="4" align ="center" style="padding: 12px;">
-          <input type ="text" name="det_3_pkt" id ="det_3_pkt"size ="10" placeholder="PKT">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          <input type ="text" name="det_3_pkt" id ="det_3_pkt"size ="10" placeholder="PKT" onchange="calculation_determinations()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <input type ="text" name="det_3_wstd" id ="det_3_wstd"size ="10" placeholder="WSTD">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <input type ="text" name="det_3_df" id ="det_3_df" size ="10" placeholder="DF">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <input type ="text" name="det_3_potency" id ="det_3_potency" size ="10" placeholder="Potency">*100 <br/><br/>
-          <input type ="text" name="det_3_pkstd" id ="det_3_pkstd" size ="10" placeholder="PKSTD">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-          <input type ="text" name="det_3_awt" id ="det_3_awt" size ="10" placeholder="AWT" onchange="calculation_determinations()">
+          <input type ="text" name="det_3_pkstd" id ="det_3_pkstd" size ="10" placeholder="PKSTD" onchange="calculation_determinations()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <input type ="text" name="det_3_lc" id ="det_3_lc" size ="10" placeholder="LC" onchange="calculation_determinations()"></td>        
         <td>=&nbsp &nbsp <input type ="text" name="determination_3" id ="determination_3" size ="10">% LC </td>
       </tr>
@@ -630,12 +618,11 @@
       </tr> 
       <tr>  
         <td colspan ="4" align ="center" style="padding: 12px;">
-          <input type ="text" name="det_4_pkt" id ="det_4_pkt" size ="10" placeholder="PKT">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          <input type ="text" name="det_4_pkt" id ="det_4_pkt" size ="10" placeholder="PKT" onchange="calculation_determinations()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <input type ="text" name="det_4_wstd" id ="det_4_wstd" size ="10" placeholder="WSTD">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <input type ="text" name="det_4_df" id ="det_4_df" size ="10" placeholder="DF">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <input type ="text" name="det_4_potency" id ="det_4_potency" size ="10" placeholder="Potency">*100 <br/><br/>
-          <input type ="text" name="det_4_pkstd" id ="det_4_pkstd" size ="10" placeholder="PKSTD">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-          <input type ="text" name="det_4_awt" id ="det_4_awt" size ="10" placeholder="AWT" onchange="calculation_determinations()">
+          <input type ="text" name="det_4_pkstd" id ="det_4_pkstd" size ="10" placeholder="PKSTD" onchange="calculation_determinations()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <input type ="text" name="det_4_lc" id ="det_4_lc" size ="10" placeholder="LC" onchange="calculation_determinations()"></td>        
         <td>=&nbsp &nbsp <input type ="text" name="determination_4" id ="determination_4" size ="10">% LC </td>
       </tr> 
@@ -645,12 +632,11 @@
       </tr> 
       <tr>  
         <td colspan ="4" align ="center" style="padding: 12px;">
-          <input type ="text" name="det_5_pkt" id ="det_5_pkt" size ="10" placeholder="PKT">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          <input type ="text" name="det_5_pkt" id ="det_5_pkt" size ="10" placeholder="PKT" onchange="calculation_determinations()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <input type ="text" name="det_5_wstd" id ="det_5_wstd" size ="10" placeholder="WSTD">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <input type ="text" name="det_5_df" id ="det_5_df" size ="10" placeholder="DF">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <input type ="text" name="det_5_potency" id ="det_5_potency" size ="10" placeholder="Potency">*100 <br/><br/>
-          <input type ="text" name="det_5_pkstd" id ="det_5_pkstd" size ="10" placeholder="PKSTD">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-          <input type ="text" name="det_5_awt" id ="det_5_awt" size ="10" placeholder="AWT" onchange="calculation_determinations()">
+          <input type ="text" name="det_5_pkstd" id ="det_5_pkstd" size ="10" placeholder="PKSTD" onchange="calculation_determinations()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <input type ="text" name="det_5_lc" id ="det_5_lc" size ="10" placeholder="LC" onchange="calculation_determinations()"></td>        
         <td>=&nbsp &nbsp <input type ="text" name="determination_5" id ="determination_5" size ="10">% LC </td>
       </tr> 
@@ -660,15 +646,14 @@
       </tr> 
       <tr>  
         <td colspan ="4" align ="center" style="padding: 12px;">
-          <input type ="text" name="det_6_pkt" id ="det_6_pkt" size ="10" placeholder="PKT">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          <input type ="text" name="det_6_pkt" id ="det_6_pkt" size ="10" placeholder="PKT" onchange="calculation_determinations()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <input type ="text" name="det_6_wstd" id ="det_6_wstd" size ="10" placeholder="WSTD">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <input type ="text" name="det_6_df" id ="det_6_df" size ="10" placeholder="DF">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <input type ="text" name="det_6_potency" id ="det_6_potency" size ="10" placeholder="Potency">*100 <br/><br/>
-          <input type ="text" name="det_6_pkstd" id ="det_6_pkstd" size ="10" placeholder="PKSTD">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-          <input type ="text" name="det_6_awt" id ="det_6_awt" size ="10" placeholder="AWT" onchange="calculation_determinations()">
-          <input type ="text" name="det_6_lc" id ="det_6_lc" size ="10" placeholder="LC" onchange="calculation_determinations()"></td>        
+          <input type ="text" name="det_6_pkstd" id ="det_6_pkstd" size ="10" placeholder="PKSTD" onchange="calculation_determinations()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          <input type ="text" name="det_6_lc" id ="det_6_lc" size ="10" placeholder="LC" onchange="calculation_determinations(); "></td>        
         <td>=&nbsp &nbsp <input type ="text" name="determination_6" id ="determination_6" size ="10">% LC </td>
-      </tr> 
+        </tr> 
       <tr> 
         <td align="center"colspan ="6"style="padding: 8px;padding: 8px;background-color: #e8e8ff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> </td>
       </tr>

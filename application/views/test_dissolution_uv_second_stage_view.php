@@ -25,11 +25,17 @@
   <script type="text/javascript" src="<?php echo base_url().'js/tabs.js';?>"></script>
   <script type="text/javascript" src="<?php echo base_url().'js/jquery.validate.js';?>"></script>
   <script type="text/javascript" src="<?php echo base_url().'js/equationstwo.js';?>"></script>
+  <script type="text/javascript" src="<?php echo base_url().'js/datepicker.js';?>"></script>
   <script type="text/javascript" src="<?php echo base_url().'tinymce/tinymce.min.js';?>"></script>
   
   <!-- bootstrap reference library -->
   <script src="<?php echo base_url().'js/bootstrap.min.js';?>"></script>
   <script type="text/javascript" src="<?php echo base_url().'js/Jquery-datatables/jquery.dataTables.js';?>"></script>
+   <style>
+    .hide_data {
+      display: none; 
+    }
+  </style>
   <script>
    $(document).ready(function() {
     /* Init DataTables */
@@ -37,10 +43,66 @@
      "sScrollY":"270px",
      "sScrollX":"100%"
     });
-     $("#equipment_make").change(function(){
-         var id_number=$(this).val();
-         //append to textbox
-         $("#equipment_number").val(id_number);
+     $("#determination").click(function(){
+    $("#determinations").toggle();
+  });
+  $("#determination_no_std").click(function(){
+    $("#determinations_no_std").toggle();
+  });
+  $("#sample_data").click(function(){
+    $("#sample_table").toggle();
+  });
+  
+  
+  $("#difference_standard").change(function()       {
+        var text_std = $("#difference_standard").val();     
+
+        $("#det_1_pkstd").val(text_std);
+        $("#det_2_pkstd").val(text_std);
+        $("#det_3_pkstd").val(text_std); 
+        $("#det_4_pkstd").val(text_std); 
+        $("#det_5_pkstd").val(text_std); 
+        $("#det_6_pkstd").val(text_std); 
+   }); 
+   $("#difference_s1").change(function()       {
+      var text_wstd = $("#difference_s1").val();     
+
+      $("#det_1_pkt").val(text_wstd);
+      $("#second_det_1_pkt").val(text_wstd);
+    });
+
+     $("#difference_s2").change(function()       {
+      var text_wstd = $("#difference_s2").val();     
+
+      $("#det_2_pkt").val(text_wstd);
+      $("#second_det_2_pkt").val(text_wstd);
+    });
+
+    $("#difference_s3").change(function()       {
+      var text_wstd = $("#difference_s3").val();     
+
+      $("#det_3_pkt").val(text_wstd);
+      $("#second_det_3_pkt").val(text_wstd);
+    });
+
+    $("#difference_s4").change(function()       {
+      var text_wstd = $("#difference_s4").val();     
+
+      $("#det_4_pkt").val(text_wstd);
+      $("#second_det_4_pkt").val(text_wstd);
+    });
+
+    $("#difference_s5").change(function()       {
+      var text_wstd = $("#difference_s5").val();     
+
+      $("#det_5_pkt").val(text_wstd);
+      $("#second_det_5_pkt").val(text_wstd);
+    });
+    $("#difference_s6").change(function()       {
+      var text_wstd = $("#difference_s6").val();     
+
+      $("#det_6_pkt").val(text_wstd);
+      $("#second_det_6_pkt").val(text_wstd);
     });
    });
    tinymce.init({
@@ -60,6 +122,13 @@
    $acc_status=$user['logged_in']['acc_status'];
    $id_temp=1;
    //var_dump($user);
+    if(empty($user['logged_in']['id'])) {
+       
+      redirect('login','location');  //loads the login page in current page div
+
+      echo '<meta http-equiv=refresh content="0;url=base_url();login">'; 
+
+       }
   ?>
 <div id="header"> 
   <div id="logo" style="padding:8px;color: #0000ff;" align="center"><img src="<?php echo base_url().'images/meds_logo.png';?>" height="35px" width="40px"/><b>MISSION FOR ESSENTIAL DRUGS AND SUPPLIES</b></div>
@@ -103,13 +172,14 @@
 <table width="950" class ="table_form" border="0" cellpadding="4px" align="center">
    <input type="hidden" name ="assignment" value ="<?php echo $assignment;?>"><input type="hidden" name ="test_request" value ="<?php echo $test_request;?>">
    <input type="hidden" name ="analyst" value ="<?php echo $user['logged_in']['fname']." ".$user['logged_in']['lname'];?>">
+      <input type ="hidden" id = "uv_type" value=" <?php echo $sql_dissolution_det['uv_type'];?>">
       <input type ="hidden" id = "label_claim" value=" <?php echo $results['label_claim'];?>">
    <tr>
      <td colspan="6"  style="padding: 8px;text-align:right;background-color:#fdfdfd;padding:8px;border-bottom:solid 1px #bfbfbf;"><a href="<?php echo base_url().'test/index/'.$assignment.'/'.$test_request?>"><img src="<?php echo base_url().'images/icons/assign.png';?>" height="20px" width="20px">Back to Test Lists</a></td>
     </tr>
      <tr>
      <td colspan ="6">
-      <table width="100%" bgcolor="#c4c4ff" cellpadding="8px" border="0" align ="center">
+      <table width="100%" class="table_form" bgcolor="#c4c4ff" cellpadding="8px" border="0" align ="center">
         <tr>
             <td rowspan="2" colspan ="2" style="padding:4px;border-left:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;border-bottom:solid 1px #bfbfbf;text-align:center;background-color:#ffffff;"><img src="<?php echo base_url().'images/meds_logo.png';?>" height="80px" width="90px"/></td>
             <td colspan="6" style="padding:4px;color:#0000ff;border-left:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;border-bottom:solid 1px #bfbfbf;text-align:center;background-color:#ffffff;">MISSION FOR ESSENTIAL DRUGS AND SUPPLIES</td>
@@ -143,7 +213,7 @@
     </tr>
      <tr>
       <td colspan="6" align="center" style="padding:8px;">
-        <table border="0" align="center" cellpadding="8px" width="100%">
+        <table border="0" class="table_form" align="center" cellpadding="8px" width="100%">
             <tr>
               <td height="25px" style="padding:8px;border-left:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;">Registration Number: <?php echo $results['laboratory_number'];?></td>
               <td height="25px" style="padding:8px;border-left:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;">Request Date: <?php echo $results['date_time'];?></td>
@@ -199,7 +269,7 @@
          </td>    
       
         <td align="left" style="background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">  Equipment Number:</td>
-        <td colspan = "2" style="background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><input type ="text" name ="equipment_number" id="equipment_number" value = "<?php echo $sql_dissolution['equipment_no']?>"></td>
+        <td colspan = "2" style="background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><input type ="text" name ="equipment_number" id="equipment_number" value = "<?php echo $sql_dissolution['equipment_number']?>"></td>
       </tr>
        <tr>
         <td align="left" colspan ="6" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;color: #0000fb;" ><b>Medium Preparation</b></td>
@@ -234,13 +304,37 @@
         <td style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="temperature" value = "<?php echo $sql_dissolution['temperature']?>"> </td>        
         <td style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="actual_temperature" value = "<?php echo $sql_dissolution['actual_temperature']?>"> </td>        
         <td colspan = "3"style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="temperature_comment" value = "<?php echo $sql_dissolution['temperature_comment']?>"> </td>
-      </tr>
-      <tr>
-        <td colspan = "6"align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: solid 1px #bfbfbf;color: #0000fb;"><b>Sample Preparation</b></td>
-      </tr>
+      </tr>    
        <tr>
-        <td colspan = "6"align="center"style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><textarea cols="80" rows="4" name = "sample_preparation"><?php echo $sql_dissolution['sample_preparation']?></textarea></td>
-      </tr>
+        <td colspan="6" 
+        <?php 
+          if($sql_dissolution_det['uv_type']=="std"){
+            echo"style='dsiplay:block;text-align:center;border-bottom: solid 1px #c0c0c0;'";
+          }else{
+            echo"style='display:none;'";
+          }
+        ?>>
+          <table border="0" class="inner_table" samplepowder ="std" width="80%" cellpadding="8px" align="center">        
+        <tr>
+          <td colspan = "" align="center" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Equipment Number:</td>
+          <td colspan = "2" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> 
+              <select id="equipment_make_1" name="equipment_number">
+                <option selected></option>
+                 <?php
+                 foreach($query_e as $equipment):
+                ?>
+                 
+                 <option value="<?php echo $equipment['id_number'];?>" data-equipmentid_1="<?php echo $equipment['description']; ?>"><?php echo $equipment['id_number'];?></option>
+                  <?php
+                  endforeach
+                  ?>
+                
+              </select>
+           </td>    
+        
+          <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> Equipment Make:</td>
+          <td colspan = "2" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><input type ="text" name ="equipment_make" id="equipmentid_1"></td>
+        </tr>
        <tr>
         <td colspan = "6"align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;color: #0000fb;"><b>Weight of Standard</b></td>
       </tr>
@@ -264,44 +358,100 @@
           </td>
       </tr>
       <tr>
-        <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Potency:</td>
-        <td colspan = "" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="potency" value = "<?php echo $sql_dissolution['potency']?>"> </td>
-        <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Lot No.:</td>
-        <td colspan = "" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="lot_no" value = "<?php echo $sql_dissolution['lot_no']?>"> </td>
-        <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">ID No.:</td>
-        <td colspan = ""style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="id_no" value = "<?php echo $sql_dissolution['id_no']?>"> </td>
+        <td style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Potency:</td>
+        <td style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="potency" value = "<?php echo $sql_dissolution['potency']?>"> </td>
+        <td style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Lot No.:</td>
+        <td style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="lot_no" value = "<?php echo $sql_dissolution['lot_no']?>"> </td>
+        <td style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">ID No.:</td>
+        <td style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="id_no" value = "<?php echo $sql_dissolution['id_no']?>"> </td>
       </tr>
        <tr>
-        <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Weight of standard + container (g)</td>
-        <td style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="potency_standard_container" id ="standard_container" value = "<?php echo $sql_dissolution['potency_standard_container']?>"> </td>
-        <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Weight of container (g) </td>
-        <td style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="potency_container" id ="container" value = "<?php echo $sql_dissolution['potency_container']?>" onchange="standard_weight_calc()"> </td>
-        <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Weight of standard (g)</td>
-        <td style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="standard_weight_1" id ="standard_weight_1" value = "<?php echo $sql_dissolution['standard_weight_1']?>"> </td>
+        <td colspan ="2" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Weight of standard + container (g)</td>
+        <td colspan ="4" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="potency_standard_container" id ="standard_container" value = "<?php echo $sql_dissolution['potency_standard_container']?>"> </td>
+      </tr>  
+      <tr>
+        <td colspan ="2" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Weight of container (g) </td>
+        <td colspan ="4" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="potency_container" id ="container" value = "<?php echo $sql_dissolution['potency_container']?>" onchange="standard_weight_calc()"> </td>
+      </tr>  
+      <tr>
+        <td colspan ="2" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Weight of standard (g)</td>
+        <td colspan ="4" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="standard_weight_1" id ="standard_weight_1" value = "<?php echo $sql_dissolution['standard_weight_1']?>"> </td>
       </tr>  
       <tr> 
-        <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Dilution</td>
-        <td colspan ="4" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <textarea rows ="4" cols ="80" name ="standard_dilution"> <?php echo $sql_dissolution['standard_dilution']?></textarea> </td>
+        <td colpans = "" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Dilution </td>
       </tr>  
+      <tr>
+        <td colspan = "6" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <textarea rows ="4" cols ="80" name ="standard_dilution"> <?php echo $sql_dissolution['standard_dilution']?></textarea> </td>
+      </tr>  
+        </table>
+        </td>
+      </tr>
+       <tr>
+        <td colspan = "6" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: solid 1px #bfbfbf;color: #0000fb;"><b>Sample Preparation</b></td>
+      </tr>
+       <tr>
+        <td colspan = "6" align="center"style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><textarea cols="80" rows="4" name = "sample_preparation"><?php echo $sql_dissolution['sample_preparation']?></textarea></td>
+      </tr>
+      <tr>        
+        <td colspan = "4" align = "center"style="padding: 12px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: solid 1px #bfbfbf;color:#0000fb;"><b>Dilution Factor:</b> [<input type ="text" name = "df_1" id = "df_1" size = "10"> X <input type ="text" name = "df_2" id = "df_2" size = "10">] / <input type ="text" name = "df_3" id = "df_3" size = "10"></td>
+        <td colspan = "2" style="padding: 12px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: solid 1px #bfbfbf;">= <input type ="text" name = "dilution_factor" id = "dilution_factor" size = "10"> </td>
+      </tr>
       <tr> 
         <td align="center"colspan ="6" style="padding: 8px;padding: 8px;background-color: #e8e8ff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> </td>
-      </tr>        
-      <tr>
-        <td colspan = "6"align="left" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Absorbance at <input type ="text" name="first_absorbance" value = "<?php echo $sql_dissolution['first_absorbance']?>"> nm and <input type ="text" name="second_absorbance" value = "<?php echo $sql_dissolution['second_absorbance']?>"> nm</td>
+      </tr> 
+       <tr>
+        <td colspan = "6" style="padding: 8px;color:#0000fb;"><b>Data Collected from Stage 1</b><input type="button" id="sample_data" value="+" class ="btn" size="20" /></td>
       </tr>
       <tr>
        <td colspan ="6">
+          <div class="scroll hide_data" id="sample_table">
+           <table border="0" align="center" class ="inner_table" cellpadding="8px" width="80%">             
+            <tr>
+              <td colspan = "6" align="center" style="padding: 8px;">Absorbance at <input type ="text" name="first_absorbance" value = "<?php echo $sql_dissolution['first_absorbance']?>"> nm and <input type ="text" name="second_absorbance" value = "<?php echo $sql_dissolution['second_absorbance']?>"> nm</td>
+            </tr>            
+            <tr>
+              <td align="center" style="padding: 8px;">Absorbance</td>
+              <td align="center" style="padding: 8px;">Std 1</td>
+              <td align="center" style="padding: 8px;">Sample 1</td>
+              <td align="center" style="padding: 8px;">Sample 2</td>
+              <td align="center" style="padding: 8px;">Sample 3</td>
+              <td align="center" style="padding: 8px;">Sample 4</td>
+              <td align="center" style="padding: 8px;">Sample 5</td>
+              <td align="center" style="padding: 8px;">Sample 6</td>
+            </tr>
+         
+            <tr>
+              <td style="padding: 8px;">Wavelength</td>
+              <td style="padding: 8px;"><input type = "text" name ="difference_standard" value = "<?php echo $sql_dissolution['difference_standard']?>"></td>
+              <td style="padding: 8px;"><input type = "text" name ="difference_s1" value = "<?php echo $sql_dissolution['difference_s1']?>"></td>
+              <td style="padding: 8px;"><input type = "text" name ="difference_s2" value = "<?php echo $sql_dissolution['difference_s2']?>"></td>
+              <td style="padding: 8px;"><input type = "text" name ="difference_s3" value = "<?php echo $sql_dissolution['difference_s3']?>"></td>
+              <td style="padding: 8px;"><input type = "text" name ="difference_s4" value = "<?php echo $sql_dissolution['difference_s4']?>"></td>
+              <td style="padding: 8px;"><input type = "text" name ="difference_s5" value = "<?php echo $sql_dissolution['difference_s5']?>"></td>
+              <td style="padding: 8px;"><input type = "text" name ="difference_s6" value = "<?php echo $sql_dissolution['difference_s6']?>"></td>
+            </tr>
+          </table>
+         </div>
+        </td>
+      </tr>
+      <td colspan ="6">
           <div class="scroll">
            <table border="0" align="center" class ="inner_table" cellpadding="8px" width="80%">   
+             <tr>
+              <td colspan = "6" style="padding: 8px;color:#0000fb;"><b>Data Collected from Stage two</b></td>
+            </tr>
+             <tr>
+              <td colspan = "6"align="center" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Absorbance at <input type ="text" name="first_absorbance" value = "<?php echo $sql_dissolution['first_absorbance']?>"> nm and <input type ="text" name="second_absorbance" value = "<?php echo $sql_dissolution['second_absorbance']?>"> nm</td>
+            </tr>
             <tr>
-              <td align="center" style="padding: 8px;"><b>Absorbance</b></td>
-              <td align="center" style="padding: 8px;"><b>Std 1</b></td>
-              <td align="center" style="padding: 8px;"><b>Sample 1</b></td>
-              <td align="center" style="padding: 8px;"><b>Sample 2</b></td>
-              <td align="center" style="padding: 8px;"><b>Sample 3</b></td>
-              <td align="center" style="padding: 8px;"><b>Sample 4</b></td>
-              <td align="center" style="padding: 8px;"><b>Sample 5</b></td>
-              <td align="center" style="padding: 8px;"><b>Sample 6</b></td>
+              <td align="center" style="padding: 8px;">Absorbance</td>
+              <td align="center" style="padding: 8px;">Std 1</td>
+              <td align="center" style="padding: 8px;">Sample 1</td>
+              <td align="center" style="padding: 8px;">Sample 2</td>
+              <td align="center" style="padding: 8px;">Sample 3</td>
+              <td align="center" style="padding: 8px;">Sample 4</td>
+              <td align="center" style="padding: 8px;">Sample 5</td>
+              <td align="center" style="padding: 8px;">Sample 6</td>
             </tr>
          
             <tr>
@@ -321,6 +471,74 @@
       <tr> 
         <td align="center"colspan ="6" style="padding: 8px;padding: 8px;background-color: #e8e8ff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> </td>
       </tr>
+      <tr>
+      <td colspan="6" 
+      <?php 
+          if($sql_dissolution_det['uv_type']=="std"){
+            echo"style='dsiplay:block;text-align:center;border-bottom: solid 1px #c0c0c0;'";
+          }else{
+            echo"style='display:none;'";
+          }
+        ?>>
+      <table border="0" class="inner_table" samplepowder ="std" width="80%" cellpadding="8px" align="center">          
+      <tr>        
+        <td colspan = "6" align = "center"style="padding: 12px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: solid 1px #bfbfbf;color:#0000fb;"> <u>ABSORBANCE OF SAMPLE (ASAMPLE)* DILUTION FACTOR(DF) * 100 * POTENCY (P) </u> <br/> ABSORBANCE OF STANDARD(ASTD) * LABEL CLAIM (LC)</td>
+      </tr>
+      <tr> 
+        <td align="center"colspan ="6" style="padding: 8px;padding: 8px;background-color: #e8e8ff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> </td>
+      </tr>
+      <tr>
+        <td colspan="6" style="padding: 8px; color:#0000fb;"><b>Determination Data collected from Stage one:</b><input type="button" id="determination" value="+" class ="btn" size="20" /></td>
+      </tr>        
+      <tr><td colspan="6">
+      <div class="hide_data" id="determinations">
+      <table border="0" class="inner_table" style="padding: 8px;background-color:#ffffff;"  width="100%" cellpadding="8px" align="center">          
+          
+      <tr>
+        <td align ="center" style="padding: 8px; color:#0000fb;">Determination one:</td>                
+        <td colspan ="2" align ="center" style="padding: 12px;">
+         <?php echo $sql_dissolution_det['det_1_pkt']?> x <?php echo $sql_dissolution_det['det_1_wstd']?> x <?php echo $sql_dissolution_det['det_1_df']?> x 
+         <?php echo $sql_dissolution_det['det_1_potency']?> x 100 <br/><hr/><?php echo $sql_dissolution_det['det_1_pkstd']?> x <?php echo $sql_dissolution_det['det_1_lc']?>
+         <td> =&nbsp &nbsp <?php echo $sql_dissolution_det['determination_1']?> % LC</td>      
+      </tr> 
+      <tr>
+        <td align ="center" style="padding: 8px; color:#0000fb;">Determination two:</td>                
+        <td colspan ="2" align ="center" style="padding: 12px;">
+         <?php echo $sql_dissolution_det['det_2_pkt']?> x <?php echo $sql_dissolution_det['det_2_wstd']?> x <?php echo $sql_dissolution_det['det_2_df']?> x 
+         <?php echo $sql_dissolution_det['det_2_potency']?> x 100 <br/><hr/><?php echo $sql_dissolution_det['det_2_pkstd']?> x <?php echo $sql_dissolution_det['det_2_lc']?>
+         <td> =&nbsp &nbsp <?php echo $sql_dissolution_det['determination_2']?> % LC</td>      
+      </tr> 
+      <tr>
+        <td align ="center" style="padding: 8px; color:#0000fb;">Determination three:</td>                
+        <td colspan ="2" align ="center" style="padding: 12px;">
+         <?php echo $sql_dissolution_det['det_3_pkt']?> x <?php echo $sql_dissolution_det['det_3_wstd']?> x <?php echo $sql_dissolution_det['det_3_df']?> x 
+         <?php echo $sql_dissolution_det['det_3_potency']?> x 100 <br/><hr/><?php echo $sql_dissolution_det['det_3_pkstd']?> x <?php echo $sql_dissolution_det['det_3_lc']?>
+         <td> =&nbsp &nbsp <?php echo $sql_dissolution_det['determination_3']?> % LC</td>      
+      </tr> 
+      <tr>
+        <td align ="center" style="padding: 8px; color:#0000fb;">Determination four:</td>                
+        <td colspan ="2" align ="center" style="padding: 12px;">
+         <?php echo $sql_dissolution_det['det_4_pkt']?> x <?php echo $sql_dissolution_det['det_4_wstd']?> x <?php echo $sql_dissolution_det['det_4_df']?> x 
+         <?php echo $sql_dissolution_det['det_4_potency']?> x 100 <br/><hr/><?php echo $sql_dissolution_det['det_4_pkstd']?> x <?php echo $sql_dissolution_det['det_4_lc']?>
+         <td> =&nbsp &nbsp <?php echo $sql_dissolution_det['determination_4']?> % LC</td>      
+      </tr> 
+      <tr>
+        <td align ="center" style="padding: 8px; color:#0000fb;">Determination five:</td>                
+        <td colspan ="2" align ="center" style="padding: 12px;">
+         <?php echo $sql_dissolution_det['det_5_pkt']?> x <?php echo $sql_dissolution_det['det_5_wstd']?> x <?php echo $sql_dissolution_det['det_5_df']?> x 
+         <?php echo $sql_dissolution_det['det_5_potency']?> x 100 <br/><hr/><?php echo $sql_dissolution_det['det_5_pkstd']?> x <?php echo $sql_dissolution_det['det_5_lc']?>
+         <td> =&nbsp &nbsp <?php echo $sql_dissolution_det['determination_5']?> % LC</td>      
+      </tr> 
+      <tr>
+        <td align ="center" style="padding: 8px; color:#0000fb;">Determination six:</td>                
+        <td colspan ="2" align ="center" style="padding: 12px;">
+         <?php echo $sql_dissolution_det['det_6_pkt']?> x <?php echo $sql_dissolution_det['det_6_wstd']?> x <?php echo $sql_dissolution_det['det_6_df']?> x 
+         <?php echo $sql_dissolution_det['det_6_potency']?> x 100 <br/><hr/><?php echo $sql_dissolution_det['det_6_pkstd']?> x <?php echo $sql_dissolution_det['det_6_lc']?>
+         <td> =&nbsp &nbsp <?php echo $sql_dissolution_det['determination_6']?> % LC</td>      
+      </tr> 
+          </table>
+      </div>
+      </td></tr>
       <tr>
         <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: solid 1px #bfbfbf;">Content</td>
         <td colspan = "6" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: solid 1px #bfbfbf;"> <input type ="text" name="content"> </td>
@@ -408,7 +626,154 @@
           <input type ="text" name="det_6_pkstd" id ="det_6_pkstd" size ="10" placeholder="PKSTD" onchange="calculation_determinations()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <input type ="text" name="det_6_lc" id ="det_6_lc" size ="10" placeholder="LC" onchange="calculation_determinations()"></td>        
         <td>=&nbsp &nbsp <input type ="text" name="determination_6" id ="determination_6" size ="10">% LC </td>
+      </tr>
+    </table>
+    </td>
+    </tr> 
+    <tr>
+    <td colspan="6"
+    <?php 
+          if($sql_dissolution_det['uv_type']=="no_std"){
+            echo"style='dsiplay:block;text-align:center;border-bottom: solid 1px #c0c0c0;'";
+          }else{
+            echo"style='display:none;'";
+          }
+        ?>>
+    <table border="0" class="inner_table" style="padding: 12px;background-color:#ffffff;"  sampleliquid ="liquids" width="80%" cellpadding="8px" align="center">        
+      <tr>        
+        <td colspan = "6" align = "center"style="padding: 12px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: solid 1px #bfbfbf;color:#0000fb;"> <u>ABSORBANCE OF SAMPLE (ASAMPLE) x 10 x DILUTION FACTOR(DF) x 100</u> <br/> A(1%, 1cm)/1000 x LABEL CLAIM (LC)</td>
+      </tr>
+      <tr> 
+        <td align="center"colspan ="6" style="padding: 8px;padding: 8px;background-color: #e8e8ff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> </td>
+      </tr>
+
+      <tr><td colspan="6">
+      <div class="hide_data" id="determinations_no_std">
+      <table border="0" class="inner_table" style="padding: 8px;background-color:#ffffff;"  width="100%" cellpadding="8px" align="center">          
+          
+      <tr>
+        <td colspan="6" style="padding: 8px; color:#0000fb;"><b>Determination Data collected from Stage one:</b><input type="button" id="determination_no_std" value="+" class ="btn" size="20" /></td>
       </tr> 
+      <tr>
+        <td align ="center" style="padding: 8px; color:#0000fb;">Determination one:</td>                
+        <td colspan ="2" align ="center" style="padding: 12px;">
+         <?php echo $sql_dissolution_det['second_det_1_pkt']?> x 10 x <?php echo $sql_dissolution_det['second_det_1_df']?> x 100
+          <br/><hr/>A(1%, 1cm)/1000 x <?php echo $sql_dissolution_det['second_det_1_lc']?>
+         <td> =&nbsp &nbsp <?php echo $sql_dissolution_det['second_determination_1']?> % LC</td>      
+      </tr> 
+      <tr>
+        <td align ="center" style="padding: 8px; color:#0000fb;">Determination two:</td>                
+        <td colspan ="2" align ="center" style="padding: 12px;">
+         <?php echo $sql_dissolution_det['second_det_2_pkt']?> x 10 x <?php echo $sql_dissolution_det['second_det_2_df']?> x 100
+          <br/><hr/>A(1%, 1cm)/1000 x <?php echo $sql_dissolution_det['second_det_2_lc']?>
+         <td> =&nbsp &nbsp <?php echo $sql_dissolution_det['second_determination_2']?> % LC</td>      
+      </tr> 
+      <tr>
+        <td align ="center" style="padding: 8px; color:#0000fb;">Determination three:</td>                
+        <td colspan ="2" align ="center" style="padding: 12px;">
+         <?php echo $sql_dissolution_det['second_det_3_pkt']?> x 10 x <?php echo $sql_dissolution_det['det_3_df']?> x 100
+          <br/><hr/>A(1%, 1cm)/1000 x <?php echo $sql_dissolution_det['second_det_3_lc']?>
+         <td> =&nbsp &nbsp <?php echo $sql_dissolution_det['second_determination_3']?> % LC</td>      
+      </tr>
+      <tr>
+        <td align ="center" style="padding: 8px; color:#0000fb;">Determination four:</td>                
+        <td colspan ="2" align ="center" style="padding: 12px;">
+         <?php echo $sql_dissolution_det['second_det_4_pkt']?> x 10 x <?php echo $sql_dissolution_det['second_det_4_df']?> x 100
+          <br/><hr/>A(1%, 1cm)/1000 x <?php echo $sql_dissolution_det['second_det_4_lc']?>
+         <td> =&nbsp &nbsp <?php echo $sql_dissolution_det['second_determination_4']?> % LC</td>      
+      </tr> 
+      <tr>
+        <td align ="center" style="padding: 8px; color:#0000fb;">Determination five:</td>                
+       <td colspan ="2" align ="center" style="padding: 12px;">
+         <?php echo $sql_dissolution_det['second_det_5_pkt']?> x 10 x <?php echo $sql_dissolution_det['second_det_5_df']?> x 100
+          <br/><hr/>A(1%, 1cm)/1000 x <?php echo $sql_dissolution_det['second_det_5_lc']?>
+         <td> =&nbsp &nbsp <?php echo $sql_dissolution_det['second_determination_5']?> % LC</td>      
+      </tr>
+      <tr>
+        <td align ="center" style="padding: 8px; color:#0000fb;">Determination six:</td>                
+        <td colspan ="2" align ="center" style="padding: 12px;">
+         <?php echo $sql_dissolution_det['second_det_6_pkt']?> x 10 x <?php echo $sql_dissolution_det['second_det_6_df']?> x 100
+          <br/><hr/>A(1%, 1cm)/1000 x <?php echo $sql_dissolution_det['second_det_6_lc']?>
+         <td> =&nbsp &nbsp <?php echo $sql_dissolution_det['second_determination_6']?> % LC</td>      
+      </tr>   
+          </table>
+      </div>
+      </td></tr>   
+      <tr>
+        <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: solid 1px #bfbfbf;">Content</td>
+        <td colspan = "6" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: solid 1px #bfbfbf;"> <input type ="text" name="content"> </td>
+      </tr>
+      <tr>
+        <td align="center" colspan = "4"style="padding: 12px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <b><u>Determination 1</u></b></td>
+        <td align="center" colspan = "2"style="padding: 12px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"></td>
+      </tr>
+      <tr>
+        <td colspan ="4" align ="center" style="padding: 12px;">
+          <input type ="text" name="second_det_1_pkt" id ="second_det_1_pkt" size ="10" placeholder="A(SAMPLE)" >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp x 10
+          <input type ="text" name="second_det_1_df" id ="second_det_1_df" size ="10" placeholder="DF">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp x 100<br/><br/>A(1%, 1cm)/1000 x 
+          <input type ="text" name="second_det_1_lc" id ="second_det_1_lc" class ="det_1_lc"size ="10" placeholder="LC" ></td>
+        <td> =&nbsp &nbsp<input type ="text" name="second_determination_1" class="determination_1" id ="second_determination_1" size ="10"> % LC</td>
+      </tr>
+      <tr>
+        <td align="center" colspan = "4"style="padding: 12px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <b><u>Determination 2</u></b></td>
+        <td align="center" colspan = "2"style="padding: 12px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"></td>
+      </tr>
+      <tr>
+        <td colspan ="4" align ="center" style="padding: 12px;">
+          <input type ="text" name="second_det_2_pkt" id="second_det_2_pkt" size ="10" placeholder="A(SAMPLE)" >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp x 10
+          <input type ="text" name="second_det_2_df"id="second_det_2_df" size ="10" placeholder="DF">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp x 100 <br/><br/>A(1%, 1cm)/1000 x 
+          <input type ="text" name="second_det_2_lc" id ="second_det_2_lc" class="det_2_lc" size ="10" placeholder="LC"onchange="calculation_determinations()"></td>        
+        <td>=&nbsp &nbsp <input type ="text" name="second_determination_2"id ="second_determination_2" class="determination_2" size ="10">% LC </td>
+      </tr>
+      <tr>  
+        <td align="center" colspan = "4"style="padding: 12px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <b><u>Determination 3</u></b></td>
+        <td align="center" colspan = "2"style="padding: 12px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"></td>
+      </tr> 
+      <tr>  
+        <td colspan ="4" align ="center" style="padding: 12px;">
+          <input type ="text" name="second_det_3_pkt" id ="second_det_3_pkt"size ="10" placeholder="A(SAMPLE)" onchange="calculation_determinations()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp x 10
+          <input type ="text" name="second_det_3_df" id ="second_det_3_df" size ="10" placeholder="DF">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp x 100 <br/><br/>A(1%, 1cm)/1000 x 
+          <input type ="text" name="second_det_3_lc" id ="second_det_3_lc" class="det_3_lc" size ="10" placeholder="LC" onchange="calculation_determinations()"></td>        
+        <td>=&nbsp &nbsp <input type ="text" name="second_determination_3" id ="second_determination_3" class="determination_3" size ="10">% LC </td>
+      </tr>
+      <tr>
+        <td align="center" colspan = "4" style="padding: 12px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <b><u>Determination 4</u></b></td>
+        <td align="center" colspan = "2" style="padding: 12px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"></td>
+
+      </tr> 
+      <tr>  
+        <td colspan ="4" align ="center" style="padding: 12px;">
+          <input type ="text" name="second_det_4_pkt" id ="second_det_4_pkt" size ="10" placeholder="A(SAMPLE)" onchange="calculation_determinations()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp x 10
+          <input type ="text" name="second_det_4_df" id ="second_det_4_df" size ="10" placeholder="DF">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp x 100 <br/><br/>A(1%, 1cm)/1000 x 
+          <input type ="text" name="second_det_4_lc" id ="second_det_4_lc" class="det_4_lc" size ="10" placeholder="LC" onchange="calculation_determinations()"></td>        
+        <td>=&nbsp &nbsp <input type ="text" name="second_determination_4" id ="second_determination_4" class="determination_4" size ="10">% LC </td>
+      </tr> 
+      <tr>  
+        <td align="center" colspan = "4"style="padding: 12px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <b><u>Determination 5</u></b></td>
+        <td align="center" colspan = "2"style="padding: 12px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"></td>
+      </tr> 
+      <tr>  
+        <td colspan ="4" align ="center" style="padding: 12px;">
+
+          <input type ="text" name="second_det_5_pkt" id ="second_det_5_pkt" size ="10" placeholder="A(SAMPLE)" onchange="calculation_determinations()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp x 10
+          <input type ="text" name="second_det_5_df" id ="second_det_5_df" size ="10" placeholder="DF">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp x 100 <br/><br/>A(1%, 1cm)/1000 x 
+          <input type ="text" name="second_det_5_lc" id ="second_det_5_lc" class="det_5_lc" size ="10" placeholder="LC" onchange="calculation_determinations()"></td>        
+        <td>=&nbsp &nbsp <input type ="text" name="second_determination_5" id ="second_determination_5" class="determination_5" size ="10">% LC </td>
+      </tr> 
+      <tr> 
+        <td align="center" colspan = "4"style="padding: 12px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <b><u>Determination 6</u></b></td>
+        <td align="center" colspan = "2"style="padding: 12px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"></td>
+      </tr> 
+      <tr>  
+        <td colspan ="4" align ="center" style="padding: 12px;">
+          <input type ="text" name="second_det_6_pkt" id ="second_det_6_pkt" size ="10" placeholder="A(SAMPLE)" onchange="calculation_determinations()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp x 10
+          <input type ="text" name="second_det_6_df" id ="second_det_6_df" size ="10" placeholder="DF">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp x 100 <br/><br/>A(1%, 1cm)/1000 x 
+          <input type ="text" name="second_det_6_lc" id ="second_det_6_lc" class="det_6_lc" size ="10" placeholder="LC" onchange="calculation_determinations()"></td>        
+        <td>=&nbsp &nbsp <input type ="text" name="second_determination_6" id ="second_determination_6" class="determination_6" size ="10">% LC </td>
+      </tr> 
+      </table>
+      </td>
+      </tr>
       <tr> 
         <td align="center"colspan ="6" style="padding: 8px;padding: 8px;background-color: #e8e8ff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> </td>
 
@@ -471,56 +836,41 @@
             </tr>
           </table>
         </td>
-    </tr>              
+    </tr>                            
       <tr>
-        <td colspan="8" style="padding:8px;color:#0000ff;border-bottom:solid 1px #c4c4ff;"><b>Chromatography Check List</b></td>
+        <td colspan="8" align="left"  style="padding:8px;border-bottom: dotted 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><b>Conclusion</b></td>
       </tr>
-      <tr>
-        <td colspan="8" style="padding:8px;border-bottom:dotted 1px #c4c4ff;">
-          <table border="0" cellpadding="8px" width="60%" align="center">
-            <tr>
-              <td style="color:#0000ff;border-bottom:solid 1px #c4c4ff;padding:8px;">Requirement</td>
-              <td style="color:#0000ff;padding:8px;border-bottom:solid 1px #c4c4ff;">Tick</td>
-              <td style="color:#0000ff;padding:8px;border-bottom:solid 1px #c4c4ff;">Comment</td>
-            </tr>
-            <tr>
-              <td style="color:#000;padding:8px;">System Suitability Sequence</td>
-              <td style="color:#000;padding:8px;"><input type="checkbox" name="sysytem_suitability_sequence" value="Sysytem Suitability Sequence"></input></td>
-              <td style="color:#000;padding:8px;"><input type="text" name="sysytem_suitability_sequence_comment" size="50"></input></td>
-            </tr>
-            <tr>
-              <td style="color:#000;padding:8px;">Sample Injection sequence</td>
-              <td style="color:#000;padding:8px;"><input type="checkbox" name="sample_injection_sequence" value="Sample Injection Sequence"></input></td>
-              <td style="color:#000;padding:8px;"><input type="text" name="Sample_injection_sequence_comment" size="50"></input></td>
-            </tr>
-            <tr>
-              <td style="color:#000;padding:8px;">Chromatograms Attached</td>
-              <td style="color:#000;padding:8px;"><input type="checkbox" name="chromatograms_attached" value="Chromatograms Attached"></input></td>
-              <td style="color:#000;padding:8px;"><input type="text" name="chromatograms_attached_comment" size="50"></input></td>
-            </tr>
-          </table>
-        </td>
-       </tr>         
       <tr>
         <td colspan="8" align="left"  style="padding:8px;border-bottom: dotted 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><b>Conclusion</b></td>
       </tr>
       <tr>
         <td colspan="8" style="padding:8px;border-bottom:solid 1px #c4c4ff;">
-          <table border="0" width="30%" cellpadding="8px" align="center">
+          <table border="0" class="table_form" width="100%" cellpadding="8px" align="center">
             <tr>    
-              <td style="border-bottom:dottted 1px #c4c4ff;padding:8px;text-align:right;">PASS</input></td>
-              <td style="border-bottom:dottted 1px #c4c4ff;padding:8px;text-align:left;"><input type="radio" name="choice" value="1"></input></td>
-              <td style="border-bottom:dottted 1px #c4c4ff;padding:8px;text-align:right;">FAIL</input></td>
-              <td style="border-bottom:dottted 1px #c4c4ff;padding:8px;text-align:left;"><input type="radio" name="choice" value="0"></input></td>
-            </tr>
+              <td style="border-bottom:dottted 1px #c4c4ff;padding:8px;text-align:center;"><input type="text" name="choice" id="choice"></td>
+              </tr>
           </table>
          </tr>
          <tr>
        <td colspan="8" style="padding:8px;">
-        <table border="0" width="90%" cellpadding="8px" align="center">
+        <table border="0" class="table_form" width="100%" cellpadding="8px" align="center">
           <tr>
-            <td style="border-bottom: dotted 1px #c4c4ff;padding:4px;text-align:right;">Supervisor <input type="text" id="supervisor" name="supervisor"></td>
-            <td style="border-bottom: dotted 1px #c4c4ff;padding:4px;text-align:left;">Date <input type="date"  id="date" name="date"></td>
+            <td style="background-color:#ededfd;border-bottom: dotted 1px #c4c4ff;padding:8px;text-align:cente;">Done by: <input type="hidden" id="done_by" name="done_by" value="<?php echo($user['logged_in']['fname']." ".$user['logged_in']['lname']);?>"><?php echo($user['logged_in']['fname']." ".$user['logged_in']['lname']);?></td>
+            <td style="background-color:#ededfd;border-bottom: dotted 1px #c4c4ff;padding:8px;text-align:right;">Date conducted: <input type="hidden"  id="date" name="date_done" value="<?php echo date("d/m/Y")?>"><?php echo date("d/M/Y")?></td>
+          </tr>
+          <tr>
+            <td style="border-bottom: dotted 1px #c4c4ff;padding:4px;text-align:left;">Approved by: 
+            <select id="name" name="name" >
+            <option selected></option>
+             <?php
+             foreach($sql_approved as $user):
+            ?>
+             <option value="<?php  echo $user['fname'];?>"><?php  echo $user['fname'], "&nbsp;",$user['lname'];?></option>
+              <?php
+              endforeach
+              ?>
+          </select></td>
+            <td style="border-bottom: dotted 1px #c4c4ff;padding:4px;text-align:right;">Date <input type="text"  class="datepicker" name="date"></td>
           </tr>
           
           <tr>
@@ -540,4 +890,39 @@
  </div>
 </div>
   </body>
+  <script>
+  $('#min').change(function() {
+    if($('#min').is(':checked')){
+       $("input[min='min_tolerance']").show();
+       $('#max').prop('disabled', true);
+       $('#range').prop('disabled', true);
+    } else {
+        $("input[min='min_tolerance']").hide();
+       $('#max').prop('disabled', false);
+       $('#range').prop('disabled', false);
+    }
+  }).change();
+  $('#max').change(function() {
+    if($('#max').is(':checked')){
+       $("input[max='max_tolerance']").show();
+       $('#min').prop('disabled', true);
+       $('#range').prop('disabled', true);
+    } else {
+        $("input[max='max_tolerance']").hide();
+        $('#min').prop('disabled', false);
+        $('#range').prop('disabled', false);
+    }
+  }).change();
+  $('#range').change(function() {
+    if($('#range').is(':checked')){
+       $("input[range='tolerance_range']").show();
+        $('#max').prop('disabled', true);
+        $('#min').prop('disabled', true);
+    } else {
+        $("input[range='tolerance_range']").hide();
+        $('#max').prop('disabled', false);
+        $('#min').prop('disabled', false);
+    }
+  }).change();
+</script>
   </html>

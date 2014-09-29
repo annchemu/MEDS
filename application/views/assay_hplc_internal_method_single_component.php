@@ -24,9 +24,10 @@
   <script type="text/javascript" src="<?php echo base_url().'js/equations.js';?>"></script>
   <script type="text/javascript" src="<?php echo base_url().'tinymce/tinymce.min.js';?>"></script>
   <script type="text/javascript" src="<?php echo base_url().'tinymce/textarea_script.js';?>"></script>
-  <script type="text/javascript" src="<?php echo base_url().'js/datepicker.js';?>"></script>
   <script type="text/javascript" src="<?php echo base_url().'js/equipmentinfo.js';?>"></script>
- 
+  <script type="text/javascript" src="<?php echo base_url().'js/datepicker.js';?>"></script>
+  <script type="text/javascript" src="<?php echo base_url().'js/jquery.autosave.js';?>"></script>
+  
  </head>
  <body>
   <?php
@@ -89,9 +90,8 @@
        <table width="75%" class="table_form" border="0" cellpadding="4px" align="center">
         <input type="hidden" name="tr_id" value="<?php echo $query['tr'];?>"></input>
         <input type="hidden" name="assignment_id" value="<?php echo $request[0]['a'];?>"></input>    
-        <input type="hidden" name="test_type_id" value="<?php echo $query['test_type_id'];?>"></input>
         <tr>
-            <td colspan="8" style="text-align:right;padding:8px;backgroun-color:#fffff;border-bottom:solid 1px #bfbfbf;"><a href="<?php echo base_url().'test/index/'.$request[0]['a'].'/'.$query['tr'].'/'.$query['test_type_id'];?>"><img src="<?php echo base_url().'images/icons/view.png';?>" height="25px" width="25px">Back To Test Lists</a></td>
+            <td colspan="8" style="text-align:right;padding:8px;backgroun-color:#fffff;border-bottom:solid 1px #bfbfbf;"><a href="<?php echo base_url().'test/index/'.$request[0]['a'].'/'.$query['tr'].'/';?>"><img src="<?php echo base_url().'images/icons/view.png';?>" height="25px" width="25px">Back To Test Lists</a></td>
         </tr>
         <tr>
           <td colspan="8" align="center" style="padding:8px;">
@@ -246,10 +246,13 @@
                       <input type="text" id="weight_sample_six" name="weight_sample_six" onChange="calculate_difference()" size="10"></td> -->
                   </tr>
                   <tr>
-                    <td colspan="7"  align="left" style="padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">Dilution: </td>
+                    <td colspan="7"  align="left" style="padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">Dilution Preparation: </td>
                   </tr>
                   <tr>
                     <td colspan="7"  align="center" style="padding:8px;border-bottom: dotted 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><textarea rows="5" cols="160" name="dilution_one"></textarea></td>
+                  </tr>
+                  <tr>
+                    <td colspan="7"  align="left" style="padding:8px;border-bottom: dotted 1px #c4c4ff;color: #0000fb;background-color: #ffffff;">Sample Dilution Result <input type="text" id="dilution_result" name="dilution_result"></td>
                   </tr>
                 </table>
               </td>
@@ -292,51 +295,51 @@
                         ?>
                       </select>
                     </td>
-                    <td align="left" style="padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
+                    <!-- <td align="left" style="padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
                       <select id="standard_description_two" name="standard_description_two" >
                       <option selected></option>
                        <?php
                        foreach($sql_standards as $s_name):
                       ?>
                        
-                       <option value="<?php  echo $s_name['item_description'];?>"><?php  echo $s_name['item_description'];?></option>
+                       <option value="<?php  echo $s_name['item_description'];?>" data-stdlotnumbertwo="<?php echo $s_name['batch_number'];?>" data-stdrefnumbertwo="<?php echo $s_name['reference_number'];?>"><?php  echo $s_name['item_description'];?></option>
                         <?php
                         endforeach
                         ?>
                       </select>
-                    </td>
+                    </td> -->
                 </tr>
                  <tr>
                     <td align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
                     Lot Number</td>
                     <td height="20px" align="left" style="padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
                     <input type="text" id="stdlotnumber" name="std_lot_number" value=""></input></td>
-                    <td height="20px" align="left" style="padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                    <input type="text" id="stdlotnumber" name="std_lot_number" value=""></input></td>
+                    <!-- <td height="20px" align="left" style="padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
+                    <input type="text" id="stdlotnumbertwo" name="std_lot_number" value=""></input></td> -->
                 </tr>
                 <tr>
                     <td align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
                     ID Number</td>
                     <td height="20px" align="left" style="padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
                     <input type="text" id="stdrefnumber" name="std_id_number" value=""></input></td>
-                    <td height="20px" align="left" style="padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                    <input type="text" id="stdrefnumber" name="std_id_number" value=""></input></td>
+                    <!-- <td height="20px" align="left" style="padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
+                    <input type="text" id="stdrefnumbertwo" name="std_id_number" value=""></input></td> -->
                 </tr>
                 <tr>
                     <td align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
                     Potency</td>
                     <td height="20px" align="left" style="padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
                     <input type="text" id="potency_one" name="potency_one"></input></td>
-                    <td height="20px" align="left" style="padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                    <input type="text" id="potency_one" name="potency_one"></input></td>
+                    <!-- <td height="20px" align="left" style="padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
+                    <input type="text" id="potency_two" name="potency_two"></input></td> -->
                 </tr>
                 <tr>
                     <td height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
                     Weight of standard + container(g)</td>
                     <td height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
                     <input type="text" name="weight_standard_container_one" id="weight_standard_container_one"></td>
-                    <td height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
-                    <input type="text" name="weight_standard_container_two" id="weight_standard_container_two"></td>
+                    <!-- <td height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
+                    <input type="text" name="weight_standard_container_two" id="weight_standard_container_two"></td> -->
                   
                 </tr>
                 <tr>
@@ -344,18 +347,18 @@
                     Weight of container(g)</td>
                     <td height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
                     <input type="text" name="weight_container_of_std_one" id="container_one" onChange="calculate_sample_difference()"></td>
-                    <td height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
+                    <!-- <td height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
                     <input type="text" name="weight_container_of_std_two" id="container_two" onChange="calculate_sample_difference()"></td> 
-                    
+                     -->
                 </tr>
                 <tr>
                     <td height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
                     Weight of standard(g)</td>
                     <td height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
                     <input type="text" name="weight_standard_one" id="weight_standard_one" onChange="calculate_sample_difference()"></td>
-                    <td height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
+                    <!-- <td height="25px" align="left" style="color:#000;padding:8px;border-bottom: dotted 1px #c4c4ff;background-color: #ffffff;">
                     <input type="text" name="weight_standard_two" id="weight_standard_two" ></td>
-                    
+                     -->
                 </tr>
                 <tr>
                   <td colspan="4" height="25px" align="left" style="color:#000;padding:8px;background-color: #ffffff;">Dilution:</td>
@@ -363,7 +366,7 @@
                 <tr>
                   
                   <td colspan="2" height="25px" align="left" style="color:#000;padding:8px;border-bottom: solid 1px #c4c4ff;background-color: #ffffff;"><textarea type="text" name="dilution_one" row="8" cols="40"></textarea></td>
-                  <td colspan="2" height="25px" align="left" style="color:#000;padding:8px;border-bottom: solid 1px #c4c4ff;background-color: #ffffff;"><textarea type="text" name="dilution_two" row="8" cols="40"></textarea></td>
+                  <!-- <td colspan="2" height="25px" align="left" style="color:#000;padding:8px;border-bottom: solid 1px #c4c4ff;background-color: #ffffff;"><textarea type="text" name="dilution_two" row="8" cols="40"></textarea></td> -->
                 </tr>
               </table>
             </td>
@@ -675,97 +678,97 @@
                     </tr>
                     <tr>
                       <td style="text-align:center;border-bottom:solid 1px #c4c4ff;">1.</td>
-                      <td><input type="text" class="std" name="std_one" size="10"></input></td>
-                      <td><input type="text" class="internal_std_one" name="internal_std_a_one" size="10"></input></td>
-                      <td><input type="text" class="ratio_std_one" name="ratio_std_a_one" size="10"></input></td>
+                      <td><input type="text" class="std" name="std_one" id="std_one" size="10"></input></td>
+                      <td><input type="text" class="internal_std_one" id="internal_std_a_one" name="internal_std_a_one" onChange="ratio()" size="10"></input></td>
+                      <td><input type="text" class="ratio_std_one" id="ratio_std_a_one" name="ratio_std_a_one"  size="10"></input></td>
 
-                      <td><input type="text" class="sample_one" name="sample_a_one" size="10"></input></td>
-                      <td><input type="text" class="internal_std_two" name="internal_std_b_one" size="10"></input></td>
-                      <td><input type="text" class="ratio_std_two" name="ratio_std_b_one" size="10"></input></td>
+                      <td><input type="text" class="sample_one" id="sample_a_one" name="sample_a_one" size="10"></input></td>
+                      <td><input type="text" class="internal_std_two" id="internal_std_b_one" name="internal_std_b_one" onChange="ratio()" size="10"></input></td>
+                      <td><input type="text" class="ratio_std_two" id="ratio_std_b_one" name="ratio_std_b_one" size="10"></input></td>
 
-                      <td><input type="text" class="sample_two" name="sample_b_one" size="10"></input></td>
-                      <td><input type="text" class="internal_std_three" name="internal_std_c_one" size="10"></input></td>
-                      <td><input type="text" class="ratio_std_three" name="ratio_std_c_one" size="10"></input></td>
+                      <td><input type="text" class="sample_two" id="sample_b_one" name="sample_b_one" size="10"></input></td>
+                      <td><input type="text" class="internal_std_three" id="internal_std_c_one" name="internal_std_c_one" onChange="ratio()" size="10"></input></td>
+                      <td><input type="text" class="ratio_std_three" id="ratio_std_c_one" name="ratio_std_c_one" size="10"></input></td>
 
-                      <td><input type="text" class="sample_three" name="sample_c_one" size="10"></input></td>
-                      <td><input type="text" class="internal_std_four" name="internal_std_d_one" size="10"></input></td>
-                      <td><input type="text" class="ratio_std_four" name="ratio_std_d_one" size="10"></input></td>
+                      <td><input type="text" class="sample_three" id="sample_c_one" name="sample_c_one" size="10"></input></td>
+                      <td><input type="text" class="internal_std_four" id="internal_std_d_one" name="internal_std_d_one" onChange="ratio()" size="10"></input></td>
+                      <td><input type="text" class="ratio_std_four" id="ratio_std_d_one" name="ratio_std_d_one" size="10"></input></td>
 
                     </tr>
                     <tr>
                       <td style="text-align:center;border-bottom:solid 1px #c4c4ff;">2.</td>
-                      <td><input type="text" class="std" name="std_two" onChange="" size="10"></input></td>
-                      <td><input type="text" class="internal_std_one" name="internal_std_a_two" onChange="" size="10"></input></td>
-                      <td><input type="text" class="ratio_std_one" name="ratio_std_a_two" onChange="" size="10"></input></td>
+                      <td><input type="text" class="std" id="std_two" name="std_two" onChange="" size="10"></input></td>
+                      <td><input type="text" class="internal_std_one" id="internal_std_a_two" name="internal_std_a_two" onChange="ratio()" size="10"></input></td>
+                      <td><input type="text" class="ratio_std_one" id="ratio_std_a_two" name="ratio_std_a_two" onChange="" size="10"></input></td>
 
-                      <td><input type="text" class="sample_one" name="sample_a_two" onChange="" size="10"></input></td>
-                      <td><input type="text" class="internal_std_two" name="internal_std_b_two" onChange="" size="10"></input></td>
-                      <td><input type="text" class="ratio_std_two" name="ratio_std_b_two" onChange="" size="10"></input></td>
+                      <td><input type="text" class="sample_one" id="sample_a_two" name="sample_a_two" onChange="" size="10"></input></td>
+                      <td><input type="text" class="internal_std_two" id="internal_std_b_two" name="internal_std_b_two" onChange="ratio()" size="10"></input></td>
+                      <td><input type="text" class="ratio_std_two" id="ratio_std_b_two" name="ratio_std_b_two" onChange="" size="10"></input></td>
 
-                      <td><input type="text" class="sample_two" name="sample_b_two" onChange="" size="10"></input></td>
-                      <td><input type="text" class="internal_std_three" name="internal_std_c_two" onChange="" size="10"></input></td>
-                      <td><input type="text" class="ratio_std_three" name="ratio_std_c_two" onChange="" size="10"></input></td>
+                      <td><input type="text" class="sample_two" id="sample_b_two" name="sample_b_two" onChange="" size="10"></input></td>
+                      <td><input type="text" class="internal_std_three" id="internal_std_c_two" name="internal_std_c_two" onChange="ratio()" size="10"></input></td>
+                      <td><input type="text" class="ratio_std_three" id="ratio_std_c_two" name="ratio_std_c_two" onChange="" size="10"></input></td>
 
-                      <td><input type="text" class="sample_three" name="sample_c_two" onChange="" size="10"></input></td>
-                      <td><input type="text" class="internal_std_four" name="internal_std_d_two" onChange="" size="10"></input></td>
-                      <td><input type="text" class="ratio_std_four" name="ratio_std_d_two" onChange="" size="10"></input></td>
+                      <td><input type="text" class="sample_three" id="sample_c_two" name="sample_c_two" onChange="" size="10"></input></td>
+                      <td><input type="text" class="internal_std_four" id="internal_std_d_two" name="internal_std_d_two" onChange="ratio()" size="10"></input></td>
+                      <td><input type="text" class="ratio_std_four" id="ratio_std_d_two" name="ratio_std_d_two" onChange="" size="10"></input></td>
 
                     </tr>
                     <tr>
                       <td style="text-align:center;border-bottom:solid 1px #c4c4ff;">3.</td>
-                      <td><input type="text" class="std" name="std_three" onChange="" size="10"></input></td>
-                      <td><input type="text" class="internal_std_one" name="internal_std_a_three" onChange="" size="10"></input></td>
-                      <td><input type="text" class="ratio_std_one" name="ratio_std_a_three" onChange="" size="10"></input></td>
+                      <td><input type="text" class="std" id="std_three" name="std_three" onChange="" size="10"></input></td>
+                      <td><input type="text" class="internal_std_one" id="internal_std_a_three" name="internal_std_a_three" onChange="ratio()" size="10"></input></td>
+                      <td><input type="text" class="ratio_std_one" id="ratio_std_a_three" name="ratio_std_a_three" onChange="" size="10"></input></td>
 
-                      <td><input type="text" class="sample_one" name="sample_a_three" onChange="" size="10"></input></td>
-                      <td><input type="text" class="internal_std_two" name="internal_std_b_three" onChange="" size="10"></input></td>
-                      <td><input type="text" class="ratio_std_two" name="ratio_std_b_three" onChange="" size="10"></input></td>
+                      <td><input type="text" class="sample_one" id="sample_a_three" name="sample_a_three" onChange="" size="10"></input></td>
+                      <td><input type="text" class="internal_std_two" id="internal_std_b_three" name="internal_std_b_three" onChange="ratio()" size="10"></input></td>
+                      <td><input type="text" class="ratio_std_two" id="ratio_std_b_three" name="ratio_std_b_three" onChange="" size="10"></input></td>
 
-                      <td><input type="text" class="sample_two" name="sample_b_three" onChange="" size="10"></input></td>
-                      <td><input type="text" class="internal_std_three" name="internal_std_c_three" onChange="" size="10"></input></td>
-                      <td><input type="text" class="ratio_std_three" name="ratio_std_c_three" onChange="" size="10"></input></td>
+                      <td><input type="text" class="sample_two" id="sample_b_three" name="sample_b_three" onChange="" size="10"></input></td>
+                      <td><input type="text" class="internal_std_three" id="internal_std_c_three" name="internal_std_c_three" onChange="ratio()" size="10"></input></td>
+                      <td><input type="text" class="ratio_std_three" id="ratio_std_c_three" name="ratio_std_c_three" onChange="" size="10"></input></td>
 
-                      <td><input type="text" class="sample_three" name="sample_c_three" onChange="" size="10"></input></td>
-                      <td><input type="text" class="internal_std_four" name="internal_std_d_three" onChange="" size="10"></input></td>
-                      <td><input type="text" class="ratio_std_four" name="ratio_std_d_three" onChange="" size="10"></input></td>
+                      <td><input type="text" class="sample_three" id="sample_c_three" name="sample_c_three" onChange="" size="10"></input></td>
+                      <td><input type="text" class="internal_std_four" id="internal_std_d_three" name="internal_std_d_three" onChange="ratio()" size="10"></input></td>
+                      <td><input type="text" class="ratio_std_four" id="ratio_std_d_three" name="ratio_std_d_three" onChange="" size="10"></input></td>
 
                     </tr>
                     <tr>
                       <td style="text-align:center;border-bottom:solid 1px #c4c4ff;">4.</td>
-                      <td><input type="text" class="std" name="std_four" onChange="" size="10"></input></td>
-                      <td><input type="text" class="internal_std_one" name="internal_std_a_four" onChange="" size="10"></input></td>
-                      <td><input type="text" class="ratio_std_one" name="ratio_std_a_four" onChange="" size="10"></input></td>
+                      <td><input type="text" class="std" id="std_four" name="std_four" onChange="" size="10"></input></td>
+                      <td><input type="text" class="internal_std_one" id="internal_std_a_four" name="internal_std_a_four" onChange="ratio()" size="10"></input></td>
+                      <td><input type="text" class="ratio_std_one" id="ratio_std_a_four" name="ratio_std_a_four" onChange="" size="10"></input></td>
 
-                      <td><input type="text" class="sample_one" name="sample_a_four" onChange=" " size="10"></input></td>
-                      <td><input type="text" class="internal_std_two" name="internal_std_b_four" onChange="" size="10"></input></td>
-                      <td><input type="text" class="ratio_std_two" name="ratio_std_b_four" onChange="" size="10"></input></td>
+                      <td><input type="text" class="sample_one" id="sample_a_four" name="sample_a_four" onChange=" " size="10"></input></td>
+                      <td><input type="text" class="internal_std_two" id="internal_std_b_four" name="internal_std_b_four" onChange="ratio()" size="10"></input></td>
+                      <td><input type="text" class="ratio_std_two" id="ratio_std_b_four" name="ratio_std_b_four" onChange="" size="10"></input></td>
 
-                      <td><input type="text" class="sample_two" name="sample_b_four" onChange="" size="10"></input></td>
-                      <td><input type="text" class="internal_std_three" name="internal_std_c_four" onChange="" size="10"></input></td>
-                      <td><input type="text" class="ratio_std_three" name="ratio_std_c_four" onChange="" size="10"></input></td>
+                      <td><input type="text" class="sample_two" id="sample_b_four" name="sample_b_four" onChange="" size="10"></input></td>
+                      <td><input type="text" class="internal_std_three" id="internal_std_c_four" name="internal_std_c_four" onChange="ratio()" size="10"></input></td>
+                      <td><input type="text" class="ratio_std_three" id="ratio_std_c_four" name="ratio_std_c_four" onChange="" size="10"></input></td>
 
-                      <td><input type="text" class="sample_three" name="sample_c_four" onChange="" size="10"></input></td>
-                      <td><input type="text" class="internal_std_four" name="internal_std_d_four" onChange="" size="10"></input></td>
-                      <td><input type="text" class="ratio_std_four" name="ratio_std_d_four" onChange="" size="10"></input></td>
+                      <td><input type="text" class="sample_three" id="sample_c_four" name="sample_c_four" onChange="" size="10"></input></td>
+                      <td><input type="text" class="internal_std_four" id="internal_std_d_four" name="internal_std_d_four" onChange="ratio()" size="10"></input></td>
+                      <td><input type="text" class="ratio_std_four" id="ratio_std_d_four" name="ratio_std_d_four" onChange="" size="10"></input></td>
 
                     </tr>
                     <tr>
                       <td style="text-align:center;border-bottom:solid 1px #c4c4ff;">5.</td>
                       <td><input type="text" class="std" id="std_five" name="std_five" onChange="" size="10"></input></td>
-                      <td><input type="text" class="internal_std_one" id="internal_std_a_five" name="internal_std_b_five" onChange="" size="10"></input></td>
-                      <td><input type="text" class="ratio_std_one" id="ratio_std_a_five" name="ratio_std_five_one" onChange="" size="10"></input></td>
+                      <td><input type="text" class="internal_std_one" id="internal_std_a_five" name="internal_std_a_five" onChange="ratio()" size="10"></input></td>
+                      <td><input type="text" class="ratio_std_one" id="ratio_std_a_five" name="ratio_std_a_five" onChange="" size="10"></input></td>
 
                       <td><input type="text" class="sample_one" id="sample_a_five" name="sample_a_five" onChange="" size="10"></input></td>
-                      <td><input type="text" class="internal_std_two" id="internal_std_b_five" name="internal_std_b_five" onChange="" size="10"></input></td>
-                      <td><input type="text" class="ratio_std_two" id="ratio_std_b_five" name="ratio_std_five_two" onChange="" size="10"></input></td>
+                      <td><input type="text" class="internal_std_two" id="internal_std_b_five" name="internal_std_b_five" onChange="ratio()" size="10"></input></td>
+                      <td><input type="text" class="ratio_std_two" id="ratio_std_b_five" name="ratio_std_b_five" onChange="" size="10"></input></td>
 
                       <td><input type="text" class="sample_two" id="sample_b_five" name="sample_d_five" onChange="" size="10"></input></td>
-                      <td><input type="text" class="internal_std_three" id="internal_std_c_five" name="internal_std_c_five" onChange="" size="10"></input></td>
-                      <td><input type="text" class="ratio_std_three" id="ratio_std_c_five" name="ratio_std_five_three" onChange="" size="10"></input></td>
+                      <td><input type="text" class="internal_std_three" id="internal_std_c_five" name="internal_std_c_five" onChange="ratio()" size="10"></input></td>
+                      <td><input type="text" class="ratio_std_three" id="ratio_std_c_five" name="ratio_std_c_five" onChange="" size="10"></input></td>
 
                       <td><input type="text" class="sample_three" id="sample_c_five" name="sample_c_five" onChange="" size="10"></input></td>
-                      <td><input type="text" class="internal_std_four" id="internal_std_d_five" name="internal_std_d_five" onChange="" size="10"></input></td>
-                      <td><input type="text" class="ratio_std_four" id="ratio_std_d_five" name="ratio_std_five_four" onChange="" size="10"></input></td>
+                      <td><input type="text" class="internal_std_four" id="internal_std_d_five" name="internal_std_d_five" onChange="ratio()" size="10"></input></td>
+                      <td><input type="text" class="ratio_std_four" id="ratio_std_d_five" name="ratio_std_d_five" onChange="" size="10"></input></td>
 
                     </tr>
                     <tr>
@@ -813,11 +816,7 @@
                 <td colspan="8" style="padding:8px;border-bottom:solid 1pf #c4c4ff;">
                   <table border="0" cellpadding="8px" align="center">
                     <tr>
-                      <td style="color:#0000ff;padding:8px;border-bottom:solid 1px #c4c4ff;"><input type="text" id="a" name="a" size="5"> x <input type="text" id="b" name="b" size="5"> =</td>
-                      <td style="color:#0000ff;padding:8px;border-bottom:solid 1px #c4c4ff;"><input type="text" id="d_factor" name="d_factor" size="5" disabled> Dilution Factor</td>
-                    </tr>
-                    <tr>
-                      <td style="color:#0000ff;text-align:center;padding:8px;"><input type="text" id="factor" name="factor" onChange="calc_d_factor()" size="5"></td>
+                      <td style="color:#0000ff;text-align:center;padding:8px;">Sample Dilution Factor <input type="text" id="determination_dilution_result" name="determination_dilution_result" size="5" disabled></td>
                     </tr>
                   </table>
                 </td>
@@ -829,31 +828,31 @@
                       <td colspan="2" style="padding:8px;color:#0000ff;text-align:left;border-bottom:solid 1px #c4c4ff;">Determination 1</td>
                     </tr>
                     <tr>
-                      <td style="padding:8px;border-bottom:dotted 1px #c4c4ff; text-align:center;"><input type="text" id="d_one_pkt" name="d_one_pkt"  placeholder="(PKT)" size="5"/ disabled> x <input type="text" id="d_one_wstd" name="d_one_wstd" placeholder="(WSTD)" size="5"/> x <input type="text" id="d_one_awt" name="d_one_awt" placeholder="(AWT)" size="5"/> x 100 x <input type="text" id="d_one_df" name="d_one_df" placeholder="(DF)" size="5" disabled/> x <input type="text" id="d_one_potency" name="d_one_potency" placeholder="(P)" size="5" disabled/></td>
-                      <td style="padding:8px;">=<input type="text" id="d_one_p_lc" name="d_one_p_lc" onCHange="calc_determination()" placeholder="(%LC)" size="10" disabled/></td>
+                      <td style="padding:8px;border-bottom:dotted 1px #c4c4ff; text-align:center;"><input type="text" id="d_one_pkt" name="d_one_pkt"  placeholder="(PKT)" size="5"/ disabled> x <input type="text"  id="d_one_wstd" name="d_one_wstd" placeholder="(WSTD)" size="5"/> x <input type="text" id="d_one_awt" name="d_one_awt" placeholder="(AWT)" size="5"/> x 100 x <input type="text" id="d_one_df" name="d_one_df" placeholder="(DF)" size="5" disabled/> x <input type="text" id="d_one_potency" name="d_one_potency" placeholder="(P)" size="5" disabled/></td>
+                      <td style="padding:8px;">=<input type="text" id="d_one_p_lc" name="d_one_p_lc" onChange="calc_determination()" placeholder="(%LC)" size="10" disabled/></td>
                     </tr>
                     <tr>
-                      <td colspan="2" style="padding:8px;text-align:center;"><input type="text" id="d_one_pkstd" name="d_one_pkstd" placeholder="(PKSTD)" size="5" disabled> x <input type="text" id="d_one_wt" name="d_one_wt" placeholder="(WT)" size="5"> x <input type="text" id="d_one_lc" name="d_one_lc" placeholder="(LC)" size="5" onCHange="calc_determination()"></td>
+                      <td colspan="2" style="padding:8px;text-align:center;"><input type="text" id="d_one_pkstd" name="d_one_pkstd" placeholder="(PKSTD)" size="5" disabled> x <input type="text" id="d_one_wt" name="d_one_wt" placeholder="(WT)" size="5" disabled> x <input type="text" id="d_one_lc" name="d_one_lc" placeholder="(LC)" size="5" onChange="calc_determination()"></td>
                     </tr>
                     <tr>
                       <td colspan="2" style="padding:8px;color:#0000ff;text-align:left;border-bottom:solid 1px #c4c4ff;">Determination 2</td>
                     </tr>
                     <tr>
-                      <td style="padding:8px;border-bottom:dotted 1px #c4c4ff; text-align:center;"><input type="text" id="d_two_pkt" name="d_two_pkt"  placeholder="(PKT)" size="5" onChange="calc_determination()" disabled/> x <input type="text" id="d_two_wstd" name="d_two_wstd" placeholder="(WSTD)" size="5"/> x <input type="text" id="d_two_awt" name="d_two_awt" placeholder="(AWT)" size="5"/> x 100 x <input type="text" id="d_two_df" name="d_two_df" placeholder="(DF)" size="5" disabled/> x <input type="text" id="d_two_potency" name="d_two_potency" placeholder="(P)" size="5" disabled></td>
-                      <td style="padding:8px;">=<input type="text" id="d_two_p_lc" name="d_two_p_lc" onCHange="calc_determination()" placeholder="(%LC)" size="10" disabled/></td>
+                      <td style="padding:8px;border-bottom:dotted 1px #c4c4ff; text-align:center;"><input type="text" id="d_two_pkt" name="d_two_pkt"  placeholder="(PKT)" size="5"  disabled/> x <input type="text" id="d_two_wstd" name="d_two_wstd" placeholder="(WSTD)" size="5"/> x <input type="text" id="d_two_awt" name="d_two_awt" placeholder="(AWT)" size="5"/> x 100 x <input type="text" id="d_two_df" name="d_two_df" placeholder="(DF)" size="5" disabled/> x <input type="text" id="d_two_potency" name="d_two_potency" placeholder="(P)" size="5" disabled></td>
+                      <td style="padding:8px;">=<input type="text" id="d_two_p_lc" name="d_two_p_lc" onChange="calc_determination()" placeholder="(%LC)" size="10" disabled/></td>
                     </tr>
                     <tr>
-                      <td colspan="2" style="padding:8px;text-align:center;"><input type="text" id="d_two_pkstd" name="d_two_pkstd" placeholder="(PKSTD)" size="5" disabled> x <input type="text" id="d_two_wt" name="d_two_wt" placeholder="(WT)" size="5"> x <input type="text" id="d_two_lc" name="d_two_lc" placeholder="(LC)" size="5" /></td>
+                      <td colspan="2" style="padding:8px;text-align:center;"><input type="text" id="d_two_pkstd" name="d_two_pkstd" placeholder="(PKSTD)" size="5" disabled> x <input type="text" id="d_two_wt" name="d_two_wt" placeholder="(WT)" size="5" disabled> x <input type="text" id="d_two_lc" name="d_two_lc" placeholder="(LC)" size="5" onChange="calc_determination()"/></td>
                     </tr>
                     <tr>
                       <td colspan="2" style="padding:8px;color:#0000ff;text-align:left;border-bottom:solid 1px #c4c4ff;">Determination 3</td>
                     </tr>
                     <tr>
-                      <td style="padding:8px;border-bottom:dotted 1px #c4c4ff; text-align:center;"><input type="text" id="d_three_pkt" name="d_three_pkt"  placeholder="(PKT)" size="5" onChange="calc_determination()" disabled/> x <input type="text" id="d_three_wstd" name="d_three_wstd" placeholder="(WSTD)" size="5"/> x <input type="text" id="d_three_awt" name="d_three_awt" placeholder="(AWT)" size="5"/> x 100 x <input type="text" id="d_three_df" name="d_three_df" placeholder="(DF)" size="5" disabled/> x <input type="text" id="d_three_potency" name="d_three_potency" placeholder="(P)" size="5" disabled/></td>
+                      <td style="padding:8px;border-bottom:dotted 1px #c4c4ff; text-align:center;"><input type="text" id="d_three_pkt" name="d_three_pkt"  placeholder="(PKT)" size="5"  disabled/> x <input type="text" id="d_three_wstd" name="d_three_wstd" placeholder="(WSTD)" size="5"/> x <input type="text" id="d_three_awt" name="d_three_awt" placeholder="(AWT)" size="5"/> x 100 x <input type="text" id="d_three_df" name="d_three_df" placeholder="(DF)" size="5" disabled/> x <input type="text" id="d_three_potency" name="d_three_potency" placeholder="(P)" size="5" disabled/></td>
                       <td style="padding:8px;">=<input type="text" id="d_three_p_lc" name="d_three_p_lc" onChange="calc_determination()" placeholder="(%LC)" size="10" disabled/></td>
                     </tr>
                     <tr>
-                      <td colspan="2" style="padding:8px;text-align:center;"><input type="text" id="d_three_pkstd" name="d_three_pkstd" placeholder="(PKSTD)" size="5" disabled> x <input type="text" id="d_three_wt" name="d_three_wt" placeholder="(WT)" size="5"> x <input type="text" id="d_three_lc" name="d_three_lc" placeholder="(LC)" size="5" /></td>
+                      <td colspan="2" style="padding:8px;text-align:center;"><input type="text" id="d_three_pkstd" name="d_three_pkstd" placeholder="(PKSTD)" size="5" disabled> x <input type="text" id="d_three_wt" name="d_three_wt" placeholder="(WT)" size="5" disabled> x <input type="text" id="d_three_lc" name="d_three_lc" placeholder="(LC)" size="5" onChange="calc_determination()"/></td>
                     </tr>
                     <tr>
                       <td colspan="3" style="padding:8px;">Average % &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="determination_average" name="determination_average"  disabled></input></td>
@@ -963,8 +962,19 @@
                     <td style="background-color:#ededfd;border-bottom: dotted 1px #c4c4ff;padding:8px;text-align:right;">Date Conducted <input type="hidden"  id="date" name="date_done" value="<?php echo date("d/m/Y")?>"><?php echo date("d/M/Y")?></td>
                   </tr>
                   <tr>
-                    <td style="border-bottom: dotted 1px #c4c4ff;padding:8px;text-align:left;">Approved By <input type="text" id="supervisor" name="supervisor"></td>
-                    <td style="border-bottom: dotted 1px #c4c4ff;padding:8px;text-align:right;">Date Approved <input type="text"  id="datepicker" name="date_appproved"></td>
+                    <td style="border-bottom: dotted 1px #c4c4ff;padding:8px;text-align:left;">Approved By 
+                      <select id="supervisor" name="supervisor" >
+                      <option selected></option>
+                       <?php
+                       foreach($users as $user_name):
+                      ?>
+                       <option value="<?php  echo $user_name['fname']." ".$user_name['lname'];?>"><?php  echo $user_name['fname']." ".$user_name['lname'];?></option>
+                        <?php
+                        endforeach
+                        ?>
+                      </select>
+                    </td>
+                    <td style="border-bottom: dotted 1px #c4c4ff;padding:8px;text-align:right;">Date Approved <input type="text" class="datepicker" id="datepicker" name="date_appproved"></td>
                   </tr>
                   <tr>
                     <td colspan="2" style="padding:4px;">Further Comments:</td>
@@ -980,30 +990,31 @@
             </tr>
        </table>
       </form>
+      <p id="message"></p>
 </div>
 </div>
 </body>
 <script>
-$(document).ready(function() {
-        
+$(document).ready(function() { 
+
       $(".std").keyup(function(){
         var text_avg_std = $("#std_average").val();
 
         $("#d_one_pkstd").val(text_avg_std);$("#d_two_pkstd").val(text_avg_std);$("#d_three_pkstd").val(text_avg_std);   
 
-        }); 
+       }); 
 
        $(".sample_one").keyup(function(){
         var text_avg_sample_one = $("#sample_a_average").val();
         $("#d_one_pkt").val(text_avg_sample_one);
 
-        }); 
+       }); 
 
        $(".sample_two").keyup(function(){
         var text_avg_sample_two = $("#sample_b_average").val();  
         $("#d_two_pkt").val(text_avg_sample_two); 
          
-        });
+       });
 
        $(".sample_three").keyup(function(){
         var text_avg_sample_three = $("#sample_c_average").val(); 
@@ -1017,11 +1028,16 @@ $(document).ready(function() {
          
         });
 
+       $("#potency_two").keyup(function(){
+        var text_potency = $("#potency_two").val();
+        $("#d_one_potency").val(text_potency); $("#d_two_potency").val(text_potency);$("#d_three_potency").val(text_potency); 
+         
+        });
 
-        $("#factor").change(function(){
-        var text_df = $("#d_factor").val();    
+        $("#dilution_result").change(function(){
+        var text_df = $("#dilution_result").val();    
 
-        $("#d_one_df").val(text_df);$("#d_two_df").val(text_df); $("#d_three_df").val(text_df);
+        $("#determination_dilution_result").val(text_df);$("#d_one_df").val(text_df);$("#d_two_df").val(text_df); $("#d_three_df").val(text_df);
         }); 
 
         $("#d_one_lc").change(function(){
@@ -1032,8 +1048,11 @@ $(document).ready(function() {
         var text_wt = $("#d_one_wt").val();     
         var text_lc = $("#d_one_lc").val();     
 
-        $("#d_two_wstd").val(text_wstd);$("#d_two_awt").val(text_awt);$("#d_two_wt").val(text_wt);$("#d_two_lc").val(text_lc);$("#equivalent_to_lc").val(text_lc);
-        $("#d_three_wstd").val(text_wstd);$("#d_three_awt").val(text_awt);$("#d_three_wt").val(text_wt);$("#d_three_lc").val(text_lc);
+        $("#d_two_wstd").val(text_wstd);$("#d_two_awt").val(text_awt);$("#d_two_wt").val(text_wt);
+        // $("#d_two_lc").val(text_lc);
+        //$("#equivalent_to_lc").val(text_lc);
+        $("#d_three_wstd").val(text_wstd);$("#d_three_awt").val(text_awt);$("#d_three_wt").val(text_wt);
+        // $("#d_three_lc").val(text_lc);
         }); 
     });
 </script>

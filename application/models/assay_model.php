@@ -49,6 +49,49 @@ class Assay_Model extends CI_Model{
 
    }
 
+   function process_monograph_hplc_internal_method_two_components(){
+
+      $assignment_id=$this->input->post('assignment_id');
+      $test_request_id=$this->input->post('tr_id');
+      $status=1;
+      $internal_method_two_components='';
+      
+      // $area_method_two_components='6c';
+      // $area_method_two_components_different_methods='6d';
+      // $area_method_oral_liquids_single_component='6e';
+      // $area_method_oral_liquids_two_components='6f';
+      // $area_method_powder_for_oral_liquids='6g';
+      // $area_method_injection_powder_single_component='6h';
+      // $area_method_injection_powder_two_components='6i';
+      // $titration='6j';
+      // $ultraviolet='6k';
+      // $karl_fisher='6l';
+
+      $data=$this->db->select_max('id')->get('assay_hplc_internal_method_two_components')->result();
+      $assay_hplc_internal_method_two_components_id=$data[0]->id;
+      $assay_hplc_internal_method_two_components_id++;
+
+    $data = array(
+     
+     'assignment_id'=>$assignment_id,
+     'test_request_id'=>$test_request_id,
+     'assay_hplc_internal_method_two_components_id'=>$assay_hplc_internal_method_two_components_id,
+     'serial_number'=>$this->input->post('serial_number'),
+     'monograph'=>$this->input->post('monograph')
+
+    );
+
+    $data_two = array(
+     
+     'test_type_id'=>$assay_hplc_internal_method_two_components_id,
+     'actual_test_id'=>$internal_method,
+    );
+    
+     $this->db->insert('assay_monograph_hplc_internal_method_two_components',$data);
+     redirect('test/index/'.$assignment_id.'/'.$test_request_id);
+
+   }
+
    function process_monograph_hplc_area_method_single_component(){
 
       $assignment_id=$this->input->post('assignment_id');
@@ -169,12 +212,6 @@ class Assay_Model extends CI_Model{
      'monograph'=>$this->input->post('monograph')
 
     );
-
-    $data_two = array(
-     
-     'test_type_id'=>$assay_hplc_area_method_oral_liquids_single_component_id,
-     'actual_test_id'=>$area_method_oral_liquids_single_component,
-    );
     
      $this->db->insert('assay_monograph_hplc_area_method_oral_liquids_single_component',$data);
      redirect('test/index/'.$assignment_id.'/'.$test_request_id);
@@ -202,15 +239,8 @@ class Assay_Model extends CI_Model{
      'monograph'=>$this->input->post('monograph')
 
     );
-
-    $data_two = array(
-     
-     'test_type_id'=>$assay_hplc_area_method_oral_liquids_two_components_id,
-     'actual_test_id'=>$internal_method,
-    );
     
      $this->db->insert('assay_monograph_hplc_area_method_oral_liquids_two_components',$data);
-     $this->db->update('test_request', $data_two,array('test_request_id' => $test_request_id));
      redirect('test/index/'.$assignment_id.'/'.$test_request_id);
 
    }
@@ -302,14 +332,8 @@ class Assay_Model extends CI_Model{
 
     );
 
-    $data_two = array(
-     
-     'test_type_id'=>$assay_hplc_area_method_injection_powder_two_components_id,
-     'actual_test_id'=>$internal_method,
-    );
     
      $this->db->insert('assay_monograph_hplc_area_method_injection_powder_two_components',$data);
-     $this->db->update('test_request', $data_two,array('test_request_id' => $test_request_id));
      redirect('test/index/'.$assignment_id.'/'.$test_request_id);
 
    }
@@ -416,7 +440,7 @@ class Assay_Model extends CI_Model{
     $assignment_id=$this->input->post('assignment_id');
     $test_request_id=$this->input->post('tr_id');
     $test_type_id=$this->input->post('test_type_id');
-    $status=1;
+    $status="";
     $internal_method='6a';
     $data=$this->db->select_max('id')->get('assay_hplc_internal_method')->result();
     $assay_hplc_internal_method_id=$data[0]->id;
@@ -427,8 +451,10 @@ class Assay_Model extends CI_Model{
     
     if($conclusion=="Test Complies (Passed)"){
       $choice=1;
+      $status=1.1;
     }else if($conclusion=="Test Does Not Comply(Failed)"){
       $choice=0;
+      $status=1.2;
     }  
 
     //Sample Insertion
@@ -442,33 +468,34 @@ class Assay_Model extends CI_Model{
      'weight_of_sample_container_w1'=>$this->input->post('weight_sample_container_one'),
      'weight_of_sample_container_w2'=>$this->input->post('weight_sample_container_two'),
      'weight_of_sample_container_w3'=>$this->input->post('weight_sample_container_three'),
-     'weight_of_sample_container_w4'=>$this->input->post('weight_sample_container_four'),
-     'weight_of_sample_container_w5'=>$this->input->post('weight_sample_container_five'),
-     'weight_of_sample_container_w6'=>$this->input->post('weight_sample_container_six'),
+     // 'weight_of_sample_container_w4'=>$this->input->post('weight_sample_container_four'),
+     // 'weight_of_sample_container_w5'=>$this->input->post('weight_sample_container_five'),
+     // 'weight_of_sample_container_w6'=>$this->input->post('weight_sample_container_six'),
      'weight_of_container_w1'=>$this->input->post('weight_container_one'),
      'weight_of_container_w2'=>$this->input->post('weight_container_two'),
      'weight_of_container_w3'=>$this->input->post('weight_container_three'),
-     'weight_of_container_w4'=>$this->input->post('weight_container_four'),
-     'weight_of_container_w5'=>$this->input->post('weight_container_five'),
-     'weight_of_container_w6'=>$this->input->post('weight_container_six'),
+     // 'weight_of_container_w4'=>$this->input->post('weight_container_four'),
+     // 'weight_of_container_w5'=>$this->input->post('weight_container_five'),
+     // 'weight_of_container_w6'=>$this->input->post('weight_container_six'),
      'weight_of_sample_w1'=>$this->input->post('weight_sample_one'),
      'weight_of_sample_w2'=>$this->input->post('weight_sample_two'),
      'weight_of_sample_w3'=>$this->input->post('weight_sample_three'),
-     'weight_of_sample_w4'=>$this->input->post('weight_sample_four'),
-     'weight_of_sample_w5'=>$this->input->post('weight_sample_five'),
-     'weight_of_sample_w6'=>$this->input->post('weight_sample_six'),
+     // 'weight_of_sample_w4'=>$this->input->post('weight_sample_four'),
+     // 'weight_of_sample_w5'=>$this->input->post('weight_sample_five'),
+     // 'weight_of_sample_w6'=>$this->input->post('weight_sample_six'),
      'dilution_one'=>$this->input->post('dilution_one'),
+     'sample_dilution_result'=>$this->input->post('sample_dilution_result'),
      'weight_of_standard_preparation'=>$this->input->post('weight_of_standard_preparation'),
      'standard_description_one'=>$this->input->post('standard_description_one'),
-     'standard_description_two'=>$this->input->post('standard_description_two'),
+     //'standard_description_two'=>$this->input->post('standard_description_two'),
      'potency_one'=>$this->input->post('potency_one'),
-     'potency_two'=>$this->input->post('potency_two'),
+     //'potency_two'=>$this->input->post('potency_two'),
      'weight_standard_container_std_one'=>$this->input->post('weight_standard_container_one'),
-     'weight_standard_container_std_two'=>$this->input->post('weight_standard_container_two'),
+     //'weight_standard_container_std_two'=>$this->input->post('weight_standard_container_two'),
      'weight_container_of_std_one'=>$this->input->post('weight_container_of_std_one'),
-     'weight_container_of_std_two'=>$this->input->post('weight_container_of_std_two'),
+     //'weight_container_of_std_two'=>$this->input->post('weight_container_of_std_two'),
      'weight_of_standard_one'=>$this->input->post('weight_of_standard_one'),
-     'weight_of_standard_two'=>$this->input->post('weight_of_standard_two'),
+     //'weight_of_standard_two'=>$this->input->post('weight_of_standard_two'),
      'dilution_two'=>$this->input->post('dilution_two'),
      'equipment_make'=>$this->input->post('equipmentmake'),
      'equipment_id'=>$this->input->post('make_id'),
@@ -516,33 +543,33 @@ class Assay_Model extends CI_Model{
      'd_three_pkstd'=>$this->input->post('d_three_pkstd'),
      'd_three_wt'=>$this->input->post('d_three_wt'),
      'd_three_lc'=>$this->input->post('d_three_lc'),
-     'd_four_pkt'=>$this->input->post('d_four_pkt'),
-     'd_four_wstd'=>$this->input->post('d_four_wstd'),
-     'd_four_awt'=>$this->input->post('d_four_awt'),
-     'd_four_df'=>$this->input->post('d_four_df'),
-     'd_four_potency'=>$this->input->post('d_four_potency'),
-     'd_four_pkstd'=>$this->input->post('d_four_pkstd'),
-     'd_four_wt'=>$this->input->post('d_four_wt'),
-     'd_four_lc'=>$this->input->post('d_four_lc'),
-     'd_five_pkt'=>$this->input->post('d_five_pkt'),
-     'd_five_wstd'=>$this->input->post('d_five_wstd'),
-     'd_five_awt'=>$this->input->post('d_five_awt'),
-     'd_five_df'=>$this->input->post('d_five_df'),
-     'd_five_potency'=>$this->input->post('d_five_potency'),
-     'd_five_pkstd'=>$this->input->post('d_five_pkstd'),
-     'd_five_wt'=>$this->input->post('d_five_wt'),
-     'd_five_lc'=>$this->input->post('d_five_lc'),
-     'd_six_pkt'=>$this->input->post('d_six_pkt'),
-     'd_six_wstd'=>$this->input->post('d_six_wstd'),
-     'd_six_awt'=>$this->input->post('d_six_awt'),
-     'd_six_df'=>$this->input->post('d_six_df'),
+     // 'd_four_pkt'=>$this->input->post('d_four_pkt'),
+     // 'd_four_wstd'=>$this->input->post('d_four_wstd'),
+     // 'd_four_awt'=>$this->input->post('d_four_awt'),
+     // 'd_four_df'=>$this->input->post('d_four_df'),
+     // 'd_four_potency'=>$this->input->post('d_four_potency'),
+     // 'd_four_pkstd'=>$this->input->post('d_four_pkstd'),
+     // 'd_four_wt'=>$this->input->post('d_four_wt'),
+     // 'd_four_lc'=>$this->input->post('d_four_lc'),
+     // 'd_five_pkt'=>$this->input->post('d_five_pkt'),
+     // 'd_five_wstd'=>$this->input->post('d_five_wstd'),
+     // 'd_five_awt'=>$this->input->post('d_five_awt'),
+     // 'd_five_df'=>$this->input->post('d_five_df'),
+     // 'd_five_potency'=>$this->input->post('d_five_potency'),
+     // 'd_five_pkstd'=>$this->input->post('d_five_pkstd'),
+     // 'd_five_wt'=>$this->input->post('d_five_wt'),
+     // 'd_five_lc'=>$this->input->post('d_five_lc'),
+     // 'd_six_pkt'=>$this->input->post('d_six_pkt'),
+     // 'd_six_wstd'=>$this->input->post('d_six_wstd'),
+     // 'd_six_awt'=>$this->input->post('d_six_awt'),
+     // 'd_six_df'=>$this->input->post('d_six_df'),
 
      'determination_one'=>$this->input->post('d_one_p_lc'),
      'determination_two'=>$this->input->post('d_two_p_lc'),
      'determination_three'=>$this->input->post('d_three_p_lc'),
-     'determination_four'=>$this->input->post('d_four_p_lc'),
-     'determination_five'=>$this->input->post('d_five_p_lc'),
-     'determination_six'=>$this->input->post('d_six_p_lc'),
+     // 'determination_four'=>$this->input->post('d_four_p_lc'),
+     // 'determination_five'=>$this->input->post('d_five_p_lc'),
+     // 'determination_six'=>$this->input->post('d_six_p_lc'),
 
      'average_determination'=>$this->input->post('determination_average'),
      'equivalent_to'=>$this->input->post('determination_equivalent_to'),
@@ -679,161 +706,161 @@ class Assay_Model extends CI_Model{
      'internal_std_b_one'=>$this->input->post('internal_std_b_one'),
      'internal_std_c_one'=>$this->input->post('internal_std_c_one'),
      'internal_std_d_one'=>$this->input->post('internal_std_d_one'),
-     'internal_std_e_one'=>$this->input->post('internal_std_e_one'),
-     'internal_std_f_one'=>$this->input->post('internal_std_f_one'),
-     'internal_std_g_one'=>$this->input->post('internal_std_g_one'),
+     // 'internal_std_e_one'=>$this->input->post('internal_std_e_one'),
+     // 'internal_std_f_one'=>$this->input->post('internal_std_f_one'),
+     // 'internal_std_g_one'=>$this->input->post('internal_std_g_one'),
 
      'internal_std_a_two'=>$this->input->post('internal_std_a_two'),
      'internal_std_b_two'=>$this->input->post('internal_std_b_two'),
      'internal_std_c_two'=>$this->input->post('internal_std_c_two'),
      'internal_std_d_two'=>$this->input->post('internal_std_d_two'),
-     'internal_std_e_two'=>$this->input->post('internal_std_e_two'),
-     'internal_std_f_two'=>$this->input->post('internal_std_f_two'),
-     'internal_std_g_two'=>$this->input->post('internal_std_g_two'),
+     // 'internal_std_e_two'=>$this->input->post('internal_std_e_two'),
+     // 'internal_std_f_two'=>$this->input->post('internal_std_f_two'),
+     // 'internal_std_g_two'=>$this->input->post('internal_std_g_two'),
 
      'internal_std_a_three'=>$this->input->post('internal_std_a_three'),
      'internal_std_b_three'=>$this->input->post('internal_std_b_three'),
      'internal_std_c_three'=>$this->input->post('internal_std_c_three'),
      'internal_std_d_three'=>$this->input->post('internal_std_d_three'),
-     'internal_std_e_three'=>$this->input->post('internal_std_e_three'),
-     'internal_std_f_three'=>$this->input->post('internal_std_f_three'),
-     'internal_std_g_three'=>$this->input->post('internal_std_g_three'),
+     // 'internal_std_e_three'=>$this->input->post('internal_std_e_three'),
+     // 'internal_std_f_three'=>$this->input->post('internal_std_f_three'),
+     // 'internal_std_g_three'=>$this->input->post('internal_std_g_three'),
 
      'internal_std_a_four'=>$this->input->post('internal_std_a_four'),
      'internal_std_b_four'=>$this->input->post('internal_std_b_four'),
      'internal_std_c_four'=>$this->input->post('internal_std_c_four'),
      'internal_std_d_four'=>$this->input->post('internal_std_d_four'),
-     'internal_std_e_four'=>$this->input->post('internal_std_e_four'),
-     'internal_std_f_four'=>$this->input->post('internal_std_f_four'),
-     'internal_std_g_four'=>$this->input->post('internal_std_g_four'),
+     // 'internal_std_e_four'=>$this->input->post('internal_std_e_four'),
+     // 'internal_std_f_four'=>$this->input->post('internal_std_f_four'),
+     // 'internal_std_g_four'=>$this->input->post('internal_std_g_four'),
 
      'internal_std_a_five'=>$this->input->post('internal_std_a_five'),
      'internal_std_b_five'=>$this->input->post('internal_std_b_five'),
      'internal_std_c_five'=>$this->input->post('internal_std_c_five'),
      'internal_std_d_five'=>$this->input->post('internal_std_d_five'),
-     'internal_std_e_five'=>$this->input->post('internal_std_e_five'),
-     'internal_std_f_five'=>$this->input->post('internal_std_f_five'),
-     'internal_std_g_five'=>$this->input->post('internal_std_g_five'),
+     // 'internal_std_e_five'=>$this->input->post('internal_std_e_five'),
+     // 'internal_std_f_five'=>$this->input->post('internal_std_f_five'),
+     // 'internal_std_g_five'=>$this->input->post('internal_std_g_five'),
 
      'internal_std_a_six'=>$this->input->post('internal_std_a_six'),
      'internal_std_b_six'=>$this->input->post('internal_std_b_six'),
      'internal_std_c_six'=>$this->input->post('internal_std_c_six'),
      'internal_std_d_six'=>$this->input->post('internal_std_d_six'),
-     'internal_std_e_six'=>$this->input->post('internal_std_e_six'),
-     'internal_std_f_six'=>$this->input->post('internal_std_f_six'),
-     'internal_std_g_six'=>$this->input->post('internal_std_g_six'),
+     // 'internal_std_e_six'=>$this->input->post('internal_std_e_six'),
+     // 'internal_std_f_six'=>$this->input->post('internal_std_f_six'),
+     // 'internal_std_g_six'=>$this->input->post('internal_std_g_six'),
 
      'internal_std_a_seven'=>$this->input->post('internal_std_a_seven'),
      'internal_std_b_seven'=>$this->input->post('internal_std_b_seven'),
      'internal_std_c_seven'=>$this->input->post('internal_std_c_seven'),
      'internal_std_d_seven'=>$this->input->post('internal_std_d_seven'),
-     'internal_std_e_seven'=>$this->input->post('internal_std_e_seven'),
-     'internal_std_f_seven'=>$this->input->post('internal_std_f_seven'),
-     'internal_std_g_seven'=>$this->input->post('internal_std_g_seven'),
+     // 'internal_std_e_seven'=>$this->input->post('internal_std_e_seven'),
+     // 'internal_std_f_seven'=>$this->input->post('internal_std_f_seven'),
+     // 'internal_std_g_seven'=>$this->input->post('internal_std_g_seven'),
 
      'sample_a_one'=>$this->input->post('sample_a_one'),
      'sample_b_one'=>$this->input->post('sample_b_one'),
      'sample_c_one'=>$this->input->post('sample_c_one'),
      'sample_d_one'=>$this->input->post('sample_d_one'),
-     'sample_e_one'=>$this->input->post('sample_e_one'),
-     'sample_f_one'=>$this->input->post('sample_f_one'),
-     'sample_g_one'=>$this->input->post('sample_g_one'),
+     // 'sample_e_one'=>$this->input->post('sample_e_one'),
+     // 'sample_f_one'=>$this->input->post('sample_f_one'),
+     // 'sample_g_one'=>$this->input->post('sample_g_one'),
 
      'sample_a_two'=>$this->input->post('sample_a_two'),
      'sample_b_two'=>$this->input->post('sample_b_two'),
      'sample_c_two'=>$this->input->post('sample_c_two'),
      'sample_d_two'=>$this->input->post('sample_d_two'),
-     'sample_e_two'=>$this->input->post('sample_e_two'),
-     'sample_f_two'=>$this->input->post('sample_f_two'),
-     'sample_g_two'=>$this->input->post('sample_g_two'),
+     // 'sample_e_two'=>$this->input->post('sample_e_two'),
+     // 'sample_f_two'=>$this->input->post('sample_f_two'),
+     // 'sample_g_two'=>$this->input->post('sample_g_two'),
      
      'sample_a_three'=>$this->input->post('sample_a_three'),
      'sample_b_three'=>$this->input->post('sample_b_three'),
      'sample_c_three'=>$this->input->post('sample_c_three'),
      'sample_d_three'=>$this->input->post('sample_d_three'),
-     'sample_e_three'=>$this->input->post('sample_e_three'),
-     'sample_f_three'=>$this->input->post('sample_f_three'),
-     'sample_g_three'=>$this->input->post('sample_g_three'),
+     // 'sample_e_three'=>$this->input->post('sample_e_three'),
+     // 'sample_f_three'=>$this->input->post('sample_f_three'),
+     // 'sample_g_three'=>$this->input->post('sample_g_three'),
      
      'sample_a_four'=>$this->input->post('sample_a_four'),
      'sample_b_four'=>$this->input->post('sample_b_four'),
      'sample_c_four'=>$this->input->post('sample_c_four'),
      'sample_d_four'=>$this->input->post('sample_d_four'),
-     'sample_e_four'=>$this->input->post('sample_e_four'),
-     'sample_f_four'=>$this->input->post('sample_f_four'),
-     'sample_g_four'=>$this->input->post('sample_g_four'),
+     // 'sample_e_four'=>$this->input->post('sample_e_four'),
+     // 'sample_f_four'=>$this->input->post('sample_f_four'),
+     // 'sample_g_four'=>$this->input->post('sample_g_four'),
      
      'sample_a_five'=>$this->input->post('sample_a_five'),
      'sample_b_five'=>$this->input->post('sample_b_five'),
      'sample_c_five'=>$this->input->post('sample_c_five'),
      'sample_d_five'=>$this->input->post('sample_d_five'),
-     'sample_e_five'=>$this->input->post('sample_e_five'),
-     'sample_f_five'=>$this->input->post('sample_f_five'),
-     'sample_g_five'=>$this->input->post('sample_g_five'),
+     // 'sample_e_five'=>$this->input->post('sample_e_five'),
+     // 'sample_f_five'=>$this->input->post('sample_f_five'),
+     // 'sample_g_five'=>$this->input->post('sample_g_five'),
      
      'sample_a_six'=>$this->input->post('sample_a_six'),
      'sample_b_six'=>$this->input->post('sample_b_six'),
      'sample_c_six'=>$this->input->post('sample_c_six'),
      'sample_d_six'=>$this->input->post('sample_d_six'),
-     'sample_e_six'=>$this->input->post('sample_e_six'),
-     'sample_f_six'=>$this->input->post('sample_f_six'),
-     'sample_g_six'=>$this->input->post('sample_g_six'),
+     // 'sample_e_six'=>$this->input->post('sample_e_six'),
+     // 'sample_f_six'=>$this->input->post('sample_f_six'),
+     // 'sample_g_six'=>$this->input->post('sample_g_six'),
 
      'ratio_std_a_one'=>$this->input->post('ratio_std_a_one'),
      'ratio_std_b_one'=>$this->input->post('ratio_std_b_one'),
      'ratio_std_c_one'=>$this->input->post('ratio_std_c_one'),
      'ratio_std_d_one'=>$this->input->post('ratio_std_d_one'),
-     'ratio_std_e_one'=>$this->input->post('ratio_std_e_one'),
-     'ratio_std_f_one'=>$this->input->post('ratio_std_f_one'),
-     'ratio_std_g_one'=>$this->input->post('ratio_std_g_one'),
+     // 'ratio_std_e_one'=>$this->input->post('ratio_std_e_one'),
+     // 'ratio_std_f_one'=>$this->input->post('ratio_std_f_one'),
+     // 'ratio_std_g_one'=>$this->input->post('ratio_std_g_one'),
 
      'ratio_std_a_two'=>$this->input->post('ratio_std_a_two'),
      'ratio_std_b_two'=>$this->input->post('ratio_std_b_two'),
      'ratio_std_c_two'=>$this->input->post('ratio_std_c_two'),
      'ratio_std_d_two'=>$this->input->post('ratio_std_d_two'),
-     'ratio_std_e_two'=>$this->input->post('ratio_std_e_two'),
-     'ratio_std_f_two'=>$this->input->post('ratio_std_f_two'),
-     'ratio_std_g_two'=>$this->input->post('ratio_std_g_two'),
+     // 'ratio_std_e_two'=>$this->input->post('ratio_std_e_two'),
+     // 'ratio_std_f_two'=>$this->input->post('ratio_std_f_two'),
+     // 'ratio_std_g_two'=>$this->input->post('ratio_std_g_two'),
 
      'ratio_std_a_three'=>$this->input->post('ratio_std_a_three'),
      'ratio_std_b_three'=>$this->input->post('ratio_std_b_three'),
      'ratio_std_c_three'=>$this->input->post('ratio_std_c_three'),
      'ratio_std_d_three'=>$this->input->post('ratio_std_d_three'),
-     'ratio_std_e_three'=>$this->input->post('ratio_std_e_three'),
-     'ratio_std_f_three'=>$this->input->post('ratio_std_f_three'),
-     'ratio_std_g_three'=>$this->input->post('ratio_std_g_three'),
+     // 'ratio_std_e_three'=>$this->input->post('ratio_std_e_three'),
+     // 'ratio_std_f_three'=>$this->input->post('ratio_std_f_three'),
+     // 'ratio_std_g_three'=>$this->input->post('ratio_std_g_three'),
 
      'ratio_std_a_four'=>$this->input->post('ratio_std_a_four'),
      'ratio_std_b_four'=>$this->input->post('ratio_std_b_four'),
      'ratio_std_c_four'=>$this->input->post('ratio_std_c_four'),
      'ratio_std_d_four'=>$this->input->post('ratio_std_d_four'),
-     'ratio_std_e_four'=>$this->input->post('ratio_std_e_four'),
-     'ratio_std_f_four'=>$this->input->post('ratio_std_f_four'),
-     'ratio_std_g_four'=>$this->input->post('ratio_std_g_four'),
+     // 'ratio_std_e_four'=>$this->input->post('ratio_std_e_four'),
+     // 'ratio_std_f_four'=>$this->input->post('ratio_std_f_four'),
+     // 'ratio_std_g_four'=>$this->input->post('ratio_std_g_four'),
 
      'ratio_std_a_five'=>$this->input->post('ratio_std_a_five'),
      'ratio_std_b_five'=>$this->input->post('ratio_std_b_five'),
      'ratio_std_c_five'=>$this->input->post('ratio_std_c_five'),
      'ratio_std_d_five'=>$this->input->post('ratio_std_d_five'),
-     'ratio_std_e_five'=>$this->input->post('ratio_std_e_five'),
-     'ratio_std_f_five'=>$this->input->post('ratio_std_f_five'),
-     'ratio_std_g_five'=>$this->input->post('ratio_std_g_five'),
+     // 'ratio_std_e_five'=>$this->input->post('ratio_std_e_five'),
+     // 'ratio_std_f_five'=>$this->input->post('ratio_std_f_five'),
+     // 'ratio_std_g_five'=>$this->input->post('ratio_std_g_five'),
 
      'ratio_std_a_six'=>$this->input->post('ratio_std_a_six'),
      'ratio_std_b_six'=>$this->input->post('ratio_std_b_six'),
      'ratio_std_c_six'=>$this->input->post('ratio_std_c_six'),
      'ratio_std_d_six'=>$this->input->post('ratio_std_d_six'),
-     'ratio_std_e_six'=>$this->input->post('ratio_std_e_six'),
-     'ratio_std_f_six'=>$this->input->post('ratio_std_f_six'),
-     'ratio_std_g_six'=>$this->input->post('ratio_std_g_six'),
+     // 'ratio_std_e_six'=>$this->input->post('ratio_std_e_six'),
+     // 'ratio_std_f_six'=>$this->input->post('ratio_std_f_six'),
+     // 'ratio_std_g_six'=>$this->input->post('ratio_std_g_six'),
 
      'ratio_std_a_seven'=>$this->input->post('ratio_std_a_seven'),
      'ratio_std_b_seven'=>$this->input->post('ratio_std_b_seven'),
      'ratio_std_c_seven'=>$this->input->post('ratio_std_c_sevee'),
      'ratio_std_d_seven'=>$this->input->post('ratio_std_d_seven'),
-     'ratio_std_e_seven'=>$this->input->post('ratio_std_e_seven'),
-     'ratio_std_f_seven'=>$this->input->post('ratio_std_f_seven'),
-     'ratio_std_g_seven'=>$this->input->post('ratio_std_g_seven'),
+     // 'ratio_std_e_seven'=>$this->input->post('ratio_std_e_seven'),
+     // 'ratio_std_f_seven'=>$this->input->post('ratio_std_f_seven'),
+     // 'ratio_std_g_seven'=>$this->input->post('ratio_std_g_seven'),
      
      'std_average'=>$this->input->post('std_average'),
      'internal_std_a_average'=>$this->input->post('internal_std_a_average'),
@@ -906,6 +933,9 @@ class Assay_Model extends CI_Model{
      'choice'=>$conclusion
 
 
+    );
+    $data_eight = array(
+      'request_status'=>$status,
     );
 
     $this->db->insert('coa',$data_seven);

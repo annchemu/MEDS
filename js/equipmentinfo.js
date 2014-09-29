@@ -26,6 +26,13 @@ $(document).ready(function() {
       $("#stdrefnumber").val(stdrefnumber);
       
     });
+     $("#standard_description_two").on('change',function(){
+      var stdlotnumbertwo=$(this).find(":selected").data("stdlotnumbertwo");
+      var stdrefnumbertwo=$(this).find(":selected").data("stdrefnumbertwo");
+      $("#stdlotnumbertwo").val(stdlotnumbertwo);
+      $("#stdrefnumbertwo").val(stdrefnumbertwo);
+      
+    });
      $("#make_id").on('change',function(){
       var equipmentmake=$(this).find(":selected").data("equipmentmake");
       $("#equipmentmake").val(equipmentmake);

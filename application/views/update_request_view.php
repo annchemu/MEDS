@@ -27,15 +27,9 @@
   <!-- bootstrap reference library -->
   <script src="<?php echo base_url().'js/bootstrap.min.js';?>"></script>
   <script type="text/javascript" src="<?php echo base_url().'js/Jquery-datatables/jquery.dataTables.js';?>"></script>
-  <script>
-   $(document).ready(function() {
-    /* Init DataTables */
-    $('#list').dataTable({
-     "sScrollY":"270px",
-     "sScrollX":"100%"
-    });
-   });
-  </script>
+  <script type="text/javascript" src="<?php echo base_url().'js/datepicker.js';?>"></script>
+  <script type="text/javascript" src="<?php echo base_url().'tinymce/tinymce.min.js';?>"></script>
+  <script type="text/javascript" src="<?php echo base_url().'tinymce/textarea_script.js';?>"></script>
  </head>
  <body>
   <?php
@@ -47,6 +41,13 @@
    $acc_status=$user['logged_in']['acc_status'];
    $id_temp=1;
    //var_dump($user);
+   if(empty($user['logged_in']['id'])) {
+       
+      redirect('login','location');  //1. loads the login page in current page div
+
+      echo '<meta http-equiv=refresh content="0;url=base_url();login">'; //3 doesn't work
+
+       }
   ?>
   <div id="header"> 
    <div id="logo" style="padding:8px;color: #0000ff;" align="center"><img src="<?php echo base_url().'images/meds_logo.png';?>" height="35px" width="40px"/>MISSION FOR ESSENTIAL DRUGS AND SUPPLIES</div>
@@ -192,11 +193,11 @@
     <div id="form_wrapper">
     <div id="forms" >
         <?php echo validation_errors(); ?>
-        <?php echo form_open('update_request_record/Submit/'.$test_request_id.'/'.$user_type_id, array('id'=>'update_request_view'));?>
+        <?php echo form_open('update_request_record/update_request/'.$query['id'].'/'.$user_type_id, array('id'=>'update_request_view'));?>
         <table class="table_form" bgcolor="#c4c4ff" width="65%"  border="0" cellpadding="8px" align="center">
         <!-- <input type="hidden" id="id" value="<?php echo"$user_type_id";?>" class="id" name="id"/> -->
         <input type="hidden" id="id" value="<?php echo"$user_id";?>" class="id" name="user_id"/>
-        <!-- <input type="hidden" id="test_req" value="<?php echo"$test_request_id";?>"name="test_req"/> -->
+        <input type="hidden" id="test_req" value="<?php echo $query['id'];?>"name="test_req"/>
         <tr>
           <td colspan="8" style="padding:8px;text-align:right;"><a href="<?php echo base_url().'home';?>"><img src="<?php echo base_url().'images/icons/view.png';?>"height="20px" width="20px">Back To Test Request Lists</a></td>
         </tr>
@@ -254,11 +255,11 @@
               </tr>
               <tr>
                   <td style="padding:4px;text-align:left;">Label Claim</td>
-                  <td colspan="4" style="padding:4px;text-align:left;"><input type="text" class="field" size="80" name="lable_claim" id="lable_claim" value="<?php echo $query['label_claim'];?>"><span id="lable_claim_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="lable_claim_r" style="color:red; display:none">Fill this</span></td>
+                  <td colspan="4" style="padding:4px;text-align:left;"><input type="text" class="field" size="80" name="label_claim" id="lable_claim" value="<?php echo $query['label_claim'];?>"><span id="lable_claim_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="lable_claim_r" style="color:red; display:none">Fill this</span></td>
               </tr>
               <tr>
-                  <td style="padding:4px;text-align: left;">Dosage from</td>
-                  <td style="text-align:left;padding:4px;"><input type="text" class="field" name="dosage_from" id="dosage_from" value="<?php echo $query['dosage_from'];?>"><span id="dosage_from_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="dosage_from_r" style="color:red; display:none">Fill this</span></td>
+                  <td style="padding:4px;text-align: left;">Dosage form</td>
+                  <td style="text-align:left;padding:4px;"><input type="text" class="field" name="dosage_form" id="dosage_from" value="<?php echo $query['dosage_form'];?>"><span id="dosage_from_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="dosage_from_r" style="color:red; display:none">Fill this</span></td>
                   <td style="padding:4px;"></td>
                   <td style="padding:4px;text-align:left;">Strength or concentration</td>
                   <td style="padding:4px;text-align:left;"><input type="text" class="field"  name="strength_concentration" id="strength_concentration" value="<?php echo $query['strength_concentration'];?>"><span id="strength_concentration_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="strength_concentration_r" style="color:red; display:none">Fill this</span></td>
@@ -286,10 +287,10 @@
               </tr>
               <tr>
                   <td style="padding:4px;text-align:left;">Date of Manufacture</td>
-                  <td style="padding:4px;text-align:left;"><input type="date"  name="date_of_manufacture" id="date_of_manufacture"><span id="date_of_manufacture_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="date_of_manufacture_r" style="color:red; display:none">Fill this</span></td>
+                  <td style="padding:4px;text-align:left;"><input type="text" class="datepicker" name="date_of_manufacture" id="datepicker" value="<?php echo $query['date_manufactured'];?>"><span id="date_of_manufacture_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="date_of_manufacture_r" style="color:red; display:none">Fill this</span></td>
                   <td style="padding:4px;"></td>
                   <td style="padding:4px;text-align:left;">Expiry/Retest Date</td>
-                  <td style="padding:4px;text-align:left;"><div id="exp_date"><input type="date" class="field" id="expiry_retest_date" name="expiry_retest_date" value="<?php echo $query['expiry_date'];?>"><span id="expiry_retest_date_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="expiry_retest_date_r" style="color:red; display:none">Fill this</span></td>
+                  <td style="padding:4px;text-align:left;"><input type="text" class="field datepicker" id="expiry_retest_date" name="expiry_retest_date" value="<?php echo $query['expiry_date'];?>"><span id="expiry_retest_date_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="expiry_retest_date_r" style="color:red; display:none">Fill this</span></td>
               </tr>
               <tr>
                   <td style="padding:4px;text-align: left;">Quantity Submitted</td>

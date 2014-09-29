@@ -239,7 +239,7 @@
                foreach($sql_standards as $s_name):
               ?>
                
-               <option value="<?php  echo $s_name['item_description'];?>" data-idno="<?php  echo $s_name['reference_number'];?>" data-lotno="<?php  echo $s_name['batch_number'];?>"><?php  echo $s_name['item_description'];?></option>
+               <option value="<?php  echo $s_name['item_description'];?>" data-idno="<?php  echo $s_name['reference_number'];?>"data-potency="<?php echo $s_name['potency'];?>" data-lotno="<?php  echo $s_name['batch_number'];?>"><?php  echo $s_name['item_description'];?></option>
                 <?php
                 endforeach
                 ?>
@@ -493,7 +493,7 @@
               endforeach
               ?>
           </select></td>
-            <td style="border-bottom: dotted 1px #c4c4ff;padding:4px;text-align:right;">Date: <input type="text"  id="datepicker" name="date" size="10"></td>
+            <td style="border-bottom: dotted 1px #c4c4ff;padding:4px;text-align:right;">Date: <input type="text"  class="datepicker" name="date" size="10"></td>
           </tr>
           <tr>
             <td colspan="2" style="padding:4px;">Further Comments:</td>

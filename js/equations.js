@@ -9,8 +9,11 @@
       // var sample_weight_six = (Math.abs(document.getElementById('weight_sample_container_six').value) - Math.abs(document.getElementById('weight_container_six').value));
       
       document.getElementById('weight_sample_one').value = sample_weight_one.toFixed(5);
+      document.getElementById('d_one_wt').value = sample_weight_one.toFixed(5);
       document.getElementById('weight_sample_two').value = sample_weight_two.toFixed(5);
+      document.getElementById('d_two_wt').value = sample_weight_two.toFixed(5);
       document.getElementById('weight_sample_three').value = sample_weight_three.toFixed(5);
+      document.getElementById('d_three_wt').value = sample_weight_three.toFixed(5);
       // document.getElementById('weight_sample_four').value = sample_weight_four.toFixed(5);
       // document.getElementById('weight_sample_five').value = sample_weight_five.toFixed(5);
       // document.getElementById('weight_sample_six').value = sample_weight_six.toFixed(5);
@@ -52,10 +55,13 @@
       function calculate_sample_difference(){
       
       var weight_one = (Math.abs(document.getElementById('weight_standard_container_one').value) - Math.abs(document.getElementById('container_one').value));
-      // var weight_two = (Math.abs(document.getElementById('weight_standard_container_two').value) - Math.abs(document.getElementById('container_two').value));
+      //var weight_two = (Math.abs(document.getElementById('weight_standard_container_two').value) - Math.abs(document.getElementById('container_two').value));
       
       document.getElementById('weight_standard_one').value = weight_one.toFixed(5); 
-      // document.getElementById('weight_standard_two').value = weight_two.toFixed(5); 
+      //document.getElementById('weight_standard_two').value = weight_two.toFixed(5);
+      document.getElementById('d_one_wstd').value = weight_one.toFixed(5);
+      document.getElementById('d_two_wstd').value = weight_one.toFixed(5); 
+      document.getElementById('d_three_wstd').value = weight_one.toFixed(5);
       }
       
   
@@ -784,7 +790,7 @@
       }
 
       function calc_d_factor(){
-            var dilution_factor= (Math.abs(document.getElementById('a').value) * Math.abs(document.getElementById('b').value))/(Math.abs(document.getElementById('factor').value));
+            //var dilution_factor= (Math.abs(document.getElementById('a').value) * Math.abs(document.getElementById('b').value))/(Math.abs(document.getElementById('factor').value));
             document.getElementById('d_factor').value =dilution_factor;
       }
 
@@ -824,7 +830,55 @@
 
       }
 
+      function ratio(){
 
+          // ratiostd_one = (Math.abs(document.getElementById('std_one').value) / Math.abs(document.getElementById('internal_std_a_one').value));
+          // ratiostd_two = (Math.abs(document.getElementById('sample_a_one').value) / Math.abs(document.getElementById('internal_std_b_one').value));
+          // ratiostd_three = (Math.abs(document.getElementById('sample_b_one').value) / Math.abs(document.getElementById('internal_std_c_one').value));
+          // ratiostd_four = (Math.abs(document.getElementById('sample_c_one').value) / Math.abs(document.getElementById('internal_std_d_one').value));
+          // ratiostd_five = (Math.abs(document.getElementById('std_two').value) / Math.abs(document.getElementById('internal_std_a_two').value));          
+          
+          // ratiosample_one = (Math.abs(document.getElementById('sample_a_two').value) / Math.abs(document.getElementById('internal_std_b_two').value));
+          // ratiosample_two = (Math.abs(document.getElementById('sample_b_two').value) / Math.abs(document.getElementById('internal_std_c_two').value));
+          // ratiosample_three = (Math.abs(document.getElementById('sample_c_two').value) / Math.abs(document.getElementById('internal_std_d_two').value));
+          // ratiosample_four = (Math.abs(document.getElementById('std_three').value) / Math.abs(document.getElementById('internal_std_a_three').value));
+          // ratiosample_five = (Math.abs(document.getElementById('sample_a_three').value) / Math.abs(document.getElementById('internal_std_b_three').value));
+          // ratiosample_six = (Math.abs(document.getElementById('sample_b_three').value) / Math.abs(document.getElementById('internal_std_c_three').value));
+          // ratiosample_seven = (Math.abs(document.getElementById('sample_c_three').value) / Math.abs(document.getElementById('internal_std_d_three').value));
+          // ratiosample_eight = (Math.abs(document.getElementById('std_four').value) / Math.abs(document.getElementById('internal_std_a_four').value));
+          // ratiosample_nine = (Math.abs(document.getElementById('sample_a_four').value) / Math.abs(document.getElementById('internal_std_b_four').value));
+          // ratiosample_ten = (Math.abs(document.getElementById('sample_b_four').value) / Math.abs(document.getElementById('internal_std_c_four').value));
+          // ratiosample_eleven = (Math.abs(document.getElementById('sample_c_four').value) / Math.abs(document.getElementById('internal_std_d_four').value));          
+          // ratiosample_twelve = (Math.abs(document.getElementById('std_five').value) / Math.abs(document.getElementById('internal_std_a_five').value));
+          // ratiosample_thirteen = (Math.abs(document.getElementById('sample_a_five').value) / Math.abs(document.getElementById('internal_std_b_five').value));
+          // ratiosample_fourteen = (Math.abs(document.getElementById('sample_b_five').value) / Math.abs(document.getElementById('internal_std_c_five').value));
+          // ratiosample_fiftteen = (Math.abs(document.getElementById('sample_c_five').value) / Math.abs(document.getElementById('internal_std_d_five').value));
+          
+          // document.getElementById('ratio_std_a_one').value = ratiostd_one.toFixed(5);
+          // document.getElementById('ratio_std_b_one').value = ratiostd_two.toFixed(5);
+          // document.getElementById('ratio_std_c_one').value = ratiostd_three.toFixed(5);
+          // document.getElementById('ratio_std_d_one').value = ratiostd_four.toFixed(5);
+
+          // document.getElementById('ratio_std_a_two').value = ratiostd_five.toFixed(5);
+          // document.getElementById('ratio_std_b_two').value = ratiosample_one.toFixed(5);
+          // document.getElementById('ratio_std_c_two').value = ratiosample_two.toFixed(5);
+          // document.getElementById('ratio_std_d_two').value = ratiosample_three.toFixed(5);
+
+          // document.getElementById('ratio_std_a_three').value = ratiosample_four.toFixed(5);
+          // document.getElementById('ratio_std_b_three').value = ratiosample_five.toFixed(5);
+          // document.getElementById('ratio_std_c_three').value = ratiosample_six.toFixed(5);
+          // document.getElementById('ratio_std_d_three').value = ratiosample_seven.toFixed(5);
+
+          // document.getElementById('ratio_std_a_four').value = ratiosample_eight.toFixed(5);
+          // document.getElementById('ratio_std_b_four').value = ratiosample_nine.toFixed(5);
+          // document.getElementById('ratio_std_c_four').value = ratiosample_ten.toFixed(5);
+          // document.getElementById('ratio_std_d_four').value = ratiosample_eleven.toFixed(5);
+
+          // document.getElementById('ratio_std_a_five').value = ratiosample_twelve.toFixed(5);
+          // document.getElementById('ratio_std_b_five').value = ratiosample_thirteen.toFixed(5);
+          // document.getElementById('ratio_std_c_five').value = ratiosample_fourteen.toFixed(5);
+          // document.getElementById('ratio_std_d_five').value = ratiosample_fifteen.toFixed(5);
+      }
 
 $(document).ready(function(){
       $('.std').keyup(function() {
@@ -933,6 +987,7 @@ $(document).ready(function(){
             $('.internal_std_four_average').val(average_rounded);
 
       });  
+
       $('.ratio_std_one').keyup(function() {
          
       var sum = 0;

@@ -34,16 +34,24 @@ class Friability_Model extends CI_Model{
      $assignment_id=$this->input->post('assignment_id');
      $test_request_id=$this->input->post('tr_id');
      $status=1;
+     $test_type="Friability";
+     $conclusion="";
+     $comment=$this->input->post('comment');
+
+     if($comment=='ok'){
+        $conclusion="Test Complies(Passed)";
+     }else{
+        $conclusion="Test Does Not Complie(Failed)";
+     }
+     
   //Sample Insertion
     $data = array(
      
      'serial_number'=>$this->input->post('serial_number'),
-     'batch_lot_number'=>$this->input->post('batch_lot_number'),
+     'test_request_id'=>$test_request_id,
+     'assignment_id'=>$assignment_id,
      'time'=>$this->input->post('time'),
      'revolutions'=>$this->input->post('revolutions'),
-     'description_one'=>$this->input->post('description_one'),
-     'description_two'=>$this->input->post('description_two'),
-     'description_three'=>$this->input->post('description_three'),
      'w_tablets_containers_bf_rotation'=>$this->input->post('w_tablets_containers_bf_rotaion'),
      'w_tablets_containers_af_rotation'=>$this->input->post('w_tablets_containers_af_rotation'),
      'w_containers_bf_rotation'=>$this->input->post('w_containers_bf_rotation'),
@@ -56,7 +64,6 @@ class Friability_Model extends CI_Model{
      'specification'=>$this->input->post('specification'),
      'method'=>$this->input->post('method'),
      'results'=>$this->input->post('results'),
-     'remarks'=>$this->input->post('remarks'),
      'test_status'=>$status
     );
 
@@ -64,13 +71,14 @@ class Friability_Model extends CI_Model{
      
      'assignment_id'=>$assignment_id,
      'test_request_id'=>$test_request_id,
-     'method'=>$this->input->post('method'),
-     'specification'=>$this->input->post('specification'),
-     'results'=>$this->input->post('results')
+     'test_type'=>$test_type,
+     'conclusion'=>$conclusion,
+     'further_comments'=>$this->input->post('comment'),
+     'test_specification'=>$this->input->post('specification')
 
     );
     $this->db->insert('coa',$data_two);
-    $this->db->update('friability', $data,array('test_request_id' => $test_request_id));
+    $this->db->insert('friability', $data);
     redirect('test/index/'.$assignment_id.'/'.$test_request_id);
   }
 }

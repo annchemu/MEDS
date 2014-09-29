@@ -20,6 +20,9 @@ class Test_Requestmodel extends CI_Model{
   $client_id_data=$this->db->select_max('id')->get('client')->result();
   $client_id= $client_id_data[0]->id;
   
+  $data=$this->db->select_max('id')->get('test_request')->result();
+  $test_request_id=$data[0]->id;
+  $test_request_id++;
   //$old_ref=$this->getRefNo();
   //$old_ref_no=$old_ref[0]->applicant_ref_number;
 
@@ -27,6 +30,7 @@ class Test_Requestmodel extends CI_Model{
 //Sample Insertion
   $data_two = array(
 
+   'test_request_id'=>$test_request_id,
    'reference_number'=>$this->input->post('reference_number'),
    'active_ingredients'=>$this->input->post('active_ingredients'),
    'manufacturer_name'=>$this->input->post('manufacturer_name'),
@@ -102,7 +106,7 @@ function post(){
   
   $test_req=$this->input->post('test_req');
   $user_type_id=$this->input->post('id');
-  
+  $actual_test=0;
   
  //Client Insertion
   $data_one = array(
@@ -131,15 +135,6 @@ $data= $this->db->where('applicant_ref_number',$applicant_reference_number)->get
 
 if($data==1){
 
-$assay=$this->input->post('hplc_internal_method');
- 
-  if($assay='6a'){
-    $actual_test=6;
-  }
-  if($assay='6b'){
-    $actual_test=6;
-  }
-
  $data = array(
 
    'request_type'=>$request_type,
@@ -148,6 +143,10 @@ $assay=$this->input->post('hplc_internal_method');
    'applicant_name'=>$this->input->post('applicant_name'),
    'applicant_address'=>$this->input->post('applicant_address'),
    'active_ingredients'=>$this->input->post('active_ingredients'),
+   'dosage_form'=>$this->input->post('dosage_form'),
+   'strength_concentration'=>$this->input->post('strength_concentration'),
+   'pack_size'=>$this->input->post('pack_size'),
+   'label_claim'=>$this->input->post('label_claim'),
    'manufacturer_name'=>$this->input->post('manufacturer_name'),
    'manufacturer_address'=>$this->input->post('manufacturer_address'),
    'brand_name'=>$this->input->post('brand_name'),
@@ -168,10 +167,12 @@ $assay=$this->input->post('hplc_internal_method');
    'identification'=>$this->input->post('identification'),
    'dissolution'=>$this->input->post('dissolution'),  
    'friability'=>$this->input->post('friability'),  
-   'assay'=>$actual_test,  
+   'assay'=>$this->input->post('assay'),  
    'disintegration'=>$this->input->post('disintegration'),  
-   'content_uniformity'=>$this->input->post('content_uniformity'),  
-   'ph_alkalinity'=>$this->input->post('ph_alkalinity'), 
+   'content_uniformity'=>$this->input->post('content_uniformity'), 
+   'uniformity_of_dosage'=>$this->input->post('uniformity_of_dosage'),
+   'weight_variation_mass_uniformity'=>$this->input->post('weight_variation_mass_uniformity'),
+   'ph_alkalinity'=>$this->input->post('ph_alkalinity_acidity'), 
    'full_monograph'=>$this->input->post('full_monograph'), 
    'microbiology'=>$this->input->post('microbiology'),    
    'test_specification'=>$this->input->post('specification'),
@@ -205,12 +206,16 @@ $assay=$this->input->post('hplc_internal_method');
 
 }else{
 $data = array(
-   'request_type'=>$request_type, 
+   'request_type'=>$request_type,
    'client_id'=>$client_id,
    'reference_number'=>$this->input->post('reference_number'),
    'applicant_name'=>$this->input->post('applicant_name'),
    'applicant_address'=>$this->input->post('applicant_address'),
    'active_ingredients'=>$this->input->post('active_ingredients'),
+   'dosage_form'=>$this->input->post('dosage_form'),
+   'strength_concentration'=>$this->input->post('strength_concentration'),
+   'pack_size'=>$this->input->post('pack_size'),
+   'label_claim'=>$this->input->post('label_claim'),
    'manufacturer_name'=>$this->input->post('manufacturer_name'),
    'manufacturer_address'=>$this->input->post('manufacturer_address'),
    'brand_name'=>$this->input->post('brand_name'),
@@ -222,7 +227,7 @@ $data = array(
    'quantity_submitted'=>$this->input->post('quantity_submitted'),
    'quantity_remaining'=>$this->input->post('quantity_submitted'),
    'quantity_type'=>$this->input->post('quantity_type'),
-   'applicant_ref_number'=>$this->input->post('applicant_reference_number'),
+   'applicant_ref_number'=>$new_code,
    'sample_source'=>$this->input->post('sample_source'),
    'testing_reason'=>$this->input->post('reason'),
    'other_reason'=>$this->input->post('other_reason'),
@@ -231,12 +236,14 @@ $data = array(
    'identification'=>$this->input->post('identification'),
    'dissolution'=>$this->input->post('dissolution'),  
    'friability'=>$this->input->post('friability'),  
-   'assay'=>$actual_test,  
+   'assay'=>$this->input->post('assay'),  
    'disintegration'=>$this->input->post('disintegration'),  
-   'content_uniformity'=>$this->input->post('content_uniformity'),  
-   'ph_alkalinity'=>$this->input->post('ph_alkalinity'), 
+   'content_uniformity'=>$this->input->post('content_uniformity'), 
+   'uniformity_of_dosage'=>$this->input->post('uniformity_of_dosage'),
+   'weight_variation_mass_uniformity'=>$this->input->post('weight_variation_mass_uniformity'),
+   'ph_alkalinity'=>$this->input->post('ph_alkalinity_acidity'), 
    'full_monograph'=>$this->input->post('full_monograph'), 
-   'microbiology'=>$this->input->post('microbiology'),      
+   'microbiology'=>$this->input->post('microbiology'),    
    'test_specification'=>$this->input->post('specification'),
    'authorizer_name'=>$this->input->post('authorizing_name'),
    'authorizer_designation'=>$this->input->post('designation'),
@@ -276,7 +283,7 @@ $data = array(
   $this->db->insert('client_ref',$data_client);
  }
 }
-redirect('test_request_list/GetA/'.$test_req.'/'.$user_type_id);
+redirect('test_request_list/Get/'.$test_req.'/'.$user_type_id);
 }
 
 

@@ -185,7 +185,7 @@
     <div id="form_wrapper_lists">
      <div id="analysis_request">
       <?php echo validation_errors(); ?>
-      <?php echo form_open('assignment/save',array('id'=>'assignment_form'));?>
+      <?php echo form_open('assignment/save/'.$request[0]['tid'].'/',array('id'=>'assignment_form'));?>
       <table class="table_form" align="center" bgcolor="#f0f0ff" width="70%" border="0" cellpadding="4px">
           <input type="hidden" name="user_name" value="<?php echo($user['logged_in']['fname']." ".$user['logged_in']['lname']);?>"></input>
           <input type="hidden" name="user_id" value="<?php echo $user['logged_in']['id'];?>"></input>
@@ -227,7 +227,7 @@
            <td height="25px" colspan="3" style="text-align:center;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;"><b>Analyst</b></td>
           </tr>
           <tr>
-           <td height="25px" colspan="2" style="text-align:center;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;"><?php echo $request[0]['quantity_submitted'].$request[0]['quantity_type']?></td> 
+           <td height="25px" colspan="2" style="text-align:center;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;"><?php echo $request[0]['quantity_remaining'].$request[0]['quantity_type']?></td> 
            <td height="25px" colspan="3" style="text-align:center;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;"><input type="text" name="samples_issued" ></input></td>
            <td height="25px" colspan="3" style="text-align:center;background-color:#ffffff;border-left: dashed 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;">
             <select id="analyst" name="analyst">

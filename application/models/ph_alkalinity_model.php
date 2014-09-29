@@ -31,27 +31,29 @@ class Ph_Alkalinity_Model extends CI_Model{
      $assignment_id=$this->input->post('assignment_id');
      $test_request_id=$this->input->post('tr_id');
      $status=1;
+     $test_type = "pH Alkalinity";
   //Sample Insertion
     $data= array(
-    
+    'assignment_id'=>$assignment_id,
+    'test_request_id'=>$test_request_id,
     'serial_number'=>$this->input->post('serial_number'),
     'batch_lot_number'=>$this->input->post('batch_lot_number'), 
     'method'=>$this->input->post('method'),
     'observation'=>$this->input->post('observation'),
-    'test_status'=>$status
+    'status'=>$status
      
     );
     $data_two = array(
      
      'assignment_id'=>$assignment_id,
      'test_request_id'=>$test_request_id,
-     'method'=>$this->input->post('method'),
-     'specification'=>$this->input->post('specification'),
-     'results'=>$this->input->post('results')
+     'test_type'=>$test_type,
+     'test_specification'=>$this->input->post('observation'),
+     'conclusion'=>$this->input->post('conclusion')
 
     );
      $this->db->insert('coa',$data_two);
-     $this->db->update('ph_alkalinity', $data,array('test_request_id' => $test_request_id));
+     $this->db->insert('ph_alkalinity', $data);
      redirect('test/index/'.$assignment_id.'/'.$test_request_id);
   }
 }

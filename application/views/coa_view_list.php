@@ -197,11 +197,12 @@
     <thead bgcolor="#efefef">
       <tr>
         <th style="text-align:center;border-right: dotted 1px #ddddff;">No.</th>
-        <th style="text-align:center;border-right: dotted 1px #ddddff;">Product Name</th>
-        <th style="text-align:center;border-right: dotted 1px #ddddff;">Manufacturer</th>
-        <th style="text-align:center;border-right: dotted 1px #ddddff;">Batch Lot No.</th>
-        <th style="text-align:center;border-right: dotted 1px #ddddff;">Date of Manufacturing</th>
-        <th style="text-align:center;border-right: dotted 1px #ddddff;">Expiry Date</th>
+        <th style="text-align:center;border-right: dotted 1px #ddddff;">Test Type</th>
+        <th style="text-align:center;border-right: dotted 1px #ddddff;">Test Specification</th>
+        <th style="text-align:center;border-right: dotted 1px #ddddff;">Conclusion</th>
+        <th style="text-align:center;border-right: dotted 1px #ddddff;">Done By</th>
+        <th style="text-align:center;border-right: dotted 1px #ddddff;">Approved By</th>
+        <th style="text-align:center;border-right: dotted 1px #ddddff;">Date Done</th>
         <th style="text-align:center;border-right: dotted 1px #ddddff;">View COA</th>
       </tr>
     </thead>
@@ -217,11 +218,12 @@
       ?>
       
         <td style="text-align: center;border-bottom: solid 1px #c0c0c0;"><?php echo $i;?>.</td>
-        <td style="text-align: center;border-bottom: solid 1px #c0c0c0;"><?php echo $row->active_ingredients;?></td>
-        <td style="text-align: center;border-bottom: solid 1px #c0c0c0;"><?php echo $row->manufacturer_name;?></td>
-        <td style="text-align: center;border-bottom: solid 1px #c0c0c0;"><?php echo $row->batch_lot_number;?></td>
-        <td style="text-align: center;border-bottom: solid 1px #c0c0c0;"><?php echo $row->date_manufactured;?></td>
-        <td style="text-align: center;border-bottom: solid 1px #c0c0c0;"><?php echo $row->expiry_date;?></td>
+        <td style="text-align: center;border-bottom: solid 1px #c0c0c0;"><?php echo $row->test_type;?></td>
+        <td style="text-align: center;border-bottom: solid 1px #c0c0c0;"><?php echo $row->test_specification;?></td>
+        <td style="text-align: center;border-bottom: solid 1px #c0c0c0;"><?php echo $row->conclusion;?></td>
+        <td style="text-align: center;border-bottom: solid 1px #c0c0c0;"><?php echo $row->done_by;?></td>
+        <td style="text-align: center;border-bottom: solid 1px #c0c0c0;"><?php echo $row->supervisor;?></td>
+        <td style="text-align: center;border-bottom: solid 1px #c0c0c0;"><?php echo $row->date_done;?></td>
         <td style="text-align: center;"><a href="<?php echo base_url().'coa/view/'.$row->id?>" height="20px" width ="20px"><img src="<?php echo base_url().'images/icons/add_field.png';?>" height="10px" width="10px">Generate COA</a></td>
         
         

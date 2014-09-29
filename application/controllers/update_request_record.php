@@ -25,22 +25,16 @@ function Update()
     $this->load->view('update_request_view',$data);
     
 }
-function Submit()
+function update_request()
 {
     $trid = $this->uri->segment(3);
     //$utid = $this->uri->segment(4);
     // $id = $this->input->post('my_id');
-     
-  /* // echo $id;
-    echo $trid;
-    echo $utid;
-     die();
-*/    
       
     $this->load->model('update_requestmodel');        
 	
 	if($this->input->post('submit')){
-		$this->update_requestmodel->Update($trid);                
+		$this->update_requestmodel->update_data($trid);                
 	}
 	//redirect('home');
 }

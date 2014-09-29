@@ -207,7 +207,9 @@
 </script>
 <div class="modal-dialog">
 <div class="modal-content">
-<div class="modal-header">
+
+<div class="modal-body">
+  <div class="modal-header">
   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
   <h4 class="modal-title" id="meds">MEDS Analysis Test Request Form</h4>
 </div>
@@ -243,19 +245,25 @@
           </tr>
         </table>
       </td>
-    </tr>
+  </tr>
 	
-<div class="modal-body">
-<tr>
-        <td colspan="8" style="text-align:right;padding:8px;border-bottom: solid 10px #c4c4ff;color:#0000fb;background-color:#ffffff;"><input class="btn" type="button" name="newDataC" id="newDataC" value="Refresh"/></td>
+
+    <tr>
+        <td colspan="8" style="text-align:right;padding:8px;border-bottom: solid 10px #c4c4ff;color:#0000fb;background-color:#ffffff;"><input class="btn" type="hidden" name="newDataC" id="newDataC" value="Refresh"/></td>
     </tr>
     <tr>
-        <td height="25px" colspan="2" style="padding:4px;background-color:#ffffff;">Name of Applicant</td>
-        <td height="25px" colspan="6" style="padding:4px;background-color:#ffffff;text-align:left;"><input type="text" id="applicant_name" class="field" size="80" name="applicant_name"/><span id="applicant_name_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png'?>" height="10px" width="10px"></span><span id="applicant_name_r" style="color:red; display:none">Fill in this field</span></td>
-    </tr>
-    <tr>
-        <td height="25px" colspan="2" style="padding:4px;background-color:#ffffff;">Address of Applicant</td>
-        <td height="25px" colspan="6" style="padding:4px;background-color:#ffffff;text-align:left;"><input type="text" class="field" size="80"  id="applicant_address" name="applicant_address" value=""/><span id="applicant_address_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="applicant_address_r" style="color:red; display:none">Fill in this field</span></td>
+      <td colspan="8" style="padding:8px;">
+        <table width="100%">
+          <tr>
+            <td height="25px" colspan="2" style="padding:4px;background-color:#ffffff;">Name of Applicant</td>
+            <td height="25px" colspan="6" style="padding:4px;background-color:#ffffff;text-align:left;"><input type="text" id="applicant_name" class="field" size="80" name="applicant_name"/><span id="applicant_name_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png'?>" height="10px" width="10px"></span><span id="applicant_name_r" style="color:red; display:none">Fill in this field</span></td>
+          </tr>
+          <tr>
+            <td height="25px" colspan="2" style="padding:4px;background-color:#ffffff;">Address of Applicant</td>
+            <td height="25px" colspan="6" style="padding:4px;background-color:#ffffff;text-align:left;"><input type="text" class="field" size="80"  id="applicant_address" name="applicant_address" value=""/><span id="applicant_address_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="applicant_address_r" style="color:red; display:none">Fill in this field</span></td>
+          </tr>
+        </table>
+      </td>
     </tr>
     <tr>
         <td colspan="8" style="padding:4px;border-bottom:solid 1px #c4c4ff;background-color:#ffffff;text-align:left;"><b>Sample Description</b></td>
@@ -330,31 +338,42 @@
               </tr>
               <tr>
                   <td height="25px" style="padding:4px;text-align:left;">Sample Source</td>
-                  <td height="25px" colspan="4" style="padding:4px;text-align:left;"><textarea rows="1" cols="80" class="field" id="sample_source" name="sample_source"></textarea><span id="csample_source_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="csample_source_r" style="color:red; display:none">Fill this</span></td>
+                  <td height="25px" colspan="4" style="padding:4px;text-align:left;"><input type="text" size="80" class="field" id="sample_source" name="sample_source"><span id="csample_source_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="csample_source_r" style="color:red; display:none">Fill this</span></td>
               </tr>
           </table>
         </td>
     </tr>
       <tr>
-        <td height="25px" colspan="8" style="padding:8px;background-color:#ffffff;border-bottom:solid 10px #c4c4ff;"><b>Reason for Requesting Analysis</b> (Tick as appropriate)</td>
+        <td height="25px" colspan="8" style="padding:8px;background-color:#ffffff;border-bottom:solid 10px #c4c4ff;"><b>Reason for Requesting Analysis</b> (Select as appropriate)</td>
       </tr>
       <tr>
-          <td colspan="8" style="padding:4px;background-color:#ffffff;"><input type='radio' checked="checked" name='reason' id='compliance_testing' value="Compliance Testing">Compliance Testing</td>
+          <td colspan="8" style="padding:8px;background-color:#ffffff;">
+            <table width="100%">
+            <tr>
+              <td style="padding:4px;background-color:#ffffff;"><input type='radio' checked="checked" name='reason' id='compliance_testing' value="Compliance Testing">Compliance Testing</td>
+            </tr>
+            <tr>
+              <td style="padding:4px;background-color:#ffffff;"><input type='radio' name='reason' id='investigative_testing' value="Investigative Testing">Investigative Testing</td>
+            </tr>
+            </table>  
       </tr>
       <tr>
-          <td colspan="8" style="padding:4px;background-color:#ffffff;"><input type='radio' name='reason' id='investigative_testing' value="Investigative Testing">Investigative Testing</td>
+         <td height="25px" colspan="8" style="padding:8px;background-color:#ffffff;"><b>Other(Please Specify)</b></td>
       </tr>
       <tr>
-         <td height="25px" colspan="8" style="padding:4px;background-color:#ffffff;">Other(Please Specify)</td>
+        <td colspan="8" style="text-align:center;padding:8px;background-color:#ffffff;">
+          <table align="center" width="100%" border="0">
+            <tr>
+              <td><textarea rows="3" cols="130" name='other_reason' id='other_reason'></textarea></td>
+            </tr>
+          </table>
+        </td>
       </tr>
       <tr>
-        <td height="25px" colspan="8" style="padding:4px;background-color:#ffffff;"><textarea rows="3" cols="130" name='other_reason' id='other_reason'></textarea></td>
+        <td height="25px" colspan="8" style="padding:8px;background-color:#ffffff;border-bottom:solid 1px #c4c4ff;"><b>Test(s) Required:</b> (Select as appropriate)</td>
       </tr>
       <tr>
-        <td height="25px" colspan="8" style="padding:8px;background-color:#ffffff;border-bottom:solid 1px #c4c4ff;"><b>Test(s) Required:</b> (Tick as appropriate)</td>
-      </tr>
-      <tr>
-        <td colspan="8" style="padding:2px;background-color:#ffffff;">
+        <td colspan="8" style="padding:8px;background-color:#ffffff;">
             <table class ="inner_table" width="100%" cellpadding="8px" height="150px" align="center" border="0">
                 <tr>
                     <td style="padding:2px;border-bottom:solid 1px #f2f2f2;text-align:center;"><b>No</b></td>
@@ -424,13 +443,13 @@
         </td>
       </tr>
       <tr>
-        <td height="25px" colspan="8"  style="padding:4px;background-color:#ffffff;">Other(Please specify)</td>
+        <td height="25px" colspan="8"  style="padding:4px;background-color:#ffffff;"><b>Other(Please specify)</b></td>
       </tr>
       <tr>
-        <td colspan="8" style="padding:4px;background-color:#ffffff;"><textarea rows="3" cols="130" name="other_test" id="other_test" ></textarea></td>
+        <td colspan="8" style="padding:8px;background-color:#ffffff;"><textarea rows="3" cols="130" name="other_test" id="other_test" ></textarea></td>
       </tr>
       <tr>
-        <td height="25px" colspan="8" style="padding:4px;background-color:#ffffff;border-bottom:solid 10px #c4c4ff;"><b>Specifications to be used for testing:</b>(Tick as appropriate)</td>
+        <td height="25px" colspan="8" style="padding:4px;background-color:#ffffff;border-bottom:solid 10px #c4c4ff;"><b>Specifications to be used for testing:</b>(Select as appropriate)</td>
       </tr>
       <tr>
        <td colspan="8" style="padding:8px;text-align:center;">
@@ -451,7 +470,7 @@
               <td colspan="8" style="padding:4px;text-align:left;background-color:#ffffff;"><input type='radio' name='specification' id='manufacturers_specs' value='Manufacturer's Specifications'>Manufacturer's Specifications</td>
           </tr>
           <tr>
-            <td height="25px" colspan="8" style="text-align:left;background-color:#ffffff;border-bottom:solid 1px #c4c4ff;">Other(Please specify)</td>
+            <td height="25px" colspan="8" style="text-align:left;background-color:#ffffff;border-bottom:solid 1px #c4c4ff;"><b>Other(Please specify)</b></td>
           </tr>
           <tr>
               <td colspan="8" style="text-align:center;padding:4px;background-color:#ffffff;"><textarea rows="3" cols="130" id="other_specification" name="other_specification"></textarea></td>
@@ -461,27 +480,37 @@
       </tr>
       </div>  
       <tr>
-        <td height="25px" colspan="8" style="padding:2px;background-color:#ffffff;border-bottom:solid 1px #c4c4ff;"><h6><b><p>Note:</b> If manufacturer's or 'other', please provide methods of analysis and specifications</p></h6></td>
+        <td height="25px" colspan="8" style="padding:8px;background-color:#ffffff;border-bottom:solid 1px #c4c4ff;"><h6><b><p>Note:</b> If manufacturer's or 'other', please provide methods of analysis and specifications</p></h6></td>
       </tr>
       <tr>
-        <td height="25px" colspan="8" style="padding:4px;background-color:#ffffff;border-bottom:solid 10px #c4c4ff;"><b>Details of person authorizing request for analysis</b></td>
+        <td height="25px" colspan="8" style="padding:8px;background-color:#ffffff;border-bottom:solid 10px #c4c4ff;"><b>Details of person authorizing request for analysis</b></td>
       </tr>
       <tr>
-          <td height="25px" style="padding:4px;background-color:#ffffff;">Name</td>
-          <td height="25px" style="padding:4px;background-color:#ffffff;"><input type="text" class="field" id="authorizing_name" name="authorizing_name"/><span id="authorizing_name_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="authorizing_name_r" style="color:red; display:none">Fill this</span></td>
-          <td height="25px" style="padding:4px;text-align:right;background-color:#ffffff;">Designation:</td>
-          <td height="25px" colspan="5" style="padding:4px;background-color:#ffffff;"><input type="text" class="field" id="designation" name="designation"/><span id="designation_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="designation_r" style="color:red; display:none">Fill this</span></td>
+        <td height="25px" colspan="8" style="padding:8px;background-color:#ffffff;">
+          <table width="100%">
+            <tr>
+              <td height="25px" style="padding:4px;background-color:#ffffff;">Name: <input type="text" class="field" id="authorizing_name" name="authorizing_name"/><span id="authorizing_name_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="authorizing_name_r" style="color:red; display:none">Fill this</span></td>
+              <td height="25px" style="padding:4px;text-align:right;background-color:#ffffff;">Designation: 
+                <select class="field" id="designation" name="designation"/><span id="designation_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="designation_r" style="color:red; display:none">Fill this</span>
+                  <option selected></option>
+                  <option>laboratory Assistant</option>
+                  <option>Laboratory Supervisor</option>
+                  <option>Quality Assuarance Manager</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+                <td height="25px" width="120px" style="padding:4px;text-align:left;background-color:#ffffff;">Lab Reg Number: <input type="text" class="field" id="lab_reg_number" name="lab_reg_number"/><span id="lab_reg_number_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="lab_reg_number_r" style="color:red; display:none">Fill this</span></td>
+                <input type="hidden" id="creceived_by" name="creceived_by" value="<?php echo($user['logged_in']['fname']." ".$user['logged_in']['lname']);?>"/>
+            </tr>
+          </table>
+        </td>
       </tr>
       <tr>
-          <td height="25px" width="120px" style="padding:4px;text-align:left;background-color:#ffffff;border-bottom:solid 1px #c4c4ff;">Lab Registration No</td>
-          <td height="25px" colspan="7" style="padding:4px;background-color:#ffffff;border-bottom:solid 1px #c4c4ff;"><input type="text" class="field" id="lab_reg_number" name="lab_reg_number"/><span id="lab_reg_number_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="lab_reg_number_r" style="color:red; display:none">Fill this</span></td>
-          <input type="hidden" id="creceived_by" name="creceived_by" value="<?php echo($user['logged_in']['fname']." ".$user['logged_in']['lname']);?>"/>
+        <td height="25px" colspan="8" width="120px" style="padding:8px;text-align:left;background-color:#ffffff;border-bottom:solid 1px #c4c4ff;"><b>Comments</b> <span id="findings_comment_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="findings_comment_r" style="color:red; display:none">Fill this</span></td>
       </tr>
       <tr>
-        <td height="25px" colspan="8" width="120px" style="padding:4px;text-align:left;background-color:#ffffff;border-bottom:solid 1px #c4c4ff;"><b>Comments</b> <span id="findings_comment_1" style="color:Green; display:none"><img src="<?php echo base_url().'images/done.png';?>" height="10px" width="10px"></span><span id="findings_comment_r" style="color:red; display:none">Fill this</span></td>
-      </tr>
-      <tr>
-        <td height="25px" colspan="8" style="padding:4px;background-color:#ffffff;"><textarea rows="3" cols="130" type="text" class="field" id="findings_comment" name="findings_comment"/></textarea></td>  
+        <td height="25px" colspan="8" style="padding:8px;background-color:#ffffff;"><textarea rows="3" cols="130" type="text" class="field" id="findings_comment" name="findings_comment"/></textarea></td>  
       </tr>
       <div class="modal-footer">
         <tr>

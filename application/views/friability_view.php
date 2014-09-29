@@ -97,23 +97,23 @@
           <td colspan="8" align="center" style="padding:8px;">
             <table border="0" align="center" cellpadding="8px" width="100%" >
           <tr>
-                  <td rowspan="0" style="border-left:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;border-bottom:solid 1px #bfbfbf;text-align:center;background-color:#ffffff;"><img src="<?php echo base_url().'images/meds_logo.png';?>" height="80px" width="90px"/></td>
+                  <td style="border-left:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;border-bottom:solid 1px #bfbfbf;text-align:center;background-color:#ffffff;"><img src="<?php echo base_url().'images/meds_logo.png';?>" height="80px" width="90px"/></td>
                   <td colspan="7" style="padding:4px;color:#0000ff;border-left:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;border-bottom:solid 1px #bfbfbf;text-align:center;background-color:#ffffff;">MISSION FOR ESSENTIAL DRUGS AND SUPPLIES</td>
               </tr>
               <tr>    
-                  <td colspan="0" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-left:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;">Document: Analytical Worksheet</td>
+                  <td height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-left:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;">Document: Analytical Worksheet</td>
                   <td colspan="4" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-right:solid 1px #bfbfbf;">Title: <?php echo $query['active_ingredients']." "." ".$query['test_specification'];?></td>
                   <td height="25px" colspan="2" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;border-left:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;color:#000000;">REFERENCE NUMBER</td>
-                  <td colspan="0" style="padding:4px;border-right:solid 1px #bfbfbf;border-bottom:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;"><?php echo $query['reference_number'];?></td>
+                  <td style="padding:4px;border-right:solid 1px #bfbfbf;border-bottom:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;"><?php echo $query['reference_number'];?></td>
               </tr>
               <tr>
-                    <td colspan="0" style="padding:4px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-left:solid 1px #bfbfbf;">EFFECTIVE DATE: <?php echo date("d/m/Y")?></td>
+                    <td style="padding:4px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-left:solid 1px #bfbfbf;">EFFECTIVE DATE: <?php echo date("d/m/Y")?></td>
                     <td colspan="2" style="padding:4px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-left:solid 1px #bfbfbf;">ISSUE/REV 2/2</td>
                     <td height="25px"colspan="2" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-left:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;">SUPERSEDES: 2/1</td>
                     <td height="25px" colspan="3" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-left:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;">PAGE 1 of 1</td>
                 </tr>
                 <tr>
-                    <td colspan="0" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-left:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;">SERIAL No.</td>
+                    <td height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;border-left:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;">SERIAL No.</td>
                     <td colspan="2" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-right:solid 1px #bfbfbf;"><input type="text" name="serial_number"></input></td>
                     <td colspan="2" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-right:solid 1px #bfbfbf;">Batch/Lot No.</td>
                     <td colspan="3" height="25px" style="padding:4px;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;border-right:solid 1px #bfbfbf;"><?php echo $query['batch_lot_number']?></input></td>
@@ -129,47 +129,47 @@
               <td colspan="4"  align="center" style="padding:8px;border-bottom: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"></td>
             </tr>
             <tr>
-                <td colspan="0" height="25px" align="center" style="padding:4px;border-bottom: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;">Time in Friability Tester</td>
-                <td colspan="0" height="25px" align="left" style="padding:4px;border-bottom: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><input type="text" name="time"></td>
-                <td colspan="0" height="25px" align="center" style="padding:4px;border-bottom: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;">Number of Revolutions</td>
-                <td colspan="0" height="25px" align="center" style="padding:4px;border-bottom: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><input type="text" name="revolutions"></td>
+                <td height="25px" align="center" style="padding:4px;border-bottom: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;">Time in Friability Tester</td>
+                <td height="25px" align="left" style="padding:4px;border-bottom: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><input type="text" name="time"></td>
+                <td height="25px" align="center" style="padding:4px;border-bottom: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;">Number of Revolutions</td>
+                <td height="25px" align="center" style="padding:4px;border-bottom: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><input type="text" name="revolutions"></td>
             </tr>
             <tr>
-                <td  width="25%" colspan="0" height="20px" align="center" style="padding:4px;border-bottom: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><b>Description</b></td>
-                <td  width="25%" colspan="0" height="20px" align="center" style="padding:4px;border-bottom: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><b>Before Rotation</b></td>
+                <td  width="25%" height="20px" align="center" style="padding:4px;border-bottom: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><b>Description</b></td>
+                <td  width="25%" height="20px" align="center" style="padding:4px;border-bottom: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><b>Before Rotation</b></td>
                 <td  width="25%" colspan="2" height="20px" align="center" style="padding:4px;border-bottom: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><b>After Rotation</b></td>
             </tr>
             <tr>
-                <td  colspan="0" height="25px" align="center" style="padding:4px;border-bottom: dotted 1px #c4c4ff;color: #0000fb;background-color: #ffffff;">Weight of 20tablets and container(g)</td>
-                <td  colspan="0" height="25px" align="center" style="padding:4px;border-bottom: dotted 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><input type="text" name="w_tablets_containers_bf_rotation"></td>
-                <td  colspan="2" height="25px" align="center" style="padding:4px;border-bottom: dotted 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><input type="text" name="w_tablets_containers_af_rotation"></td>
+                <td  height="25px" align="center" style="padding:4px;border-bottom: dotted 1px #c4c4ff;color: #0000fb;background-color: #ffffff;">Weight of 20tablets and container(g)</td>
+                <td  height="25px" align="center" style="padding:4px;border-bottom: dotted 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><input type="text" id="" name="w_tablets_containers_bf_rotation"></td>
+                <td  colspan="2" height="25px" align="center" style="padding:4px;border-bottom: dotted 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><input id="" type="text" name="w_tablets_containers_af_rotation"></td>
             </tr>
             <tr>
-                <td colspan="0" height="25px" align="center" style="padding:4px;border-bottom: dotted 1px #c4c4ff;color: #0000fb;background-color: #ffffff;">weight of container(g)</td>
-                <td colspan="0" height="25px" align="center" style="padding:4px;border-bottom: dotted 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><input type="text" name="w_container_bf_rotation"></td>
-                <td colspan="2" height="25px" align="center" style="padding:4px;border-bottom: dotted 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><input type="text" name="w_container_af_rotation"></td>
+                <td height="25px" align="center" style="padding:4px;border-bottom: dotted 1px #c4c4ff;color: #0000fb;background-color: #ffffff;">weight of container(g)</td>
+                <td height="25px" align="center" style="padding:4px;border-bottom: dotted 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><input type="text" id="" name="w_container_bf_rotation"></td>
+                <td colspan="2" height="25px" align="center" style="padding:4px;border-bottom: dotted 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><input type="text" id="" name="w_container_af_rotation"></td>
             </tr>
             <tr>
-                <td colspan="0" height="25px" align="center" style="padding:4px;border-bottom: dotted 1px #c4c4ff;color: #0000fb;background-color: #ffffff;">Weight of tablets/capsules(g)</td>
-                <td colspan="0" height="25px" align="center" style="padding:4px;border-bottom: dotted 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><input type="text" name="w_tablets_bf_rotation"></td>
-                <td colspan="2" height="25px" align="center" style="padding:4px;border-bottom: dotted 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><input type="text" name="w_tablets_af_rotation"></td> 
+                <td height="25px" align="center" style="padding:4px;border-bottom: dotted 1px #c4c4ff;color: #0000fb;background-color: #ffffff;">Weight of tablets/capsules(g)</td>
+                <td height="25px" align="center" style="padding:4px;border-bottom: dotted 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><input type="text" id="" name="w_tablets_bf_rotation"></td>
+                <td colspan="2" height="25px" align="center" style="padding:4px;border-bottom: dotted 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><input type="text" id="" name="w_tablets_af_rotation"></td> 
             </tr>
             <tr>
               <td colspan="4" height="25px" align="center" style="padding:8px;border-bottom: solid 5px #c4c4ff;color: #0000fb;background-color: #ffffff;"></td>
             </tr>
             <tr>
-                <td colspan="0" height="25px" align="right" style="padding:4px;border-bottom: solid 5px #c4c4ff;color: #0000fb;background-color: #ffffff;">% Loss in Weight(friability)=</td>
-                <td colspan="0" height="25px" align="center" style="padding:8px;border-bottom: solid 5px #c4c4ff;color: #0000fb;background-color: #ffffff;"><input type="text" name="loss_in_weight"></td>
+                <td height="25px" align="right" style="padding:4px;border-bottom: solid 5px #c4c4ff;color: #0000fb;background-color: #ffffff;">% Loss in Weight(friability)=</td>
+                <td height="25px" align="center" style="padding:8px;border-bottom: solid 5px #c4c4ff;color: #0000fb;background-color: #ffffff;"><input type="text" name="loss_in_weight"></td>
                 <td colspan="2" height="25px" align="center" style="padding:4px;border-bottom: solid 5px #c4c4ff;color: #0000fb;background-color: #ffffff;"></td>
             </tr>
             <tr>
-                <td colspan="0" height="25px" align="left" style="padding:4px;border-bottom: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;">Acceptance Criteria</td>
-                <td colspan="0" height="25px" align="left" style="padding:4px;border-bottom: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;">Actual</td>
+                <td height="25px" align="left" style="padding:4px;border-bottom: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;">Acceptance Criteria</td>
+                <td height="25px" align="left" style="padding:4px;border-bottom: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;">Actual</td>
                 <td colspan="2" height="25px" align="left" style="padding:4px;border-bottom: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;">Comment</td>
             </tr>
             <tr>
-               <td colspan="0" height="25px" align="left" style="padding:4px;border-bottom: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;">%Loss in Weight</td>
-                <td colspan="0" height="25px" align="left" style="padding:4px;border-bottom: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><input type="text" name="actual"></td>
+               <td height="25px" align="left" style="padding:4px;border-bottom: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;">%Loss in Weight</td>
+                <td height="25px" align="left" style="padding:4px;border-bottom: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><input type="text" name="actual"></td>
                 <td colspan="2" height="25px" align="left" style="padding:4px;border-bottom: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><input type="text" name="comment"></td>
             </tr>
            <tr>
@@ -177,7 +177,7 @@
             </tr>
             <tr>
               <td align="center" style="padding:4px;border-bottom: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;">Specifications</td>
-              <td colspan="0" style="padding:4px;border-bottom: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><input type="text" name="specification" size="50"></input></td>
+              <td style="padding:4px;border-bottom: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><input type="text" name="specification" size="50"></input></td>
               <td align="center" style="padding:4px;border-bottom: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;">Method Used</td>
               <td style="padding:4px;border-bottom: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><input type="text" name="method" ></input></td>
             </tr>

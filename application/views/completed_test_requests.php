@@ -199,7 +199,7 @@
     </div>
     <div id="form_wrapper_lists">
      <div id="account_lists">
-       <table class="subdivider" border="0" bgcolor="#ffffff" width="50%" cellpadding="8px" align="center">
+       <table class="subdivider" border="0" bgcolor="#ffffff" width="100%" cellpadding="8px" align="center">
         <tr>
             <td height="25px" align="center"
             <?php
@@ -222,8 +222,8 @@
                 }
              ?>
              >
-              <a data-target="#test_request" role="button" class="btn" data-toggle="modal"><img src="<?php echo base_url().'images/icons/add.png'?>" height="25px" width="25px">Add MEDS Request</a>  
-              <a data-target="#clients_request" role="button" class="btn" data-toggle="modal"><img src="<?php echo base_url().'images/icons/add.png'?>" height="25px" width="25px">Add Client Request</a>
+              <a data-target="#test_request" role="button" class="sub_menu sub_menu_link first_link" data-toggle="modal"><img src="<?php echo base_url().'images/icons/add_field.png'?>" height="10px" width="10px">Add MEDS Request</a>&nbsp; &nbsp; 
+              <a data-target="#clients_request" role="button" class="sub_menu sub_menu_link first_link" data-toggle="modal"><img src="<?php echo base_url().'images/icons/add_field.png'?>" height="10px" width="10px">Add Client Request</a>
             </div>
             </td>
         </tr>
@@ -405,8 +405,8 @@
                <?php endforeach; ?>
           </tbody>           
       </table>
-    <div id="test_request" name="menu" style="display:none;"><?php include_once "application/views/test_request_form.php";?></div>  
-    <div id="client" name="menu" style="display:none;"><?php include_once "application/views/client_test_request_form.php";?></div>
+    <div id="test_request" class="modal fade" role="dialog" aria-labelledby="meds" aria-hidden="true"><?php include_once "application/views/test_request_form.php";?></div>  
+    <div id="clients_request" class="modal fade" role="dialog" aria-labelledby="client" aria-hidden="true"><?php include_once "application/views/client_test_request_form.php";?></div>
 </div>
 </div>
 </body>

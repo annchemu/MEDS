@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="<?php echo base_url().'jquery-ui.css';?>">
   
   
-  <!-- bootstrap reference library -->
+  <!-- bootstrap reference css library -->
   <link href="<?php echo base_url().'bootstrap/css/bootstrap.css'; ?>" rel="stylesheet" type="text/css"/>
 
   <script src="<?php echo base_url().'js/jquery.js';?>"></script>
@@ -26,8 +26,11 @@
   <script src="<?php echo base_url().'datatables/extensions/Tabletools/js/dataTables.tableTools.js';?>" type="text/javascript"></script>
   <script src="<?php echo base_url().'datatables/extensions/Tabletools/js/ZeroClipboard.js" type="text/javascript';?>"></script>
   <script type="text/javascript" src="<?php echo base_url().'js/datepicker.js';?>"></script>
+  <script type="text/javascript" src="<?php echo base_url().'tinymce/tinymce.min.js';?>"></script>
+  <script type="text/javascript" src="<?php echo base_url().'tinymce/textarea_script.js';?>"></script>
   
-  <!-- bootstrap reference library -->
+  
+  <!-- bootstrap reference js library -->
   <script src="<?php echo base_url().'js/bootstrap.min.js';?>"></script>
   
   <script>
@@ -166,7 +169,7 @@
         <a href="<?php echo base_url().'temperature_humidity_list/records/'.$id_temp;?>"class="sub_menu sub_menu_link first_link">Temperature & Humidity</a>
         <!-- <a href="<?php echo base_url().'outoftolerance_list/records';?>"class="sub_menu sub_menu_link first_link">Out of Tolerance</a> -->
         <a href="<?php echo base_url().'complaints_list/records';?>"class="sub_menu sub_menu_link first_link">Complaints</a>
-        <a href="coapresentation/mypresentation.pdf"  class="sub_menu sub_menu_link first_link">Certificate of Analysis</a>
+        <a href="<?php echo base_url().'coa_list/records';?>"  class="sub_menu sub_menu_link first_link">Certificate of Analysis</a>
         <a href="<?php echo base_url().'finance/index';?>" class="sub_menu sub_menu_link first_link">Finance/Client Billing</a>
     </div>
     <?php
@@ -240,6 +243,7 @@
              >
               <a data-target="#test_request" role="button" class="sub_menu sub_menu_link first_link" data-toggle="modal"><img src="<?php echo base_url().'images/icons/add_field.png'?>" height="10px" width="10px">Add MEDS Request</a>&nbsp; &nbsp; 
               <a data-target="#clients_request" role="button" class="sub_menu sub_menu_link first_link" data-toggle="modal"><img src="<?php echo base_url().'images/icons/add_field.png'?>" height="10px" width="10px">Add Client Request</a>
+            </div>
             </td>
         </tr>
         <?php
@@ -247,7 +251,7 @@
           ?>
           <div id="assigned_test_requests" name="menu" style="display:none;"><?php include_once "application/views/assigned_analyst_tests.php";?></div>
       <?php
-        }elseif($user['logged_in']['user_type'] ==6){
+        }elseif($user['logged_in']['user_type'] ==6 || $user['logged_in']['user_type'] ==7){
       ?>
           <div id="unassigned_test_requests" name="menu" style="display:none;"><?php include_once "application/views/unassigned_test_request_list.php";?></div>
           <div id="test_request" class="modal fade" role="dialog" aria-labelledby="meds" aria-hidden="true"><?php include_once "application/views/test_request_form.php";?></div>  

@@ -22,6 +22,9 @@
 
   <script src="<?php echo base_url().'js/jquery.js';?>"></script>
   <script src="<?php echo base_url().'js/jquery-ui.js';?>"></script>
+  <script type="text/javascript" src="<?php echo base_url().'js/equipmentinfo.js';?>"></script>
+  <script type="text/javascript" src="<?php echo base_url().'tinymce/tinymce.min.js';?>"></script>
+  <script type="text/javascript" src="<?php echo base_url().'js/datepicker.js';?>"></script>
   <script type="text/javascript" src="<?php echo base_url().'js/tabs.js';?>"></script>
   
   <!-- bootstrap reference library -->
@@ -34,11 +37,9 @@
      "sScrollY":"270px",
      "sScrollX":"100%"
     });
-    $("#equipment_make").change(function(){
-         var id_number=$(this).val();
-         //append to textbox
-         $("#equipment_number").val(id_number);
-    });
+    tinymce.init({
+    selector: "textarea"
+   });
    });
 
    $("input,select,textarea").autosave({
@@ -59,7 +60,7 @@
   //   $('#message').fadeOut('slow');//just a function to fade out the message
   // }
   </script>
-  </head
+  </head>
   <body>
      <?php
    $user=$this->session->userdata;
@@ -70,6 +71,13 @@
    $acc_status=$user['logged_in']['acc_status'];
    $id_temp=1;
    //var_dump($user);
+   if(empty($user['logged_in']['id'])) {
+       
+      redirect('login','location');  //loads the login page in current page div
+
+      echo '<meta http-equiv=refresh content="0;url=base_url();login">'; 
+
+       }
   ?>
   <div id="header"> 
   <div id="logo" style="padding:8px;color: #0000ff;" align="center"><img src="<?php echo base_url().'images/meds_logo.png';?>" height="35px" width="40px"/><b>MISSION FOR ESSENTIAL DRUGS AND SUPPLIES</b></div>
@@ -118,7 +126,7 @@
     </tr>   
     <tr>
       <td colspan ="6" style="padding:8px;">
-       <table width="100%" bgcolor="#c4c4ff" cellpadding="8px" border="0" align ="center">       
+       <table width="100%" class="table_form" bgcolor="#c4c4ff" cellpadding="8px" border="0" align ="center">       
           <tr>
                 <td rowspan="2" colspan ="" style="padding:4px;border-left:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;border-bottom:solid 1px #bfbfbf;text-align:center;background-color:#ffffff;"><img src="<?php echo base_url().'images/meds_logo.png';?>" height="80px" width="90px"/></td>
                 <td colspan="4" style="padding:4px;color:#0000ff;border-left:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;border-bottom:solid 1px #bfbfbf;text-align:center;background-color:#ffffff;">MISSION FOR ESSENTIAL DRUGS AND SUPPLIES</td>
@@ -151,7 +159,7 @@
     </tr>
     <tr>
       <td colspan="6" align="center" style="padding:8px;">
-        <table border="0" align="center" cellpadding="8px" width="100%">
+        <table border="0" class="table_form" align="center" cellpadding="8px" width="100%">
             <tr>
               <td height="25px" style="padding:8px;border-left:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;">Registration Number: <?php echo $results['laboratory_number'];?></td>
               <td height="25px" style="padding:8px;border-left:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;">Request Date: <?php echo $results['date_time'];?></td>
@@ -179,25 +187,25 @@
       </td>
     </tr>  
         <tr> <td colspan ="6" align ="center" style="padding: 8px;text-align:center;padding-right:40px;border-bottom: solid 10px #f0f0ff;color: #0000fb;background-color: #e8e8ff;"> MEDS Disintergration Test Form</td></tr>
-      <tr>
-        <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><b>Equipment Make:</b></td>
-        <td colspan = "2" style="background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> 
-            <select id="equipment_make" name="equipment_make">
+       <tr>
+        <td colspan=""align="center" style="padding:8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Equipment Number:</td>
+        <td colspan = "2" style="padding:8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> 
+            <select id ="equipment_make" name="equipment_make">
               <option selected></option>
                <?php
                foreach($query_e as $equipment):
               ?>
                
-               <option value="<?php echo $equipment['id_number'];?>"><?php echo $equipment['model'];?></option>
+               <option value="<?php echo $equipment['id_number'];?>" data-equipmentid="<?php echo $equipment['description']; ?>"><?php echo $equipment['id_number'];?></option>
                 <?php
                 endforeach
-                ?>
+                ?> 
               
             </select>
          </td>    
       
-        <td align="left" style="background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">  Equipment Number:</td>
-        <td colspan = "2" style="background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><input type ="text" name ="equipment_no" id="equipment_number"></td>
+        <td colspan=""align="center" style="padding:8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Equipment Make :</td>
+        <td colspan = "2" style="padding:8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><input type ="text" name ="equipment_number" id="equipmentid"></td>
       </tr>
        <tr>
         <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;color:#0000fb;"><b>Duration of Test</b></td>
@@ -248,7 +256,7 @@
         <table border="0" width="90%" cellpadding="8px" align="center">
           <tr>
             <td style="border-bottom: dotted 1px #c4c4ff;padding:4px;text-align:right;">Supervisor <input type="text" id="supervisor" name="supervisor"></td>
-            <td style="border-bottom: dotted 1px #c4c4ff;padding:4px;text-align:left;">Date <input type="date"  id="date" name="date"></td>
+            <td style="border-bottom: dotted 1px #c4c4ff;padding:4px;text-align:left;">Date <input type="text"  class="datepicker" name="date"></td>
           </tr>
           
           <tr>
@@ -261,7 +269,7 @@
       </td>
     </tr>
       <tr>
-        <td colspan = "6" align ="center"> <input type ="submit" name ="save_disintergration" value ="Save Disintergration Data"></td>
+        <td colspan = "6" align ="center"> <input type ="submit" class="btn" name ="save_disintergration" value ="Submit"></td>
       </tr>
     </table>
    </form> 

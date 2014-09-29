@@ -35,9 +35,20 @@
     /* Init DataTables */
     $('#list').dataTable({
      "sScrollY":"270px",
-     "sScrollX":"100%"
-     
-    });
+     "sScrollX":"100%",
+     "oTableTools": {
+                "aButtons": [
+                "copy",
+                "print",
+                {
+                    "sExtends": "collection",
+                    "sButtonText": 'Save',
+                    "aButtons": ["csv", "xls", "pdf"]
+                }
+                ],
+                "sSwfPath": "<?php echo base_url(); ?>datatables/media/swf/copy_csv_xls_pdf.swf"
+            }
+    });     
    });
   </script>
  </head>

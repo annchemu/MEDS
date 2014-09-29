@@ -367,9 +367,9 @@
               <td align="center" style="padding: 8px;">2.</td>
               <td align="center" style="padding: 8px;">3.</td>
             <tr>        
-              <td style="padding: 8px;"><input type = "text" name ="kf_volume_1"></td>
-              <td style="padding: 8px;"><input type = "text" name ="kf_volume_2"></td>
-              <td style="padding: 8px;"><input type = "text" name ="kf_volume_3"></td>
+              <td align="center" style="padding: 8px;"><input type = "text" name ="kf_volume_1"></td>
+              <td align="center" style="padding: 8px;"><input type = "text" name ="kf_volume_2"></td>
+              <td align="center" style="padding: 8px;"><input type = "text" name ="kf_volume_3"></td>
             </tr>
           </table>
          </div>
@@ -387,9 +387,9 @@
               <td align="center" style="padding: 8px;">2.</td>
               <td align="center" style="padding: 8px;">3.</td>
             <tr>        
-              <td style="padding: 8px;"><input type = "text" name ="titer_1"></td>
-              <td style="padding: 8px;"><input type = "text" name ="titer_2"></td>
-              <td style="padding: 8px;"><input type = "text" name ="titer_3"></td>
+              <td align="center" style="padding: 8px;"><input type = "text" name ="titer_1"></td>
+              <td align="center" style="padding: 8px;"><input type = "text" name ="titer_2"></td>
+              <td align="center" style="padding: 8px;"><input type = "text" name ="titer_3"></td>
             </tr>
            </table>
          </div>
@@ -462,9 +462,9 @@
               <td align="center" style="padding: 8px;">2.</td>
               <td align="center" style="padding: 8px;">3.</td>
             <tr>        
-              <td style="padding: 8px;"><input type = "text" name ="titer_1"></td>
-              <td style="padding: 8px;"><input type = "text" name ="titer_2"></td>
-              <td style="padding: 8px;"><input type = "text" name ="titer_3"></td>
+              <td style="padding: 8px;"><input type = "text" name ="volume_ssample_1"></td>
+              <td style="padding: 8px;"><input type = "text" name ="volume_ssample_2"></td>
+              <td style="padding: 8px;"><input type = "text" name ="volume_ssample_3"></td>
             </tr>
            </table>
          </div>

@@ -390,13 +390,23 @@ margin-top:-32767px;/* thank you Erik J - negate effect of float*/
     border-radius:4px;
 }
 .reagents{
-    padding: 2px;
+    padding: 6px;
     background-color:#ff6724;
     color:#ffffff;
     border-radius:4px;
+}.coa{
+    padding: 6px;
+    background-color:#00ff00;
+    color:#ffffff;
+    border-radius:4px;
+}.coa:hover{
+    padding: 6px;
+    background-color:#ffffff;
+    color:#0000ff;
+    border-radius:4px;
 }
 .reagents:hover{
-    padding: 2px;
+    padding: 6px;
     background-color:#ffffff;
     color:#0000ff;
     border-radius:4px;

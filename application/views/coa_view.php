@@ -197,7 +197,7 @@
   <?php echo form_open('coa/submit',array('id'=>'coa_view'));?>
   <table bgcolor="#c4c4ff" class="table_form"  width="75%" border="0" cellpadding="8px" align="center">
     <tr>
-      <td colspan="6" style="text-align:right;background-color:#fdfdfd;padding:8px;"><a href="<?php echo base_url().'coa_list/records'?>"><img src="<?php echo base_url().'images/icons/view.png';?>" height="20px" width="20px">Back To Certificate of Analysis Lists</a></td>
+      <td colspan="6" style="text-align:right;background-color:#fdfdfd;padding:8px;"><a href="<?php echo base_url().'test/index/'.$assignment[0]['a'].'/'.$query['tr'].'/';?>"><img src="<?php echo base_url().'images/icons/view.png';?>" height="20px" width="20px">Back To Test Lists</a></td>
     </tr>
     <tr>
         <td colspan="8" style="padding:8px;text-align:center;">
@@ -225,50 +225,45 @@
             </tr>
           </table>
         </td>
-      </tr>
-      <tr>        
-        <td colspan="6" align="center" 
-        style="text-align:center;background-color:#ffffff;padding-right:40px;border-bottom: solid 10px #f0f0ff;color: #0000fb;background-color: #e8e8ff;">
-        <h4><b>Certificate of Analysis Form</b></h4></td>
-      </tr>
-
+    </tr>
+    <tr><td colspan="8" style="padding:8px;"></td></tr>
     <tr>
-      <td width = "250px"align="left" style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><u>REGISTRATION NUMBER:</u></td>
-      <td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><?php echo $query_tr['reference_number'] ?></td>
-      <td align="left" style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><u>Request Date:</u></td>
-      <td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><?php echo $query_tr['date_time']?></td>
-      <td align="left" style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><u>Test Date:</u></td>
-      <td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><?php if (empty($query_coa)){echo "Test has not been DONE yet";}?></td>
-    </tr>  
-    <tr>
-       <td align="left" style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><u>NAME OF PRODUCT:</u></td>
-       <td colspan="5" style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><?php echo $query_tr['active_ingredients'] ?></td>       
+        <td colspan="8" align="center" style="padding:4px;border-bottom: solid 10px #c4c4ff;border-top: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><h5><b>Certificate of Analysis Form</b></h5></td>
     </tr>
     <tr>
-        <td align="left" style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><u>CLIENT:</u></td>
-        <td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><?php echo $query_tr['applicant_name']?></td>       
-        <td align="left" style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><u>MANUFACTURER:</u></td>
-        <td colspan="4" style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><?php echo $query_tr['manufacturer_name']?></td>
+      <td width = "250px"align="left" style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><u>REGISTRATION NUMBER:</u></td>
+      <td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><?php echo $query['reference_number'] ?></td>
+      <td align="left" style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><u>Request Date:</u></td>
+      <td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><?php echo $query['date_time']?></td>
+      <td align="left" style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><u>Test Date:</u></td>
+      <td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><?php if (empty($coa)){echo "Test has not been DONE yet";}?></td>
+    </tr>  
+    <tr>
+       <td colspan="6" align="left" style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><u>NAME OF PRODUCT:</u> <?php echo $query['active_ingredients'] ?></td>       
+    </tr>
+    <tr>
+        <td colspan="3" align="center" style="padding:8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: solid 1px #bfbfbf;"><u>CLIENT:</u></br></br><?php echo $query['applicant_name']?></td>       
+        <td colspan="3" align="center" style="padding:8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: solid 1px #bfbfbf;"><u>MANUFACTURER:</u></br></br><?php echo $query['manufacturer_name']?></td>
     </tr>
     <tr>
       <td colspan="6"style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><u>LABEL CLAIM:</u></td>
     </tr>
-    <tr><td colspan="6" style ="padding:8px;"><?php echo $query_tr['label_claim']?></td></tr>
+    <tr><td colspan="6" style ="text-align:center;padding:8px;"><?php echo $query['label_claim']?></td></tr>
     <tr>
-      <td align="left" style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Batch Number:</td>
-      <td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><?php echo $query_tr['batch_lot_number']?></td>
-      <td align="left" style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Manufactured:</td>
-      <td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><?php echo $query_tr['date_manufactured']?></td>
-      <td align="left" style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Expires:</td>
-      <td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><?php echo $query_tr['expiry_date']?></td>
+      <td align="right" style="padding:8px;background-color:#ffffff;">Batch Number:</td>
+      <td align="left" style="padding:8px;background-color:#ffffff;"><?php echo $query['batch_lot_number']?></td>
+      <td align="right" style="padding:8px;background-color:#ffffff;">Manufactured:</td>
+      <td align="left" style="padding:8px;background-color:#ffffff;"><?php echo $query['date_manufactured']?></td>
+      <td align="right" style="padding:8px;background-color:#ffffff;">Expires:</td>
+      <td align="left" style="padding:8px;background-color:#ffffff;"><?php echo $query['expiry_date']?></td>
     </tr>
     <tr>
-      <td align= "center" colspan ="6" style="padding:8px;text-align:center;background-color:#ffffff;padding-right:40px;border-bottom: solid 10px #f0f0ff;color: #0000fb;background-color: #e8e8ff;">
-        <h4><u>RESULTS OF ANALYSIS</u></h2></td>      
+      <td align= "center" colspan ="6" style="padding:8px;text-align:center;background-color:#ffffff;padding-right:40px;border-bottom: solid 10px #f0f0ff;color: #0000fb;">
+        <h5><u><b>RESULTS OF ANALYSIS</b></u></h5></td>      
     </tr>
     <tr>
       <td colspan="1"align="left" style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><b>Appearance:</b></td>
-    <<td colspan="5" style ="text-align:left;padding:8px;"><?php echo $query_tr['active_ingredients']?></td></tr>
+    <td colspan="5" style ="text-align:left;padding:8px;"><?php echo $query['active_ingredients']?></td></tr>
      <tr>
       <td colspan="6">
       <table width="950px" bgcolor="#c4c4ff" border="0" cellpadding="4px" align="center">
@@ -285,23 +280,23 @@
           <?php
             $i = 1;
 
-            if(empty($query_coa)){
+            if(empty($coa)){
                   echo "There's no data currently for display!";
             }else{
 
             }
-            foreach ($query_coa as $row): 
+            foreach ($coa as $row): 
 
               if ($i ==0) {
                  echo "<tr>";
               }
             ?>
-          <td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><?php echo $i?>.</td>      
+          <td style="padding:8px;background-color:#ffffff;border-left: dotted 1px #bfbfbf;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><?php echo $i?>.</td>      
           <td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><?php echo $row['test_type']?></td>      
-          <td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><?php echo $row['coa_method_used']?></td>       
-          <td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><?php echo $row['coa_specification']?></td>
-          <td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><?php echo $row['coa_results']?></td>      
-          <td colspan="4" style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><input type ="text" name ="remarks"</td>
+          <td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><?php echo $row['test_specification']?></td>       
+          <td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><?php echo $ph_alkalinity[0]['monograph']?></td>
+          <td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><?php echo $ph_alkalinity[0]['further_comments']?></td>      
+          <td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><?php echo $row['conclusion']?></td>
 
           <?php $i++; ?>
 
@@ -318,12 +313,26 @@
     </tr>
     <tr><td colspan="6" style ="text-align:center;padding:8px;"><textarea name ="conclusions" cols ="160" rows ="3"></textarea></td></tr>
     <tr>
-         <td align="left" style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">PREPARED BY:</td>
-         <td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><b>Peter Kamau</b><br/>Laboratory Analyst</td>
-         <td align="left" style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">REVIEWED BY:</td>
-         <td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><b><?php echo $user['logged_in']['fname']." ".$user['logged_in']['lname']?></b><br/>Laboratory Supervisor</td>         
-         <td align="left" style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">APPROVED BY:</td>
-         <td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><input type="text" name="approved_by">Quality Assurance Manager</td>         
+         <td colspan="3" align="center" style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><b>Prepared by:</b> <?php echo($user['logged_in']['fname']." ".$user['logged_in']['lname']);?> &nbsp;&nbsp;&nbsp;&nbsp;<b>Reviewed By 
+            <select id="supervisor" name="supervisor" >
+            <option selected></option>
+             <?php
+             foreach($users as $user_name):
+            ?>
+             <option value="<?php  echo $user_name['fname']." ".$user_name['lname'];?>"><?php  echo $user_name['fname']." ".$user_name['lname'];?></option>
+              <?php
+              endforeach
+              ?>
+            </select>
+          </td>
+
+         <td colspan="3" align="center" style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><b>Approved by:</b>
+          <select id="approved_by" name="approved_by" >
+            <option selected></option>
+             <option value="Quality Assurance Manager">Quality Assurance Manager</option>
+             <option value="Laboratory Supervisor">Laboratory Supervisor</option>
+            </select>
+          </td>         
       </tr>
       <tr>
         <td colspan="6" style="padding:8px;text-align:center;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;"><input type="submit" class="btn" name="save_coa" value ="Submit"></td>

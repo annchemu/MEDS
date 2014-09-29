@@ -5,26 +5,60 @@ class Coa extends CI_Controller{
 	} 
 
 	function index(){
+
+    $data['coa']=
+    $this->db->select('*')->get_where('coa')->result_array();
+
+
+    $query=$this->db->select('test_request.id AS tr,test_request.client_id,test_request.active_ingredients,test_request.brand_name,test_request.applicant_address,test_request.date_time,test_request.manufacturer_name,test_request.manufacturer_address,test_request.batch_lot_number,
+    test_request.sample_source,test_request.expiry_date,test_request.date_manufactured,test_request.quantity_type,test_request.sample_source,test_request.laboratory_number,test_request.applicant_name,
+    test_request.quantity_remaining,test_request.quantity_submitted,test_request.pack_size,test_request.reference_number,test_request.applicant_ref_number,test_request.identification,test_request.friability,test_request.dissolution,test_request.assay,test_request.test_specification,
+    test_request.disintegration,test_request.ph_alkalinity,test_request.full_monograph,test_request.content_uniformity,test_request.microbiology,test_request.request_status')->get_where('test_request', array('id' => $test_request_id));
+
+    $results=$query->result_array();
+    $data['query']=$results[0];
+
 		$this->load->view('coa_view');
 
 	}
 
 	function view(){
-		$id = $this->uri->segment(3);
-		$sql = "SELECT * FROM test_request WHERE id = '$id'";
-		$query = $this->db->query($sql);
-		$results = $query->result_array();
-		$data['query_tr'] = $results[0];
-
-		// $sql_coa = "SELECT * FROM coa WHERE test_request_id = '$id'";
-		// $query_coa = $this->db->query($sql_coa)	;
-		// $data['query_coa'] = $query_coa->result_array();
-		// $results_c = $query_coa->result_array();
-		// $data['query_coa_c'] = $results_c[0];
-
-     $data['query_coa']=
-    $this->db->select('*')->get_where('coa', array('test_request_id' => $id))->result_array();
+    $aid = $this->uri->segment(3);
+		$test_request_id = $this->uri->segment(4);
+    $user_id=6;
+  
+     $data['users']=
+    $this->db->select('*')->get_where('user', array('user_type' => $user_id))->result_array();
+ 
+    $data['coa']=
+    $this->db->select('*')->get_where('coa', array('test_request_id' => $test_request_id))->result_array();
     
+    $data['assay_monograph_hplc_internal_method']=
+    $this->db->select('*')->get_where('assay_monograph_hplc_internal_method', array('test_request_id' => $test_request_id))->result_array();
+    
+    $data['assay_hplc_internal_method']=
+    $this->db->select('*')->get_where('assay_hplc_internal_method', array('test_request_id' => $test_request_id))->result_array();
+    
+    $data['friability_monograph']=
+    $this->db->select('*')->get_where('friability_monograph', array('test_request_id' => $test_request_id))->result_array();
+    
+    $data['friability']=
+    $this->db->select('*')->get_where('friability', array('test_request_id' => $test_request_id))->result_array();
+    
+    $data['assignment']=
+    $this->db->select('assignment.id AS a,assignment.test_request_id,assignment.assigner_user_id,assignment.client_id,assignment.reference_number,assignment.assigner_name,assignment.analyst_name,assignment.sample_issued')->get_where('assignment', array('id' => $aid))->result_array();
+    
+    $data['ph_alkalinity']=
+    $this->db->select('*')->get_where('ph_alkalinity,ph_alkalinity_monograph ', array('ph_alkalinity.test_request_id' => $test_request_id))->result_array();
+    
+    $query=$this->db->select('test_request.id AS tr,test_request.client_id,test_request.active_ingredients,test_request.brand_name,test_request.applicant_address,test_request.date_time,test_request.manufacturer_name,test_request.manufacturer_address,test_request.batch_lot_number,
+    test_request.sample_source,test_request.label_claim,test_request.expiry_date,test_request.date_manufactured,test_request.quantity_type,test_request.sample_source,test_request.laboratory_number,test_request.applicant_name,
+    test_request.quantity_remaining,test_request.quantity_submitted,test_request.pack_size,test_request.reference_number,test_request.applicant_ref_number,test_request.identification,test_request.friability,test_request.dissolution,test_request.assay,test_request.test_specification,
+    test_request.disintegration,test_request.ph_alkalinity,test_request.full_monograph,test_request.content_uniformity,test_request.microbiology,test_request.request_status')->get_where('test_request', array('id' => $test_request_id));
+     
+
+    $results=$query->result_array();
+    $data['query']=$results[0];
 
 		$this->load->view('coa_view', $data);
 	}

@@ -38,6 +38,11 @@
      "sScrollY":"270px",
      "sScrollX":"100%"
     });
+    $('#myTab a').click(function (e) {
+      e.preventDefault()
+      $(this).tab('show')
+    })
+
    });
    
      tinymce.init({
@@ -103,15 +108,59 @@
   </table> 
   </div>
 </div>
-<div id="form_wrapper">
+<ul class="nav nav-tabs" role="tablist" style="padding-top:150px;" id="myTab">
+<?php 
+  for($i=1;$i<=$no_of_tests;$i++){
+    $active='';
+      if($i==1){
+        $active='active';
+      }
+?>
+ <li class="<?php echo $active; ?>"><a href="#<?php echo 'test_'.$i; ?>">Chemical Method No: <?php echo $i ?></a></li>
+
+<?php
+ }
+?>
+</ul>
+
+<!--Tab Contents-->
+<div class="tab-content">
+
+
+<?php 
+    for($i=1;$i<=$no_of_tests;$i++){
+      $active='';
+      if($i==1){
+        $active='active';
+      }
+?>
+<div class="tab-pane <?php echo $active; ?>" id="test_<?php echo $i; ?>">
 <div id="forms">
-<?php echo form_open('test_identification/worksheet_chemical_method', array('id'=>'test_identification_view'));?>
+<?php echo form_open('test_identification/worksheet_chemical_method', array('id'=>'test_identification_view'));
+   
+   $user=$this->session->userdata;
+$test_request_id=$user['logged_in']['test_request_id'];
+   $user_type_id=$user['logged_in']['user_type'];
+   $user_id=$user['logged_in']['id'];
+   $department_id=$user['logged_in']['department_id'];
+   $acc_status=$user['logged_in']['acc_status'];
+   $id_temp=1;
+   //var_dump($user);
+   if(empty($user['logged_in']['id'])) {
+       
+      redirect('login','location');  //loads the login page in current page div
+
+      echo '<meta http-equiv=refresh content="0;url=base_url();login">'; 
+
+       }
+  ?>
 <table width="950px" class ="table_form" border="0" cellpadding="4px" align="center">
     <input type="hidden" name ="assignment" value ="<?php echo $assignment;?>"><input type="hidden" name ="test_request" value ="<?php echo $test_request;?>">
       <input type="hidden" name ="analyst" value ="<?php echo $user['logged_in']['fname']." ".$user['logged_in']['lname'];?>">
      <tr>
        <td colspan="6"  style="padding: 8px;text-align:right;background-color:#fdfdfd;padding:8px;border-bottom:solid 1px #bfbfbf;"><a href="<?php echo base_url().'test/index/'.$assignment.'/'.$test_request?>"><img src="<?php echo base_url().'images/icons/assign.png';?>" height="20px" width="20px">Back to Test Lists</a></td>
      </tr>
+
      <tr>
       <td colspan ="6" style="padding:8px;">
          <table width="100%" class ="table_form" bgcolor="#c4c4ff" cellpadding="8px" border="0" align ="center">
@@ -385,6 +434,11 @@
     </table>
    </form> 
 </div>
+</div>
+</div>
+<?php
+ }
+?>
 </div>
 </body>
 </html>

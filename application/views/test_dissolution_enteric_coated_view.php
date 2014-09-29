@@ -56,6 +56,14 @@
    $acc_status=$user['logged_in']['acc_status'];
    $id_temp=1;
    //var_dump($user);
+
+    if(empty($user['logged_in']['id'])) {
+       
+      redirect('login','location');  //loads the login page in current page div
+
+      echo '<meta http-equiv=refresh content="0;url=base_url();login">'; 
+
+       }
   ?>  
   <div id="header"> 
   <div id="logo" style="padding:8px;color: #0000ff;" align="center"><img src="<?php echo base_url().'images/meds_logo.png';?>" height="35px" width="40px"/><b>MISSION FOR ESSENTIAL DRUGS AND SUPPLIES</b></div>
@@ -169,7 +177,7 @@
           <td colspan="6"  align="center" style="padding:8px;border-bottom: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"> MEDS Dissolution Test Form: Enteric Coated Capsules</td>
       </tr>    
       <tr>
-        <td colspan=""align="center" style="padding:8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Equipment Make:</td>
+        <td colspan=""align="center" style="padding:8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Equipment Number:</td>
         <td colspan = "2" style="padding:8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> 
             <select id ="equipment_make" name="equipment_make">
               <option selected></option>
@@ -185,7 +193,7 @@
             </select>
          </td>    
       
-        <td colspan=""align="center" style="padding:8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">ID Number:</td>
+        <td colspan=""align="center" style="padding:8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Equipment Make:</td>
         <td colspan = "2" style="padding:8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><input type ="text" name ="equipment_number" id="equipmentid"></td>
       </tr>
       <tr>
@@ -259,7 +267,7 @@
                foreach($sql_standards as $s_name):
               ?>
                
-               <option value="<?php  echo $s_name['item_description'];?>" data-idno="<?php  echo $s_name['reference_number'];?>" data-lotno="<?php  echo $s_name['batch_number'];?>"><?php  echo $s_name['item_description'];?></option>
+               <option value="<?php  echo $s_name['item_description'];?>" data-potency="<?php  echo $s_name['potency'];?>"data-idno="<?php  echo $s_name['reference_number'];?>" data-lotno="<?php  echo $s_name['batch_number'];?>"><?php  echo $s_name['item_description'];?></option>
                 <?php
                 endforeach
                 ?>
@@ -268,7 +276,7 @@
       </tr>
       <tr>
         <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Potency:</td>
-        <td colspan = "" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="potency"> </td>
+        <td colspan = "" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="potency" id="potency"> </td>
         <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Lot No.:</td>
         <td colspan = "" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="lot_no" id ="lot_no"> </td>
         <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">ID No.:</td>
@@ -677,63 +685,63 @@
               </tr> 
               <tr>
                   <td align="center"style="padding: 8px;">1.</td>
-                  <td style="padding: 8px;"><input type = "text" class = "standard" name ="sample_1" id ="sample_1"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_1" name ="sample_1_s1" id ="sample_1_s1"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_2" name ="sample_1_s2" id ="sample_1_s2"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_3" name ="sample_1_s3" id ="sample_1_s3"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_4" name ="sample_1_s4" id ="sample_1_s4"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_5" name ="sample_1_s5" id ="sample_1_s5"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_6" name ="sample_1_s6" id ="sample_1_s6"></td>
+                  <td style="padding: 8px;"><input type = "text" class = "standard" name ="buffer_sample_1" id ="sample_1"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_1" name ="buffer_sample_1_s1" id ="sample_1_s1"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_2" name ="buffer_sample_1_s2" id ="sample_1_s2"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_3" name ="buffer_sample_1_s3" id ="sample_1_s3"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_4" name ="buffer_sample_1_s4" id ="sample_1_s4"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_5" name ="buffer_sample_1_s5" id ="sample_1_s5"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_6" name ="buffer_sample_1_s6" id ="sample_1_s6"></td>
                 </tr>
                 <tr>
                   <td align="center"style="padding: 8px;">2.</td>
-                  <td style="padding: 8px;"><input type = "text" class = "standard" name ="sample_2" id ="sample_2"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_1" name ="sample_2_s1" id ="sample_2_s1"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_2" name ="sample_2_s2" id ="sample_2_s2"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_3" name ="sample_2_s3" id ="sample_2_s3"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_4" name ="sample_2_s4" id ="sample_2_s4"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_5" name ="sample_2_s5" id ="sample_2_s5"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_6" name ="sample_2_s6" id ="sample_2_s6"></td>
+                  <td style="padding: 8px;"><input type = "text" class = "standard" name ="buffer_sample_2" id ="sample_2"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_1" name ="buffer_sample_2_s1" id ="sample_2_s1"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_2" name ="buffer_sample_2_s2" id ="sample_2_s2"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_3" name ="buffer_sample_2_s3" id ="sample_2_s3"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_4" name ="buffer_sample_2_s4" id ="sample_2_s4"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_5" name ="buffer_sample_2_s5" id ="sample_2_s5"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_6" name ="buffer_sample_2_s6" id ="sample_2_s6"></td>
                 </tr>
                 <tr>
                   <td align="center"style="padding: 8px;">3.</td>
-                  <td style="padding: 8px;"><input type = "text" class = "standard" name ="sample_3" id ="sample_3"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_1" name ="sample_3_s1" id ="sample_3_s1"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_2" name ="sample_3_s2" id ="sample_3_s2"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_3" name ="sample_3_s3" id ="sample_3_s3"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_4" name ="sample_3_s4" id ="sample_3_s4"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_5" name ="sample_3_s5" id ="sample_3_s5"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_6" name ="sample_3_s6" id ="sample_3_s6"></td>
+                  <td style="padding: 8px;"><input type = "text" class = "standard" name ="buffer_sample_3" id ="sample_3"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_1" name ="buffer_sample_3_s1" id ="sample_3_s1"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_2" name ="buffer_sample_3_s2" id ="sample_3_s2"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_3" name ="buffer_sample_3_s3" id ="sample_3_s3"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_4" name ="buffer_sample_3_s4" id ="sample_3_s4"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_5" name ="buffer_sample_3_s5" id ="sample_3_s5"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_6" name ="buffer_sample_3_s6" id ="sample_3_s6"></td>
                 </tr>
                 <tr>
                   <td align="center"style="padding: 8px;">4.</td>
-                  <td style="padding: 8px;"><input type = "text" class = "standard" name ="sample_4" id ="sample_4"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_1" name ="sample_4_s1" id ="sample_4_s1"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_2" name ="sample_4_s2" id ="sample_4_s2"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_3" name ="sample_4_s3" id ="sample_4_s3"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_4" name ="sample_4_s4" id ="sample_4_s4"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_5" name ="sample_4_s5" id ="sample_4_s5"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_6" name ="sample_4_s6" id ="sample_4_s6"></td>
+                  <td style="padding: 8px;"><input type = "text" class = "standard" name ="buffer_sample_4" id ="sample_4"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_1" name ="buffer_sample_4_s1" id ="sample_4_s1"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_2" name ="buffer_sample_4_s2" id ="sample_4_s2"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_3" name ="buffer_sample_4_s3" id ="sample_4_s3"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_4" name ="buffer_sample_4_s4" id ="sample_4_s4"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_5" name ="buffer_sample_4_s5" id ="sample_4_s5"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_6" name ="buffer_sample_4_s6" id ="sample_4_s6"></td>
                 </tr>
                  <tr>
                   <td align="center"style="padding: 8px;">5.</td>
-                  <td style="padding: 8px;"><input type = "text" class = "standard" name ="sample_5" id ="sample_5"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_1" name ="sample_5_s1" id ="sample_5_s1" onchange ="avg_sample1()"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_2" name ="sample_5_s2" id ="sample_5_s2" onchange ="avg_sample2()"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_3" name ="sample_5_s3" id ="sample_5_s3" onchange ="avg_sample3()"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_4" name ="sample_5_s4" id ="sample_5_s4" onchange ="avg_sample4()"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_5" name ="sample_5_s5" id ="sample_5_s5" onchange ="avg_sample5()"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_6" name ="sample_5_s6" id ="sample_5_s6" onchange ="avg_sample6()"></td>
+                  <td style="padding: 8px;"><input type = "text" class = "standard" name ="buffer_sample_5" id ="sample_5"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_1" name ="buffer_sample_5_s1" id ="sample_5_s1" onchange ="avg_sample1()"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_2" name ="buffer_sample_5_s2" id ="sample_5_s2" onchange ="avg_sample2()"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_3" name ="buffer_sample_5_s3" id ="sample_5_s3" onchange ="avg_sample3()"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_4" name ="buffer_sample_5_s4" id ="sample_5_s4" onchange ="avg_sample4()"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_5" name ="buffer_sample_5_s5" id ="sample_5_s5" onchange ="avg_sample5()"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_6" name ="buffer_sample_5_s6" id ="sample_5_s6" onchange ="avg_sample6()"></td>
                 </tr>
                 <tr>
                   <td align="center"style="padding: 8px;">Average</td>
-                  <td style="padding: 8px;"><input type = "text" class = "standard_avg" name ="avg" id ="avg"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_1_avg" name ="avg_s1" id ="avg_s1"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_2_avg" name ="avg_s2" id ="avg_s2"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_3_avg" name ="avg_s3" id ="avg_s3"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_4_avg" name ="avg_s4" id ="avg_s4"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_5_avg" name ="avg_s5" id ="avg_s5"></td>
-                  <td style="padding: 8px;"><input type = "text" class ="sample_6_avg" name ="avg_s6" id ="avg_s6"></td>
+                  <td style="padding: 8px;"><input type = "text" class = "standard_avg" name ="buffer_avg" id ="avg"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_1_avg" name ="buffer_avg_s1" id ="avg_s1"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_2_avg" name ="buffer_avg_s2" id ="avg_s2"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_3_avg" name ="buffer_avg_s3" id ="avg_s3"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_4_avg" name ="buffer_avg_s4" id ="avg_s4"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_5_avg" name ="buffer_avg_s5" id ="avg_s5"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_6_avg" name ="buffer_avg_s6" id ="avg_s6"></td>
                 </tr>
          </table>
         </div>
@@ -757,95 +765,95 @@
       </tr>
       <tr>
         <td colspan ="4" align ="center" style="padding: 12px;">
-          <input type ="text" name="det_1_pkt" id ="det_1_pkt" size ="10" placeholder="PKT" onchange="calculation_determinations()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-          <input type ="text" name="det_1_wstd" id ="det_1_wstd" size ="10" placeholder="WSTD">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-          <input type ="text" name="det_1_df" id ="det_1_df" size ="10" placeholder="DF">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-          <input type ="text" name="det_1_potency" id ="det_1_potency" size ="10" placeholder="Potency">*100 <br/><br/>
-          <input type ="text" name="det_1_pkstd" id ="det_1_pkstd" size ="10" placeholder="PKSTD" onchange="calculation_determinations()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-          <input type ="text" name="det_1_lc" id ="det_1_lc" size ="10" placeholder="LC" onchange="calculation_determinations()"></td>
-        <td> =&nbsp &nbsp<input type ="text" name="determination_1" id ="determination_1" size ="10"> % LC</td>
+          <input type ="text" name="buffer_det_1_pkt" id ="det_1_pkt" size ="10" placeholder="PKT" onchange="calculation_determinations()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          <input type ="text" name="buffer_det_1_wstd" id ="det_1_wstd" size ="10" placeholder="WSTD">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          <input type ="text" name="buffer_det_1_df" id ="det_1_df" size ="10" placeholder="DF">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          <input type ="text" name="buffer_det_1_potency" id ="det_1_potency" size ="10" placeholder="Potency">*100 <br/><br/>
+          <input type ="text" name="buffer_det_1_pkstd" id ="det_1_pkstd" size ="10" placeholder="PKSTD" onchange="calculation_determinations()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          <input type ="text" name="buffer_det_1_lc" id ="det_1_lc" size ="10" placeholder="LC" onchange="calculation_determinations()"></td>
+        <td> =&nbsp &nbsp<input type ="text" name="buffer_determination_1" id ="determination_1" size ="10"> % LC</td>
       </tr>
       <tr>
         <td align="center" colspan = "6"style="padding: 12px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: solid 1px #bfbfbf;"> <b><u>Determination 2</u></b></td>
       </tr>
       <tr>
         <td colspan ="4" align ="center" style="padding: 12px;">
-          <input type ="text" name="det_2_pkt" id="det_2_pkt" size ="10" placeholder="PKT" onchange="calculation_determinations()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-          <input type ="text" name="det_2_wstd" id ="det_2_wstd" size ="10" placeholder="WSTD">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-          <input type ="text" name="det_2_df"id="det_2_df" size ="10" placeholder="DF">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-          <input type ="text" name="det_2_potency" id ="det_2_potency" size ="10" placeholder="Potency">*100 <br/><br/>
-          <input type ="text" name="det_2_pkstd" id ="det_2_pkstd" size ="10" placeholder="PKSTD" onchange="calculation_determinations()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-          <input type ="text" name="det_2_lc" id ="det_2_lc" size ="10" placeholder="LC"onchange="calculation_determinations()"></td>        
-        <td>=&nbsp &nbsp <input type ="text" name="determination_2"id ="determination_2" size ="10">% LC </td>
+          <input type ="text" name="buffer_det_2_pkt" id="det_2_pkt" size ="10" placeholder="PKT" onchange="calculation_determinations()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          <input type ="text" name="buffer_det_2_wstd" id ="det_2_wstd" size ="10" placeholder="WSTD">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          <input type ="text" name="buffer_det_2_df"id="det_2_df" size ="10" placeholder="DF">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          <input type ="text" name="buffer_det_2_potency" id ="det_2_potency" size ="10" placeholder="Potency">*100 <br/><br/>
+          <input type ="text" name="buffer_det_2_pkstd" id ="det_2_pkstd" size ="10" placeholder="PKSTD" onchange="calculation_determinations()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          <input type ="text" name="buffer_det_2_lc" id ="det_2_lc" size ="10" placeholder="LC"onchange="calculation_determinations()"></td>        
+        <td>=&nbsp &nbsp <input type ="text" name="buffer_determination_2"id ="determination_2" size ="10">% LC </td>
       </tr>
       <tr>  
         <td align="center" colspan = "6"style="padding: 12px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: solid 1px #bfbfbf;"> <b><u>Determination 3</u></b></td>
       </tr> 
       <tr>  
         <td colspan ="4" align ="center" style="padding: 12px;">
-          <input type ="text" name="det_3_pkt" id ="det_3_pkt"size ="10" placeholder="PKT" onchange="calculation_determinations()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-          <input type ="text" name="det_3_wstd" id ="det_3_wstd"size ="10" placeholder="WSTD">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-          <input type ="text" name="det_3_df" id ="det_3_df" size ="10" placeholder="DF">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-          <input type ="text" name="det_3_potency" id ="det_3_potency" size ="10" placeholder="Potency">*100 <br/><br/>
-          <input type ="text" name="det_3_pkstd" id ="det_3_pkstd" size ="10" placeholder="PKSTD" onchange="calculation_determinations()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-          <input type ="text" name="det_3_lc" id ="det_3_lc" size ="10" placeholder="LC" onchange="calculation_determinations()"></td>        
-        <td>=&nbsp &nbsp <input type ="text" name="determination_3" id ="determination_3" size ="10">% LC </td>
+          <input type ="text" name="buffer_det_3_pkt" id ="det_3_pkt"size ="10" placeholder="PKT" onchange="calculation_determinations()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          <input type ="text" name="buffer_det_3_wstd" id ="det_3_wstd"size ="10" placeholder="WSTD">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          <input type ="text" name="buffer_det_3_df" id ="det_3_df" size ="10" placeholder="DF">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          <input type ="text" name="buffer_det_3_potency" id ="det_3_potency" size ="10" placeholder="Potency">*100 <br/><br/>
+          <input type ="text" name="buffer_det_3_pkstd" id ="det_3_pkstd" size ="10" placeholder="PKSTD" onchange="calculation_determinations()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          <input type ="text" name="buffer_det_3_lc" id ="det_3_lc" size ="10" placeholder="LC" onchange="calculation_determinations()"></td>        
+        <td>=&nbsp &nbsp <input type ="text" name="buffer_determination_3" id ="determination_3" size ="10">% LC </td>
       </tr>
       <tr>
         <td align="center" colspan = "6"style="padding: 12px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: solid 1px #bfbfbf;"> <b><u>Determination 4</u></b></td>
       </tr> 
       <tr>  
         <td colspan ="4" align ="center" style="padding: 12px;">
-          <input type ="text" name="det_4_pkt" id ="det_4_pkt" size ="10" placeholder="PKT" onchange="calculation_determinations()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-          <input type ="text" name="det_4_wstd" id ="det_4_wstd" size ="10" placeholder="WSTD">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-          <input type ="text" name="det_4_df" id ="det_4_df" size ="10" placeholder="DF">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-          <input type ="text" name="det_4_potency" id ="det_4_potency" size ="10" placeholder="Potency">*100 <br/><br/>
-          <input type ="text" name="det_4_pkstd" id ="det_4_pkstd" size ="10" placeholder="PKSTD" onchange="calculation_determinations()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-          <input type ="text" name="det_4_lc" id ="det_4_lc" size ="10" placeholder="LC" onchange="calculation_determinations()"></td>        
-        <td>=&nbsp &nbsp <input type ="text" name="determination_4" id ="determination_4" size ="10">% LC </td>
+          <input type ="text" name="buffer_det_4_pkt" id ="det_4_pkt" size ="10" placeholder="PKT" onchange="calculation_determinations()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          <input type ="text" name="buffer_det_4_wstd" id ="det_4_wstd" size ="10" placeholder="WSTD">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          <input type ="text" name="buffer_det_4_df" id ="det_4_df" size ="10" placeholder="DF">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          <input type ="text" name="buffer_det_4_potency" id ="det_4_potency" size ="10" placeholder="Potency">*100 <br/><br/>
+          <input type ="text" name="buffer_det_4_pkstd" id ="det_4_pkstd" size ="10" placeholder="PKSTD" onchange="calculation_determinations()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          <input type ="text" name="buffer_det_4_lc" id ="det_4_lc" size ="10" placeholder="LC" onchange="calculation_determinations()"></td>        
+        <td>=&nbsp &nbsp <input type ="text" name="buffer_determination_4" id ="determination_4" size ="10">% LC </td>
       </tr> 
       <tr>  
         <td align="center" colspan = "6"style="padding: 12px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: solid 1px #bfbfbf;"> <b><u>Determination 5</u></b></td>
       </tr> 
       <tr>  
         <td colspan ="4" align ="center" style="padding: 12px;">
-          <input type ="text" name="det_5_pkt" id ="det_5_pkt" size ="10" placeholder="PKT" onchange="calculation_determinations()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-          <input type ="text" name="det_5_wstd" id ="det_5_wstd" size ="10" placeholder="WSTD">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-          <input type ="text" name="det_5_df" id ="det_5_df" size ="10" placeholder="DF">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-          <input type ="text" name="det_5_potency" id ="det_5_potency" size ="10" placeholder="Potency">*100 <br/><br/>
-          <input type ="text" name="det_5_pkstd" id ="det_5_pkstd" size ="10" placeholder="PKSTD" onchange="calculation_determinations()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-          <input type ="text" name="det_5_lc" id ="det_5_lc" size ="10" placeholder="LC" onchange="calculation_determinations()"></td>        
-        <td>=&nbsp &nbsp <input type ="text" name="determination_5" id ="determination_5" size ="10">% LC </td>
+          <input type ="text" name="buffer_det_5_pkt" id ="det_5_pkt" size ="10" placeholder="PKT" onchange="calculation_determinations()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          <input type ="text" name="buffer_det_5_wstd" id ="det_5_wstd" size ="10" placeholder="WSTD">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          <input type ="text" name="buffer_det_5_df" id ="det_5_df" size ="10" placeholder="DF">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          <input type ="text" name="buffer_det_5_potency" id ="det_5_potency" size ="10" placeholder="Potency">*100 <br/><br/>
+          <input type ="text" name="buffer_det_5_pkstd" id ="det_5_pkstd" size ="10" placeholder="PKSTD" onchange="calculation_determinations()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          <input type ="text" name="buffer_det_5_lc" id ="det_5_lc" size ="10" placeholder="LC" onchange="calculation_determinations()"></td>        
+        <td>=&nbsp &nbsp <input type ="text" name="buffer_determination_5" id ="determination_5" size ="10">% LC </td>
       </tr> 
       <tr> 
         <td align="center" colspan = "6"style="padding: 12px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: solid 1px #bfbfbf;"> <b><u>Determination 6</u></b></td>
       </tr> 
       <tr>  
         <td colspan ="4" align ="center" style="padding: 12px;">
-          <input type ="text" name="det_6_pkt" id ="det_6_pkt" size ="10" placeholder="PKT" onchange="calculation_determinations()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-          <input type ="text" name="det_6_wstd" id ="det_6_wstd" size ="10" placeholder="WSTD">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-          <input type ="text" name="det_6_df" id ="det_6_df" size ="10" placeholder="DF">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-          <input type ="text" name="det_6_potency" id ="det_6_potency" size ="10" placeholder="Potency">*100 <br/><br/>
-          <input type ="text" name="det_6_pkstd" id ="det_6_pkstd" size ="10" placeholder="PKSTD" onchange="calculation_determinations()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-          <input type ="text" name="det_6_lc" id ="det_6_lc" size ="10" placeholder="LC" onchange="calculation_determinations()"></td>        
-        <td>=&nbsp &nbsp <input type ="text" name="determination_6" id ="determination_6" size ="10">% LC </td>
+          <input type ="text" name="buffer_det_6_pkt" id ="det_6_pkt" size ="10" placeholder="PKT" onchange="calculation_determinations()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          <input type ="text" name="buffer_det_6_wstd" id ="det_6_wstd" size ="10" placeholder="WSTD">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          <input type ="text" name="buffer_det_6_df" id ="det_6_df" size ="10" placeholder="DF">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          <input type ="text" name="buffer_det_6_potency" id ="det_6_potency" size ="10" placeholder="Potency">*100 <br/><br/>
+          <input type ="text" name="buffer_det_6_pkstd" id ="det_6_pkstd" size ="10" placeholder="PKSTD" onchange="calculation_determinations()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          <input type ="text" name="buffer_det_6_lc" id ="det_6_lc" size ="10" placeholder="LC" onchange="calculation_determinations()"></td>        
+        <td>=&nbsp &nbsp <input type ="text" name="buffer_determination_6" id ="determination_6" size ="10">% LC </td>
       </tr> 
       <tr> 
         <td align="center"colspan ="6"style="padding: 12px;padding: 8px;background-color: #e8e8ff;border-bottom: solid 1px #bfbfbf;border-top: solid 1px #bfbfbf;"> </td>
       </tr>
       <tr> 
         <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> Average % </td>
-        <td colspan = "3"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" id = "determination_avg" name="average"></td>
+        <td colspan = "3"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" id = "determination_avg" name="buffer_average"></td>
     
         <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> Equivalent to</td>
-        <td colspan = "3"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" id = "equivalent" name="equivalent"></td>
+        <td colspan = "3"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" id = "equivalent" name="buffer_equivalent"></td>
       </tr>
       <tr> 
         <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> Range </td>
-        <td colspan = "3"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">  <input type ="text" size = "5" id = "range_min" name="range_min" > to <input type ="text" size = "5" id = "range_max" name="range_max"></td>
+        <td colspan = "3"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">  <input type ="text" size = "5" id = "range_min" name="buffer_range_min" > to <input type ="text" size = "5" id = "range_max" name="buffer_range_max"></td>
       
         <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> RSD</td>
-        <td colspan = "3"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" id = "determination_rsd" name="rsd"></td>
+        <td colspan = "3"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" id = "determination_rsd" name="buffer_rsd"></td>
       </tr>
       <tr> 
         <td align="center"colspan ="6"style="padding: 12px;padding: 8px;background-color: #ffff;border-top: solid 1px #bfbfbf;color:#0000fb;"> </td>
@@ -932,14 +940,14 @@
               </tr>
           </table>
          </tr>
-         <tr>
+      <tr>
        <td colspan="8" style="padding:8px;">
         <table border="0" width="100%" class="table_form" cellpadding="8px" align="center">
         <tr>
             <td style="background-color:#ededfd;border-bottom: dotted 1px #c4c4ff;padding:8px;text-align:cente;">Done by: <input type="hidden" id="done_by" name="done_by" value="<?php echo($user['logged_in']['fname']." ".$user['logged_in']['lname']);?>"><?php echo($user['logged_in']['fname']." ".$user['logged_in']['lname']);?></td>
             <td style="background-color:#ededfd;border-bottom: dotted 1px #c4c4ff;padding:8px;text-align:right;">Date conducted: <input type="hidden"  id="date" name="date_done" value="<?php echo date("d/m/Y")?>"><?php echo date("d/M/Y")?></td>
-          </tr>
-          <tr>
+        </tr>
+        <tr>
             <td style="border-bottom: dotted 1px #c4c4ff;padding:4px;text-align:left;">Approved by:
             <select id="name" name="name" >
             <option selected></option>
@@ -951,7 +959,7 @@
               endforeach
               ?>
           </select></td>
-            <td style="border-bottom: dotted 1px #c4c4ff;padding:4px;text-align:right;">Date <input type="text"  id="datepicker" name="date"></td>
+            <td style="border-bottom: dotted 1px #c4c4ff;padding:4px;text-align:right;">Date <input type="text"  class="datepicker" name="date"></td>
           </tr>
           
           <tr>

@@ -47,6 +47,13 @@
    $acc_status=$user['logged_in']['acc_status'];
    $id_temp=1;
    //var_dump($user);
+   if(empty($user['logged_in']['id'])) {
+       
+      redirect('login','location');  //loads the login page in current page div
+
+      echo '<meta http-equiv=refresh content="0;url=base_url();login">'; 
+
+       }
   ?>
   <div id="header"> 
   <div id="logo" style="padding:8px;color: #0000ff;" align="center"><img src="<?php echo base_url().'images/meds_logo.png';?>" height="35px" width="40px"/><b>MISSION FOR ESSENTIAL DRUGS AND SUPPLIES</b></div>
@@ -95,7 +102,7 @@
     </tr>   
     <tr>
       <td colspan ="6" style="padding:8px;">
-       <table width="100%" bgcolor="#c4c4ff" cellpadding="8px" border="0" align ="center">       
+       <table width="100%" class="table_form" bgcolor="#c4c4ff" cellpadding="8px" border="0" align ="center">       
           <tr>
                 <td rowspan="2" colspan ="" style="padding:4px;border-left:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;border-bottom:solid 1px #bfbfbf;text-align:center;background-color:#ffffff;"><img src="<?php echo base_url().'images/meds_logo.png';?>" height="80px" width="90px"/></td>
                 <td colspan="4" style="padding:4px;color:#0000ff;border-left:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;border-bottom:solid 1px #bfbfbf;text-align:center;background-color:#ffffff;">MISSION FOR ESSENTIAL DRUGS AND SUPPLIES</td>
@@ -128,7 +135,7 @@
     </tr>
     <tr>
       <td colspan="6" align="center" style="padding:8px;">
-        <table border="0" align="center" cellpadding="8px" width="100%">
+        <table border="0" class="table_form" align="center" cellpadding="8px" width="100%">
             <tr>
               <td height="25px" style="padding:8px;border-left:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;">Registration Number: <?php echo $results['laboratory_number'];?></td>
               <td height="25px" style="padding:8px;border-left:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;border-right:solid 1px #bfbfbf;border-bottom:solid 1px #bfbfbf;text-align:left;background-color:#ffffff;">Request Date: <?php echo $results['date_time'];?></td>
@@ -157,33 +164,33 @@
     </tr>  
         <tr> <td colspan ="6" align ="center" style="padding: 8px;text-align:center;padding-right:40px;border-bottom: solid 10px #f0f0ff;color: #0000fb;background-color: #e8e8ff;"> MEDS Disintergration Test Form</td></tr>       
      <tr> 
-      <td colspan ="6" align ="left" style="padding: 12px;background-color:#ffffff;padding-right:40px;border-bottom: solid 10px #f0f0ff;color: #0000fb;background-color: #e8e8ff;"> <b>Monograph</b></td>
+      <td colspan ="6" align ="left" style="padding: 12px;background-color:#ffffff;padding-right:40px;border-bottom: solid 1px #f0f0ff;color: #0000fb;"> <b>Monograph</b></td>
      </tr> 
      <tr> 
       <td colspan ="6" align ="center" style="text-align:center;background-color:#ffffff;padding-right:40px;border-bottom: solid #f0f0ff;"><?php echo $query_monograph['monograph'];?> </td>
      </tr> 
       <tr>
-        <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><b>Equipment Make:</b></td>
+        <td style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><b>Equipment Make:</b></td>
         <td colspan = "2"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><?php echo $query_e['equipment_make'];?> </td>
-        <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><b>Equipment Number:</b></td>
+        <td style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><b>Equipment Number:</b></td>
         <td colspan = "2" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><?php echo $query_e['equipment_no'];?></td>
       </tr>
        <tr>
-        <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;color:#0000fb;"><b>Duration of Test</b></td>
+        <td style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;color:#0000fb;"><b>Duration of Test</b></td>
       </tr>
        <tr>
-        <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Highest</td>
-        <td colspan = "5" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><?php echo $query_e['highest_hours'];?> Hour(s), <?php echo $query_e['highest_mins'];?> Minute(s), <?php echo $query_e['highest_seconds'];?> Second(s)</td>
+        <td align ="center" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Highest:</td>
+        <td colspan = "7" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><?php echo $query_e['highest_hours'];?> hour(s), <?php echo $query_e['highest_mins'];?> minute(s), <?php echo $query_e['highest_seconds'];?> second(s)</td>
       </tr>
       <tr>  
-        <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Mean</td>
-        <td colspan = "5" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><?php echo $query_e['mean_hours'];?> Hour(s), <?php echo $query_e['mean_mins'];?> Minute(s), <?php echo $query_e['mean_seconds'];?> Second(s)</td>
+        <td align ="center" style="padding: 8px;background-color:#ffffff;border-bottom: solid #f0f0ff;border-top: dotted 1px #bfbfbf;">Mean:</td>
+        <td colspan = "7" style="padding: 8px;background-color:#ffffff;border-bottom: solid #f0f0ff;border-top: dotted 1px #bfbfbf;"><?php echo $query_e['mean_hours'];?> hour(s), <?php echo $query_e['mean_mins'];?> minute(s), <?php echo $query_e['mean_seconds'];?> second(s)</td>
       </tr>
       <tr>
         <td align = "center"colspan = "2"style="padding: 8px;"><b>Acceptance Criteria</b></td><td align = "center" colspan = "1.5"style="padding: 8px;"><b>Actual</b></td><td colspan = "1.5"align = "center"style="padding: 8px;"><b>Comment</b></td>
       </tr>
       <tr>
-        <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Disintergration Medium </td>
+        <td style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Disintergration Medium </td>
         <td style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <?php echo $query_e['dis_medium'];?></td>
        
         <td align = "center"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><?php echo $query_e['actual_medium'];?> </td>
@@ -191,7 +198,7 @@
         <td align = "center"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><?php echo $query_e['medium_comment'];?> </td>
       </tr>
       <tr>
-        <td align="left" style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Temperature of Media </td>
+        <td style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Temperature of Media </td>
         <td style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><?php echo $query_e['medium_temperature'];?></td>
         
         <td align = "center"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><?php echo $query_e['actual_medium_temperature'];?> </td>
@@ -199,7 +206,7 @@
         <td align = "center"style="padding: 8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><?php echo $query_e['medium_temperature_comment'];?> </td>
       </tr>
        <tr>
-        <td colspan="8" align="left"  style="padding:8px;border-bottom: dotted 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><b>Conclusion</b></td>
+        <td colspan="8" style="padding:8px;border-bottom: dotted 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><b>Conclusion</b></td>
       </tr>
       <tr>
         <td colspan="8" style="padding:8px;border-bottom:solid 1px #c4c4ff;"><?php echo $query_e['choice'];?></td>

@@ -32,7 +32,7 @@ class Test_Dissolution extends CI_Controller{
 		$data['assignment'] = $this->uri->segment(3);
 		$data['test_request'] = $this->uri->segment(4);
 		$test_request = $this->uri->segment(4);
-		$status=0; 
+		$status=0; $user_type=6;
 		$status_first_stage =1;
 
 		$sql = "SELECT * FROM test_request WHERE id =$test_request";
@@ -50,7 +50,13 @@ class Test_Dissolution extends CI_Controller{
 		$query_dissolution = $this->db->get_where('diss_data', array('status' => $status_first_stage))->result_array();
     	$data['sql_dissolution']= $query_dissolution[0];
 		
-		// var_dump($results_e);
+		$query_dissolution_det = $this->db->get_where('diss_uv_determinations', array('status' => $status_first_stage))->result_array();
+		$data['sql_dissolution_det']= $query_dissolution_det[0];
+		
+		$data['sql_approved']=
+    	$this->db->select('user.fname,user.lname,user.user_type')->get_where('user', array('user_type' => $user_type))->result_array();
+
+		// var_dump($query_dissolution_det);
 		// die;
 
 		$this->load->view('test_dissolution_uv_second_stage_view', $data);		
@@ -59,7 +65,7 @@ class Test_Dissolution extends CI_Controller{
 		$data['assignment'] = $this->uri->segment(3);
 		$data['test_request'] = $this->uri->segment(4);
 		$test_request = $this->uri->segment(4);
-		$status=0; 
+		$status=0; $user_type=6;
 		$status_second_stage =2;
 
 		$sql = "SELECT * FROM test_request WHERE id =$test_request";
@@ -77,7 +83,13 @@ class Test_Dissolution extends CI_Controller{
 		$query_dissolution = $this->db->get_where('diss_data', array('status' => $status_second_stage))->result_array();
     	$data['sql_dissolution']= $query_dissolution[0];
 		
-		// var_dump($results_e);
+		$query_dissolution_det = $this->db->get_where('diss_uv_determinations', array('status' => $status_second_stage))->result_array();
+		$data['sql_dissolution_det']= $query_dissolution_det[0];
+		
+		$data['sql_approved']=
+    	$this->db->select('user.fname,user.lname,user.user_type')->get_where('user', array('user_type' => $user_type))->result_array();
+
+		// var_dump($query_dissolution);
 		// die;
 
 		$this->load->view('test_dissolution_uv_third_stage_view', $data);		
@@ -222,7 +234,7 @@ class Test_Dissolution extends CI_Controller{
 		$data['assignment'] = $this->uri->segment(3);
 		$data['test_request'] = $this->uri->segment(4);
 		$test_request = $this->uri->segment(4);
-		$status=0; 
+		$status=0; $user_type = 6;
 		$status_first_stage =1;
 
 		$sql = "SELECT * FROM test_request WHERE id =$test_request";
@@ -239,7 +251,15 @@ class Test_Dissolution extends CI_Controller{
 	    $data['sql_standards']=
     	$this->db->select('standard_register.reference_number,standard_register.potency,standard_register.item_description,standard_register.batch_number,standard_register.manufacturer_supplier,standard_register.status')->get_where('standard_register', array('status' => $status))->result_array();
 
-    	
+    	$query_dissolution_det = $this->db->get_where('diss_enteric_coated_determinations', array('status' => $status_first_stage))->result_array();
+		$data['sql_dissolution_det']= $query_dissolution_det[0];
+		
+		$query_dissolution_sample = $this->db->get_where('diss_enteric_coated_samples', array('status' => $status_first_stage))->result_array();
+		$data['sql_dissolution_sample']= $query_dissolution_sample[0];
+		
+		$data['sql_approved']=
+    	$this->db->select('user.fname,user.lname,user.user_type')->get_where('user', array('user_type' => $user_type))->result_array();
+
     	$query_dissolution = $this->db->get_where('diss_delayed_release', array('status' => $status_first_stage))->result_array();
     	$data['sql_dissolution']= $query_dissolution[0];
 		// var_dump($results_e);
@@ -251,7 +271,7 @@ class Test_Dissolution extends CI_Controller{
 		$data['assignment'] = $this->uri->segment(3);
 		$data['test_request'] = $this->uri->segment(4);
 		$test_request = $this->uri->segment(4);
-		$status=0; 
+		$status=0; $user_type =6;
 		$status_second_stage =2;
 
 		$sql = "SELECT * FROM test_request WHERE id =$test_request";
@@ -271,6 +291,16 @@ class Test_Dissolution extends CI_Controller{
     	
     	$query_dissolution = $this->db->get_where('diss_delayed_release', array('status' => $status_second_stage))->result_array();
     	$data['sql_dissolution']= $query_dissolution[0];
+
+    	$query_dissolution_det = $this->db->get_where('diss_enteric_coated_determinations', array('status' => $status_second_stage))->result_array();
+		$data['sql_dissolution_det']= $query_dissolution_det[0];
+		
+		$query_dissolution_sample = $this->db->get_where('diss_enteric_coated_samples', array('status' => $status_second_stage))->result_array();
+		$data['sql_dissolution_sample']= $query_dissolution_sample[0];
+		
+		$data['sql_approved']=
+    	$this->db->select('user.fname,user.lname,user.user_type')->get_where('user', array('user_type' => $user_type))->result_array();
+
 		// var_dump($results_e);
 		// die;
 
@@ -309,7 +339,7 @@ class Test_Dissolution extends CI_Controller{
 		$data['assignment'] = $this->uri->segment(3);
 		$data['test_request'] = $this->uri->segment(4);
 		$test_request = $this->uri->segment(4);
-		$status=0;
+		$status=0;$user_type =6;
 		$status_first_stage = 1; 
 
 		$sql = "SELECT * FROM test_request WHERE id =$test_request";
@@ -332,6 +362,14 @@ class Test_Dissolution extends CI_Controller{
 		$data['sql_dissolution']= $query_dissolution[0];
 		// var_dump($query_dissolution);
 		// die;
+		$query_dissolution_det = $this->db->get_where('diss_enteric_coated_determinations', array('status' => $status_first_stage))->result_array();
+		$data['sql_dissolution_det']= $query_dissolution_det[0];
+		
+		$query_dissolution_sample = $this->db->get_where('diss_enteric_coated_samples', array('status' => $status_first_stage))->result_array();
+		$data['sql_dissolution_sample']= $query_dissolution_sample[0];
+		
+		$data['sql_approved']=
+    	$this->db->select('user.fname,user.lname,user.user_type')->get_where('user', array('user_type' => $user_type))->result_array();
 
 		$this->load->view('test_dissolution_enteric_coated_second_view', $data);		
 	}
@@ -339,7 +377,7 @@ class Test_Dissolution extends CI_Controller{
 		$data['assignment'] = $this->uri->segment(3);
 		$data['test_request'] = $this->uri->segment(4);
 		$test_request = $this->uri->segment(4);
-		$status=0;
+		$status=0; $user_type=6;
 		$status_second_stage = 2; 
 
 		$sql = "SELECT * FROM test_request WHERE id =$test_request";
@@ -360,9 +398,18 @@ class Test_Dissolution extends CI_Controller{
 		
 		$query_dissolution = $this->db->get_where('diss_enteric_coated', array('status' => $status_second_stage))->result_array();
 		$data['sql_dissolution']= $query_dissolution[0];
+		
+		$query_dissolution_det = $this->db->get_where('diss_enteric_coated_determinations', array('status' => $status_second_stage))->result_array();
+		$data['sql_dissolution_det']= $query_dissolution_det[0];
+		
+		$query_dissolution_sample = $this->db->get_where('diss_enteric_coated_samples', array('status' => $status_second_stage))->result_array();
+		$data['sql_dissolution_sample']= $query_dissolution_sample[0];
+		
+		$data['sql_approved']=
+    	$this->db->select('user.fname,user.lname,user.user_type')->get_where('user', array('user_type' => $user_type))->result_array();
+
 		// var_dump($query_dissolution);
 		// die;
-
 		$this->load->view('test_dissolution_enteric_coated_third_view', $data);		
 	}
 	function index_normal(){
@@ -383,8 +430,7 @@ class Test_Dissolution extends CI_Controller{
 
 	    $data['sql_columns']=
 	    $this->db->select('columns.column_type,columns.serial_number,columns.column_dimensions,columns.manufacturer,columns.column_number')->get_where('columns', array('status' => $status))->result_array();
-
-
+ 
 	    $data['sql_standards']=
     	$this->db->select('standard_register.reference_number,standard_register.potency,standard_register.item_description,standard_register.batch_number,standard_register.manufacturer_supplier,standard_register.status')->get_where('standard_register', array('status' => $status))->result_array();
 		// var_dump($results_e);
@@ -399,7 +445,7 @@ class Test_Dissolution extends CI_Controller{
 		$data['assignment'] = $this->uri->segment(3);
 		$data['test_request'] = $this->uri->segment(4);
 		$test_request = $this->uri->segment(4);
-		$status=0; 
+		$status=0; $user_type=6;
 		$status_first_stage =1;
 
 		$sql = "SELECT * FROM test_request WHERE id =$test_request";
@@ -421,7 +467,14 @@ class Test_Dissolution extends CI_Controller{
 		
     	$query_dissolution = $this->db->get_where('diss_normal', array('status' => $status_first_stage))->result_array();
 		$data['sql_dissolution']= $query_dissolution[0];
-		// var_dump($results_e);
+		
+		$query_dissolution_det = $this->db->get_where('diss_normal_hplc_determinations', array('status' => $status_first_stage))->result_array();
+		$data['sql_dissolution_det']= $query_dissolution_det[0];
+		
+		$data['sql_approved']=
+    	$this->db->select('user.fname,user.lname,user.user_type')->get_where('user', array('user_type' => $user_type))->result_array();
+
+		// print_r($data['sql_approved']);
 		// die;
 
 		$this->load->view('test_dissolution_hplc_normal_second_view', $data);		
@@ -430,7 +483,7 @@ class Test_Dissolution extends CI_Controller{
 		$data['assignment'] = $this->uri->segment(3);
 		$data['test_request'] = $this->uri->segment(4);
 		$test_request = $this->uri->segment(4);
-		$status=0;
+		$status=0;$user_type=6;
 		$status_second_stage=2; 
 
 		$sql = "SELECT * FROM test_request WHERE id =$test_request";
@@ -452,6 +505,13 @@ class Test_Dissolution extends CI_Controller{
 		
 		$query_dissolution = $this->db->get_where('diss_normal', array('status' => $status_second_stage))->result_array();
 		$data['sql_dissolution']= $query_dissolution[0];
+		
+		$query_dissolution_det = $this->db->get_where('diss_normal_hplc_determinations', array('status' => $status_second_stage))->result_array();
+		$data['sql_dissolution_det']= $query_dissolution_det[0];
+		
+		$data['sql_approved']=
+    	$this->db->select('user.fname,user.lname,user.user_type')->get_where('user', array('user_type' => $user_type))->result_array();
+
 		// var_dump($results_e);
 		// die;
 

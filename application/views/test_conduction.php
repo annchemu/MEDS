@@ -30,6 +30,14 @@
      "iDisplayLength": 100,
      "bSort": false
     });
+     $('#chemical_test_link').click(function(){
+         var tests = prompt("Please specify number of tests",1);
+         if(tests != null){
+          var url = "<?php echo base_url().'test_identification/index_chemical/'.$query['a'].'/'.$request[0]['tr'].'/'; ?>"+tests;
+          window.location=url;
+         }
+        //
+     });
    });
   </script>
  </head>
@@ -110,7 +118,7 @@
              <td align="right" style="padding:4px;border-bottom: solid 1px #c4c4ff;color: #0000fb;background-color: #ffffff;"><a href="<?php echo base_url().'home';?>"><img src="<?php echo base_url().'images/icons/assign.png';?>" height="20px" width="20px">Back To Assigned Test Requests</a></td>
            </tr>
             <tr>
-             <td  align="center" style="border-bottom: solid 5px #c4c4ff;color: #0000fb;background-color: #ffffff;"><h5><?php echo "Product Name".$request[0]['active_ingredients']." "."Samples Issued"." ".$query['sample_issued']?></h5></td>
+             <td  align="center" style="border-bottom: solid 5px #c4c4ff;color: #0000fb;background-color: #ffffff;"><h5><?php echo $request[0]['active_ingredients']." "."Samples Issued"." ".$query['sample_issued']?></h5></td>
            </tr>
         </table>
         <table id="list" border="0" width="100%" bgcolor="#ffffff" cellpadding="4px">
@@ -118,7 +126,9 @@
             <tr>
               <th style="text-align:left;padding:4px;background-color:#ffffff;border-top: solid 1px #ddddff;"><input type="checkbox" class="">Single Components</th>
               <th style="text-align:left;padding:4px;background-color:#ffffff;border-top: solid 1px #ddddff;"><input type="checkbox" class="">Two Components</th>
-              <th colspan="3"style="text-align:right;padding:4px;background-color:#ffffff;border-top: solid 1px #ddddff;"><a class="reagents" href="<?php echo base_url().'assay/assay_reagents/'.$query['a'].'/'.$request[0]['tr'];?>">Test's Reagents</a></th>
+              <th style="text-align:right;padding:4px;background-color:#ffffff;border-top: solid 1px #ddddff;"><a class="reagents" href="<?php echo base_url().'assay/assay_reagents/'.$query['a'].'/'.$request[0]['tr'];?>">Reagents Used For Tests</a></th>
+              <th style="text-align:left;padding:4px;background-color:#ffffff;border-top: solid 1px #ddddff;"><a class="coa" href="<?php echo base_url().'coa/view/'.$query['a'].'/'.$request[0]['tr'];?>">Generate a Certificate Of Analysis(COA)</a></th>
+              <th style="text-align:center;padding:4px;background-color:#ffffff;border-top: solid 1px #ddddff;"></th>
               </tr>
             <tr>
                 <th style="text-align:center;border-right: dotted 1px #ddddff;">Test Name</th>
@@ -130,6 +140,648 @@
             
           </thead>
           <tbody>
+           <?php
+            if($request[0]['identification']==0 || $request[0]['identification']==""){
+              
+             }else{
+              ?>
+               <tr>
+                <td style="text-align:center;padding:4px;background-color:#ffffff;"><b>Identification</b></td>
+                <td style='text-align:left;padding:4px;background-color:#ffffff;'></td>
+                <td style='text-align:center;padding:4px;background-color:#ffffff;'></td>
+                <td style='text-align:center;padding:4px;background-color:#ffffff;'></td>
+                <td style='text-align:center;padding:4px;background-color:#ffffff;'></td>
+               </tr>
+               <tr>
+                    <td style="text-align:center;padding:4px;"><b></b></td>
+                    <td style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_identification/monograph_assay/'.$query['a'].'/'.$request[0]['tr'];?>">Monograph</a></td>
+                    <td 
+                    <?php 
+                      if(empty($monograph_identification_assay)){
+                    
+                          echo"style='text-align:left;padding:4px;'>";
+                          echo "Please Fill The Assay Monograph First";
+                     }else{
+                      ?>
+                       style="text-align:left;padding:4px;"><a href="<?php echo base_url().'test_identification/index/'.$query['a'].'/'.$request[0]['tr'];?>">Assay</a></td>
+                     <?php   
+                     }
+                     ?>
+                    <td <?php 
+                      if(empty($identification_assay)){
+                    
+                          echo"style='text-align:center;padding:4px;'>";
+                          echo "View Worksheet";
+                     }else{
+                      ?>
+                         style='text-align:center;padding:4px;'><a href='<?php echo base_url().'test_identification/view_worksheet/'.$query['a'].'/'.$request[0]['tr'];?>'>View Worksheet</a>
+                     <?php   
+                     }
+                     ?>
+                    </td>
+                    <td 
+                      <?php 
+                      if(empty($identification_assay)){
+                    
+                          echo"style='text-align:left;padding:4px;background-color:#ffeea0;border-bottom:solid 1px #bfbfbf;'>";
+                          echo "Not Done";
+                     }else{
+                         echo"style='text-align:center;padding:4px;background-color:#98ff98;border-bottom:solid 1px #bfbfbf;'>";
+                         echo "Complete";
+                     }?>                     
+                    </td>
+              </tr>
+              <tr>
+                    <td style="text-align:center;padding:4px;"></td>
+                    <td style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_identification/monograph_uv/'.$query['a'].'/'.$request[0]['tr'];?>">Monograph</a></td>
+                    <td 
+                    <?php 
+                      if(empty($monograph_identification_uv)){
+              
+                          echo"style='text-align:left;padding:4px;'>";
+                          echo "Please Fill The UV Monograph First";
+                     }else{
+                      ?>
+                        style="text-align:left;padding:4px;"><a href="<?php echo base_url().'test_identification/index_uv/'.$query['a'].'/'.$request[0]['tr'];?>">UV</a></td>
+                     <?php   
+                     }
+                     ?>
+                    <td 
+                    <?php 
+                      if(empty($identification_uv)){
+                    
+                          echo"style='text-align:center;padding:4px;'>";
+                          echo "View Worksheet";
+                     }else{
+                      ?>
+                         style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_identification/view_worksheet_uv/'.$query['a'].'/'.$request[0]['tr'];?>">View Worksheet</a></td>
+                     <?php   
+                     }
+                     ?>                    
+                    <td 
+                      <?php 
+                      if(empty($identification_uv)){
+                    
+                          echo"style='text-align:center;padding:4px;background-color:#ffeea0;border-bottom:solid 1px #bfbfbf;'>";
+                          echo "Not Done";
+                     }else{
+                         echo"style='text-align:center;padding:4px;background-color:#98ff98;border-bottom:solid 1px #bfbfbf;'>";
+                         echo "Complete";
+                     }?>
+                     
+                    </td>
+              </tr>
+              <tr>
+                    <td style="text-align:center;padding:4px;"></td>
+                    <td style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_identification/monograph_infrared/'.$query['a'].'/'.$request[0]['tr'];?>">Monograph</a></td>
+                    <td 
+                      <?php 
+                      if(empty($monograph_identification_infrared)){
+                    
+                          echo"style='text-align:left;padding:4px;'>";
+                          echo "Please Fill The Infrared Monograph First";
+                  
+                     }else{
+                      ?>
+                        style="text-align:left;padding:4px;"><a href="<?php echo base_url().'test_identification/index_infrared/'.$query['a'].'/'.$request[0]['tr'];?>">Infrared</a></td>
+                     <?php   
+                     }
+                     ?>
+                    <td 
+                    <?php 
+                      if(empty($identification_infrared)){
+                    
+                          echo"style='text-align:center;padding:4px;'>";
+                          echo "View Worksheet";
+                     }else{
+                      ?>
+                         style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_identification/view_worksheet_infrared/'.$query['a'].'/'.$request[0]['tr'];?>">View Worksheet</a></td>
+                     <?php   
+                     }
+                     ?>                    
+                    <td 
+                      <?php 
+                      if(empty($identification_infrared)){
+                    
+                          echo"style='text-align:center;padding:4px;background-color:#ffeea0;border-bottom:solid 1px #bfbfbf';>";
+                          echo "Not Done";
+                     }else{
+                         echo"style='text-align:center;padding:4px;background-color:#98ff98;border-bottom:solid 1px #bfbfbf';>";
+                         echo "Complete";
+                     }?>
+                     
+                    </td>
+              </tr>
+              <tr>
+                    <td style="text-align:center;padding:4px;"></td>
+                    <td style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_identification/monograph_thin_layer/'.$query['a'].'/'.$request[0]['tr'];?>">Monograph</a></td>
+                    <td 
+                    <?php 
+                      if(empty($monograph_identification_thin_layer)){
+                    
+                          echo"style='text-align:left;padding:4px;'>";
+                          echo "Please Fill The Thin Layer Chromatography Monograph First";
+                     }else{
+                      ?>
+                    style="text-align:left;padding:4px;"><a href="<?php echo base_url().'test_identification/index_thin_layer/'.$query['a'].'/'.$request[0]['tr'];?>">Thin Layer Chromatography</a></td>
+                     <?php   
+                     }
+                     ?>
+                    <td 
+                    <?php 
+                      if(empty($identification_thin_layer)){
+                    
+                          echo"style='text-align:center;padding:4px;'>";
+                          echo "View Worksheet";
+                     }else{
+                      ?>
+                        style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_identification/view_worksheet_thin_layer/'.$query['a'].'/'.$request[0]['tr'];?>">View Worksheet</a></td>
+                     <?php   
+                     }
+                     ?>
+                    
+                    <td 
+                      <?php 
+                      if(empty($identification_thin_layer)){
+                    
+                          echo"style='text-align:center;padding:4px;background-color:#ffeea0;border-bottom:solid 1px #bfbfbf';>";
+                          echo "Not Done";
+                     }else{
+                         echo"style='text-align:center;padding:4px;background-color:#98ff98;border-bottom:solid 1px #bfbfbf';>";
+                         echo "Complete";
+                     }?>
+                     
+                    </td>
+              </tr>
+              <tr>
+                    <td style="text-align:center;padding:4px;"></td>
+                    <td style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_identification/monograph_hplc/'.$query['a'].'/'.$request[0]['tr'];?>">Monograph</a></td>
+                    <td 
+                    <?php 
+                      if(empty($monograph_identification_hplc)){
+                    
+                          echo"style='text-align:left;padding:4px;'>";
+                          echo "Please Fill The Identification by HPLC Monograph First";
+
+                     }else{
+                      ?>
+                       style="text-align:left;padding:4px;"><a href="<?php echo base_url().'test_identification/index_hplc/'.$query['a'].'/'.$request[0]['tr'];?>">Identification by HPLC</a></td>
+                     <?php   
+                     }
+                     ?>
+                    <td 
+                    <?php 
+                      if(empty($identification_hplc)){
+                    
+                          echo"style='text-align:center;padding:4px;'>";
+                          echo "View Worksheet";
+                     }else{
+                      ?>
+                        style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_identification/view_worksheet_hplc/'.$query['a'].'/'.$request[0]['tr'];?>">View Worksheet</a></td>
+                     <?php   
+                     }
+                     ?>
+                    <td 
+                      <?php 
+                      if(empty($identification_hplc)){
+                    
+                          echo"style='text-align:center;padding:4px;background-color:#ffeea0;border-bottom:solid 1px #bfbfbf;'>";
+                          echo "Not Done";
+                     }else{
+                         echo"style='text-align:center;padding:4px;background-color:#98ff98;border-bottom:solid 1px #bfbfbf;'>";
+                         echo "Complete";
+                     }?>
+                     
+                    </td>
+              </tr>
+              <tr>
+                    <td style="text-align:center;padding:4px;"></td>
+                    <td style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_identification/monograph_chemical/'.$query['a'].'/'.$request[0]['tr'];?>">Monograph</a></td>
+                    <td 
+                    <?php 
+                      if(empty($monograph_identification_chemical_method)){
+                    
+                          echo"style='text-align:left;padding:4px;'>";
+                          echo "Please Fill The Chemical Method Monograph First";
+                      
+                     }else{
+                      ?>
+                      style="text-align:left;padding:4px;"><a id="chemical_test_link"  href="#">Chemical Method</a></td>
+                     <?php   
+                     }
+                     ?>
+                    <td 
+                    <?php 
+                      if(empty($identification_chemical_method)){
+                    
+                          echo"style='text-align:center;padding:4px;'>";
+                          echo "View Worksheet";
+                     }else{
+                      ?>
+                       style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_identification/view_worksheet_chemical/'.$query['a'].'/'.$request[0]['tr'];?>">View Worksheet</a></td>
+                     <?php   
+                     }
+                     ?>
+                    <td 
+                      <?php 
+                      if(empty($identification_chemical_method)){
+                    
+                          echo"style='text-align:center;padding:4px;background-color:#ffeea0;border-bottom:solid 1px #bfbfbf;'>";
+                          echo "Not Done";
+                     }else{
+                         echo"style='text-align:center;padding:4px;background-color:#98ff98;border-bottom:solid 1px #bfbfbf;'>";
+                         echo "Complete";
+                     }?>
+                     
+                    </td>
+              </tr>
+              <?php
+             }
+             ?>
+          <?php
+            if($request[0]['dissolution']==0 || $request[0]['dissolution']=="" || $request[0]['dissolution']=="NULL" ){
+             
+           }else{
+            ?>
+            <tr>
+                <td style="text-align:center;padding:4px;"><b>Dissolution</b></a></td>
+                <td style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_dissolution/monograph_uv/'.$query['a'].'/'.$request[0]['tr'];?>">Monograph</a></td>
+                <td 
+                <?php 
+                      if(empty($monograph_diss_uv)){
+                          echo"style='text-align:left;padding:4px;color:#000;border-bottom:solid 1px #bfbfbf;'>";
+                          echo "Please Fill The By UV Monograph First";
+                          
+                     }else{
+                      ?>
+                        style="text-align:left;padding:4px;"><a href="<?php echo base_url().'test_dissolution/index/'.$query['a'].'/'.$request[0]['tr'];?>">Normal Tablet Single Component UV</a></td>
+                     <?php   
+                     }
+                     ?>
+               
+
+                <td 
+                <?php 
+                      if(empty($diss_uv)){
+                    
+                          echo"style='text-align:center;padding:4px;border-bottom:solid 1px #bfbfbf;'>";
+                          echo "View Worksheet";
+                     }else{
+                      ?>
+                     style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_dissolution/view_worksheet_uv/'.$query['a'].'/'.$request[0]['tr'];?>">View Worksheet</a></td>
+                     <?php   
+                     }
+                     ?>
+              <td 
+                <?php 
+                      if(empty($diss_uv)){
+                    
+                          echo"style='text-align:center;padding:4px;background-color:#ffeea0;border-bottom:solid 1px #bfbfbf;'>";
+                          echo "Not Done";
+                     }else{
+                         echo"style='text-align:center;padding:4px;background-color:#98ff98;border-bottom:solid 1px #bfbfbf;'>";
+                         echo "Complete";
+                     }?>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align:center;padding:4px;"></td>
+                <td style="text-align:center;padding:4px;"></td>
+                <td 
+                <?php 
+                      if(@$diss_uv[0]['choice']==1 && @$diss_uv[0]['status']==1|| @$diss_uv[0]['choice']==0 && @$diss_uv[0]['status']==0){                  
+                      
+                          echo"style='text-align:left;padding:4px;color:#000;border-bottom:solid 1px #bfbfbf;'>";
+                          echo "Normal Tablet (Single, UV): Second Stage";
+                          
+                     }
+                     else{
+                      ?>
+                        style="text-align:left;padding:4px;"><a href="<?php echo base_url().'test_dissolution/index_second_stage_uv/'.$query['a'].'/'.$request[0]['tr'];?>">Normal Tablet (Single, UV): Second Stage</a></td>
+                     <?php   
+                     }
+                     ?>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+                <td style="text-align:center;padding:4px;"></td>
+                <td style="text-align:center;padding:4px;"></td>
+                <td 
+                <?php 
+                      if(@$diss_uv[0]['choice']==0 && @$diss_uv[0]['status']==2 || @$diss_uv[0]['choice']==0 && @$diss_uv[0]['status']==3 || @$diss_uv[0]['choice']==1 && @$diss_uv[0]['status']==3 ){                  
+                      
+                      ?>style="text-align:left;padding:4px;"><a href="<?php echo base_url().'test_dissolution/index_third_stage_uv/'.$query['a'].'/'.$request[0]['tr'];?>">Normal Tablet (Single, UV): Third Stage</a></td>
+                      <?php
+                     }else{
+                        
+                         echo"style='text-align:left;padding:4px;color:#000;border-bottom:solid 1px #bfbfbf;'>";
+                         echo "Normal Tablet (Single, UV): Third Stage";
+                     } ?>
+                <td></td>
+              <td></td>
+            </tr>
+            <tr>
+                <td style="text-align:center;padding:4px;"></a></td>
+                <td style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_dissolution/monograph_delayed_release/'.$query['a'].'/'.$request[0]['tr'];?>">Monograph</a></td>
+                <td 
+                <?php 
+                      if(empty($monograph_dissolution_delayed)){
+                           echo"style='text-align:left;padding:4px;color:#000;border-bottom:solid 1px #bfbfbf;'>";
+                          echo "Please Fill The Delayed Release Tablets Monograph First";
+                          
+                     }else{
+                      ?>
+                      style="text-align:left;padding:4px;"><a href="<?php echo base_url().'test_dissolution/index_delayed_release/'.$query['a'].'/'.$request[0]['tr'];?>">Delayed Release Tablets Single Component HPLC</a></td>
+                     <?php   
+                     }
+                     ?>
+                <td 
+                <?php 
+                      if(empty($dissolution_delayed)){
+                    
+                          echo"style='text-align:center;padding:4px;border-bottom:solid 1px #bfbfbf;'>";
+                          echo "View Worksheet";
+                     }else{
+                      ?>
+                     style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_dissolution/view_worksheet_delayed_release/'.$query['a'].'/'.$request[0]['tr'];?>">View Worksheet</a></td>
+                     <?php   
+                     }
+                     ?>
+              <td 
+                <?php 
+                      if(empty($dissolution_delayed)){
+                    
+                          echo"style='text-align:center;padding:4px;background-color:#ffeea0;border-bottom:solid 1px #bfbfbf;'>";
+                          echo "Not Done";
+                     }else{
+                         echo"style='text-align:center;padding:4px;background-color:#98ff98;border-bottom:solid 1px #bfbfbf;'>";
+                         echo "Complete";
+                     }?>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align:center;padding:4px;"></td>
+                <td style="text-align:center;padding:4px;"></td>
+                <td 
+                <?php 
+                      if(@$dissolution_delayed[0]['choice']==1 && @$dissolution_delayed[0]['status']==1|| @$dissolution_delayed[0]['choice']==0 && @$dissolution_delayed[0]['status']==0){                  
+                      
+                          echo"style='text-align:left;padding:4px;color:#000;border-bottom:solid 1px #bfbfbf;'>";
+                          echo "Delayed Release (Single, HPLC): Second Stage";
+                          
+                     }
+                     else{
+                      ?>
+                        style="text-align:left;padding:4px;"><a href="<?php echo base_url().'test_dissolution/index_delayed_release_second_stage/'.$query['a'].'/'.$request[0]['tr'];?>">Delayed Release (Single, HPLC): Second Stage</a></td>
+                     <?php   
+                     }
+                     ?>
+                <td></td>
+              <td></td>
+            </tr>
+            <tr>
+                <td style="text-align:center;padding:4px;"></td>
+                <td style="text-align:center;padding:4px;"></td>
+                <td 
+                <?php 
+                      if(@$dissolution_delayed[0]['choice']==0 && @$dissolution_delayed[0]['status']==2 || @$dissolution_delayed[0]['choice']==0 && @$dissolution_delayed[0]['status']==3 || @$dissolution_delayed[0]['choice']==1 && @$dissolution_delayed[0]['status']==3 ){                  
+                      
+                      ?>style="text-align:left;padding:4px;"><a href="<?php echo base_url().'test_dissolution/index_delayed_release_third_stage/'.$query['a'].'/'.$request[0]['tr'];?>"> Delayed Release (Single, HPLC): Third Stage</a></td><?php
+                     }else{
+                        
+                         echo"style='text-align:left;padding:4px;color:#000;border-bottom:solid 1px #bfbfbf;'>";
+                         echo " Delayed Release (Single, HPLC):Third Stage";
+                     } ?>
+                <td></td>
+              <td></td>
+            </tr>
+            <tr>
+                <td style="text-align:center;padding:4px;"></a></td>
+                <td style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_dissolution/monograph_enteric_coated/'.$query['a'].'/'.$request[0]['tr'];?>">Monograph</a></td>
+                <td 
+                 <?php 
+                      if(empty($monograph_dissolution_enteric_coated)){
+                    
+                          echo"style='text-align:left;padding:4px;border-bottom:solid 1px #bfbfbf;'>";
+                          echo "Enteric Coated Tablets Single Component HPLC";
+                     }else{
+                      ?>
+                      style="text-align:left;padding:4px;"><a href="<?php echo base_url().'test_dissolution/index_enteric_coated/'.$query['a'].'/'.$request[0]['tr'];?>">Enteric Coated Tablets Single Component HPLC</a></td>
+                     <?php   
+                     }
+                     ?>
+                <td 
+                <?php 
+                      if(empty($dissolution_enteric_coated)){
+                    
+                          echo"style='text-align:center;padding:4px;border-bottom:solid 1px #bfbfbf;'>";
+                          echo "View Worksheet";
+                     }else{
+                      ?>
+                      style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_dissolution/view_worksheet_enteric_coated/'.$query['a'].'/'.$request[0]['tr'];?>">View Worksheet</a></td>
+                     <?php   
+                     }
+                     ?>
+              <td 
+                <?php 
+                      if(empty($dissolution_enteric_coated)){
+                    
+                          echo"style='text-align:center;padding:4px;background-color:#ffeea0;border-bottom:solid 1px #bfbfbf;'>";
+                          echo "Not Done";
+                     }else{
+                         echo"style='text-align:center;padding:4px;background-color:#98ff98;border-bottom:solid 1px #bfbfbf;'>";
+                         echo "Complete";
+                     }?>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align:center;padding:4px;"></td>
+                <td style="text-align:center;padding:4px;"></td>
+                <td 
+                <?php 
+                      if(@$dissolution_enteric_coated[0]['choice']==1 && @$dissolution_enteric_coated[0]['status']==1|| @$dissolution_enteric_coated[0]['choice']==0 && @$dissolution_enteric_coated[0]['status']==0){                  
+                      
+                          echo"style='text-align:left;padding:4px;color:#000;border-bottom:solid 1px #bfbfbf;'>";
+                          echo "Enteric Coated (Single, HPLC): Second Stage";
+                          
+                     }
+                     else{
+                      ?>
+                        style="text-align:left;padding:4px;"><a href="<?php echo base_url().'test_dissolution/index_enteric_coated_second_stage/'.$query['a'].'/'.$request[0]['tr'];?>">Enteric Coated (Single, HPLC): Second Stage</a></td>
+                     <?php   
+                     }
+                     ?>
+                <td></td>
+              <td></td>
+            </tr>
+            <tr>
+                <td style="text-align:center;padding:4px;"></td>
+                <td style="text-align:center;padding:4px;"></td>
+                <td 
+                <?php 
+                      if(@$dissolution_enteric_coated[0]['choice']==0 && @$dissolution_enteric_coated[0]['status']==2 || @$dissolution_enteric_coated[0]['choice']==0 && @$dissolution_enteric_coated[0]['status']==3 || @$dissolution_enteric_coated[0]['choice']==1 && @$dissolution_enteric_coated[0]['status']==3 ){                  
+                      
+                      ?>style="text-align:left;padding:4px;"><a href="<?php echo base_url().'test_dissolution/index_enteric_coated_third_stage/'.$query['a'].'/'.$request[0]['tr'];?>"> Enteric Coated (Single, HPLC): Third Stage</a></td><?php
+                     }else{
+                        
+                         echo"style='text-align:left;padding:4px;color:#000;border-bottom:solid 1px #bfbfbf;'>";echo " Enteric Coated (Single, HPLC):Third Stage";
+                     } ?>
+                <td></td>
+              <td></td>
+            </tr>
+            <tr>
+                <td style="text-align:center;padding:4px;"></a></td>
+                <td style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_dissolution/monograph_normal_hplc/'.$query['a'].'/'.$request[0]['tr'];?>">Monograph</a></td>
+                <td  
+                 <?php 
+                      if(empty($monograph_dissolution_normal_hplc)){
+                    
+                          echo"style='text-align:left;padding:4px;border-bottom:solid 1px #bfbfbf;'>";
+                          echo "Normal Tablets Single Component HPLC";
+                     }else{
+                      ?>
+                      style="text-align:left;padding:4px;"><a href="<?php echo base_url().'test_dissolution/index_normal/'.$query['a'].'/'.$request[0]['tr'];?>">Normal Tablets Single Component HPLC</a></td>
+                     <?php   
+                     }
+                     ?>
+                <td 
+                <?php 
+                      if(empty($dissolution_normal_hplc)){
+                    
+                          echo"style='text-align:center;padding:4px;border-bottom:solid 1px #bfbfbf;'>";
+                          echo "View Worksheet";
+                     }else{
+                      ?>
+                       style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_dissolution/view_worksheet_normal/'.$query['a'].'/'.$request[0]['tr'];?>">View Worksheet</a></td>
+                     <?php   
+                     }
+                     ?>
+              <td 
+                <?php 
+                      if(empty($dissolution_normal_hplc)){
+                    
+                          echo"style='text-align:center;padding:4px;background-color:#ffeea0;border-bottom:solid 1px #bfbfbf;'>";
+                          echo "Not Done";
+                     }else{
+                         echo"style='text-align:center;padding:4px;background-color:#98ff98;border-bottom:solid 1px #bfbfbf;'>";
+                         echo "Complete";
+                     }?>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align:center;padding:4px;"></td>
+                <td style="text-align:center;padding:4px;"></td>
+                <td 
+                <?php 
+                      if(@$dissolution_normal_hplc[0]['choice']==1 && @$dissolution_normal_hplc[0]['status']==1|| @$dissolution_normal_hplc[0]['choice']==0 && @$dissolution_normal_hplc[0]['status']==0){                  
+                      
+                          echo"style='text-align:left;padding:4px;color:#000;border-bottom:solid 1px #bfbfbf;'>";
+                          echo "Normal Tablets (Single, HPLC): ";
+                          
+                     }
+                     else{
+                      ?>
+                        style="text-align:left;padding:4px;"><a href="<?php echo base_url().'test_dissolution/index_second_normal/'.$query['a'].'/'.$request[0]['tr'];?>">Normal Tablets (Single, HPLC): Second Stage</a></td>
+                     <?php   
+                     }
+                     ?>
+                <td></td>
+              <td></td>
+            </tr>
+            <tr>
+                <td style="text-align:center;padding:4px;"></td>
+                <td style="text-align:center;padding:4px;"></td>
+                <td 
+                <?php 
+                      if(@$dissolution_normal_hplc[0]['choice']==0 && @$dissolution_normal_hplc[0]['status']==2 || @$dissolution_normal_hplc[0]['choice']==0 && @$dissolution_normal_hplc[0]['status']==3 || @$dissolution_normal_hplc[0]['choice']==1 && @$dissolution_normal_hplc[0]['status']==3 ){                  
+                      
+                      ?>style="text-align:left;padding:4px;"><a href="<?php echo base_url().'test_dissolution/index_third_normal/'.$query['a'].'/'.$request[0]['tr'];?>">Normal Tablets (Single, HPLC): Third Stage</a></td><?php
+                     }else{
+                        
+                         echo"style='text-align:left;padding:4px;color:#000;border-bottom:solid 1px #bfbfbf;'>";echo "Normal Tablets (Single, HPLC): Third Stage";
+                     } ?>
+                <td></td>
+              <td></td>
+            </tr>
+            <tr>
+                <td style="text-align:center;padding:4px;"></a></td>
+                <td style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_dissolution/monograph_two_components/'.$query['a'].'/'.$request[0]['tr'];?>">Monograph</a></td>
+                <td 
+                <?php 
+                      if(empty($monograph_dissolution_two_component)){
+                    
+                          echo"style='text-align:left;padding:4px;border-bottom:solid 1px #bfbfbf;'>";
+                          echo "Two Component Tablets";
+                     }else{
+                      ?>
+                      style="text-align:left;padding:4px;"><a href="<?php echo base_url().'test_dissolution/index_two_components/'.$query['a'].'/'.$request[0]['tr'];?>">Normal Tablets Multicomponent</a></td>
+                     <?php   
+                     }
+                     ?>
+                <td 
+                <?php 
+                      if(empty($dissolution_two_component)){
+                    
+                          echo"style='text-align:center;padding:4px;border-bottom:solid 1px #bfbfbf;'>";
+                          echo "Not Done";
+                     }else{
+                         ?>
+                      style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_dissolution/view_worksheet_two_component/'.$query['a'].'/'.$request[0]['tr'];?>">View Worksheet</a></td>
+                      <?php
+                      }
+                     ?>
+                <td 
+                <?php 
+                      if(empty($dissolution_two_component)){
+                    
+                          echo"style='text-align:center;padding:4px;background-color:#ffeea0;border-bottom:solid 1px #bfbfbf;'>";
+                          echo "Not Done";
+                     }else{
+                         echo"style='text-align:center;padding:4px;background-color:#98ff98;border-bottom:solid 1px #bfbfbf;'>";
+                         echo "Complete";
+                     }?>
+                </td>
+            </tr>
+             <tr>
+                <td style="text-align:center;padding:4px;"></td>
+                <td style="text-align:center;padding:4px;"></td>
+                <td 
+                <?php 
+                      if(@$dissolution_two_component[0]['choice']==1 && @$dissolution_two_component[0]['status']==1|| @$dissolution_two_component[0]['choice']==0 && @$dissolution_two_component[0]['status']==0){                  
+                      
+                          echo"style='text-align:left;padding:4px;color:#000;border-bottom:solid 1px #bfbfbf;'>";
+                          echo "Normal Tablets (Multi, HPLC): Second Stage";
+                          
+                     }
+                     else{
+                      ?>
+                        style="text-align:left;padding:4px;"><a href="<?php echo base_url().'test_dissolution/index_two_components_second_stage/'.$query['a'].'/'.$request[0]['tr'];?>">Normal Tablets (Multi, HPLC): Second Stage</a></td>
+                     <?php   
+                     }
+                     ?>
+               <td></td>
+              <td></td>
+            </tr>
+            <tr>
+                <td style="text-align:center;padding:4px;"></td>
+                <td style="text-align:center;padding:4px;"></td>
+                <td 
+                <?php 
+                      if(@$dissolution_two_component[0]['choice']==0 && @$dissolution_two_component[0]['status']==2 || @$dissolution_two_component[0]['choice']==0 && @$dissolution_two_component[0]['status']==3 || @$dissolution_two_component[0]['choice']==1 && @$dissolution_two_component[0]['status']==3 ){                  
+                      
+                      ?>style="text-align:left;padding:4px;"><a href="<?php echo base_url().'test_dissolution/index_two_components_third_stage/'.$query['a'].'/'.$request[0]['tr'];?>">Normal Tablets (Multi, HPLC): Third Stage</a></td><?php
+                     }else{
+                        
+                         echo"style='text-align:left;padding:4px;color:#000;border-bottom:solid 1px #bfbfbf;'>";echo "Normal Tablets (Multi, HPLC): Third Stage";
+                     } ?>
+                <td></td>
+              <td></td>
+            </tr>
+           <?php  
+           }
+           ?>
+          
             
           <?php
             if($request[0]['assay']==0 || $request[0]['assay']=="" || $request[0]['assay']=="NULL" ){
@@ -140,7 +792,7 @@
                 <td style="text-align:center;padding:4px; background-color:#ffffff;border-top: solid 1px #ddddff;"><b>Assay Tests</b></td>
                 <td style="text-align:left;padding:4px;background-color:#ffffff;border-top: solid 1px #ddddff;"></td>
                 <td style="text-align:center;padding:4px; background-color:#ffffff;border-top: solid 1px #ddddff;"><a href="<?php echo base_url().'assay/worksheet/'.$query['a'].'/'.$request[0]['tr'];?>"></a></td>
-                <td style="text-align:center;padding:4px; background-color:#ffffff;border-top: solid 1px #ddddff;"><a href="<?php echo base_url().'assay/worksheet/'.$query['a'].'/'.$request[0]['tr'].'/'.$request[0]['test_type_id'];?>"></a></td>
+                <td style="text-align:center;padding:4px; background-color:#ffffff;border-top: solid 1px #ddddff;"><a href="<?php echo base_url().'assay/worksheet/'.$query['a'].'/'.$request[0]['tr'].'/';?>"></a></td>
               <td 
                 <?php 
                       if(empty($hplc_internal_method)){
@@ -162,12 +814,12 @@
                     
                           echo"style='text-align:left;padding:4px;'>";
                           ?>
-                          <a href="<?php echo base_url().'assay/monograph_hplc_internal_method_single_component/'.$query['a'].'/'.$request[0]['tr'].'/'.$request[0]['test_type_id'];?>">Please Fill The Monograph</a>
+                          <a href="<?php echo base_url().'assay/monograph_hplc_internal_method/'.$query['a'].'/'.$request[0]['tr'].'/';?>">Please Fill The Monograph</a>
                   <?php       
                      }else{
                          echo"style='text-align:left;padding:4px;'>";
                     ?>
-                      <a href="<?php echo base_url().'assay/view_monograph_hplc_internal_method_single_component/'.$query['a'].'/'.$request[0]['tr'].'/'.$request[0]['test_type_id'];?>">View Monograph</a>
+                      <a href="<?php echo base_url().'assay/view_monograph_hplc_internal_method/'.$query['a'].'/'.$request[0]['tr'].'/';?>">View Monograph</a>
                      <?php
                      }
                      ?>
@@ -190,7 +842,18 @@
                      else{
                          echo"style='text-align:left;padding:4px;'>";
                    ?>
-                     <a href="<?php echo base_url().'assay/worksheet_internal_method_single_component/'.$query['a'].'/'.$request[0]['tr'].'/'.$request[0]['test_type_id'];?>">Hplc Internal Method Single Component</a> 
+                     <a href="<?php echo base_url().'assay/worksheet_internal_method_single_component/'.$query['a'].'/'.$request[0]['tr'].'/';?>">Hplc Internal Method Single Component</a>&nbsp; 
+                     <?php
+                     if($hplc_internal_method==1.2){
+                    ?>
+                    <a href="<?php echo base_url().'assay/worksheet_internal_method_single_component_stg2/'.$query['a'].'/'.$request[0]['tr'].'/';?>">STG2-REPEAT</a>&nbsp; 
+                    <?php
+                     }elseif($hplc_internal_method==2.2){
+                     ?>
+                     <a href="<?php echo base_url().'assay/worksheet_internal_method_single_component_stg3/'.$query['a'].'/'.$request[0]['tr'].'/';?>">STG3-REPEAT</a> 
+                     <?php 
+                     }
+                     ?>
                 <?php
                 }
                 ?>
@@ -206,7 +869,7 @@
                      }else{
                          echo"style='text-align:center;padding:4px;'>";
                    ?>
-                     <a href="<?php echo base_url().'assay/full_worksheet_hplc_internal_method_single_component/'.$query['a'].'/'.$request[0]['tr'].'/'.$request[0]['test_type_id'];?>">view worksheet</a>
+                     <a href="<?php echo base_url().'assay/full_worksheet_hplc_internal_method_single_component/'.$query['a'].'/'.$request[0]['tr'].'/';?>">view worksheet</a>
                 <?php
                 }
                 ?>
@@ -229,46 +892,47 @@
                 <td style="text-align:center;padding:4px;"></a></td>
                 <td 
                   <?php 
-                      if(empty($assay_monograph_hplc_internal_method)){
+                      if(empty($assay_monograph_hplc_internal_method_two_components)){
                     
                           echo"style='text-align:left;padding:4px;'>";
                           ?>
-                          <a href="<?php echo base_url().'assay/monograph_hplc_internal_method/'.$query['a'].'/'.$request[0]['tr'].'/'.$request[0]['test_type_id'];?>">Please Fill The Monograph</a>
+                          <a href="<?php echo base_url().'assay/monograph_hplc_internal_method_two_components/'.$query['a'].'/'.$request[0]['tr'].'/';?>">Please Fill The Monograph</a>
                   <?php       
                      }else{
                          echo"style='text-align:left;padding:4px;'>";
                     ?>
-                      <a href="<?php echo base_url().'assay/view_monograph_hplc_internal_method/'.$query['a'].'/'.$request[0]['tr'].'/'.$request[0]['test_type_id'];?>">View Monograph</a>
+                      <a href="<?php echo base_url().'assay/view_monograph_hplc_internal_method_two_components/'.$query['a'].'/'.$request[0]['tr'].'/';?>">View Monograph</a>
                      <?php
                      }
                      ?>
                 </td>
                 <td
                  <?php 
-                      if(empty($assay_monograph_hplc_internal_method)){
+                      if(empty($assay_monograph_hplc_internal_method_two_components)){
                     
                           echo"style='text-align:left;padding:4px;'>";
                           ?>
                           Hplc Internal Method Two Components
                      <?php     
-                     }elseif(!empty($assay_hplc_internal_method)){
+                     }else if(!empty($assay_monograph_hplc_internal_method_two_components)){
                     
                           echo"style='text-align:left;padding:4px;'>";
                           ?>
-                          Hplc Internal Method Two Components has been Conducted 
+                          <a href="<?php echo base_url().'assay/worksheet_internal_method_two_components/'.$query['a'].'/'.$request[0]['tr'].'/';?>">Hplc Internal Method Two Components</a> 
+                          
                      <?php     
                      }
                      else{
                          echo"style='text-align:left;padding:4px;'>";
                    ?>
-                     <a href="<?php echo base_url().'assay/worksheet_internal_method_two_components/'.$query['a'].'/'.$request[0]['tr'].'/'.$request[0]['test_type_id'];?>">Hplc Internal Method Two Components</a> 
-                <?php
+                        Hplc Internal Method Two Components has been Conducted 
+                     <?php
                 }
                 ?>
                 </td>
                  <td
                  <?php 
-                      if(empty($hplc_internal_method)){
+                      if(empty($hplc_internal_method_two_components)){
                     
                           echo"style='text-align:center;padding:4px;'>";
                           ?>
@@ -277,18 +941,18 @@
                      }else{
                          echo"style='text-align:center;padding:4px;'>";
                    ?>
-                     <a href="<?php echo base_url().'assay/full_worksheet_hplc_internal_method_two_components/'.$query['a'].'/'.$request[0]['tr'].'/'.$request[0]['test_type_id'];?>">view worksheet</a>
+                     <a href="<?php echo base_url().'assay/full_worksheet_hplc_internal_method_two_components/'.$query['a'].'/'.$request[0]['tr'].'/';?>">view worksheet</a>
                 <?php
                 }
                 ?>
                 </td>
               <td
                 <?php 
-                      if(empty($hplc_internal_method)){
+                      if(empty($hplc_internal_method_two_components)){
                         echo"style='text-align:center;padding:4px;background-color:#ffeea0;border-bottom:solid 1px #bfbfbf;border-top:solid 1px #bfbfbf;'>";
                         echo "Not Done";
                           
-                     }else if (!empty($hplc_internal_method)){
+                     }else if (!empty($hplc_internal_method_two_components)){
                          echo"style='text-align:center;padding:4px;border-bottom:solid 1px #bfbfbf;background-color:#98ff98;'>";
                          echo "Complete"; 
                      }?> 
@@ -309,7 +973,7 @@
                      }else{
                          echo"style='text-align:left;padding:4px;'>";
                      ?>
-                      <a href="<?php echo base_url().'assay/view_monograph_hplc_area_method_single_component/'.$query['a'].'/'.$request[0]['tr'].'/'.$request[0]['test_type_id'];?>">View Monograph</a>
+                      <a href="<?php echo base_url().'assay/view_monograph_hplc_area_method_single_component/'.$query['a'].'/'.$request[0]['tr'].'/';?>">View Monograph</a>
                     <?php
                      }
                     ?>
@@ -386,7 +1050,7 @@
                 </td>
                  <td
                  <?php 
-                      if(!empty($assay_hplc_area_method_two_components)){
+                      if(empty($assay_monograph_hplc_area_method_two_components)){
                     
                           echo"style='text-align:left;padding:4px;'>";
                           ?>
@@ -395,7 +1059,7 @@
                      }else{
                          echo"style='text-align:left;padding:4px;'>";
                    ?>
-                     <a href="<?php echo base_url().'assay/worksheet_area_method_two_components/'.$query['a'].'/'.$request[0]['tr'];?>">Hplc Area Method Two Components</a>
+                        <a href="<?php echo base_url().'assay/worksheet_area_method_two_components/'.$query['a'].'/'.$request[0]['tr'];?>">Hplc Area Method Two Components</a>     
                 <?php
                 }
                 ?>
@@ -411,7 +1075,7 @@
                      }else{
                          echo"style='text-align:center;padding:4px;'>";
                    ?>
-                     <a href="<?php echo base_url().'assay/full_worksheet_hplc_area_method_two_components/'.$query['a'].'/'.$request[0]['tr'].'/'.$request[0]['test_type_id'];?>">view worksheet</a>
+                     <a href="<?php echo base_url().'assay/full_worksheet_hplc_area_method_two_components/'.$query['a'].'/'.$request[0]['tr'].'/';?>">view worksheet</a>
                 <?php
                 }
                 ?>
@@ -441,23 +1105,23 @@
                           
                   <?php       
                      }else{
-                         echo"style='text-align:center;padding:4px;'>";
+                         echo"style='text-align:left;padding:4px;'>";
                      ?>
-                      <a href="<?php echo base_url().'assay/monograph_hplc_internal_method/'.$query['a'].'/'.$request[0]['tr'].'/'.$request[0]['test_type_id'];?>">View Monograph</a>
+                      <a href="<?php echo base_url().'assay/view_monograph_hplc_area_method_two_components_dif_methods/'.$query['a'].'/'.$request[0]['tr'].'/';?>">View Monograph</a>
                      <?php
                       }
                      ?> 
                 </td>
                 <td
                  <?php 
-                      if(empty($assay_hplc_area_method_two_components_different_methods)){
+                      if(empty($assay_monograph_hplc_area_method_two_components_dif_methods)){
                     
                           echo"style='text-align:left;padding:4px;'>";
                           ?>
                           Hplc Area Method Two Components Different Methods
                      <?php     
                      }else{
-                         echo"style='text-align:center;padding:4px;'>";
+                         echo"style='text-align:left;padding:4px;'>";
                    ?>
                      <a href="<?php echo base_url().'assay/worksheet_area_method_two_components_different_methods/'.$query['a'].'/'.$request[0]['tr'];?>">Hplc Area Method Two Components Different Methods</a>
                 <?php
@@ -475,7 +1139,7 @@
                      }else{
                          echo"style='text-align:center;padding:4px;'>";
                    ?>
-                     <a href="<?php echo base_url().'assay/full_worksheet_hplc_internal_method/'.$query['a'].'/'.$request[0]['tr'].'/'.$request[0]['test_type_id'];?>">view worksheet</a>
+                     <a href="<?php echo base_url().'assay/full_worksheet_hplc_internal_method/'.$query['a'].'/'.$request[0]['tr'].'/';?>">view worksheet</a>
                 <?php
                 }
                 ?>
@@ -507,14 +1171,14 @@
                      }else{
                          echo"style='text-align:left;padding:4px;'>";
                          ?>
-                         <a href="<?php echo base_url().'assay//'.$query['a'].'/'.$request[0]['tr'].'/'.$request[0]['test_type_id'];?>">View Monograph</a>
+                         <a href="<?php echo base_url().'assay/view_monograph_hplc_area_method_two_oral_liquids_single_component/'.$query['a'].'/'.$request[0]['tr'].'/';?>">View Monograph</a>
                      <?php
                      }
                      ?>
                 </td>
                 <td
                  <?php 
-                      if(!empty($assay_hplc_area_method_oral_liquids_single_component)){
+                      if(empty($assay_monograph_hplc_area_method_oral_liquids_single_component)){
                     
                           echo"style='text-align:left;padding:4px;'>";
                           ?>
@@ -539,7 +1203,7 @@
                      }else{
                          echo"style='text-align:center;padding:4px;'>";
                    ?>
-                     <a href="<?php echo base_url().'assay/full_worksheet_hplc_internal_method/'.$query['a'].'/'.$request[0]['tr'].'/'.$request[0]['test_type_id'];?>">view worksheet</a>
+                     <a href="<?php echo base_url().'assay/full_worksheet_hplc_internal_method/'.$query['a'].'/'.$request[0]['tr'].'/';?>">view worksheet</a>
                 <?php
                 }
                 ?>
@@ -561,7 +1225,7 @@
                 <td style="text-align:center;padding:4px;"></a></td>
                 <td 
                   <?php 
-                      if(empty($assay_hplc_area_method_oral_liquids_two_components)){
+                      if(empty($assay_monograph_hplc_area_method_oral_liquids_two_components)){
                     
                           echo"style='text-align:left;padding:4px;'>";
                           ?>
@@ -569,23 +1233,23 @@
                           
                   <?php       
                      }else{
-                         echo"style='text-align:center;padding:4px;'>";
+                         echo"style='text-align:left;padding:4px;'>";
                      ?>
-                      <a href="<?php echo base_url().'assay//'.$query['a'].'/'.$request[0]['tr'].'/'.$request[0]['test_type_id'];?>">View Monograph</a>
+                      <a href="<?php echo base_url().'assay/view_monograph_hplc_area_method_two_oral_liquids_two_components/'.$query['a'].'/'.$request[0]['tr'].'/';?>">View Monograph</a>
                     <?php
                       }
                     ?>
                 </td>
                 <td
                  <?php 
-                      if(empty($assay_hplc_area_method_oral_liquids_two_components)){
+                      if(empty($assay_monograph_hplc_area_method_oral_liquids_two_components)){
                     
                           echo"style='text-align:left;padding:4px;'>";
                           ?>
                           Hplc Area Method Oral Liquids Two Components
                      <?php     
                      }else{
-                         echo"style='text-align:center;padding:4px;'>";
+                         echo"style='text-align:left;padding:4px;'>";
                    ?>
                      <a href="<?php echo base_url().'assay/worksheet_oral_liquids_two_components/'.$query['a'].'/'.$request[0]['tr'];?>">Hplc Area Method Oral Liquids Two Components</a>
                 <?php
@@ -603,7 +1267,7 @@
                      }else{
                          echo"style='text-align:center;padding:4px;'>";
                    ?>
-                     <a href="<?php echo base_url().'assay/full_worksheet_hplc_internal_method/'.$query['a'].'/'.$request[0]['tr'].'/'.$request[0]['test_type_id'];?>">view worksheet</a>
+                     <a href="<?php echo base_url().'assay/full_worksheet_hplc_internal_method/'.$query['a'].'/'.$request[0]['tr'].'/';?>">view worksheet</a>
                 <?php
                 }
                 ?>
@@ -635,7 +1299,7 @@
                      }else{
                          echo"style='text-align:left;padding:4px;'>";
                      ?>
-                     <a href="<?php echo base_url().'assay//'.$query['a'].'/'.$request[0]['tr'].'/'.$request[0]['test_type_id'];?>">View Monograph</a>
+                     <a href="<?php echo base_url().'assay/view_monograph_hplc_area_method_powder_for_oral_liquids/'.$query['a'].'/'.$request[0]['tr'].'/';?>">View Monograph</a>
                     <?php
                     }
                     ?>
@@ -667,7 +1331,7 @@
                      }else{
                          echo"style='text-align:center;padding:4px;'>";
                    ?>
-                     <a href="<?php echo base_url().'assay/full_worksheet_hplc_internal_method/'.$query['a'].'/'.$request[0]['tr'].'/'.$request[0]['test_type_id'];?>">view worksheet</a>
+                     <a href="<?php echo base_url().'assay/full_worksheet_hplc_internal_method/'.$query['a'].'/'.$request[0]['tr'].'/';?>">view worksheet</a>
                 <?php
                 }
                 ?>
@@ -699,7 +1363,7 @@
                      }else{
                          echo"style='text-align:left;padding:4px;'>";
                      ?>
-                     <a href="<?php echo base_url().'assay//'.$query['a'].'/'.$request[0]['tr'].'/'.$request[0]['test_type_id'];?>">View Monograph</a>
+                     <a href="<?php echo base_url().'assay/view_monograph_hplc_area_method_injection_powder_single_component/'.$query['a'].'/'.$request[0]['tr'].'/';?>">View Monograph</a>
                      <?php
                      }
                      ?> 
@@ -731,7 +1395,7 @@
                      }else{
                          echo"style='text-align:center;padding:4px;'>";
                    ?>
-                     <a href="<?php echo base_url().'assay/full_worksheet_hplc_internal_method/'.$query['a'].'/'.$request[0]['tr'].'/'.$request[0]['test_type_id'];?>">view worksheet</a>
+                     <a href="<?php echo base_url().'assay/full_worksheet_hplc_internal_method/'.$query['a'].'/'.$request[0]['tr'].'/';?>">view worksheet</a>
                 <?php
                 }
                 ?>
@@ -761,23 +1425,23 @@
                           
                   <?php       
                      }else{
-                         echo"style='text-align:center;padding:4px;'>";
+                         echo"style='text-align:left;padding:4px;'>";
                      ?>
-                     <a href="<?php echo base_url().'assay//'.$query['a'].'/'.$request[0]['tr'].'/'.$request[0]['test_type_id'];?>">View Monograph</a>
+                     <a href="<?php echo base_url().'assay//'.$query['a'].'/'.$request[0]['tr'].'/';?>">View Monograph</a>
                     <?php
                     }
                     ?>
                 </td>
                 <td
                  <?php 
-                      if(empty($assay_hplc_area_method_injection_powder_two_components)){
+                      if(empty($assay_monograph_hplc_area_method_injection_powder_two_components)){
                     
                           echo"style='text-align:left;padding:4px;'>";
                           ?>
                           Hplc Area Method Injection Powder Two Components
                      <?php     
                      }else{
-                         echo"style='text-align:center;padding:4px;'>";
+                         echo"style='text-align:left;padding:4px;'>";
                    ?>
                      <a href="<?php echo base_url().'assay/worksheet_injection_powder_two_components/'.$query['a'].'/'.$request[0]['tr'];?>">Hplc Area Method Injection powder Two Components</a>
                 <?php
@@ -795,7 +1459,7 @@
                      }else{
                          echo"style='text-align:center;padding:4px;'>";
                    ?>
-                     <a href="<?php echo base_url().'assay/full_worksheet_hplc_internal_method/'.$query['a'].'/'.$request[0]['tr'].'/'.$request[0]['test_type_id'];?>">view worksheet</a>
+                     <a href="<?php echo base_url().'assay/full_worksheet_hplc_internal_method/'.$query['a'].'/'.$request[0]['tr'].'/';?>">view worksheet</a>
                 <?php
                 }
                 ?>
@@ -827,7 +1491,7 @@
                      }else{
                          echo"style='text-align:left;padding:4px;'>";
                      ?>
-                     <a href="<?php echo base_url().'assay/monograph_hplc_internal_method/'.$query['a'].'/'.$request[0]['tr'].'/'.$request[0]['test_type_id'];?>">View Monograph</a>
+                     <a href="<?php echo base_url().'assay/view_monograph_titration/'.$query['a'].'/'.$request[0]['tr'].'/';?>">View Monograph</a>
                     <?php
                     }
                     ?>
@@ -892,7 +1556,7 @@
                      }else{
                          echo"style='text-align:left;padding:4px;'>";
                      ?>
-                     <a href="<?php echo base_url().'assay/monograph_indometric_titration/'.$query['a'].'/'.$request[0]['tr'].'/'.$request[0]['test_type_id'];?>">View Monograph</a>&nbsp;&nbsp;
+                     <a href="<?php echo base_url().'assay/view_monograph_indometric_titration/'.$query['a'].'/'.$request[0]['tr'].'/';?>">View Monograph</a>&nbsp;&nbsp;
                      <a href="<?php echo base_url().'test_vs_solution/index/'.$query['a'].'/'.$request[0]['tr'];?>">Volumetric Solution</a>
                     <?php
                     }
@@ -956,7 +1620,7 @@
                      }else{
                          echo"style='text-align:left;padding:4px;'>";
                     ?>
-                      <a href="<?php echo base_url().'assay/monograph_ultraviolet_single_component_view/'.$query['a'].'/'.$request[0]['tr'].'/'.$request[0]['test_type_id'];?>">View Monograph</a> 
+                      <a href="<?php echo base_url().'assay/monograph_ultraviolet_single_component_view/'.$query['a'].'/'.$request[0]['tr'].'/';?>">View Monograph</a> 
                     <?php
                     }
                     ?>
@@ -988,7 +1652,7 @@
                      }else{
                          echo"style='text-align:center;padding:4px;'>";
                    ?>
-                     <a href="<?php echo base_url().'assay/full_worksheet_single_component_view/'.$query['a'].'/'.$request[0]['tr'].'/'.$request[0]['test_type_id'];?>">view worksheet</a>
+                     <a href="<?php echo base_url().'assay/full_worksheet_single_component_view/'.$query['a'].'/'.$request[0]['tr'].'/';?>">view worksheet</a>
                 <?php
                 }
                 ?>
@@ -1019,7 +1683,7 @@
                      }else{
                          echo"style='text-align:left;padding:4px;'>";
                     ?>
-                      <a href="<?php echo base_url().'assay/monograph_ultraviolet_two_components_view/'.$query['a'].'/'.$request[0]['tr'].'/'.$request[0]['test_type_id'];?>">View Monograph</a> 
+                      <a href="<?php echo base_url().'assay/monograph_ultraviolet_two_components_view/'.$query['a'].'/'.$request[0]['tr'].'/';?>">View Monograph</a> 
                     <?php
                     }
                     ?>
@@ -1051,7 +1715,7 @@
                      }else{
                          echo"style='text-align:center;padding:4px;'>";
                    ?>
-                     <a href="<?php echo base_url().'assay/full_worksheet_hplc_internal_method/'.$query['a'].'/'.$request[0]['tr'].'/'.$request[0]['test_type_id'];?>">view worksheet</a>
+                     <a href="<?php echo base_url().'assay/full_worksheet_hplc_internal_method/'.$query['a'].'/'.$request[0]['tr'].'/';?>">view worksheet</a>
                 <?php
                 }
                 ?>
@@ -1107,7 +1771,7 @@
                      }else{
                          echo"style='text-align:left;padding:4px;'>";
                     ?>
-                      <a href="<?php echo base_url().'content_uniformity/monograph_hplc_internal_method/'.$query['a'].'/'.$request[0]['tr'].'/'.$request[0]['test_type_id'];?>">View Monograph</a>&nbsp;&nbsp;
+                      <a href="<?php echo base_url().'content_uniformity/monograph_hplc_internal_method/'.$query['a'].'/'.$request[0]['tr'].'/';?>">View Monograph</a>&nbsp;&nbsp;
                       <a href="<?php echo base_url().'content_uniformity/worksheet_uniformity_of_dosage_unit_single_component/'.$query['a'].'/'.$request[0]['tr'];?>"> Uniformity of Dosage Unit Single Component</a> 
                     <?php
                     }
@@ -1115,7 +1779,7 @@
                 </td>
                 <td
                  <?php 
-                      if(!empty($weight_variation_hplc_single_component)){
+                      if(empty($uniformity_monograph_weight_variation_single_component)){
                     
                           echo"style='text-align:left;padding:4px;'>";
                           ?>
@@ -1170,7 +1834,7 @@
                      }else{
                          echo"style='text-align:left;padding:4px;'>";
                     ?>
-                      <a href="<?php echo base_url().'assay/monograph_hplc_internal_method/'.$query['a'].'/'.$request[0]['tr'].'/'.$request[0]['test_type_id'];?>">View Monograph</a>&nbsp;&nbsp;
+                      <a href="<?php echo base_url().'assay/monograph_hplc_internal_method/'.$query['a'].'/'.$request[0]['tr'].'/';?>">View Monograph</a>&nbsp;&nbsp;
                       <a href="<?php echo base_url().'content_uniformity/worksheet_uniformity_of_dosage_unit_two_components/'.$query['a'].'/'.$request[0]['tr'];?>"> Uniformity of Dosage Unit Two Components</a>  
                     <?php
                     }
@@ -1178,7 +1842,7 @@
                 </td>
                  <td
                  <?php 
-                      if(!empty($weight_variation_hplc_two_components)){
+                      if(empty($uniformity_monograph_weight_variation_two_components)){
                     
                           echo"style='text-align:left;padding:4px;'>";
                           ?>
@@ -1234,14 +1898,14 @@
                      }else{
                          echo"style='text-align:left;padding:4px;'>";
                     ?>
-                      <a href="<?php echo base_url().'assay/monograph_hplc_internal_method/'.$query['a'].'/'.$request[0]['tr'].'/'.$request[0]['test_type_id'];?>">View Monograph</a> 
+                      <a href="<?php echo base_url().'assay/monograph_hplc_internal_method/'.$query['a'].'/'.$request[0]['tr'].'/';?>">View Monograph</a> 
                     <?php
                     }
                     ?>
                 </td>
                 <td
                  <?php 
-                      if(!empty($content_uniformity_hplc_single_component)){
+                      if(empty($uniformity_monograp_content_uniformity_single_component)){
                     
                           echo"style='text-align:left;padding:4px;'>";
                           ?>
@@ -1298,7 +1962,7 @@
                      }else{
                          echo"style='text-align:left;padding:4px;'>";
                     ?>  
-                    <a href="<?php echo base_url().'assay/monograph_hplc_internal_method/'.$query['a'].'/'.$request[0]['tr'].'/'.$request[0]['test_type_id'];?>">View Monograph</a>
+                    <a href="<?php echo base_url().'assay/monograph_hplc_internal_method/'.$query['a'].'/'.$request[0]['tr'].'/';?>">View Monograph</a>
     
                     <?php
                     }
@@ -1361,7 +2025,7 @@
                      }else{
                          echo"style='text-align:left;padding:4px;'>";
                     ?>
-                      <a href="<?php echo base_url().'assay/monograph_hplc_internal_method/'.$query['a'].'/'.$request[0]['tr'].'/'.$request[0]['test_type_id'];?>">View Monograph</a> 
+                      <a href="<?php echo base_url().'assay/monograph_hplc_internal_method/'.$query['a'].'/'.$request[0]['tr'].'/';?>">View Monograph</a> 
                     <?php
                     }
                     ?>
@@ -1423,7 +2087,7 @@
                      }else{
                          echo"style='text-align:left;padding:4px;'>";
                     ?>
-                      <a href="<?php echo base_url().'content_uniformity/monograph_hplc_internal_method/'.$query['a'].'/'.$request[0]['tr'].'/'.$request[0]['test_type_id'];?>">View Monograph</a> 
+                      <a href="<?php echo base_url().'content_uniformity/monograph_hplc_internal_method/'.$query['a'].'/'.$request[0]['tr'].'/';?>">View Monograph</a> 
                     <?php
                     }
                     ?>
@@ -1485,8 +2149,8 @@
                      }else{
                          echo"style='text-align:left;padding:4px;'>";
                     ?>
-                      <a href="<?php echo base_url().'content_uniformity/monograph_hplc_internal_method/'.$query['a'].'/'.$request[0]['tr'].'/'.$request[0]['test_type_id'];?>">View Monograph</a>&nbsp;&nbsp;
-                      <a href="<?php echo base_url().'content_uniformity/uniformity_of_dosage_unit_single_component_uv_single_wavelength/'.$query['a'].'/'.$request[0]['tr'].'/'.$request[0]['test_type_id'];?>">Uniformity of Dosage Unit Single Component (UV) Single Wavelength</a> 
+                      <a href="<?php echo base_url().'content_uniformity/monograph_hplc_internal_method/'.$query['a'].'/'.$request[0]['tr'].'/';?>">View Monograph</a>&nbsp;&nbsp;
+                      <a href="<?php echo base_url().'content_uniformity/uniformity_of_dosage_unit_single_component_uv_single_wavelength/'.$query['a'].'/'.$request[0]['tr'].'/';?>">Uniformity of Dosage Unit Single Component (UV) Single Wavelength</a> 
                     <?php
                     }
                     ?>
@@ -1548,8 +2212,8 @@
                      }else{
                          echo"style='text-align:left;padding:4px;'>";
                     ?>
-                      <a href="<?php echo base_url().'content_uniformity/monograph_hplc_internal_method/'.$query['a'].'/'.$request[0]['tr'].'/'.$request[0]['test_type_id'];?>">View Monograph</a>&nbsp;&nbsp;
-                      <a href="<?php echo base_url().'content_uniformity/monograph_hplc_internal_method/'.$query['a'].'/'.$request[0]['tr'].'/'.$request[0]['test_type_id'];?>">Uniformity of Dosage Unit Two Components (UV) Single Wavelength</a>  
+                      <a href="<?php echo base_url().'content_uniformity/monograph_hplc_internal_method/'.$query['a'].'/'.$request[0]['tr'].'/';?>">View Monograph</a>&nbsp;&nbsp;
+                      <a href="<?php echo base_url().'content_uniformity/monograph_hplc_internal_method/'.$query['a'].'/'.$request[0]['tr'].'/';?>">Uniformity of Dosage Unit Two Components (UV) Single Wavelength</a>  
                     <?php
                     }
                     ?>
@@ -1628,7 +2292,7 @@
                      }else{
                          echo"style='text-align:left;padding:4px;'>";
                     ?>
-                     <a href="<?php echo base_url().'friability/friability_monograph/'.$query['a'].'/'.$request[0]['tr'];?>">view Monograph</a>
+                     <a href="<?php echo base_url().'friability/friability_monograph/'.$query['a'].'/'.$request[0]['tr'];?>">View Monograph</a>
                     <?php
                     }
                     ?>
@@ -1748,7 +2412,7 @@
                         echo"style='text-align:center;padding:4px;'>";
                         echo "Not Done";
                           
-                     }else if ($ph_alkalinity[0]['test_status']==1){
+                     }else if ($ph_alkalinity[0]['status']==1){
                          echo"style='text-align:center;padding:4px;'>";
                          echo "Complete"; 
                      }?>  
@@ -1758,304 +2422,6 @@
              }
              ?>
 
-           <?php
-            if($request[0]['identification']==0 || $request[0]['identification']==""){
-              
-             }else{
-              ?>
-               <tr>
-                <td style="text-align:center;padding:4px;background-color:#ffffff;"><b>Identification</b></td>
-                <td style='text-align:left;padding:4px;background-color:#ffffff;'></td>
-                <td style='text-align:center;padding:4px;background-color:#ffffff;'></td>
-                <td style='text-align:center;padding:4px;background-color:#ffffff;'></td>
-                <td style='text-align:center;padding:4px;background-color:#ffffff;'></td>
-               </tr>
-               <tr>
-                    <td style="text-align:center;padding:4px;"><b></b></td>
-                    <td style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_identification/monograph_assay/'.$query['a'].'/'.$request[0]['tr'];?>">Monograph</a></td>
-                    <td 
-                    <?php 
-                      if(empty($monograph_identification_assay)){
-                    
-                          echo"style='text-align:left;padding:4px;'>";
-                          echo "Please Fill The Assay Monograph First";
-                     }else{
-                      ?>
-                       style="text-align:left;padding:4px;"><a href="<?php echo base_url().'test_identification/index/'.$query['a'].'/'.$request[0]['tr'];?>">Assay</a></td>
-                     <?php   
-                     }
-                     ?>
-                    <td <?php 
-                      if(empty($identification_assay)){
-                    
-                          echo"style='text-align:center;padding:4px;'>";
-                          echo "View Worksheet";
-                     }else{
-                      ?>
-                         style='text-align:center;padding:4px;'><a href='<?php echo base_url().'test_identification/view_worksheet/'.$query['a'].'/'.$request[0]['tr'];?>'>View Worksheet</a>
-                     <?php   
-                     }
-                     ?>
-                    </td>
-                    <td 
-                      <?php 
-                      if(empty($identification_assay)){
-                    
-                          echo"style='text-align:left;padding:4px;'>";
-                          echo "Not Yet Done";
-                     }else{
-                         echo"style='text-align:center;padding:4px;'>";
-                         echo "Complete";
-                     }?>                     
-                    </td>
-              </tr>
-              <tr>
-                    <td style="text-align:center;padding:4px;"></td>
-                    <td style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_identification/monograph_uv/'.$query['a'].'/'.$request[0]['tr'];?>">Monograph</a></td>
-                    <td 
-                    <?php 
-                      if(empty($monograph_identification_uv)){
-              
-                          echo"style='text-align:left;padding:4px;'>";
-                          echo "Please Fill The UV Monograph First";
-                     }else{
-                      ?>
-                        style="text-align:left;padding:4px;"><a href="<?php echo base_url().'test_identification/index_uv/'.$query['a'].'/'.$request[0]['tr'];?>">UV</a></td>
-                     <?php   
-                     }
-                     ?>
-                    <td 
-                    <?php 
-                      if(empty($identification_uv)){
-                    
-                          echo"style='text-align:center;padding:4px;'>";
-                          echo "View Worksheet";
-                     }else{
-                      ?>
-                         style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_identification/view_worksheet_uv/'.$query['a'].'/'.$request[0]['tr'];?>">View Worksheet</a></td>
-                     <?php   
-                     }
-                     ?>                    
-                    <td 
-                      <?php 
-                      if(empty($identification_uv)){
-                    
-                          echo"style='text-align:center;padding:4px;'>";
-                          echo "Not Yet Done";
-                     }else{
-                         echo"style='text-align:center;padding:4px;'>";
-                         echo "Complete";
-                     }?>
-                     
-                    </td>
-              </tr>
-              <tr>
-                    <td style="text-align:center;padding:4px;"></td>
-                    <td style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_identification/monograph_infrared/'.$query['a'].'/'.$request[0]['tr'];?>">Monograph</a></td>
-                    <td 
-                      <?php 
-                      if(empty($monograph_identification_infrared)){
-                    
-                          echo"style='text-align:left;padding:4px;'>";
-                          echo "Please Fill The Infrared Monograph First";
-                  
-                     }else{
-                      ?>
-                        style="text-align:left;padding:4px;"><a href="<?php echo base_url().'test_identification/index_infrared/'.$query['a'].'/'.$request[0]['tr'];?>">Infrared</a></td>
-                     <?php   
-                     }
-                     ?>
-                    <td 
-                    <?php 
-                      if(empty($identification_infrared)){
-                    
-                          echo"style='text-align:center;padding:4px;'>";
-                          echo "View Worksheet";
-                     }else{
-                      ?>
-                         style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_identification/view_worksheet_infrared/'.$query['a'].'/'.$request[0]['tr'];?>">View Worksheet</a></td>
-                     <?php   
-                     }
-                     ?>                    
-                    <td 
-                      <?php 
-                      if(empty($identification_infrared)){
-                    
-                          echo"style='text-align:center;padding:4px;'>";
-                          echo "Not Yet Done";
-                     }else{
-                         echo"style='text-align:center;padding:4px;'>";
-                         echo "Complete";
-                     }?>
-                     
-                    </td>
-              </tr>
-              <tr>
-                    <td style="text-align:center;padding:4px;"></td>
-                    <td style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_identification/monograph_thin_layer/'.$query['a'].'/'.$request[0]['tr'];?>">Monograph</a></td>
-                    <td 
-                    <?php 
-                      if(empty($monograph_identification_thin_layer)){
-                    
-                          echo"style='text-align:left;padding:4px;'>";
-                          echo "Please Fill The Thin Layer Chromatography Monograph First";
-                     }else{
-                      ?>
-                    style="text-align:left;padding:4px;"><a href="<?php echo base_url().'test_identification/index_thin_layer/'.$query['a'].'/'.$request[0]['tr'];?>">Thin Layer Chromatography</a></td>
-                     <?php   
-                     }
-                     ?>
-                    <td 
-                    <?php 
-                      if(empty($identification_thin_layer)){
-                    
-                          echo"style='text-align:center;padding:4px;'>";
-                          echo "View Worksheet";
-                     }else{
-                      ?>
-                        style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_identification/view_worksheet_thin_layer/'.$query['a'].'/'.$request[0]['tr'];?>">View Worksheet</a></td>
-                     <?php   
-                     }
-                     ?>
-                    
-                    <td 
-                      <?php 
-                      if(empty($identification_thin_layer)){
-                    
-                          echo"style='text-align:center;padding:4px;'>";
-                          echo "Not Yet Done";
-                     }else{
-                         echo"style='text-align:center;padding:4px;'>";
-                         echo "Complete";
-                     }?>
-                     
-                    </td>
-              </tr>
-              <tr>
-                    <td style="text-align:center;padding:4px;"></td>
-                    <td style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_identification/monograph_hplc/'.$query['a'].'/'.$request[0]['tr'];?>">Monograph</a></td>
-                    <td 
-                    <?php 
-                      if(empty($monograph_identification_hplc)){
-                    
-                          echo"style='text-align:left;padding:4px;'>";
-                          echo "Please Fill The Identification by HPLC Monograph First";
-
-                     }else{
-                      ?>
-                       style="text-align:left;padding:4px;"><a href="<?php echo base_url().'test_identification/index_hplc/'.$query['a'].'/'.$request[0]['tr'];?>">Identification by HPLC</a></td>
-                     <?php   
-                     }
-                     ?>
-                    <td 
-                    <?php 
-                      if(empty($identification_hplc)){
-                    
-                          echo"style='text-align:center;padding:4px;'>";
-                          echo "View Worksheet";
-                     }else{
-                      ?>
-                        style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_identification/view_worksheet_hplc/'.$query['a'].'/'.$request[0]['tr'];?>">View Worksheet</a></td>
-                     <?php   
-                     }
-                     ?>
-                    <td 
-                      <?php 
-                      if(empty($identification_hplc)){
-                    
-                          echo"style='text-align:center;padding:4px;'>";
-                          echo "Not Yet Done";
-                     }else{
-                         echo"style='text-align:center;padding:4px;'>";
-                         echo "Complete";
-                     }?>
-                     
-                    </td>
-              </tr>
-              <tr>
-                    <td style="text-align:center;padding:4px;"></td>
-                    <td style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_identification/monograph_chemical/'.$query['a'].'/'.$request[0]['tr'];?>">Monograph</a></td>
-                    <td 
-                    <?php 
-                      if(empty($monograph_identification_chemical_method)){
-                    
-                          echo"style='text-align:left;padding:4px;'>";
-                          echo "Please Fill The Chemical Method Monograph First";
-                      
-                     }else{
-                      ?>
-                      style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_identification/index_chemical/'.$query['a'].'/'.$request[0]['tr'];?>">Chemical Method</a></td>
-                     <?php   
-                     }
-                     ?>
-                    <td 
-                    <?php 
-                      if(empty($identification_chemical_method)){
-                    
-                          echo"style='text-align:center;padding:4px;'>";
-                          echo "View Worksheet";
-                     }else{
-                      ?>
-                       style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_identification/view_worksheet_chemical/'.$query['a'].'/'.$request[0]['tr'];?>">View Worksheet</a></td>
-                     <?php   
-                     }
-                     ?>
-                    <td 
-                      <?php 
-                      if(empty($identification_chemical_method)){
-                    
-                          echo"style='text-align:left;padding:4px;'>";
-                          echo "Not Yet Done";
-                     }else{
-                         echo"style='text-align:left;padding:4px;'>";
-                         echo "Complete";
-                     }?>
-                     
-                    </td>
-              </tr>
-              <tr>
-                    <td style="text-align:center;padding:4px;"></td>
-                    <td style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_identification/monograph_tlc/'.$query['a'].'/'.$request[0]['tr'];?>">Monograph</a></td>
-                    <td 
-                    <?php 
-                      if(empty($monograph_identification_tlc)){
-                    
-                          echo"style='text-align:left;padding:4px;'>";
-                          echo "Please Fill The TLC Monograph First";
-                     }else{
-                      ?>
-                    style="text-align:left;padding:4px;"><a href="<?php echo base_url().'test_identification/index_tlc/'.$query['a'].'/'.$request[0]['tr'];?>">TLC</a></td>
-                     <?php   
-                     }
-                     ?>
-                    <td
-                    <?php 
-                      if(empty($identification_tlc)){
-                    
-                          echo"style='text-align:center;padding:4px;'>";
-                          echo "View Worksheet";
-                     }else{
-                      ?>
-                    style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_identification/view_worksheet_tlc/'.$query['a'].'/'.$request[0]['tr'];?>">view worksheet</a></td>
-                     <?php   
-                     }
-                     ?> 
-                    <td 
-                      <?php 
-                      if(empty($identification_tlc)){
-                    
-                          echo"style='text-align:center;padding:4px;'>";
-                          echo "Not Yet Done";
-                     }else{
-                         echo"style='text-align:center;padding:4px;'>";
-                         echo "Complete";
-                     }?>
-                     
-                    </td>
-              </tr>
-              <?php
-             }
-             ?>
              <?php
             if($request[0]['disintegration']==0 || $request[0]['disintegration']=="" || $request[0]['disintegration']=="NULL" ){
              
@@ -2099,10 +2465,10 @@
                 <?php 
                       if(empty($query_six)){
                     
-                          echo"style='text-align:center;padding:4px;background-color:#eed6ff;border-bottom:solid 1px #bfbfbf;'>";
-                          echo "Not Yet Done";
+                          echo"style='text-align:center;padding:4px;background-color:#ffeea0;border-bottom:solid 1px #bfbfbf;'>";
+                          echo "Not Done";
                      }else{
-                         echo"style='text-align:center;padding:4px;background-color:#ffeea0;border-bottom:solid 1px #bfbfbf;'>";
+                         echo"style='text-align:center;padding:4px;background-color:#98ff98;border-bottom:solid 1px #bfbfbf;'>";
                          echo "Complete";
                      }?>
                 </td>
@@ -2111,216 +2477,6 @@
            }
            ?>
 
-           <?php
-            if($request[0]['dissolution']==0 || $request[0]['dissolution']=="" || $request[0]['dissolution']=="NULL" ){
-             
-           }else{
-            ?>
-            <tr>
-                <td style="text-align:center;padding:4px;background-color:#ffffff;"><b>Dissolution</b></td>
-                <td style='text-align:left;padding:4px;background-color:#ffffff;'></td>
-                <td style='text-align:center;padding:4px;background-color:#ffffff;'></td>
-                <td style='text-align:center;padding:4px;background-color:#ffffff;'></td>
-                <td style='text-align:center;padding:4px;background-color:#ffffff;'></td>
-               </tr>
-            <tr>
-                <td style="text-align:center;padding:4px;"><b></b></a></td>
-                <td style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_dissolution/monograph_uv/'.$query['a'].'/'.$request[0]['tr'];?>">Monograph</a></td>
-                <td 
-                <?php 
-                      if(empty($monograph_diss_uv)){
-                          echo"style='text-align:left;padding:4px;color:#000;background-color:#ffffff;'>";
-                          echo "Please Fill The By UV Monograph First";
-                          
-                     }else{
-                      ?>
-                        style="text-align:left;padding:4px;"><a href="<?php echo base_url().'test_dissolution/index/'.$query['a'].'/'.$request[0]['tr'];?>">By UV</a></td>
-                     <?php   
-                     }
-                     ?>
-                <td 
-                <?php 
-                      if(empty($diss_uv)){
-                    
-                          echo"style='text-align:center;padding:4px;border-bottom:solid 1px #bfbfbf;'>";
-                          echo "View Worksheet";
-                     }else{
-                      ?>
-                     style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_dissolution/view_worksheet_uv/'.$query['a'].'/'.$request[0]['tr'];?>">View Worksheet</a></td>
-                     <?php   
-                     }
-                     ?>
-              <td 
-                <?php 
-                      if(empty($diss_uv)){
-                    
-                          echo"style='text-align:center;padding:4px;background-color:#eed6ff;border-bottom:solid 1px #bfbfbf;'>";
-                          echo "Not Yet Done";
-                     }else{
-                         echo"style='text-align:center;padding:4px;background-color:#ffeea0;border-bottom:solid 1px #bfbfbf;'>";
-                         echo "Complete";
-                     }?>
-                </td>
-            </tr>
-            <tr>
-                <td style="text-align:center;padding:4px;"></a></td>
-                <td style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_dissolution/monograph_delayed_release/'.$query['a'].'/'.$request[0]['tr'];?>">Monograph</a></td>
-                <td 
-                <?php 
-                      if(empty($monograph_dissolution_delayed)){
-                           echo"style='text-align:left;padding:4px;color:#000;background-color:#ffffff;'>";
-                          echo "Please Fill The Delayed Release Tablets Monograph First";
-                          
-                     }else{
-                      ?>
-                      style="text-align:left;padding:4px;"><a href="<?php echo base_url().'test_dissolution/index_delayed_release/'.$query['a'].'/'.$request[0]['tr'];?>">Delayed Release Tablets</a></td>
-                     <?php   
-                     }
-                     ?>
-                <td 
-                <?php 
-                      if(empty($dissolution_delayed)){
-                    
-                          echo"style='text-align:center;padding:4px;'>";
-                          echo "View Worksheet";
-                     }else{
-                      ?>
-                     style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_dissolution/view_worksheet_delayed_release/'.$query['a'].'/'.$request[0]['tr'];?>">View Worksheet</a></td>
-                     <?php   
-                     }
-                     ?>
-              <td 
-                <?php 
-                      if(empty($dissolution_delayed)){
-                    
-                          echo"style='text-align:center;padding:4px;background-color:#eed6ff;border-bottom:solid 1px #bfbfbf;'>";
-                          echo "Not Yet Done";
-                     }else{
-                         echo"style='text-align:center;padding:4px;background-color:#ffeea0;border-bottom:solid 1px #bfbfbf;'>";
-                         echo "Complete";
-                     }?>
-                </td>
-            </tr>
-            <tr>
-                <td style="text-align:center;padding:4px;"></a></td>
-                <td style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_dissolution/monograph_enteric_coated/'.$query['a'].'/'.$request[0]['tr'];?>">Monograph</a></td>
-                <td 
-                 <?php 
-                      if(empty($monograph_dissolution_enteric_coated)){
-                    
-                          echo"style='text-align:left;padding:4px;'>";
-                          echo "Enteric Coated Tablets";
-                     }else{
-                      ?>
-                      style="text-align:left;padding:4px;"><a href="<?php echo base_url().'test_dissolution/index_enteric_coated/'.$query['a'].'/'.$request[0]['tr'];?>">Enteric Coated Tablets</a></td>
-                     <?php   
-                     }
-                     ?>
-                <td 
-                <?php 
-                      if(empty($dissolution_enteric_coated)){
-                    
-                          echo"style='text-align:center;padding:4px;'>";
-                          echo "View Worksheet";
-                     }else{
-                      ?>
-                      style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_dissolution/view_worksheet_enteric_coated/'.$query['a'].'/'.$request[0]['tr'];?>">View Worksheet</a></td>
-                     <?php   
-                     }
-                     ?>
-              <td 
-                <?php 
-                      if(empty($dissolution_enteric_coated)){
-                    
-                          echo"style='text-align:center;padding:4px;background-color:#eed6ff;border-bottom:solid 1px #bfbfbf;'>";
-                          echo "Not Yet Done";
-                     }else{
-                         echo"style='text-align:center;padding:4px;background-color:#ffeea0;border-bottom:solid 1px #bfbfbf;'>";
-                         echo "Complete";
-                     }?>
-                </td>
-            </tr>
-            <tr>
-                <td style="text-align:center;padding:4px;"></a></td>
-                <td style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_dissolution/monograph_normal_hplc/'.$query['a'].'/'.$request[0]['tr'];?>">Monograph</a></td>
-                <td  
-                 <?php 
-                      if(empty($monograph_dissolution_normal_hplc)){
-                    
-                          echo"style='text-align:left;padding:4px;'>";
-                          echo "Normal Tablets";
-                     }else{
-                      ?>
-                      style="text-align:left;padding:4px;"><a href="<?php echo base_url().'test_dissolution/index_normal/'.$query['a'].'/'.$request[0]['tr'];?>">Normal Tablets</a></td>
-                     <?php   
-                     }
-                     ?>
-                <td 
-                <?php 
-                      if(empty($dissolution_normal_hplc)){
-                    
-                          echo"style='text-align:center;padding:4px;'>";
-                          echo "View Worksheet";
-                     }else{
-                      ?>
-                       style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_dissolution/view_worksheet_normal/'.$query['a'].'/'.$request[0]['tr'];?>">View Worksheet</a></td>
-                     <?php   
-                     }
-                     ?>
-              <td 
-                <?php 
-                      if(empty($dissolution_normal_hplc)){
-                    
-                          echo"style='text-align:center;padding:4px;background-color:#eed6ff;border-bottom:solid 1px #bfbfbf;'>";
-                          echo "Not Yet Done";
-                     }else{
-                         echo"style='text-align:center;padding:4px;background-color:#ffeea0;border-bottom:solid 1px #bfbfbf;'>";
-                         echo "Complete";
-                     }?>
-                </td>
-            </tr>
-            <tr>
-                <td style="text-align:center;padding:4px;"></a></td>
-                <td style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_dissolution/monograph_two_components/'.$query['a'].'/'.$request[0]['tr'];?>">Monograph</a></td>
-                <td 
-                <?php 
-                      if(empty($monograph_dissolution_two_component)){
-                    
-                          echo"style='text-align:left;padding:4px;'>";
-                          echo "Two Component Tablets";
-                     }else{
-                      ?>
-                      style="text-align:left;padding:4px;"><a href="<?php echo base_url().'test_dissolution/index_two_components/'.$query['a'].'/'.$request[0]['tr'];?>">Two Component Tablets</a></td>
-                     <?php   
-                     }
-                     ?>
-                <td 
-                <?php 
-                      if(empty($dissolution_two_component)){
-                    
-                          echo"style='text-align:center;padding:4px;'>";
-                          echo "Not Yet Done";
-                     }else{
-                         ?>
-                      style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_dissolution/view_worksheet_two_component/'.$query['a'].'/'.$request[0]['tr'];?>">View Worksheet</a></td>
-                      <?php
-                      }
-                     ?>
-                <td 
-                <?php 
-                      if(empty($dissolution_two_component)){
-                    
-                          echo"style='text-align:center;padding:4px;background-color:#eed6ff;border-bottom:solid 1px #bfbfbf;'>";
-                          echo "Not Yet Done";
-                     }else{
-                         echo"style='text-align:center;padding:4px;background-color:#ffeea0;border-bottom:solid 1px #bfbfbf;'>";
-                         echo "Complete";
-                     }?>
-                </td>
-            </tr>
-           <?php  
-           }
-           ?>
            <?php
             if($request[0]['water_method']==0 || $request[0]['water_method']=="" || $request[0]['water_method']=="NULL" ){
              
@@ -2363,10 +2519,10 @@
                 <?php 
                       if(empty($query_ten)){
                     
-                          echo"style='text-align:center;padding:4px;background-color:#eed6ff;border-bottom:solid 1px #bfbfbf;'>";
-                          echo "Not Yet Done";
+                          echo"style='text-align:center;padding:4px;background-color:#ffeea0;border-bottom:solid 1px #bfbfbf;'>";
+                          echo "Not Done";
                      }else{
-                         echo"style='text-align:center;padding:4px;background-color:#ffeea0;border-bottom:solid 1px #bfbfbf;'>";
+                         echo"style='text-align:center;padding:4px;background-color:#98ff98;border-bottom:solid 1px #bfbfbf;'>";
                          echo "Complete";
                      }?>
                 </td>
@@ -2425,10 +2581,10 @@
                 <?php 
                       if(empty($query_twelve)){
                     
-                          echo"style='text-align:center;padding:4px;background-color:#eed6ff;border-bottom:solid 1px #bfbfbf;'>";
-                          echo "Not Yet Done";
+                          echo"style='text-align:center;padding:4px;background-color:#ffeea0;border-bottom:solid 1px #bfbfbf;'>";
+                          echo "Not Done";
                      }else{
-                         echo"style='text-align:center;padding:4px;background-color:#ffeea0;border-bottom:solid 1px #bfbfbf;'>";
+                         echo"style='text-align:center;padding:4px;background-color:#98ff98;border-bottom:solid 1px #bfbfbf;'>";
                          echo "Complete";
                      }?>
                 </td>
@@ -2479,10 +2635,10 @@
                 <?php 
                       if(empty($query_eleven)){
                     
-                          echo"style='text-align:center;padding:4px;background-color:#eed6ff;border-bottom:solid 1px #bfbfbf;'>";
-                          echo "Not Yet Done";
+                          echo"style='text-align:center;padding:4px;background-color:#ffeea0;border-bottom:solid 1px #bfbfbf;'>";
+                          echo "Not Done";
                      }else{
-                         echo"style='text-align:center;padding:4px;background-color:#ffeea0;border-bottom:solid 1px #bfbfbf;'>";
+                         echo"style='text-align:center;padding:4px;background-color:#98ff98;border-bottom:solid 1px #bfbfbf;'>";
                          echo "Complete";
                      }?>
                 </td>
