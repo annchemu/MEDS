@@ -42,7 +42,14 @@ $(document).ready(function() {
       var equipmentid=$(this).find(":selected").data("equipmentid");
       $("#equipmentid").val(equipmentid);
     });
-    
+    $("#equipment_make_1").on('change',function(){
+      var equipmentid=$(this).find(":selected").data("equipmentid_1");
+      $("#equipmentid_1").val(equipmentid);
+    });
+  $("#equipment_make_2").on('change',function(){
+      var equipmentid=$(this).find(":selected").data("equipmentid_2");
+      $("#equipmentid_2").val(equipmentid);
+    });
     $("#column_name").on('change',function(){
       var dimensions=$(this).find(":selected").data("dimensions");
       var serial_number=$(this).find(":selected").data("serialnumber");
@@ -51,9 +58,22 @@ $(document).ready(function() {
       $("#column_serial_number").val(serial_number);
       $("#column_manufacturer").val(manufacturer);
     });
-    $("#analyst").on('change',function(){
-      var assigneruserid=$(this).find(":selected").data("assigneruserid");
-      $("#assigneruserid").val(assigneruserid);
-      
+    $("#standard_description").on('change',function(){
+      var idno=$(this).find(":selected").data("idno");
+      var lotno=$(this).find(":selected").data("lotno");
+      var potency=$(this).find(":selected").data("potency");
+      $("#id_no").val(idno);
+      $("#lot_no").val(lotno);
+      $("#potency").val(potency);
+      $("#det_1_potency").val(potency); $("#det_2_potency").val(potency); $("#det_3_potency").val(potency); $("#det_4_potency").val(potency); $("#det_5_potency").val(potency); $("#det_6_potency").val(potency);
+
+    });
+    $("#name").on('change',function(){
+      var dimensions=$(this).find(":selected").data("dimensions");
+      var serial_number=$(this).find(":selected").data("serialnumber");
+      var manufacturer=$(this).find(":selected").data("manufacturer");
+      $("#length").val(dimensions);
+      $("#serial_no").val(serial_number);
+      $("#manufacturer").val(manufacturer);
     });
   });

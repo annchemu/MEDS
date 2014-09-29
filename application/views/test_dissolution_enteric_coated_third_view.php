@@ -39,6 +39,7 @@
      "sScrollY":"270px",
      "sScrollX":"100%"
     });
+<<<<<<< HEAD
      $("#determination").click(function(){
     $("#determinations").toggle();
   });
@@ -48,6 +49,8 @@
   $("#sample_data").click(function(){
     $("#sample_table").toggle();
   });
+=======
+>>>>>>> 16af635259f2314106621480ed7a65bb35cbab80
    });
      tinymce.init({
     selector: "textarea"
@@ -494,6 +497,7 @@
           <div class="scroll hide_data" id="sample_table">
            <table border="0" align="center" class ="inner_table" cellpadding="8px" width="80%">  
               <tr>
+
                 <td><b></b></td>
                 <td align="center" style="padding: 8px;"><b>Std 1 (S1)</b></td>
                 <td align="center" style="padding: 8px;"><b>Sample 1 (S1)</b></td>
@@ -747,6 +751,7 @@
       <tr><td colspan="6">
       <div class="hide_data" id="determinations">
       <table border="0" class="inner_table" style="padding: 8px;background-color:#ffffff;"  width="100%" cellpadding="8px" align="center">                  
+
       </tr> 
       <tr>
         <td align ="center" style="padding: 8px; color:#0000fb;">Determination one:</td>                
@@ -829,6 +834,7 @@
        </table>
       </div>
       </td></tr>
+
       <tr>
         <td colspan="6" style="padding: 8px; color:#0000fb;"><b>Determination Data collected from Stage three:</b></td>                
       </tr> 
@@ -912,6 +918,7 @@
       </tr> 
       <tr>
         <td align="center" colspan = "6"style="padding: 12px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: solid 1px #bfbfbf;"> <b><u>Determination 19</u></b></td>
+
       </tr>
       <tr>
         <td colspan ="4" align ="center" style="padding: 12px;">
@@ -925,6 +932,7 @@
       </tr>
       <tr>
         <td align="center" colspan = "6"style="padding: 12px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: solid 1px #bfbfbf;"> <b><u>Determination 20</u></b></td>
+
       </tr>
       <tr>
         <td colspan ="4" align ="center" style="padding: 12px;">
@@ -938,6 +946,7 @@
       </tr>
       <tr>  
         <td align="center" colspan = "6"style="padding: 12px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: solid 1px #bfbfbf;"> <b><u>Determination 21</u></b></td>
+
       </tr> 
       <tr>  
         <td colspan ="4" align ="center" style="padding: 12px;">
@@ -951,6 +960,7 @@
       </tr>
       <tr>
         <td align="center" colspan = "6"style="padding: 12px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: solid 1px #bfbfbf;"> <b><u>Determination 22</u></b></td>
+
       </tr> 
       <tr>  
         <td colspan ="4" align ="center" style="padding: 12px;">
@@ -964,6 +974,7 @@
       </tr> 
       <tr>  
         <td align="center" colspan = "6"style="padding: 12px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: solid 1px #bfbfbf;"> <b><u>Determination 23</u></b></td>
+
       </tr> 
       <tr>  
         <td colspan ="4" align ="center" style="padding: 12px;">
@@ -976,6 +987,7 @@
         <td>=&nbsp &nbsp <input type ="text" name="determination_5" id ="determination_5" size ="10">% LC </td>
       </tr> 
       <tr> 
+
         <td align="center" colspan = "6"style="padding: 12px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: solid 1px #bfbfbf;"> <b><u>Determination 24</u></b></td>
       </tr> 
       <tr>  

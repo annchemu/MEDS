@@ -506,6 +506,7 @@
         <td colspan ="6">
           <div class="scroll hide_data" id="sample_table">
            <table border="0" align="center" class ="inner_table" cellpadding="8px" width="80%">                
+
               <tr>
                 <td><b></b></td>
                 <td align="center" style="padding: 8px;"><b>Std 1 (S1)</b></td>
@@ -862,6 +863,7 @@
         <td align="center" colspan = "2"style="padding: 12px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"></td>
       </tr>
       <tr>
+
         <td colspan ="4" align ="center" style="padding: 12px;">
           <input type ="text" name="det_1_pkt" id ="det_1_pkt" size ="10" placeholder="PKT" onchange="calculation_determinations()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <input type ="text" name="det_1_wstd" id ="det_1_wstd" size ="10" placeholder="WSTD">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp

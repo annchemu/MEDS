@@ -42,6 +42,7 @@
     tinymce.init({
     selector: "textarea"
    });
+<<<<<<< HEAD
     $("#determination").click(function(){
     $("#determinations").toggle();
   });
@@ -52,6 +53,8 @@
     $("#sample_table").toggle();
   });
   
+=======
+>>>>>>> 16af635259f2314106621480ed7a65bb35cbab80
    });
   </script>
  
@@ -507,6 +510,7 @@
         <td colspan ="6">
           <div class="scroll hide_data" id="sample_table">
            <table border="0" align="center" class ="inner_table" cellpadding="8px" width="80%">               
+
               <tr>
                 <td><b></b></td>
                 <td align="center" style="padding: 8px;"><b>Std 1</b></td>
@@ -671,6 +675,7 @@
       <tr><td colspan="6">
       <div class="hide_data" id="determinations">
       <table border="0" class="inner_table" style="padding: 8px;background-color:#ffffff;"  width="100%" cellpadding="8px" align="center">    
+
       </tr> 
       <tr>
         <td align ="center" style="padding: 8px; color:#0000fb;">Determination one:</td>                
@@ -707,6 +712,7 @@
          <?php echo $sql_dissolution_det['det_5_potency']?> x 100 <br/><hr/><?php echo $sql_dissolution_det['det_5_pkstd']?> x <?php echo $sql_dissolution_det['det_5_lc']?>
          <td> =&nbsp &nbsp <?php echo $sql_dissolution_det['determination_5']?> % LC</td>      
       </tr>
+
       <tr>
         <td align ="center" style="padding: 8px; color:#0000fb;">Determination six:</td>                
         <td colspan ="2" align ="center" style="padding: 12px;">
@@ -717,6 +723,7 @@
           </table>
       </div>
       </td></tr>
+
       <tr>
         <td colspan="6" style="padding: 8px; color:#0000fb;"><b>Determination Data collected from Stage two:</b></td>                
       </tr> 

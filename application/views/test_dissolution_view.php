@@ -549,6 +549,7 @@
     <tr>
     <td colspan="6">
     <table border="0" class="inner_table" sampleliquid ="no_std" width="80%" cellpadding="8px" align="center">        
+
       <tr>        
         <td colspan = "6" align = "center"style="padding: 12px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: solid 1px #bfbfbf;color:#0000fb;"> <u>ABSORBANCE OF SAMPLE (ASAMPLE) x 10 x DILUTION FACTOR(DF) x 100</u> <br/> A(1%, 1cm)/1000 x LABEL CLAIM (LC)</td>
       </tr>
@@ -569,6 +570,7 @@
           <input type ="text" name="second_det_1_df" id ="second_det_1_df" size ="10" placeholder="DF">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp x 100<br/><br/>A(1%, 1cm)/1000 x 
           <input type ="text" name="second_det_1_lc" id ="second_det_1_lc" class ="det_1_lc"size ="10" placeholder="LC" ></td>
         <td> =&nbsp &nbsp<input type ="text" name="second_determination_1" class="determination_1" id ="second_determination_1" size ="10"> % LC</td>
+
       </tr>
       <tr>
         <td align="center" colspan = "4"style="padding: 12px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <b><u>Determination 2</u></b></td>
@@ -580,6 +582,7 @@
           <input type ="text" name="second_det_2_df"id="second_det_2_df" size ="10" placeholder="DF">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp x 100 <br/><br/>A(1%, 1cm)/1000 x 
           <input type ="text" name="second_det_2_lc" id ="second_det_2_lc" class="det_2_lc" size ="10" placeholder="LC"onchange="calculation_determinations()"></td>        
         <td>=&nbsp &nbsp <input type ="text" name="second_determination_2"id ="second_determination_2" class="determination_2" size ="10">% LC </td>
+
       </tr>
       <tr>  
         <td align="center" colspan = "4"style="padding: 12px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <b><u>Determination 3</u></b></td>
@@ -591,6 +594,7 @@
           <input type ="text" name="second_det_3_df" id ="second_det_3_df" size ="10" placeholder="DF">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp x 100 <br/><br/>A(1%, 1cm)/1000 x 
           <input type ="text" name="second_det_3_lc" id ="second_det_3_lc" class="det_3_lc" size ="10" placeholder="LC" onchange="calculation_determinations()"></td>        
         <td>=&nbsp &nbsp <input type ="text" name="second_determination_3" id ="second_determination_3" class="determination_3" size ="10">% LC </td>
+
       </tr>
       <tr>
         <td align="center" colspan = "4" style="padding: 12px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <b><u>Determination 4</u></b></td>
@@ -603,6 +607,7 @@
           <input type ="text" name="second_det_4_df" id ="second_det_4_df" size ="10" placeholder="DF">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp x 100 <br/><br/>A(1%, 1cm)/1000 x 
           <input type ="text" name="second_det_4_lc" id ="second_det_4_lc" class="det_4_lc" size ="10" placeholder="LC" onchange="calculation_determinations()"></td>        
         <td>=&nbsp &nbsp <input type ="text" name="second_determination_4" id ="second_determination_4" class="determination_4" size ="10">% LC </td>
+
       </tr> 
       <tr>  
         <td align="center" colspan = "4"style="padding: 12px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <b><u>Determination 5</u></b></td>
@@ -615,6 +620,7 @@
           <input type ="text" name="second_det_5_df" id ="second_det_5_df" size ="10" placeholder="DF">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp x 100 <br/><br/>A(1%, 1cm)/1000 x 
           <input type ="text" name="second_det_5_lc" id ="second_det_5_lc" class="det_5_lc" size ="10" placeholder="LC" onchange="calculation_determinations()"></td>        
         <td>=&nbsp &nbsp <input type ="text" name="second_determination_5" id ="second_determination_5" class="determination_5" size ="10">% LC </td>
+
       </tr> 
       <tr> 
         <td align="center" colspan = "4"style="padding: 12px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <b><u>Determination 6</u></b></td>
@@ -622,10 +628,12 @@
       </tr> 
       <tr>  
         <td colspan ="4" align ="center" style="padding: 12px;">
+
           <input type ="text" name="second_det_6_pkt" id ="second_det_6_pkt" size ="10" placeholder="A(SAMPLE)" onchange="calculation_determinations()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp x 10
           <input type ="text" name="second_det_6_df" id ="second_det_6_df" size ="10" placeholder="DF">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp x 100 <br/><br/>A(1%, 1cm)/1000 x 
           <input type ="text" name="second_det_6_lc" id ="second_det_6_lc" class="det_6_lc" size ="10" placeholder="LC" onchange="calculation_determinations()"></td>        
         <td>=&nbsp &nbsp <input type ="text" name="second_determination_6" id ="second_determination_6" class="determination_6" size ="10">% LC </td>
+
       </tr> 
       </table>
       </td>

@@ -321,6 +321,7 @@
         <td colspan="4" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="container" id ="container" value = "<?php echo $sql_dissolution['container']?>"> </td>
       </tr>  
       <tr>
+
         <td colspan="2" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">Weight of standard (g)</td>
         <td colspan="4" style="padding: 8px;background-color:#ffffff;border-bottom: solid 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"> <input type ="text" name="standard_weight_1" id ="standard_weight_1" value = "<?php echo $sql_dissolution['standard_weight_1']?>"> </td>
       </tr>  
@@ -600,6 +601,87 @@
       <tr>
         <td colspan ="6">
           <div class="scroll">
+           <table border="0" align="center" class ="inner_table" cellpadding="8px" width="80%">  
+              <tr>
+                <td colspan="6" style="padding: 8px; color:#0000fb;"><b>Data collected from Stage one:</b></td>                
+              </tr> 
+              <tr>
+                <td><b></b></td>
+                <td align="center" style="padding: 8px;"><b>Std 1</b></td>
+                <td align="center" style="padding: 8px;"><b>Sample 1</b></td>
+                <td align="center" style="padding: 8px;"><b>Sample 2</b></td>
+                <td align="center" style="padding: 8px;"><b>Sample 3</b></td>
+                <td align="center" style="padding: 8px;"><b>Sample 4</b></td>
+                <td align="center" style="padding: 8px;"><b>Sample 5</b></td>
+                <td align="center" style="padding: 8px;"><b>Sample 6</b></td>
+              </tr>
+           <tr>
+                  <td align="center"style="padding: 8px;">1.</td>
+                  <td style="padding: 8px;"><input type = "text" class = "standard" name ="sample_1" id ="sample_1" value = "<?php echo $sql_dissolution['sample_1']?>"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_1" name ="sample_1_s1" id ="sample_1_s1" value = "<?php echo $sql_dissolution['sample_1_s1']?>"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_2" name ="sample_1_s2" id ="sample_1_s2" value = "<?php echo $sql_dissolution['sample_1_s2']?>"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_3" name ="sample_1_s3" id ="sample_1_s3" value = "<?php echo $sql_dissolution['sample_1_s3']?>"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_4" name ="sample_1_s4" id ="sample_1_s4" value = "<?php echo $sql_dissolution['sample_1_s4']?>"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_5" name ="sample_1_s5" id ="sample_1_s5" value = "<?php echo $sql_dissolution['sample_1_s5']?>"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_6" name ="sample_1_s6" id ="sample_1_s6" value = "<?php echo $sql_dissolution['sample_1_s6']?>"></td>
+                </tr>
+                <tr>
+                  <td align="center"style="padding: 8px;">2.</td>
+                  <td style="padding: 8px;"><input type = "text" class = "standard" name ="sample_2" id ="sample_2"value = "<?php echo $sql_dissolution['sample_2']?>"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_1" name ="sample_2_s1" id ="sample_2_s1"value = "<?php echo $sql_dissolution['sample_2_s1']?>"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_2" name ="sample_2_s2" id ="sample_2_s2"value = "<?php echo $sql_dissolution['sample_2_s2']?>"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_3" name ="sample_2_s3" id ="sample_2_s3"value = "<?php echo $sql_dissolution['sample_2_s3']?>"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_4" name ="sample_2_s4" id ="sample_2_s4"value = "<?php echo $sql_dissolution['sample_2_s4']?>"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_5" name ="sample_2_s5" id ="sample_2_s5"value = "<?php echo $sql_dissolution['sample_2_s5']?>"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_6" name ="sample_2_s6" id ="sample_2_s6"value = "<?php echo $sql_dissolution['sample_2_s6']?>"></td>
+                </tr>
+                <tr>
+                  <td align="center"style="padding: 8px;">3.</td>
+                  <td style="padding: 8px;"><input type = "text" class = "standard" name ="sample_3" id ="sample_3" value = "<?php echo $sql_dissolution['sample_2']?>"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_1" name ="sample_3_s1" id ="sample_3_s1" value = "<?php echo $sql_dissolution['sample_2_s1']?>"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_2" name ="sample_3_s2" id ="sample_3_s2" value = "<?php echo $sql_dissolution['sample_2_s2']?>"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_3" name ="sample_3_s3" id ="sample_3_s3" value = "<?php echo $sql_dissolution['sample_2_s3']?>"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_4" name ="sample_3_s4" id ="sample_3_s4" value = "<?php echo $sql_dissolution['sample_2_s4']?>"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_5" name ="sample_3_s5" id ="sample_3_s5" value = "<?php echo $sql_dissolution['sample_2_s5']?>"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_6" name ="sample_3_s6" id ="sample_3_s6" value = "<?php echo $sql_dissolution['sample_2_s6']?>"></td>
+                </tr>
+                <tr>
+                  <td align="center"style="padding: 8px;">4.</td>
+                  <td style="padding: 8px;"><input type = "text" class = "standard" name ="sample_4" id ="sample_4" value = "<?php echo $sql_dissolution['sample_4']?>"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_1" name ="sample_4_s1" id ="sample_4_s1" value = "<?php echo $sql_dissolution['sample_4_s1']?>"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_2" name ="sample_4_s2" id ="sample_4_s2" value = "<?php echo $sql_dissolution['sample_4_s2']?>"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_3" name ="sample_4_s3" id ="sample_4_s3" value = "<?php echo $sql_dissolution['sample_4_s3']?>"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_4" name ="sample_4_s4" id ="sample_4_s4" value = "<?php echo $sql_dissolution['sample_4_s4']?>"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_5" name ="sample_4_s5" id ="sample_4_s5" value = "<?php echo $sql_dissolution['sample_4_s5']?>"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_6" name ="sample_4_s6" id ="sample_4_s6" value = "<?php echo $sql_dissolution['sample_4_s6']?>"></td>
+                </tr>
+                 <tr>
+                  <td align="center"style="padding: 8px;">5.</td>
+                  <td style="padding: 8px;"><input type = "text" class = "standard" name ="sample_5" id ="sample_5" value = "<?php echo $sql_dissolution['sample_5']?>"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_1" name ="sample_5_s1" id ="sample_5_s1" onchange ="avg_sample1()" value = "<?php echo $sql_dissolution['sample_5_s1']?>"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_2" name ="sample_5_s2" id ="sample_5_s2" onchange ="avg_sample2()" value = "<?php echo $sql_dissolution['sample_5_s2']?>"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_3" name ="sample_5_s3" id ="sample_5_s3" onchange ="avg_sample3()" value = "<?php echo $sql_dissolution['sample_5_s3']?>"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_4" name ="sample_5_s4" id ="sample_5_s4" onchange ="avg_sample4()" value = "<?php echo $sql_dissolution['sample_5_s4']?>"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_5" name ="sample_5_s5" id ="sample_5_s5" onchange ="avg_sample5()" value = "<?php echo $sql_dissolution['sample_5_s5']?>"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_6" name ="sample_5_s6" id ="sample_5_s6" onchange ="avg_sample6()" value = "<?php echo $sql_dissolution['sample_5_s6']?>"></td>
+                </tr>
+                <tr>
+                  <td align="center"style="padding: 8px;">Average</td>
+                  <td style="padding: 8px;"><input type = "text" class = "standard_avg" name ="avg" id ="avg"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_1_avg" name ="avg_s1" id ="avg_s1"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_2_avg" name ="avg_s2" id ="avg_s2"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_3_avg" name ="avg_s3" id ="avg_s3"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_4_avg" name ="avg_s4" id ="avg_s4"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_5_avg" name ="avg_s5" id ="avg_s5"></td>
+                  <td style="padding: 8px;"><input type = "text" class ="sample_6_avg" name ="avg_s6" id ="avg_s6"></td>
+                </tr>
+        </table>
+      </div>
+        </td>
+      </tr>
+      <tr>
+        <td colspan ="6">
+          <div class="scroll">
            <table border="0" align="center" class ="inner_table" cellpadding="8px" width="80%">   
               <tr>
                 <td colspan="6" style="padding: 8px; color:#0000fb;"><b>Data collected from Stage two:</b></td>                
@@ -688,6 +770,7 @@
       <div class="hide_data" id="determinations">
       <table border="0" class="inner_table" style="padding: 8px;background-color:#ffffff;"  width="100%" cellpadding="8px" align="center">          
                      
+
       </tr> 
       <tr>
         <td align ="center" style="padding: 8px; color:#0000fb;">Determination one:</td>                
@@ -735,6 +818,7 @@
       </table>
       </div>
       </td></tr> 
+
       <tr>
         <td colspan="6" style="padding: 8px; color:#0000fb;"><b>Determination Data collected from Stage two:</b></td>                
       </tr> 

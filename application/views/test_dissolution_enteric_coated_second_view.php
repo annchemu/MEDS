@@ -492,6 +492,7 @@
           <div class="scroll hide_data" id="sample_table">
            <table border="0" align="center" class ="inner_table" cellpadding="8px" width="80%">  
               
+
               <tr>
                 <td><b></b></td>
                 <td align="center" style="padding: 8px;"><b>Std 1</b></td>
@@ -656,6 +657,7 @@
       <tr><td colspan="6">
       <div class="hide_data" id="determinations">
       <table border="0" class="inner_table" style="padding: 8px;background-color:#ffffff;"  width="100%" cellpadding="8px" align="center">          
+
       </tr> 
       <tr>
         <td align ="center" style="padding: 8px; color:#0000fb;">Determination one:</td>                
@@ -702,7 +704,7 @@
        </table>
       </div>
       </td></tr>
-      <tr>
+
         <td colspan="6" style="padding: 8px; color:#0000fb;"><b>Determination Data collected from Stage two:</b></td>                
       </tr> 
       <tr>
