@@ -145,6 +145,21 @@ class Test_Dissolution_Model extends CI_Model{
 
 			$this->db->insert('diss_uv_determinations', $determination_data);
 
+			$coa_data = array(
+     
+			     'assignment_id'=>$assignment_id,
+			     'test_request_id'=>$test_request_id,
+			     'test_id'=>$assay_hplc_area_method_single_component_id,
+			     'method'=>$this->input->post('method'),
+			     'specification'=>$this->input->post('specification'),
+			     'conclusion'=>$this->input->post('conclusion'),
+			     'supervisor'=>$this->input->post('supervisor'),
+			     'date_tested'=>$this->input->post('date'),
+			     'further_comments'=>$this->input->post('further_comments')
+    		
+    		$this->db->insert('coa',$coa_data);
+
+
 		redirect('test/index/'.$assignment.'/'.$test_request);
 /*
 		$status_data = array('request_status'=>$status);
