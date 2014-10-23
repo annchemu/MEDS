@@ -12,7 +12,7 @@ function save_worksheet(){
 		$status =1;
 		$test_request=$this->input->post('test_request');
 		$assignment=$this->input->post('assignment');
-		$test_type='Dissolution Test Normal';
+		$test_name='Dissolution Test Normal';
 		$analyst= $this->input->post('analyst');
 		
 		$data =array(			
@@ -189,16 +189,13 @@ function save_worksheet(){
 			);
 		$this->db->insert('diss_normal', $data);
 
-		$coa_data = array(
-			'coa_method_used'=>$coa_method_used,
-			'coa_results'=>$coa_results,
-			'coa_specification'=>$coa_specification,
-			'test_request_id'=>$test_request,
-			'assignment_id'=>$assignment,
-			'test_type'=>$test_type,
-			'analyst'=>$analyst,
+		$result_data = array(
+			'test_id'=>$test_id,
+			'test_name'=>$test_name,
+			'remarks'=>$this->input->post('choice'),
+			'results'=>$results,
 			);
-		$this->db->insert('coa', $coa_data);
+		$this->db->update('test_results', $result_data, array('test_request_id'=>$test_request,'test_type'=>$test_type));
 
 		$determination_data = array(
 			'test_request'=>$this->input->post('test_request'),

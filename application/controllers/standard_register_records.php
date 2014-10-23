@@ -17,9 +17,24 @@ class Standard_Register_Records extends CI_Controller {
     
     }
 function Get(){
+  $status = 0;
     $this->load->model('standard_register_recordsmodel');
     
     $data['query'] = $this->standard_register_recordsmodel->standard_register_list_get();
+    // $qty_calc= $this->db->select('*')->get_where('standard_register', array('status' => $status))->result_array();
+     
+    // foreach ($qty_calc as $key => $value) {     
+   
+    //  $initial_qty = $value['initial_quantity'];
+    //   $qty = $value['quantity'];
+
+    //   $progressbar = ($qty/$initial_qty);
+    //    echo $progressbar." </br>";//echo $initial_qty." ";echo $qty; 
+    // }
+    // $data['progressbar'] = $progressbar;
+    // $data['query'] = $qty_calc;
+    // echo "<pre>"; print_r($qty_calc);die;
+
 	$this->load->view('standard_register_records',$data);
     
 }

@@ -16,30 +16,33 @@
   
   <!-- bootstrap reference css library -->
   <link href="<?php echo base_url().'bootstrap/css/bootstrap.css'; ?>" rel="stylesheet" type="text/css"/>
-
-  <script src="<?php echo base_url().'js/jquery.js';?>"></script>
   <script src="<?php echo base_url().'js/jquery-1.11.0.js';?>"></script>
   <script src="<?php echo base_url().'js/jquery.js';?>"></script>
+  
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
   <script src="<?php echo base_url().'js/jquery-ui.js';?>"></script>
-  <script type="text/javascript" src="<?php echo base_url().'js/tabs.js';?>"></script>
-  <script type="text/javascript" src="<?php echo base_url().'js/Jquery-datatables/jquery.dataTables.js';?>"></script>
-  <script src="<?php echo base_url().'datatables/extensions/Tabletools/js/dataTables.tableTools.js';?>" type="text/javascript"></script>
-  <script src="<?php echo base_url().'datatables/extensions/Tabletools/js/ZeroClipboard.js" type="text/javascript';?>"></script>
   <script type="text/javascript" src="<?php echo base_url().'js/datepicker.js';?>"></script>
+  
   <script type="text/javascript" src="<?php echo base_url().'tinymce/tinymce.min.js';?>"></script>
   <script type="text/javascript" src="<?php echo base_url().'tinymce/textarea_script.js';?>"></script>
-  
-  
+
   <!-- bootstrap reference js library -->
   <script src="<?php echo base_url().'js/bootstrap.min.js';?>"></script>
+  
+  <script type="text/javascript" src="<?php echo base_url().'js/tabs.js';?>"></script>
+  
+  <script type="text/javascript" src="<?php echo base_url().'datatables/media/js/jquery.dataTables.js';?>"></script>
+  <script type="text/javascript" src="<?php echo base_url().'datatables/extensions/TableTools/js/dataTables.tableTools.js';?>"></script>
+  
+  
   
   <script>
    $(document).ready(function() {
     /* Init DataTables */
-    $('#list').dataTable({
-     "sDom": "T lfrtip",
+    $('#list').DataTable({      
      "sScrollY":"270px",
      "sScrollX":"100%",
+     "sDom": "T lfrtip",
      "oTableTools": {
       "aButtons": [      
       
@@ -49,7 +52,7 @@
         "aButtons": ["csv", "xls", "pdf"]
       }
       ],
-      "sSwfPath": "meds/datatables/extensions/TableTools/swf/copy_csv_xls_pdf.swf"
+      "sSwfPath": "<?php echo base_url().'datatables/extensions/TableTools/swf/copy_csv_xls_pdf.swf';?>"
     }
     });
    });

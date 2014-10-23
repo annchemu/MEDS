@@ -90,7 +90,6 @@ function index(){
     $data['monograph_dissolution_enteric_coated']=$this->db->select('diss_enteric_coated_monograph.monograph')->get_where('diss_enteric_coated_monograph', array('diss_enteric_coated_monograph.test_request_id' => $trid))->result_array();
     $data['monograph_dissolution_two_component']=$this->db->select('diss_two_component_monograph.monograph')->get_where('diss_two_component_monograph', array('diss_two_component_monograph.test_request_id' => $trid))->result_array();
     $data['monograph_dissolution_delayed']=$this->db->select('diss_delayed_release_monograph.monograph')->get_where('diss_delayed_release_monograph', array('diss_delayed_release_monograph.test_request_id' => $trid))->result_array();
-    $data['monograph_disintegration']=$this->db->select('disintegration_monograph.monograph')->get_where('disintegration_monograph', array('disintegration_monograph.test_request_id' => $trid))->result_array();
     $data['monograph_water_method']=$this->db->select('water_method_monograph.monograph')->get_where('water_method_monograph', array('water_method_monograph.test_request_id' => $trid))->result_array();
     $data['monograph_volumetric_solution']=$this->db->select('volumetric_solution_monograph.monograph')->get_where('volumetric_solution_monograph', array('volumetric_solution_monograph.test_request_id' => $trid))->result_array();
     $data['monograph_loss_drying']=$this->db->select('loss_drying_monograph.monograph')->get_where('loss_drying_monograph', array('loss_drying_monograph.test_request_id' => $trid))->result_array();
@@ -98,7 +97,7 @@ function index(){
     
     $data['identification_assay']=$this->db->select('identification.status')->get_where('identification', array('identification.test_request' => $trid))->result_array();
     $data['identification_uv']=$this->db->select('identification_uv.status')->get_where('identification_uv', array('identification_uv.test_request' => $trid))->result_array();
-    $data['identification_infrared']=$this->db->select('identification.status')->get_where('identification', array('identification.test_request' => $trid))->result_array();
+    $data['identification_infrared']=$this->db->select('identification_infrared.status')->get_where('identification_infrared', array('identification_infrared.test_request' => $trid))->result_array();
     $data['identification_tlc']=$this->db->select('tlc.status')->get_where('tlc', array('tlc.test_request' => $trid))->result_array();
     $data['identification_hplc']=$this->db->select('identification_hplc.status')->get_where('identification_hplc', array('identification_hplc.test_request' => $trid))->result_array();
     $data['identification_chemical_method']=$this->db->select('identification_chemical_method.status')->get_where('identification_chemical_method', array('identification_chemical_method.test_request' => $trid))->result_array();
@@ -108,7 +107,28 @@ function index(){
     $data['dissolution_enteric_coated']=$this->db->select('diss_enteric_coated.status')->get_where('diss_enteric_coated', array('diss_enteric_coated.test_request' => $trid))->result_array();
     $data['dissolution_two_component']=$this->db->select('diss_two_components.status')->get_where('diss_two_components', array('diss_two_components.test_request' => $trid))->result_array();
     $data['dissolution_delayed']=$this->db->select('diss_delayed_release.status')->get_where('diss_delayed_release', array('diss_delayed_release.test_request' => $trid))->result_array();
+    $data['disintegration']=$this->db->select('disintegration.status')->get_where('disintegration', array('disintegration.test_request' => $trid))->result_array();
     
+    $sql = "select test_type from monograph_specifications where test_request_id = $trid";
+    
+    $results =$this->db->query($sql)->result_array();
+
+
+    $return= array();
+    foreach($results as $result){
+        $return[]=$result['test_type'];
+    }
+    
+$data['results'] =$return;
+
+   $data['monograph_specifications'] =$this->db->query($sql)->result_array();
+
+    // foreach ($monograph_specifications as $key => $value) {
+    // //    $test_type = $monograph_specifications['test_type'];
+    // }
+
+    // print_r($data['results']);die;
+
     $query=$this->db->select('assignment.id AS a,assignment.test_request_id,assignment.assigner_user_id,assignment.client_id,assignment.reference_number,assignment.assigner_name,assignment.analyst_name,assignment.sample_issued')->get_where('assignment', array('id' => $id));
     
     $results=$query->result_array();

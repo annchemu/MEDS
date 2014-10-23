@@ -8,17 +8,16 @@ class Test_Identification extends CI_Controller{
 		$data['assignment'] = $this->uri->segment(3);
 		$data['test_request'] = $this->uri->segment(4);
 		$test_request = $this->uri->segment(4);
-		$user_type=6;
+		$test_type="1a";
 		
 		$sql = "SELECT * FROM test_request WHERE id =$test_request";
 		$query = $this->db->query($sql);
 		$result =$query->result_array();
 		$data['results']=$result[0];
+		$q = "select * from monograph_specifications where test_request_id = $test_request and test_type = '$test_type' ";
+		$data['specs']=$this->db->query($q)->result_array();
 		
-		$data['sql_approved']=
-    	$this->db->select('user.fname,user.lname,user.user_type')->get_where('user', array('user_type' => $user_type))->result_array();
-
-		$this->load->view('test_identification_view', $data);
+		$this->load->view('tests/identification/test_identification_view', $data);
 		
 	}
 	function index_chemical(){		
@@ -26,7 +25,7 @@ class Test_Identification extends CI_Controller{
 		$data['test_request'] = $this->uri->segment(4);
 		$data['no_of_tests'] = $this->uri->segment(5);
 		$test_request = $this->uri->segment(4);
-		$status =0;$user_type=6;
+		$status =0;$test_type='1f';
 		
 		$sql = "SELECT * FROM test_request WHERE id =$test_request";
 		$query = $this->db->query($sql);
@@ -43,17 +42,17 @@ class Test_Identification extends CI_Controller{
 		$data['sql_reagents']=
     	$this->db->select('reagents_inventory_record.certificate_number,reagents_inventory_record.item_description,reagents_inventory_record.batch_number,reagents_inventory_record.manufacturer_supplier,reagents_inventory_record.status')->get_where('reagents_inventory_record', array('status' => $status))->result_array();
 				
-		$data['sql_approved']=
-    	$this->db->select('user.fname,user.lname,user.user_type')->get_where('user', array('user_type' => $user_type))->result_array();
-
-		$this->load->view('test_identification_chemical_view', $data);
+		$q = "select * from monograph_specifications where test_request_id = $test_request and test_type = '$test_type' ";
+		$data['specs']=$this->db->query($q)->result_array();
+		
+		$this->load->view('tests/identification/test_identification_chemical_view', $data);
 		
 	}
 	function index_hplc(){		
 		$data['assignment'] = $this->uri->segment(3);
 		$data['test_request'] = $this->uri->segment(4);
 		$test_request = $this->uri->segment(4);
-		$status =0;$user_type=6;
+		$status =0;$test_type='1e';
 		
 		$sql = "SELECT * FROM test_request WHERE id =$test_request";
 		$query = $this->db->query($sql);
@@ -73,17 +72,17 @@ class Test_Identification extends CI_Controller{
 		$data['sql_reagents']=
     	$this->db->select('reagents_inventory_record.certificate_number,reagents_inventory_record.item_description,reagents_inventory_record.batch_number,reagents_inventory_record.manufacturer_supplier,reagents_inventory_record.status')->get_where('reagents_inventory_record', array('status' => $status))->result_array();
 		
-		$data['sql_approved']=
-    	$this->db->select('user.fname,user.lname,user.user_type')->get_where('user', array('user_type' => $user_type))->result_array();
+		$q = "select * from monograph_specifications where test_request_id = $test_request and test_type = '$test_type' ";
+		$data['specs']=$this->db->query($q)->result_array();
 		
-		$this->load->view('test_identification_hplc_view', $data);
+		$this->load->view('tests/identification/test_identification_hplc_view', $data);
 		
 	}
 	function index_thin_layer(){		
 		$data['assignment'] = $this->uri->segment(3);
 		$data['test_request'] = $this->uri->segment(4);
 		$test_request = $this->uri->segment(4);
-		$status =0;$user_type=6;
+		$status =0;$test_type='1d';
 		
 		$sql = "SELECT * FROM test_request WHERE id =$test_request";
 		$query = $this->db->query($sql);
@@ -100,17 +99,17 @@ class Test_Identification extends CI_Controller{
 		$data['sql_reagents']=
     	$this->db->select('reagents_inventory_record.certificate_number,reagents_inventory_record.item_description,reagents_inventory_record.batch_number,reagents_inventory_record.manufacturer_supplier,reagents_inventory_record.status')->get_where('reagents_inventory_record', array('status' => $status))->result_array();
 		
-		$data['sql_approved']=
-    	$this->db->select('user.fname,user.lname,user.user_type')->get_where('user', array('user_type' => $user_type))->result_array();
+		$q = "select * from monograph_specifications where test_request_id = $test_request and test_type = '$test_type' ";
+		$data['specs']=$this->db->query($q)->result_array();
 		
-		$this->load->view('test_identification_thin_layer_view', $data);
+		$this->load->view('tests/identification/test_identification_thin_layer_view', $data);
 		
 	}
 	function index_uv(){
 		$data['assignment'] = $this->uri->segment(3);
 		$data['test_request'] = $this->uri->segment(4);
 		$test_request = $this->uri->segment(4);
-		$status =0;$user_type=6;
+		$status =0;$test_type='1b';
 
 		$sql = "SELECT * FROM test_request WHERE id =$test_request";
 		$query = $this->db->query($sql);
@@ -123,16 +122,16 @@ class Test_Identification extends CI_Controller{
 		$data['sql_reagents']=
     	$this->db->select('reagents_inventory_record.certificate_number,reagents_inventory_record.item_description,reagents_inventory_record.batch_number,reagents_inventory_record.manufacturer_supplier,reagents_inventory_record.status')->get_where('reagents_inventory_record', array('status' => $status))->result_array();
 		
-		$data['sql_approved']=
-    	$this->db->select('user.fname,user.lname,user.user_type')->get_where('user', array('user_type' => $user_type))->result_array();
-
-		$this->load->view('test_identification_uv_view', $data);
+		$q = "select * from monograph_specifications where test_request_id = $test_request and test_type = '$test_type' ";
+		$data['specs']=$this->db->query($q)->result_array();
+		
+		$this->load->view('tests/identification/test_identification_uv_view', $data);
 	}
 	function index_infrared(){
 		$data['assignment'] = $this->uri->segment(3);
 		$data['test_request'] = $this->uri->segment(4);
 		$test_request = $this->uri->segment(4);
-		$user_type=6;$status=0;
+		$test_type='1c';$status=0;
 
 		$sql = "SELECT * FROM test_request WHERE id =$test_request";
 		$query = $this->db->query($sql);
@@ -144,10 +143,10 @@ class Test_Identification extends CI_Controller{
 		$data['sql_standards']=
     	$this->db->select('standard_register.reference_number,standard_register.potency,standard_register.item_description,standard_register.batch_number,standard_register.manufacturer_supplier,standard_register.status')->get_where('standard_register', array('status' => $status))->result_array();
 				
-		$data['sql_approved']=
-    	$this->db->select('user.fname,user.lname,user.user_type')->get_where('user', array('user_type' => $user_type))->result_array();
-
-		$this->load->view('test_identification_infrared_view', $data);
+		$q = "select * from monograph_specifications where test_request_id = $test_request and test_type = '$test_type' ";
+		$data['specs']=$this->db->query($q)->result_array();
+		
+		$this->load->view('tests/identification/test_identification_infrared_view', $data);
 	}
 	
 	function worksheet_assay(){
@@ -210,7 +209,7 @@ class Test_Identification extends CI_Controller{
 
 		$data['results']=$result[0];
 
-		$query_e=$this->db->get_where('identification_from_assay', array('test_request' =>$test_request));
+		$query_e=$this->db->get_where('identification', array('test_request' =>$test_request));
 	    $results_e=$query_e->result_array();
 	    $assay_id = $results_e[0]['id'];
 	    $data['query_e']=$results_e[0];
@@ -220,7 +219,7 @@ class Test_Identification extends CI_Controller{
 		//var_dump($results_e);
 		//die;
 
-		$this->load->view('test_identification_view_worksheet', $data);	
+		$this->load->view('tests/identification/test_identification_view_worksheet', $data);	
 	}
 	function view_worksheet_uv(){
 		$data['assignment'] = $this->uri->segment(3);
@@ -237,12 +236,12 @@ class Test_Identification extends CI_Controller{
 	    $results_e=$query_e->result_array();
 	    $data['query_e']=$results_e[0];
 
-	    $result_monograph = $this->db->get_where('identification_uv_monograph', array('test_request_id' => $test_request))->result_array();
+	    $result_monograph = $this->db->get_where('monograph_specifications', array('test_request_id' => $test_request))->result_array();
 	    $data['query_monograph'] = $result_monograph[0];
 		//var_dump($results_e);
 		// die;
 
-		$this->load->view('test_identification_view_worksheet_uv', $data);	
+		$this->load->view('tests/identification/test_identification_view_worksheet_uv', $data);	
 	} 
 	function view_worksheet_infrared(){
 		$data['assignment'] = $this->uri->segment(3);
@@ -264,7 +263,7 @@ class Test_Identification extends CI_Controller{
 		//var_dump($results_e);
 		// die;
 
-		$this->load->view('test_identification_view_worksheet_infrared', $data);	
+		$this->load->view('tests/identification/test_identification_view_worksheet_infrared', $data);	
 	}
 	function view_worksheet_tlc(){
 		$data['assignment'] = $this->uri->segment(3);
@@ -286,7 +285,7 @@ class Test_Identification extends CI_Controller{
 		//var_dump($results_e);
 		// die;
 
-		$this->load->view('test_identification_view_worksheet_tlc', $data);	
+		$this->load->view('tests/identification/test_identification_view_worksheet_tlc', $data);	
 	}
 	function view_worksheet_hplc(){
 		$data['assignment'] = $this->uri->segment(3);
@@ -308,7 +307,7 @@ class Test_Identification extends CI_Controller{
 		//var_dump($results_e);
 		// die;
 
-		$this->load->view('test_identification_view_worksheet_hplc', $data);	
+		$this->load->view('tests/identification/test_identification_view_worksheet_hplc', $data);	
 	}
 	function view_worksheet_chemical(){
 		$data['assignment'] = $this->uri->segment(3);
@@ -330,7 +329,7 @@ class Test_Identification extends CI_Controller{
 		//var_dump($results_e);
 		// die;
 
-		$this->load->view('test_identification_view_worksheet_chemical', $data);	
+		$this->load->view('tests/identification/test_identification_view_worksheet_chemical', $data);	
 	}
 	function view_worksheet_thin_layer(){
 		$data['assignment'] = $this->uri->segment(3);
@@ -352,7 +351,7 @@ class Test_Identification extends CI_Controller{
 		//var_dump($results_e);
 		// die;
 
-		$this->load->view('test_identification_view_worksheet_thin_layer', $data);	
+		$this->load->view('tests/identification/test_identification_view_worksheet_thin_layer', $data);	
 	}
 	function monograph_assay(){
 		$data['assignment'] = $this->uri->segment(3);
@@ -366,7 +365,7 @@ class Test_Identification extends CI_Controller{
 
 		$data['results']=$result[0];
 				
-		$this->load->view('test_identification_monograph_assay_view',$data);
+		$this->load->view('tests/identification/test_identification_monograph_assay_view',$data);
 	}
 	function monograph_chemical(){
 		$data['assignment'] = $this->uri->segment(3);
@@ -379,7 +378,7 @@ class Test_Identification extends CI_Controller{
 
 		$data['results']=$result[0];
 				
-		$this->load->view('test_identification_monograph_chemical_view',$data);
+		$this->load->view('tests/identification/test_identification_monograph_chemical_view',$data);
 	}
 	function monograph_hplc(){
 		$data['assignment'] = $this->uri->segment(3);
@@ -392,7 +391,7 @@ class Test_Identification extends CI_Controller{
 
 		$data['results']=$result[0];
 				
-		$this->load->view('test_identification_monograph_hplc_view',$data);
+		$this->load->view('tests/identification/test_identification_monograph_hplc_view',$data);
 	}
 	function monograph_infrared(){
 		$data['assignment'] = $this->uri->segment(3);
@@ -405,7 +404,7 @@ class Test_Identification extends CI_Controller{
 
 		$data['results']=$result[0];
 				
-		$this->load->view('test_identification_monograph_infrared_view',$data);
+		$this->load->view('tests/identification/test_identification_monograph_infrared_view',$data);
 	}
 	function monograph_thin_layer(){
 		$data['assignment'] = $this->uri->segment(3);
@@ -418,7 +417,7 @@ class Test_Identification extends CI_Controller{
 
 		$data['results']=$result[0];
 				
-		$this->load->view('test_identification_monograph_thin_layer_view',$data);
+		$this->load->view('tests/identification/test_identification_monograph_thin_layer_view',$data);
 	}
 	function monograph_tlc(){
 		$data['assignment'] = $this->uri->segment(3);
@@ -431,7 +430,7 @@ class Test_Identification extends CI_Controller{
 
 		$data['results']=$result[0];
 				
-		$this->load->view('test_identification_monograph_tlc_view',$data);
+		$this->load->view('tests/identification/test_identification_monograph_tlc_view',$data);
 	}
 	function monograph_uv(){
 		$data['assignment'] = $this->uri->segment(3);
@@ -444,7 +443,7 @@ class Test_Identification extends CI_Controller{
 
 		$data['results']=$result[0];
 				
-		$this->load->view('test_identification_monograph_uv_view',$data);
+		$this->load->view('tests/identification/test_identification_monograph_uv_view',$data);
 	}
 	function save_chemical_monograph(){	
 

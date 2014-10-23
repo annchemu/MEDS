@@ -457,3 +457,11 @@ margin-top:-32767px;/* thank you Erik J - negate effect of float*/
     -o-transform: perspective(700px) rotateX(60deg);
     transform: perspective(700px) rotateX(60deg);
 }
+.page-alerts {
+    margin-bottom: 20px;
+}
+
+.page-alerts .page-alert {
+    border-radius: 0;
+    margin-bottom: 0;
+}

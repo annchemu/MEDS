@@ -23,7 +23,7 @@ class Assay extends CI_Controller {
 
     $query=$this->db->select('test_request.id AS tr,test_request.client_id,test_request.active_ingredients,test_request.brand_name,test_request.applicant_address,test_request.date_time,test_request.manufacturer_name,test_request.manufacturer_address,test_request.batch_lot_number,
     test_request.sample_source,test_request.expiry_date,test_request.date_manufactured,test_request.quantity_type,test_request.sample_source,test_request.laboratory_number,test_request.applicant_name,
-    test_request.quantity_remaining,test_request.quantity_submitted,test_request.reference_number,test_request.applicant_ref_number,test_request.identification,test_request.friability,test_request.dissolution,test_request.assay,test_request.test_specification,
+    test_request.quantity_remaining,test_request.quantity_submitted,test_request.strength_concentration,test_request.reference_number,test_request.applicant_ref_number,test_request.identification,test_request.friability,test_request.dissolution,test_request.assay,test_request.test_specification,
     test_request.disintegration,test_request.ph_alkalinity,test_request.full_monograph,test_request.content_uniformity,test_request.microbiology,test_request.request_status')->get_where('test_request', array('id' => $test_request_id));
      
 
@@ -31,7 +31,7 @@ class Assay extends CI_Controller {
     $results=$query->result_array();
     $data['query']=$results[0];
 
-    $this->load->view('test_reagents_form',$data);
+    $this->load->view('assay/test_reagents_form',$data);
     $this->load->helper(array('form'));
     }
 
@@ -83,7 +83,7 @@ class Assay extends CI_Controller {
 
     $results=$query->result_array();
     $data['query']=$results[0];
-    $this->load->view('out_of_specification_investigation_view',$data);
+    $this->load->view('assay/out_of_specification_investigation_view',$data);
     $this->load->helper(array('form'));
 
     }
@@ -137,7 +137,7 @@ class Assay extends CI_Controller {
     $data['query']=$results[0];
     
     
-    $this->load->view('full_assay_hplc_internal_method_worksheet_view',$data);
+    $this->load->view('assay/full_assay_hplc_internal_method_worksheet_view',$data);
     $this->load->helper(array('form'));
 
     }
@@ -191,7 +191,7 @@ class Assay extends CI_Controller {
     $data['query']=$results[0];
     
     
-    $this->load->view('full_assay_hplc_internal_method_two_components_worksheet_view',$data);
+    $this->load->view('assay/full_assay_hplc_internal_method_two_components_worksheet_view',$data);
     $this->load->helper(array('form'));
 
     }
@@ -246,7 +246,7 @@ class Assay extends CI_Controller {
     $data['query']=$results[0];
     
     
-    $this->load->view('full_assay_hplc_area_method_single_component_worksheet_view',$data);
+    $this->load->view('assay/full_assay_hplc_area_method_single_component_worksheet_view',$data);
     $this->load->helper(array('form'));
 
     }
@@ -304,7 +304,7 @@ class Assay extends CI_Controller {
     $data['query']=$results[0];
     
     
-    $this->load->view('full_assay_hplc_area_method_two_components_worksheet_view',$data);
+    $this->load->view('assay/full_assay_hplc_area_method_two_components_worksheet_view',$data);
     $this->load->helper(array('form'));
 
     }
@@ -328,7 +328,7 @@ class Assay extends CI_Controller {
     $data['query']=$results[0];
     
     
-    $this->load->view('assay_monograph_hplc_internal_method',$data);
+    $this->load->view('assay/assay_monograph_hplc_internal_method',$data);
     $this->load->helper(array('form'));
     }
     function monograph_hplc_internal_method_two_components() {
@@ -350,7 +350,7 @@ class Assay extends CI_Controller {
     $data['query']=$results[0];
     
     
-    $this->load->view('assay_monograph_hplc_internal_method_two_components',$data);
+    $this->load->view('assay/assay_monograph_hplc_internal_method_two_components',$data);
     $this->load->helper(array('form'));
     }
     function view_monograph_hplc_internal_method() {
@@ -374,7 +374,7 @@ class Assay extends CI_Controller {
     $data['query']=$results[0];
     
     
-    $this->load->view('view_monograph',$data);
+    $this->load->view('assay/view_monograph',$data);
     $this->load->helper(array('form'));
     }
     function view_monograph_hplc_internal_method_two_components() {
@@ -398,7 +398,7 @@ class Assay extends CI_Controller {
     $data['query']=$results[0];
     
     
-    $this->load->view('view_monograph_internal_method_two_components',$data);
+    $this->load->view('assay/view_monograph_internal_method_two_components',$data);
     $this->load->helper(array('form'));
     }
     function view_monograph_hplc_area_method_single_component() {
@@ -422,7 +422,7 @@ class Assay extends CI_Controller {
     $data['query']=$results[0];
     
     
-    $this->load->view('view_monograph',$data);
+    $this->load->view('assay/view_monograph',$data);
     $this->load->helper(array('form'));
     }
     function view_monograph_area_method_two_components() {
@@ -446,7 +446,7 @@ class Assay extends CI_Controller {
     $data['query']=$results[0];
     
     
-    $this->load->view('view_monograph_area_method_two_components',$data);
+    $this->load->view('assay/view_monograph_area_method_two_components',$data);
     $this->load->helper(array('form'));
     }
     function monograph_area_method_single_component() {
@@ -469,7 +469,7 @@ class Assay extends CI_Controller {
     $data['query']=$results[0];
     
     
-    $this->load->view('assay_monograph_hplc_are_method_single_component',$data);
+    $this->load->view('assay/assay_monograph_hplc_are_method_single_component',$data);
     $this->load->helper(array('form'));
     }
     function monograph_area_method_two_components() {
@@ -492,7 +492,7 @@ class Assay extends CI_Controller {
     $data['query']=$results[0];
     
     
-    $this->load->view('assay_monograph_hplc_are_method_two_components',$data);
+    $this->load->view('assay/assay_monograph_hplc_are_method_two_components',$data);
     $this->load->helper(array('form'));
     }
     
@@ -516,7 +516,7 @@ class Assay extends CI_Controller {
     $data['query']=$results[0];
     
     
-    $this->load->view('assay_monograph_hplc_are_method_two_components_dif_methods',$data);
+    $this->load->view('assay/assay_monograph_hplc_are_method_two_components_dif_methods',$data);
     $this->load->helper(array('form'));
     }
     function view_monograph_hplc_area_method_two_components_dif_methods() {
@@ -542,7 +542,7 @@ class Assay extends CI_Controller {
     $data['query']=$results[0];
     
     
-    $this->load->view('view_assay_monograph_hplc_are_method_two_components_dif_methods',$data);
+    $this->load->view('assay/view_assay_monograph_hplc_are_method_two_components_dif_methods',$data);
     $this->load->helper(array('form'));
     }
     function monograph_hplc_area_method_two_oral_liquids_single_component() {
@@ -565,7 +565,7 @@ class Assay extends CI_Controller {
     $data['query']=$results[0];
     
     
-    $this->load->view('assay_monograph_hplc_area_method_two_oral_liquids_single_component',$data);
+    $this->load->view('assay/assay_monograph_hplc_area_method_two_oral_liquids_single_component',$data);
     $this->load->helper(array('form'));
     }
     function view_monograph_hplc_area_method_two_oral_liquids_single_component() {
@@ -591,7 +591,7 @@ class Assay extends CI_Controller {
     $data['query']=$results[0];
     
     
-    $this->load->view('view_assay_monograph_ham_two_oral_liquids_single_component',$data);
+    $this->load->view('assay/view_assay_monograph_ham_two_oral_liquids_single_component',$data);
     $this->load->helper(array('form'));
     }
     function monograph_hplc_area_method_two_oral_liquids_two_components() {
@@ -614,7 +614,7 @@ class Assay extends CI_Controller {
     $data['query']=$results[0];
     
     
-    $this->load->view('assay_monograph_hplc_area_method_two_oral_liquids_two_components',$data);
+    $this->load->view('assay/assay_monograph_hplc_area_method_two_oral_liquids_two_components',$data);
     $this->load->helper(array('form'));
     }
     function view_monograph_hplc_area_method_two_oral_liquids_two_components() {
@@ -640,7 +640,7 @@ class Assay extends CI_Controller {
     $data['query']=$results[0];
     
     
-    $this->load->view('view_assay_monograph_ham_two_oral_liquids_two_components',$data);
+    $this->load->view('assay/view_assay_monograph_ham_two_oral_liquids_two_components',$data);
     $this->load->helper(array('form'));
     }
     function monograph_hplc_area_method_powder_for_oral_liquids() {
@@ -663,7 +663,7 @@ class Assay extends CI_Controller {
     $data['query']=$results[0];
     
     
-    $this->load->view('assay_monograph_hplc_area_method_powder_for_oral_liquids',$data);
+    $this->load->view('assay/assay_monograph_hplc_area_method_powder_for_oral_liquids',$data);
     $this->load->helper(array('form'));
     }
     function view_monograph_hplc_area_method_powder_for_oral_liquids() {
@@ -688,7 +688,7 @@ class Assay extends CI_Controller {
     $data['query']=$results[0];
     
     
-    $this->load->view('view_assay_monograph_hplc_area_method_powder_for_oral_liquids',$data);
+    $this->load->view('assay/view_assay_monograph_hplc_area_method_powder_for_oral_liquids',$data);
     $this->load->helper(array('form'));
     }
     function monograph_hplc_area_method_injection_powder_single_component() {
@@ -711,7 +711,7 @@ class Assay extends CI_Controller {
     $data['query']=$results[0];
     
     
-    $this->load->view('assay_monograph_hplc_area_method_injection_powder_single_component',$data);
+    $this->load->view('assay/assay_monograph_hplc_area_method_injection_powder_single_component',$data);
     $this->load->helper(array('form'));
     }
     function view_monograph_hplc_area_method_injection_powder_single_component() {
@@ -737,7 +737,7 @@ class Assay extends CI_Controller {
     $data['query']=$results[0];
     
     
-    $this->load->view('view_assay_monograph_ham_injection_powder_single_component',$data);
+    $this->load->view('assay/view_assay_monograph_ham_injection_powder_single_component',$data);
     $this->load->helper(array('form'));
     }
     function monograph_hplc_area_method_injection_powder_two_components() {
@@ -760,7 +760,7 @@ class Assay extends CI_Controller {
     $data['query']=$results[0];
     
     
-    $this->load->view('assay_monograph_hplc_area_method_injection_powder_two_components',$data);
+    $this->load->view('assay/assay_monograph_hplc_area_method_injection_powder_two_components',$data);
     $this->load->helper(array('form'));
     }
     function monograph_titration() {
@@ -783,7 +783,7 @@ class Assay extends CI_Controller {
     $data['query']=$results[0];
     
     
-    $this->load->view('assay_monograph_titration',$data);
+    $this->load->view('assay/assay_monograph_titration',$data);
     $this->load->helper(array('form'));
     }
 
@@ -809,7 +809,7 @@ class Assay extends CI_Controller {
     $data['query']=$results[0];
     
     
-    $this->load->view('view_assay_monograph_titration',$data);
+    $this->load->view('assay/view_assay_monograph_titration',$data);
     $this->load->helper(array('form'));
     }
 
@@ -833,7 +833,7 @@ class Assay extends CI_Controller {
     $data['query']=$results[0];
     
     
-    $this->load->view('assay_monograph_indometric_titration',$data);
+    $this->load->view('assay/assay_monograph_indometric_titration',$data);
     $this->load->helper(array('form'));
     }
     function view_monograph_indometric_titration() {
@@ -859,7 +859,7 @@ class Assay extends CI_Controller {
     $data['query']=$results[0];
     
     
-    $this->load->view('view_assay_monograph_indometric_titration',$data);
+    $this->load->view('assay/view_assay_monograph_indometric_titration',$data);
     $this->load->helper(array('form'));
     }
 
@@ -883,7 +883,7 @@ class Assay extends CI_Controller {
     $data['query']=$results[0];
     
     
-    $this->load->view('assay_monograph_ultraviolet_single_component',$data);
+    $this->load->view('assay/assay_monograph_ultraviolet_single_component',$data);
     $this->load->helper(array('form'));
     }
     function monograph_ultraviolet_two_components() {
@@ -906,7 +906,7 @@ class Assay extends CI_Controller {
     $data['query']=$results[0];
     
     
-    $this->load->view('assay_monograph_ultraviolet_two_components',$data);
+    $this->load->view('assay/assay_monograph_ultraviolet_two_components',$data);
     $this->load->helper(array('form'));
     }
 
@@ -944,7 +944,7 @@ class Assay extends CI_Controller {
     // var_dump($results);
     // die;
  
-    $this->load->view('assay_hplc_area_method_single_component',$data);
+    $this->load->view('assay/assay_hplc_area_method_single_component',$data);
     $this->load->helper(array('form'));
     }
 
@@ -981,7 +981,7 @@ class Assay extends CI_Controller {
     // var_dump($results);
     // die;
  
-    $this->load->view('assay_hplc_area_method_two_components',$data);
+    $this->load->view('assay/assay_hplc_area_method_two_components',$data);
     $this->load->helper(array('form'));
     }
     
@@ -1016,7 +1016,7 @@ class Assay extends CI_Controller {
     // var_dump($results);
     // die;
  
-    $this->load->view('assay_hplc_area_method_two_components_different_methods',$data);
+    $this->load->view('assay/assay_hplc_area_method_two_components_different_methods',$data);
     $this->load->helper(array('form'));
 
  }
@@ -1057,7 +1057,7 @@ class Assay extends CI_Controller {
     // var_dump($results);
     // die;
  
-    $this->load->view('assay_hplc_area_method_oral_liquids_single_component',$data);
+    $this->load->view('assay/assay_hplc_area_method_oral_liquids_single_component',$data);
     $this->load->helper(array('form'));
 
  }
@@ -1093,7 +1093,7 @@ class Assay extends CI_Controller {
     // var_dump($results);
     // die;
  
-    $this->load->view('assay_hplc_area_method_oral_liquids_two_components',$data);
+    $this->load->view('assay/assay_hplc_area_method_oral_liquids_two_components',$data);
     $this->load->helper(array('form'));
 
     }
@@ -1135,7 +1135,7 @@ class Assay extends CI_Controller {
     // var_dump($results);
     // die;
  
-    $this->load->view('assay_hplc_area_method_powder_for_oral_liquids',$data);
+    $this->load->view('assay/assay_hplc_area_method_powder_for_oral_liquids',$data);
     $this->load->helper(array('form'));
 
     }
@@ -1178,7 +1178,7 @@ class Assay extends CI_Controller {
     // var_dump($results);
     // die;
  
-    $this->load->view('assay_hplc_area_method_injection_powder_single_component',$data);
+    $this->load->view('assay/assay_hplc_area_method_injection_powder_single_component',$data);
     $this->load->helper(array('form'));
 
 
@@ -1215,7 +1215,7 @@ class Assay extends CI_Controller {
     // var_dump($results);
     // die;
  
-    $this->load->view('assay_hplc_area_method_injection_powder_two_components',$data);
+    $this->load->view('assay/assay_hplc_area_method_injection_powder_two_components',$data);
     $this->load->helper(array('form'));
 
 
@@ -1253,7 +1253,7 @@ class Assay extends CI_Controller {
 
     $query=$this->db->select('test_request.id AS tr,test_request.client_id,test_request.active_ingredients,test_request.brand_name,test_request.applicant_address,test_request.date_time,test_request.manufacturer_name,test_request.manufacturer_address,test_request.batch_lot_number,
     test_request.sample_source,test_request.expiry_date,test_request.date_manufactured,test_request.quantity_type,test_request.sample_source,test_request.laboratory_number,test_request.applicant_name,
-    test_request.quantity_remaining,test_request.quantity_submitted,test_request.pack_size,test_request.reference_number,test_request.applicant_ref_number,test_request.identification,test_request.friability,test_request.dissolution,test_request.assay,test_request.test_specification,
+    test_request.quantity_remaining,test_request.quantity_submitted,test_request.strength_concentration,test_request.pack_size,test_request.reference_number,test_request.applicant_ref_number,test_request.identification,test_request.friability,test_request.dissolution,test_request.assay,test_request.test_specification,
     test_request.disintegration,test_request.ph_alkalinity,test_request.full_monograph,test_request.content_uniformity,test_request.microbiology,test_request.request_status')->get_where('test_request', array('id' => $test_request_id));
     
 
@@ -1263,7 +1263,7 @@ class Assay extends CI_Controller {
     // var_dump($results);
     // die;
  
-    $this->load->view('assay_hplc_internal_method_single_component',$data);
+    $this->load->view('assay/assay_hplc_internal_method_single_component',$data);
     $this->load->helper(array('form'));
     }
 
@@ -1305,7 +1305,7 @@ class Assay extends CI_Controller {
     // var_dump($results);
     // die;
  
-    $this->load->view('assay_hplc_internal_method_two_components',$data);
+    $this->load->view('assay/assay_hplc_internal_method_two_components',$data);
     $this->load->helper(array('form'));
     }
 
@@ -1347,7 +1347,7 @@ class Assay extends CI_Controller {
     // var_dump($results);
     // die;
  
-    $this->load->view('assay_ultraviolet_single_component',$data);
+    $this->load->view('assay/assay_ultraviolet_single_component',$data);
     $this->load->helper(array('form'));
     }
     function worksheet_ultravioletv_two_components() {
@@ -1387,7 +1387,7 @@ class Assay extends CI_Controller {
     // var_dump($results);
     // die;
  
-    $this->load->view('assay_ultraviolet_two_components',$data);
+    $this->load->view('assay/assay_ultraviolet_two_components',$data);
     $this->load->helper(array('form'));
     }
     function worksheet_titration() {
@@ -1421,7 +1421,7 @@ class Assay extends CI_Controller {
     // var_dump($results);
     // die;
  
-    $this->load->view('assay_titration_view',$data);
+    $this->load->view('assay/assay_titration_view',$data);
     $this->load->helper(array('form'));
     }
     function worksheet_indometric_titration() {
@@ -1460,7 +1460,7 @@ class Assay extends CI_Controller {
     // var_dump($results);
     // die;
  
-    $this->load->view('assay_titration_indometric_view',$data);
+    $this->load->view('assay/assay_titration_indometric_view',$data);
     $this->load->helper(array('form'));
     }
     function worksheet_karl_fisher(){
@@ -1494,7 +1494,7 @@ class Assay extends CI_Controller {
     // var_dump($results);
     // die;
  
-    $this->load->view('assay_karl_fisher',$data);
+    $this->load->view('assay/assay_karl_fisher',$data);
     $this->load->helper(array('form'));
 
     }

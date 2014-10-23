@@ -240,6 +240,7 @@
             </tr>
         </table>
         <table id="list" class="list_view_header"  width="100%" cellpadding="4px">
+
             <thead bgcolor="#efefef">
                 <tr>
                     <th style="border-right: dotted 1px #c0c0c0;" align="center">No.</th>
@@ -264,10 +265,16 @@
             <tbody>
                 <?php
                 $i=1;
+               $progressbar =0;
                 foreach($query as $row):
-                    
+                    $initial_qtty = $row->initial_quantity;
+                  $qtty = $row->quantity;
+                  $progressbar = round((($qtty / $initial_qtty) *100));
+
                 if($i==0){
-                 
+                  
+                  //echo "$progressbar";
+
                 echo"<tr>";
                 }
                 ?> 
@@ -284,7 +291,7 @@
                     <td style="text-align: left;border-bottom: solid 1px #c0c0c0;"><?php echo substr($row->date_received,0,-8);?></td>
                     <td style="text-align: left;border-bottom: solid 1px #c0c0c0;" id ="initial_quantity"><?php echo $row->initial_quantity;?></td>
                     <td style="text-align: left;border-bottom: solid 1px #c0c0c0;"id="current_quantity"><?php echo $row->quantity;?></td>
-                    <td style="text-align: left;border-bottom: solid 1px #c0c0c0;" id ="progressbar1"><input type ="hidden" id ="progressbar" onchange="calc()"></td>
+                    <td style="text-align: left;border-bottom: solid 1px #c0c0c0;" id ="progressbar1"><div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo "$progressbar";?>%"><?php echo "$progressbar";?>%</td>
                     <td style="text-align: center;border-bottom: solid 1px #c0c0c0;">
                       <a href="<?php echo base_url().'standard_register_log/Logs/'.$row->id;?>"><img src="<?php echo base_url().'images/icons/view.png';?>" height="20px" width="20px"/>Log</a>
                       </td>
@@ -302,9 +309,16 @@
                 </tr>
                 <?php endforeach; ?>
             </tbody>
+            <tr><td></td></tr>
+            
         </table>
     </div>
     <div id="standard_form" class="modal fade" role="dialog" aria-labelledby="equipment" aria-hidden="true"><?php include_once "application/views/standard_register_form.php";?></div>  
 </div>
 </body>
+<script>
+progressbar_val = $('#progress_bar_val').val();
+<input type="hidden" id="progress_bar_val" value="<?php echo "$progressbar";?>">
+alert
+</script>
 </html>

@@ -28,6 +28,7 @@ class Friability extends CI_Controller {
     $this->load->view('friability_monograph_view',$data);
     $this->load->helper(array('form'));
     }
+    
     function friability_monograph() {
         
     $assignment_id= $this->uri->segment(3);

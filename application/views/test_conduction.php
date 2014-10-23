@@ -154,19 +154,20 @@
                </tr>
                <tr>
                     <td style="text-align:center;padding:4px;"><b></b></td>
-                    <td style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_identification/monograph_assay/'.$query['a'].'/'.$request[0]['tr'];?>">Monograph</a></td>
-                    <td 
-                    <?php 
-                      if(empty($monograph_identification_assay)){
-                    
-                          echo"style='text-align:left;padding:4px;'>";
-                          echo "Please Fill The Assay Monograph First";
-                     }else{
-                      ?>
-                       style="text-align:left;padding:4px;"><a href="<?php echo base_url().'test_identification/index/'.$query['a'].'/'.$request[0]['tr'];?>">Assay</a></td>
-                     <?php   
-                     }
-                     ?>
+                    <td style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_identification/monograph_assay/'.$query['a'].'/'.$request[0]['tr'];?>">Specifications</a></td>                   
+                 <?php              
+
+                  if(in_array('1a', $results)){
+                    ?>
+                    <td style='text-align:left;padding:4px;'><a href="<?php echo base_url().'test_identification/index/'.$query['a'].'/'.$request[0]['tr'];?>">Assay</a>
+                 <?php     
+                 }else{                         
+                  ?>
+                    <td style='text-align:left;padding:4px;'>Please fill in Assay Specification  
+                <?php
+                }             
+                ?>
+                </td>
                     <td <?php 
                       if(empty($identification_assay)){
                     
@@ -193,19 +194,20 @@
               </tr>
               <tr>
                     <td style="text-align:center;padding:4px;"></td>
-                    <td style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_identification/monograph_uv/'.$query['a'].'/'.$request[0]['tr'];?>">Monograph</a></td>
-                    <td 
-                    <?php 
-                      if(empty($monograph_identification_uv)){
-              
-                          echo"style='text-align:left;padding:4px;'>";
-                          echo "Please Fill The UV Monograph First";
-                     }else{
-                      ?>
-                        style="text-align:left;padding:4px;"><a href="<?php echo base_url().'test_identification/index_uv/'.$query['a'].'/'.$request[0]['tr'];?>">UV</a></td>
-                     <?php   
-                     }
-                     ?>
+                    <td style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_identification/monograph_uv/'.$query['a'].'/'.$request[0]['tr'];?>">Specifications</a></td>
+                    
+                       <?php              
+
+                  if(in_array('1b', $results)){
+                    ?>
+                    <td style='text-align:left;padding:4px;'><a href="<?php echo base_url().'test_identification/index_uv/'.$query['a'].'/'.$request[0]['tr'];?>">UV</a>
+                 <?php     
+                 }else{                         
+                  ?>
+                    <td style='text-align:left;padding:4px;'>Please fill in UV Specification  
+                <?php
+                }             
+                ?>
                     <td 
                     <?php 
                       if(empty($identification_uv)){
@@ -233,20 +235,19 @@
               </tr>
               <tr>
                     <td style="text-align:center;padding:4px;"></td>
-                    <td style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_identification/monograph_infrared/'.$query['a'].'/'.$request[0]['tr'];?>">Monograph</a></td>
-                    <td 
-                      <?php 
-                      if(empty($monograph_identification_infrared)){
-                    
-                          echo"style='text-align:left;padding:4px;'>";
-                          echo "Please Fill The Infrared Monograph First";
-                  
-                     }else{
+                    <td style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_identification/monograph_infrared/'.$query['a'].'/'.$request[0]['tr'];?>">Specification</a></td>
+                    <?php              
+
+                      if(in_array('1c', $results)){
+                        ?>
+                        <td style='text-align:left;padding:4px;'><a href="<?php echo base_url().'test_identification/index_infrared/'.$query['a'].'/'.$request[0]['tr'];?>">Infrared</a>
+                     <?php     
+                     }else{                         
                       ?>
-                        style="text-align:left;padding:4px;"><a href="<?php echo base_url().'test_identification/index_infrared/'.$query['a'].'/'.$request[0]['tr'];?>">Infrared</a></td>
-                     <?php   
-                     }
-                     ?>
+                        <td style='text-align:left;padding:4px;'>Please fill in Infrared Specification  
+                    <?php
+                    }             
+                    ?>
                     <td 
                     <?php 
                       if(empty($identification_infrared)){
@@ -274,19 +275,19 @@
               </tr>
               <tr>
                     <td style="text-align:center;padding:4px;"></td>
-                    <td style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_identification/monograph_thin_layer/'.$query['a'].'/'.$request[0]['tr'];?>">Monograph</a></td>
-                    <td 
-                    <?php 
-                      if(empty($monograph_identification_thin_layer)){
-                    
-                          echo"style='text-align:left;padding:4px;'>";
-                          echo "Please Fill The Thin Layer Chromatography Monograph First";
-                     }else{
+                    <td style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_identification/monograph_thin_layer/'.$query['a'].'/'.$request[0]['tr'];?>">Specifications</a></td>
+                    <?php              
+
+                      if(in_array('1d', $results)){
+                        ?>
+                        <td style='text-align:left;padding:4px;'><a href="<?php echo base_url().'test_identification/index_thin_layer/'.$query['a'].'/'.$request[0]['tr'];?>">Thin Layer</a>
+                     <?php     
+                     }else{                         
                       ?>
-                    style="text-align:left;padding:4px;"><a href="<?php echo base_url().'test_identification/index_thin_layer/'.$query['a'].'/'.$request[0]['tr'];?>">Thin Layer Chromatography</a></td>
-                     <?php   
-                     }
-                     ?>
+                        <td style='text-align:left;padding:4px;'>Please fill in Thin Layer Specification  
+                    <?php
+                    }             
+                    ?>
                     <td 
                     <?php 
                       if(empty($identification_thin_layer)){
@@ -315,20 +316,19 @@
               </tr>
               <tr>
                     <td style="text-align:center;padding:4px;"></td>
-                    <td style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_identification/monograph_hplc/'.$query['a'].'/'.$request[0]['tr'];?>">Monograph</a></td>
-                    <td 
-                    <?php 
-                      if(empty($monograph_identification_hplc)){
-                    
-                          echo"style='text-align:left;padding:4px;'>";
-                          echo "Please Fill The Identification by HPLC Monograph First";
+                    <td style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_identification/monograph_hplc/'.$query['a'].'/'.$request[0]['tr'];?>">Specifications</a></td>
+                    <?php              
 
-                     }else{
+                      if(in_array('1e', $results)){
+                        ?>
+                        <td style='text-align:left;padding:4px;'><a href="<?php echo base_url().'test_identification/index_hplc/'.$query['a'].'/'.$request[0]['tr'];?>">HPLC</a>
+                     <?php     
+                     }else{                         
                       ?>
-                       style="text-align:left;padding:4px;"><a href="<?php echo base_url().'test_identification/index_hplc/'.$query['a'].'/'.$request[0]['tr'];?>">Identification by HPLC</a></td>
-                     <?php   
-                     }
-                     ?>
+                        <td style='text-align:left;padding:4px;'>Please fill in HPLC Specification  
+                    <?php
+                    }             
+                    ?>
                     <td 
                     <?php 
                       if(empty($identification_hplc)){
@@ -356,20 +356,19 @@
               </tr>
               <tr>
                     <td style="text-align:center;padding:4px;"></td>
-                    <td style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_identification/monograph_chemical/'.$query['a'].'/'.$request[0]['tr'];?>">Monograph</a></td>
-                    <td 
-                    <?php 
-                      if(empty($monograph_identification_chemical_method)){
-                    
-                          echo"style='text-align:left;padding:4px;'>";
-                          echo "Please Fill The Chemical Method Monograph First";
-                      
-                     }else{
+                    <td style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_identification/monograph_chemical/'.$query['a'].'/'.$request[0]['tr'];?>">Specifications</a></td>
+                    <?php              
+
+                      if(in_array('1f', $results)){
+                        ?>
+                        <td style='text-align:left;padding:4px;'><a id="chemical_test_link"  href="#">Chemical Method</a>
+                     <?php     
+                     }else{                         
                       ?>
-                      style="text-align:left;padding:4px;"><a id="chemical_test_link"  href="#">Chemical Method</a></td>
-                     <?php   
-                     }
-                     ?>
+                        <td style='text-align:left;padding:4px;'>Please fill in Chemical Method Specification  
+                    <?php
+                    }             
+                    ?>
                     <td 
                     <?php 
                       if(empty($identification_chemical_method)){
@@ -405,21 +404,20 @@
             ?>
             <tr>
                 <td style="text-align:center;padding:4px;"><b>Dissolution</b></a></td>
-                <td style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_dissolution/monograph_uv/'.$query['a'].'/'.$request[0]['tr'];?>">Monograph</a></td>
+                <td style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_dissolution/monograph_uv/'.$query['a'].'/'.$request[0]['tr'];?>">Specification</a></td>
                 <td 
-                <?php 
-                      if(empty($monograph_diss_uv)){
-                          echo"style='text-align:left;padding:4px;color:#000;border-bottom:solid 1px #bfbfbf;'>";
-                          echo "Please Fill The By UV Monograph First";
-                          
-                     }else{
-                      ?>
-                        style="text-align:left;padding:4px;"><a href="<?php echo base_url().'test_dissolution/index/'.$query['a'].'/'.$request[0]['tr'];?>">Normal Tablet Single Component UV</a></td>
-                     <?php   
-                     }
-                     ?>
-               
+                <?php              
 
+                  if(in_array('7a', $results)){
+                    ?>
+                    <td style='text-align:left;padding:4px;'><a href="<?php echo base_url().'test_dissolution/index/'.$query['a'].'/'.$request[0]['tr'];?>">Normal Tablet: Single Component, UV</a>
+                 <?php     
+                 }else{                         
+                  ?>
+                    <td style='text-align:left;padding:4px;'>Please fill in UV Specification  
+                <?php
+                }             
+                ?>
                 <td 
                 <?php 
                       if(empty($diss_uv)){
@@ -483,19 +481,20 @@
             </tr>
             <tr>
                 <td style="text-align:center;padding:4px;"></a></td>
-                <td style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_dissolution/monograph_delayed_release/'.$query['a'].'/'.$request[0]['tr'];?>">Monograph</a></td>
+                <td style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_dissolution/monograph_delayed_release/'.$query['a'].'/'.$request[0]['tr'];?>">Specification</a></td>
                 <td 
-                <?php 
-                      if(empty($monograph_dissolution_delayed)){
-                           echo"style='text-align:left;padding:4px;color:#000;border-bottom:solid 1px #bfbfbf;'>";
-                          echo "Please Fill The Delayed Release Tablets Monograph First";
-                          
-                     }else{
-                      ?>
-                      style="text-align:left;padding:4px;"><a href="<?php echo base_url().'test_dissolution/index_delayed_release/'.$query['a'].'/'.$request[0]['tr'];?>">Delayed Release Tablets Single Component HPLC</a></td>
-                     <?php   
-                     }
-                     ?>
+                <?php              
+
+                  if(in_array('7b', $results)){
+                    ?>
+                    <td style='text-align:left;padding:4px;'><a href="<?php echo base_url().'test_dissolution/index_delayed_release/'.$query['a'].'/'.$request[0]['tr'];?>">Delayed Release Tablets: Single Component, HPLC </a>
+                 <?php     
+                 }else{                         
+                  ?>
+                    <td style='text-align:left;padding:4px;'>Please fill in Delayed Release Specification  
+                <?php
+                }             
+                ?>
                 <td 
                 <?php 
                       if(empty($dissolution_delayed)){
@@ -558,19 +557,19 @@
             </tr>
             <tr>
                 <td style="text-align:center;padding:4px;"></a></td>
-                <td style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_dissolution/monograph_enteric_coated/'.$query['a'].'/'.$request[0]['tr'];?>">Monograph</a></td>
-                <td 
-                 <?php 
-                      if(empty($monograph_dissolution_enteric_coated)){
-                    
-                          echo"style='text-align:left;padding:4px;border-bottom:solid 1px #bfbfbf;'>";
-                          echo "Enteric Coated Tablets Single Component HPLC";
-                     }else{
-                      ?>
-                      style="text-align:left;padding:4px;"><a href="<?php echo base_url().'test_dissolution/index_enteric_coated/'.$query['a'].'/'.$request[0]['tr'];?>">Enteric Coated Tablets Single Component HPLC</a></td>
-                     <?php   
-                     }
-                     ?>
+                <td style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_dissolution/monograph_enteric_coated/'.$query['a'].'/'.$request[0]['tr'];?>">Specification</a></td>
+                <?php              
+
+                  if(in_array('7c', $results)){
+                    ?>
+                    <td style='text-align:left;padding:4px;'><a href="<?php echo base_url().'test_dissolution/index_enteric_coated/'.$query['a'].'/'.$request[0]['tr'];?>">Enteric Coated Tablet: Single Component, HPLC</a>
+                 <?php     
+                 }else{                         
+                  ?>
+                    <td style='text-align:left;padding:4px;'>Please fill in Enteric Coated Specification  
+                <?php
+                }             
+                ?>
                 <td 
                 <?php 
                       if(empty($dissolution_enteric_coated)){
@@ -632,19 +631,20 @@
             </tr>
             <tr>
                 <td style="text-align:center;padding:4px;"></a></td>
-                <td style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_dissolution/monograph_normal_hplc/'.$query['a'].'/'.$request[0]['tr'];?>">Monograph</a></td>
+                <td style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_dissolution/monograph_normal_hplc/'.$query['a'].'/'.$request[0]['tr'];?>">Specicication</a></td>
                 <td  
-                 <?php 
-                      if(empty($monograph_dissolution_normal_hplc)){
-                    
-                          echo"style='text-align:left;padding:4px;border-bottom:solid 1px #bfbfbf;'>";
-                          echo "Normal Tablets Single Component HPLC";
-                     }else{
-                      ?>
-                      style="text-align:left;padding:4px;"><a href="<?php echo base_url().'test_dissolution/index_normal/'.$query['a'].'/'.$request[0]['tr'];?>">Normal Tablets Single Component HPLC</a></td>
-                     <?php   
-                     }
-                     ?>
+                 <?php              
+
+                  if(in_array('7d', $results)){
+                    ?>
+                    <td style='text-align:left;padding:4px;'><a href="<?php echo base_url().'test_dissolution/index_normal/'.$query['a'].'/'.$request[0]['tr'];?>">Normal Tablet: Single Component, HPLC</a>
+                 <?php     
+                 }else{                         
+                  ?>
+                    <td style='text-align:left;padding:4px;'>Please fill in Normal Tablets Specification  
+                <?php
+                }             
+                ?>
                 <td 
                 <?php 
                       if(empty($dissolution_normal_hplc)){
@@ -708,17 +708,18 @@
                 <td style="text-align:center;padding:4px;"></a></td>
                 <td style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_dissolution/monograph_two_components/'.$query['a'].'/'.$request[0]['tr'];?>">Monograph</a></td>
                 <td 
-                <?php 
-                      if(empty($monograph_dissolution_two_component)){
-                    
-                          echo"style='text-align:left;padding:4px;border-bottom:solid 1px #bfbfbf;'>";
-                          echo "Two Component Tablets";
-                     }else{
-                      ?>
-                      style="text-align:left;padding:4px;"><a href="<?php echo base_url().'test_dissolution/index_two_components/'.$query['a'].'/'.$request[0]['tr'];?>">Normal Tablets Multicomponent</a></td>
-                     <?php   
-                     }
-                     ?>
+                <?php              
+
+                  if(in_array('7e', $results)){
+                    ?>
+                    <td style='text-align:left;padding:4px;'><a href="<?php echo base_url().'test_dissolution/index_two_components/'.$query['a'].'/'.$request[0]['tr'];?>">Normal Tablet: Multi Component, HPLC</a>
+                 <?php     
+                 }else{                         
+                  ?>
+                    <td style='text-align:left;padding:4px;'>Please fill in Normal Multi Component Specification  
+                <?php
+                }             
+                ?>
                 <td 
                 <?php 
                       if(empty($dissolution_two_component)){
@@ -2436,22 +2437,23 @@
            </tr>
            <tr>
                 <td style="text-align:center;padding:4px;"><b></b></a></td>
-                <td style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_disintergration/monograph/'.$query['a'].'/'.$request[0]['tr'];?>">Monograph</a></td>
+                <td style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_disintergration/monograph/'.$query['a'].'/'.$request[0]['tr'];?>">Specifications</a></td>
                 <td 
-                 <?php 
-                      if(empty($monograph_disintegration)){
-                    
-                          echo"style='text-align:left;padding:4px;'>";
-                          echo "Specify Components";
-                     }else{
-                      ?>
-                      style="text-align:left;padding:4px;"><a href="<?php echo base_url().'test_disintergration/index/'.$query['a'].'/'.$request[0]['tr'];?>">Specify Components</a></td>
-                     <?php   
-                     }
-                     ?>
+                 <?php              
+
+                  if(in_array('3', $results)){
+                    ?>
+                    <td style='text-align:left;padding:4px;'><a href="<?php echo base_url().'test_disintergration/index/'.$query['a'].'/'.$request[0]['tr'];?>">Disintegration</a>
+                 <?php     
+                 }else{                         
+                  ?>
+                    <td style='text-align:left;padding:4px;'>Please fill in Disintegration Specification  
+                <?php
+                }             
+                ?></td>
                 <td 
                 <?php 
-                      if(empty($query_six)){
+                      if(empty($disintegration)){
                     
                           echo"style='text-align:center;padding:4px;'>";
                           echo "View Worksheet";
@@ -2463,7 +2465,7 @@
                      ?> 
               <td 
                 <?php 
-                      if(empty($query_six)){
+                      if(empty($disintegration)){
                     
                           echo"style='text-align:center;padding:4px;background-color:#ffeea0;border-bottom:solid 1px #bfbfbf;'>";
                           echo "Not Done";
@@ -2476,394 +2478,7 @@
            <?php
            }
            ?>
-<<<<<<< HEAD
-
-=======
  <?php
-            if($request[0]['dissolution']==0 || $request[0]['dissolution']=="" || $request[0]['dissolution']=="NULL" ){
-             
-           }else{
-            ?>
-            <tr>
-                <td style="text-align:center;padding:4px;"><b>Dissolution</b></a></td>
-                <td style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_dissolution/monograph_uv/'.$query['a'].'/'.$request[0]['tr'];?>">Monograph</a></td>
-                <td 
-                <?php 
-                      if(empty($monograph_diss_uv)){
-                          echo"style='text-align:left;padding:4px;color:#000;background-color:#ffffff;border-bottom:solid 1px #bfbfbf;'>";
-                          echo "Please Fill The By UV Monograph First";
-                          
-                     }else{
-                      ?>
-                        style="text-align:left;padding:4px;"><a href="<?php echo base_url().'test_dissolution/index/'.$query['a'].'/'.$request[0]['tr'];?>">By UV</a></td>
-                     <?php   
-                     }
-                     ?>
-               
-
-                <td 
-                <?php 
-                      if(empty($diss_uv)){
-                    
-                          echo"style='text-align:center;padding:4px;border-bottom:solid 1px #bfbfbf;'>";
-                          echo "View Worksheet";
-                     }else{
-                      ?>
-                     style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_dissolution/view_worksheet_uv/'.$query['a'].'/'.$request[0]['tr'];?>">View Worksheet</a></td>
-                     <?php   
-                     }
-                     ?>
-              <td 
-                <?php 
-                      if(empty($diss_uv)){
-                    
-                          echo"style='text-align:center;padding:4px;background-color:#eed6ff;border-bottom:solid 1px #bfbfbf;'>";
-                          echo "Not Yet Done";
-                     }else{
-                         echo"style='text-align:center;padding:4px;background-color:#ffeea0;border-bottom:solid 1px #bfbfbf;'>";
-                         echo "Complete";
-                     }?>
-                </td>
-            </tr>
-            <tr>
-                <td style="text-align:center;padding:4px;"></td>
-                <td style="text-align:center;padding:4px;"></td>
-                <td 
-                <?php 
-                      if(@$diss_uv[0]['choice']==1 && @$diss_uv[0]['status']==1|| @$diss_uv[0]['choice']==0 && @$diss_uv[0]['status']==0){                  
-                      
-                          echo"style='text-align:center;padding:4px;color:#000;background-color:#ffffff;border-bottom:solid 1px #bfbfbf;'>";
-                          echo "Second Stage";
-                          
-                     }
-                     else{
-                      ?>
-                        style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_dissolution/index_second_stage_uv/'.$query['a'].'/'.$request[0]['tr'];?>">By UV: Second Stage</a></td>
-                     <?php   
-                     }
-                     ?>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-                <td style="text-align:center;padding:4px;"></td>
-                <td style="text-align:center;padding:4px;"></td>
-                <td 
-                <?php 
-                      if(@$diss_uv[0]['choice']==0 && @$diss_uv[0]['status']==2 || @$diss_uv[0]['choice']==0 && @$diss_uv[0]['status']==3 || @$diss_uv[0]['choice']==1 && @$diss_uv[0]['status']==3 ){                  
-                      
-                      ?>style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_dissolution/index_third_stage_uv/'.$query['a'].'/'.$request[0]['tr'];?>">By UV: Third Stage</a></td>
-                      <?php
-                     }else{
-                        
-                         echo"style='text-align:center;padding:4px;color:#000;background-color:#ffffff;border-bottom:solid 1px #bfbfbf;'>";
-                         echo "Third Stage";
-                     } ?>
-                <td></td>
-              <td></td>
-            </tr>
-            <tr>
-                <td style="text-align:center;padding:4px;"></a></td>
-                <td style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_dissolution/monograph_delayed_release/'.$query['a'].'/'.$request[0]['tr'];?>">Monograph</a></td>
-                <td 
-                <?php 
-                      if(empty($monograph_dissolution_delayed)){
-                           echo"style='text-align:left;padding:4px;color:#000;background-color:#ffffff;border-bottom:solid 1px #bfbfbf;'>";
-                          echo "Please Fill The Delayed Release Tablets Monograph First";
-                          
-                     }else{
-                      ?>
-                      style="text-align:left;padding:4px;"><a href="<?php echo base_url().'test_dissolution/index_delayed_release/'.$query['a'].'/'.$request[0]['tr'];?>">Delayed Release Tablets</a></td>
-                     <?php   
-                     }
-                     ?>
-                <td 
-                <?php 
-                      if(empty($dissolution_delayed)){
-                    
-                          echo"style='text-align:center;padding:4px;border-bottom:solid 1px #bfbfbf;'>";
-                          echo "View Worksheet";
-                     }else{
-                      ?>
-                     style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_dissolution/view_worksheet_delayed_release/'.$query['a'].'/'.$request[0]['tr'];?>">View Worksheet</a></td>
-                     <?php   
-                     }
-                     ?>
-              <td 
-                <?php 
-                      if(empty($dissolution_delayed)){
-                    
-                          echo"style='text-align:center;padding:4px;background-color:#eed6ff;border-bottom:solid 1px #bfbfbf;'>";
-                          echo "Not Yet Done";
-                     }else{
-                         echo"style='text-align:center;padding:4px;background-color:#ffeea0;border-bottom:solid 1px #bfbfbf;'>";
-                         echo "Complete";
-                     }?>
-                </td>
-            </tr>
-            <tr>
-                <td style="text-align:center;padding:4px;"></td>
-                <td style="text-align:center;padding:4px;"></td>
-                <td 
-                <?php 
-                      if(@$dissolution_delayed[0]['choice']==1 && @$dissolution_delayed[0]['status']==1|| @$dissolution_delayed[0]['choice']==0 && @$dissolution_delayed[0]['status']==0){                  
-                      
-                          echo"style='text-align:center;padding:4px;color:#000;background-color:#ffffff;border-bottom:solid 1px #bfbfbf;'>";
-                          echo "Second Stage";
-                          
-                     }
-                     else{
-                      ?>
-                        style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_dissolution/index_delayed_release_second_stage/'.$query['a'].'/'.$request[0]['tr'];?>">Delayed Release: Second Stage</a></td>
-                     <?php   
-                     }
-                     ?>
-                <td></td>
-              <td></td>
-            </tr>
-            <tr>
-                <td style="text-align:center;padding:4px;"></td>
-                <td style="text-align:center;padding:4px;"></td>
-                <td 
-                <?php 
-                      if(@$dissolution_delayed[0]['choice']==0 && @$dissolution_delayed[0]['status']==2 || @$dissolution_delayed[0]['choice']==0 && @$dissolution_delayed[0]['status']==3 || @$dissolution_delayed[0]['choice']==1 && @$dissolution_delayed[0]['status']==3 ){                  
-                      
-                      ?>style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_dissolution/index_delayed_release_third_stage/'.$query['a'].'/'.$request[0]['tr'];?>"> Delayed Release: Third Stage</a></td><?php
-                     }else{
-                        
-                         echo"style='text-align:center;padding:4px;color:#000;background-color:#ffffff;border-bottom:solid 1px #bfbfbf;'>";
-                         echo "Third Stage";
-                     } ?>
-                <td></td>
-              <td></td>
-            </tr>
-            <tr>
-                <td style="text-align:center;padding:4px;"></a></td>
-                <td style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_dissolution/monograph_enteric_coated/'.$query['a'].'/'.$request[0]['tr'];?>">Monograph</a></td>
-                <td 
-                 <?php 
-                      if(empty($monograph_dissolution_enteric_coated)){
-                    
-                          echo"style='text-align:left;padding:4px;border-bottom:solid 1px #bfbfbf;'>";
-                          echo "Enteric Coated Tablets";
-                     }else{
-                      ?>
-                      style="text-align:left;padding:4px;"><a href="<?php echo base_url().'test_dissolution/index_enteric_coated/'.$query['a'].'/'.$request[0]['tr'];?>">Enteric Coated Tablets</a></td>
-                     <?php   
-                     }
-                     ?>
-                <td 
-                <?php 
-                      if(empty($dissolution_enteric_coated)){
-                    
-                          echo"style='text-align:center;padding:4px;border-bottom:solid 1px #bfbfbf;'>";
-                          echo "View Worksheet";
-                     }else{
-                      ?>
-                      style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_dissolution/view_worksheet_enteric_coated/'.$query['a'].'/'.$request[0]['tr'];?>">View Worksheet</a></td>
-                     <?php   
-                     }
-                     ?>
-              <td 
-                <?php 
-                      if(empty($dissolution_enteric_coated)){
-                    
-                          echo"style='text-align:center;padding:4px;background-color:#eed6ff;border-bottom:solid 1px #bfbfbf;'>";
-                          echo "Not Yet Done";
-                     }else{
-                         echo"style='text-align:center;padding:4px;background-color:#ffeea0;border-bottom:solid 1px #bfbfbf;'>";
-                         echo "Complete";
-                     }?>
-                </td>
-            </tr>
-            <tr>
-                <td style="text-align:center;padding:4px;"></td>
-                <td style="text-align:center;padding:4px;"></td>
-                <td 
-                <?php 
-                      if(@$dissolution_enteric_coated[0]['choice']==1 && @$dissolution_enteric_coated[0]['status']==1|| @$dissolution_enteric_coated[0]['choice']==0 && @$dissolution_enteric_coated[0]['status']==0){                  
-                      
-                          echo"style='text-align:center;padding:4px;color:#000;background-color:#ffffff;border-bottom:solid 1px #bfbfbf;'>";
-                          echo "Second Stage";
-                          
-                     }
-                     else{
-                      ?>
-                        style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_dissolution/index_enteric_coated_second_stage/'.$query['a'].'/'.$request[0]['tr'];?>">Enteric Coated: Second Stage</a></td>
-                     <?php   
-                     }
-                     ?>
-                <td></td>
-              <td></td>
-            </tr>
-            <tr>
-                <td style="text-align:center;padding:4px;"></td>
-                <td style="text-align:center;padding:4px;"></td>
-                <td 
-                <?php 
-                      if(@$dissolution_enteric_coated[0]['choice']==0 && @$dissolution_enteric_coated[0]['status']==2 || @$dissolution_enteric_coated[0]['choice']==0 && @$dissolution_enteric_coated[0]['status']==3 || @$dissolution_enteric_coated[0]['choice']==1 && @$dissolution_enteric_coated[0]['status']==3 ){                  
-                      
-                      ?>style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_dissolution/index_enteric_coated_third_stage/'.$query['a'].'/'.$request[0]['tr'];?>"> Enteric Coated: Third Stage</a></td><?php
-                     }else{
-                        
-                         echo"style='text-align:center;padding:4px;color:#000;background-color:#ffffff;border-bottom:solid 1px #bfbfbf;'>";echo "Third Stage";
-                     } ?>
-                <td></td>
-              <td></td>
-            </tr>
-            <tr>
-                <td style="text-align:center;padding:4px;"></a></td>
-                <td style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_dissolution/monograph_normal_hplc/'.$query['a'].'/'.$request[0]['tr'];?>">Monograph</a></td>
-                <td  
-                 <?php 
-                      if(empty($monograph_dissolution_normal_hplc)){
-                    
-                          echo"style='text-align:left;padding:4px;border-bottom:solid 1px #bfbfbf;'>";
-                          echo "Normal Tablets";
-                     }else{
-                      ?>
-                      style="text-align:left;padding:4px;"><a href="<?php echo base_url().'test_dissolution/index_normal/'.$query['a'].'/'.$request[0]['tr'];?>">Normal Tablets</a></td>
-                     <?php   
-                     }
-                     ?>
-                <td 
-                <?php 
-                      if(empty($dissolution_normal_hplc)){
-                    
-                          echo"style='text-align:center;padding:4px;border-bottom:solid 1px #bfbfbf;'>";
-                          echo "View Worksheet";
-                     }else{
-                      ?>
-                       style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_dissolution/view_worksheet_normal/'.$query['a'].'/'.$request[0]['tr'];?>">View Worksheet</a></td>
-                     <?php   
-                     }
-                     ?>
-              <td 
-                <?php 
-                      if(empty($dissolution_normal_hplc)){
-                    
-                          echo"style='text-align:center;padding:4px;background-color:#eed6ff;border-bottom:solid 1px #bfbfbf;'>";
-                          echo "Not Yet Done";
-                     }else{
-                         echo"style='text-align:center;padding:4px;background-color:#ffeea0;border-bottom:solid 1px #bfbfbf;'>";
-                         echo "Complete";
-                     }?>
-                </td>
-            </tr>
-            <tr>
-                <td style="text-align:center;padding:4px;"></td>
-                <td style="text-align:center;padding:4px;"></td>
-                <td 
-                <?php 
-                      if(@$dissolution_normal_hplc[0]['choice']==1 && @$dissolution_normal_hplc[0]['status']==1|| @$dissolution_normal_hplc[0]['choice']==0 && @$dissolution_normal_hplc[0]['status']==0){                  
-                      
-                          echo"style='text-align:center;padding:4px;color:#000;background-color:#ffffff;border-bottom:solid 1px #bfbfbf;'>";
-                          echo "Second Stage";
-                          
-                     }
-                     else{
-                      ?>
-                        style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_dissolution/index_second_normal/'.$query['a'].'/'.$request[0]['tr'];?>">Normal Tablets: Second Stage</a></td>
-                     <?php   
-                     }
-                     ?>
-                <td></td>
-              <td></td>
-            </tr>
-            <tr>
-                <td style="text-align:center;padding:4px;"></td>
-                <td style="text-align:center;padding:4px;"></td>
-                <td 
-                <?php 
-                      if(@$dissolution_normal_hplc[0]['choice']==0 && @$dissolution_normal_hplc[0]['status']==2 || @$dissolution_normal_hplc[0]['choice']==0 && @$dissolution_normal_hplc[0]['status']==3 || @$dissolution_normal_hplc[0]['choice']==1 && @$dissolution_normal_hplc[0]['status']==3 ){                  
-                      
-                      ?>style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_dissolution/index_third_normal/'.$query['a'].'/'.$request[0]['tr'];?>">Normal Tablets: Third Stage</a></td><?php
-                     }else{
-                        
-                         echo"style='text-align:center;padding:4px;color:#000;background-color:#ffffff;border-bottom:solid 1px #bfbfbf;'>";echo "Third Stage";
-                     } ?>
-                <td></td>
-              <td></td>
-            </tr>
-            <tr>
-                <td style="text-align:center;padding:4px;"></a></td>
-                <td style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_dissolution/monograph_two_components/'.$query['a'].'/'.$request[0]['tr'];?>">Monograph</a></td>
-                <td 
-                <?php 
-                      if(empty($monograph_dissolution_two_component)){
-                    
-                          echo"style='text-align:left;padding:4px;border-bottom:solid 1px #bfbfbf;'>";
-                          echo "Two Component Tablets";
-                     }else{
-                      ?>
-                      style="text-align:left;padding:4px;"><a href="<?php echo base_url().'test_dissolution/index_two_components/'.$query['a'].'/'.$request[0]['tr'];?>">Two Component Tablets</a></td>
-                     <?php   
-                     }
-                     ?>
-                <td 
-                <?php 
-                      if(empty($dissolution_two_component)){
-                    
-                          echo"style='text-align:center;padding:4px;border-bottom:solid 1px #bfbfbf;'>";
-                          echo "Not Yet Done";
-                     }else{
-                         ?>
-                      style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_dissolution/view_worksheet_two_component/'.$query['a'].'/'.$request[0]['tr'];?>">View Worksheet</a></td>
-                      <?php
-                      }
-                     ?>
-                <td 
-                <?php 
-                      if(empty($dissolution_two_component)){
-                    
-                          echo"style='text-align:center;padding:4px;background-color:#eed6ff;border-bottom:solid 1px #bfbfbf;'>";
-                          echo "Not Yet Done";
-                     }else{
-                         echo"style='text-align:center;padding:4px;background-color:#ffeea0;border-bottom:solid 1px #bfbfbf;'>";
-                         echo "Complete";
-                     }?>
-                </td>
-            </tr>
-             <tr>
-                <td style="text-align:center;padding:4px;"></td>
-                <td style="text-align:center;padding:4px;"></td>
-                <td 
-                <?php 
-                      if(@$dissolution_two_component[0]['choice']==1 && @$dissolution_two_component[0]['status']==1|| @$dissolution_two_component[0]['choice']==0 && @$dissolution_two_component[0]['status']==0){                  
-                      
-                          echo"style='text-align:center;padding:4px;color:#000;background-color:#ffffff;border-bottom:solid 1px #bfbfbf;'>";
-                          echo "Second Stage";
-                          
-                     }
-                     else{
-                      ?>
-                        style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_dissolution/index_two_components_second_stage/'.$query['a'].'/'.$request[0]['tr'];?>">Two Component: Second Stage</a></td>
-                     <?php   
-                     }
-                     ?>
-               <td></td>
-              <td></td>
-            </tr>
-            <tr>
-                <td style="text-align:center;padding:4px;"></td>
-                <td style="text-align:center;padding:4px;"></td>
-                <td 
-                <?php 
-                      if(@$dissolution_two_component[0]['choice']==0 && @$dissolution_two_component[0]['status']==2 || @$dissolution_two_component[0]['choice']==0 && @$dissolution_two_component[0]['status']==3 || @$dissolution_two_component[0]['choice']==1 && @$dissolution_two_component[0]['status']==3 ){                  
-                      
-                      ?>style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_dissolution/index_two_components_third_stage/'.$query['a'].'/'.$request[0]['tr'];?>">Two Component: Third Stage</a></td><?php
-                     }else{
-                        
-                         echo"style='text-align:center;padding:4px;color:#000;background-color:#ffffff;border-bottom:solid 1px #bfbfbf;'>";echo "Third Stage";
-                     } ?>
-                <td></td>
-              <td></td>
-            </tr>
-           <?php  
-           }
-           ?>
->>>>>>> 16af635259f2314106621480ed7a65bb35cbab80
-           <?php
             if($request[0]['water_method']==0 || $request[0]['water_method']=="" || $request[0]['water_method']=="NULL" ){
              
            }else{
@@ -2877,18 +2492,19 @@
            </tr>
            <tr>                
                 <td style="text-align:center;padding:4px;"><b></b></a></td>
-                <td style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_water/monograph/'.$query['a'].'/'.$request[0]['tr'];?>">Monograph</a></td>
-                <td <?php 
-                      if(empty($monograph_water_method)){
-                    
-                          echo"style='text-align:left;padding:4px;'>";
-                          echo "Specify Components";
-                     }else{
-                      ?>
-                      style="text-align:left;padding:4px;"><a href="<?php echo base_url().'test_water/index/'.$query['a'].'/'.$request[0]['tr'];?>">Specify Components</a>
-                     <?php   
-                     }
-                     ?>
+                <td style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_water/monograph/'.$query['a'].'/'.$request[0]['tr'];?>">Specification</a></td>
+                <?php              
+
+                  if(in_array('13', $results)){
+                    ?>
+                    <td style='text-align:left;padding:4px;'><a href="<?php echo base_url().'test_water/index/'.$query['a'].'/'.$request[0]['tr'];?>">Karl Fisher (Water Method)</a>
+                 <?php     
+                 }else{                         
+                  ?>
+                    <td style='text-align:left;padding:4px;'>Please fill in Karl Fisher Specification  
+                <?php
+                }             
+                ?></td>
                 <td 
                 <?php 
                       if(empty($query_ten)){
@@ -2938,19 +2554,19 @@
            </tr>
            <tr>
                 <td style="text-align:center;padding:4px;"><b></b></a></td>
-                <td style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_loss_drying/monograph/'.$query['a'].'/'.$request[0]['tr'];?>">Monograph</a></td>
-                <td 
-                <?php 
-                      if(empty($monograph_loss_drying)){
-                    
-                          echo"style='text-align:left;padding:4px;'>";
-                          echo "Specify Components";
-                     }else{
-                      ?>
-                        style="text-align:left;padding:4px;"><a href="<?php echo base_url().'test_loss_drying/index/'.$query['a'].'/'.$request[0]['tr'];?>">Specify Components</a></td>
-                     <?php   
-                     }
-                     ?>
+                <td style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_loss_drying/monograph/'.$query['a'].'/'.$request[0]['tr'];?>">Specification</a></td>
+                <?php              
+
+                  if(in_array('14', $results)){
+                    ?>
+                    <td style='text-align:left;padding:4px;'><a href="<?php echo base_url().'test_loss_drying/index/'.$query['a'].'/'.$request[0]['tr'];?>">Loss Drying</a>
+                 <?php     
+                 }else{                         
+                  ?>
+                    <td style='text-align:left;padding:4px;'>Please fill in Loss Drying Specification  
+                <?php
+                }             
+                ?></td>
                 <td 
                 <?php 
                       if(empty($query_twelve)){
@@ -2992,10 +2608,10 @@
            </tr>
            <tr>
                 <td style="text-align:center;padding:4px;"><b></b></a></td>
-                <td style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_related_substances/monograph/'.$query['a'].'/'.$request[0]['tr'];?>">Monograph</a></td>
+                <td style="text-align:center;padding:4px;"><a href="<?php echo base_url().'test_related_substances/monograph/'.$query['a'].'/'.$request[0]['tr'];?>">Specification</a></td>
                 <td 
                 <?php 
-                      if(empty($monograph_related_substances)){
+                      if($monograph_specifications[0]['test_type']=='12'){
                     
                           echo"style='text-align:loss_drying;padding:4px;'>";
                           echo "Specify Components";

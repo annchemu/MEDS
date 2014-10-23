@@ -27,120 +27,6 @@
   <!-- bootstrap reference library -->
   <script src="<?php echo base_url().'js/bootstrap.min.js';?>"></script>
   <script type="text/javascript" src="<?php echo base_url().'js/Jquery-datatables/jquery.dataTables.js';?>"></script>
-  <script>
-   $(document).ready(function(){
-  
-        $('#ref_no').change('live',function(){
-          if ($.trim(this.value)!=""){
-            $('#ref_no_1').show();
-            $('#ref_no_r').hide();
-          }else{
-            $('#ref_no_1').hide();
-            $('#ref_no_r').show();
-          }
-        })
-  $('#client_name').change('live',function(){
-          if ($.trim(this.value)!=""){
-            $('#client_name_1').show();
-            $('#client_name_r').hide();
-          }else{
-            $('#client_name_1').hide();
-            $('#client_name_r').show();
-          }
-        })
-       $('#received_from').change('live',function(){
-          if ($.trim(this.value)!=""){
-            $('#received_from_1').show();
-            $('#received_from_r').hide();
-          }else{
-            $('#received_from_1').hide();
-            $('#received_from_r').show();
-          }
-        })
-  $('#address').change('live',function(){
-          if ($.trim(this.value)!=""){
-            $('#address_1').show();
-            $('#address_r').hide();
-          }else{
-            $('#address_1').hide();
-            $('#address_r').show();
-          }
-        })
-  $('#telephone_no').change('live',function(){
-          if ($.trim(this.value)!=""){
-            $('#telephone_no_1').show();
-            $('#telephone_no_r').hide();
-          }else{
-            $('#telephone_no_1').hide();
-            $('#telephone_no_r').show();
-          }
-        })
-  $('#email').change('live',function(){
-          if ($.trim(this.value)!=""){
-            $('#email_1').show();
-            $('#email_r').hide();
-          }else{
-            $('#email_1').hide();
-            $('#email_r').show();
-          }
-        })
-  $('#order_ref_no').change('live',function(){
-          if ($.trim(this.value)!=""){
-            $('#order_ref_no_1').show();
-            $('#order_ref_no_r').hide();
-          }else{
-            $('#order_ref_no_1').hide();
-            $('#order_ref_no_r').show();
-          }
-        })
-    $('#complaint_nature').change('live',function(){
-          if ($.trim(this.value)!=""){
-            $('#complaint_nature_1').show();
-            $('#complaint_nature_r').hide();
-          }else{
-            $('#complaint_nature_1').hide();
-            $('#complaint_nature_r').show();
-          }
-        })
-    $('#complaint_details').change('live',function(){
-          if ($.trim(this.value)!=""){
-            $('#complaint_details_1').show();
-            $('#complaint_details_r').hide();
-          }else{
-            $('#complaint_details_1').hide();
-            $('#complaint_details_r').show();
-          }
-        });
-
-
-
-  $('#save_complaint').click(function(){         
-            count =0;
-            $('.fieldcomp').each(function(){
-               if ($.trim(this.value)=="")
-               count ++;
-            });
-            if(count >0){
-              alert( count+' All field as on this form are MANDATORY ')
-               return false;
-            }else{
-              
-            $.ajax({
-                type:"post",
-                url:"<?php echo base_url();?>complaints/submit",
-                data:$('#complaints').serialize(),
-                success:function(data){
-        redirect_url = "<?php echo base_url();?>complaints_list/index/"
-                    data='Success';
-                    window.location.href = redirect_url;
-                },
-                //error:function(){
-                  // alert('an error occured'); 
-               //}
-            })
-            }
-            })
-    })</script>
 </head>
 <body>
   <?php
@@ -152,6 +38,13 @@
    $acc_status=$user['logged_in']['acc_status'];
    $id_temp=1;
    //var_dump($user);
+   if(empty($user['logged_in']['id'])) {
+     
+    redirect('login','location');  //1. loads the login page in current page div
+
+    echo '<meta http-equiv=refresh content="0;url=base_url();login">'; //3 doesn't work
+
+     }
   ?>
   <div id="header"> 
    <div id="logo" style="padding:8px;color: #0000ff;" align="center"><img src="<?php echo base_url().'images/meds_logo.png';?>" height="35px" width="40px"/>MISSION FOR ESSENTIAL DRUGS AND SUPPLIES</div>
@@ -268,7 +161,7 @@
       <td colspan="6">
       <table width="950px" bgcolor="#c4c4ff" border="0" cellpadding="4px" align="center">
         <thead>
-          <th align="left" style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"></th>     
+          <th align="left" style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">No.</th>     
           <th align="left" style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">TEST</th>
           <th align="left" style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">METHOD</th> 
           <th align="left" style="padding:8px;background-color:#ffffff;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;">SPECIFICATIONS</th>  
@@ -292,18 +185,16 @@
               }
             ?>
           <td style="padding:8px;background-color:#ffffff;border-left: dotted 1px #bfbfbf;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><?php echo $i?>.</td>      
-          <td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><?php echo $row['test_type']?></td>      
-          <td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><?php echo $row['test_specification']?></td>       
-          <td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><?php echo $ph_alkalinity[0]['monograph']?></td>
-          <td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><?php echo $ph_alkalinity[0]['further_comments']?></td>      
-          <td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><?php echo $row['conclusion']?></td>
-
+          <td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><?php echo $row['test_name']?></td>      
+          <td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><?php echo $row['method']?></td>      
+          <td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><?php echo $row['specifications']?></td>      
+          <td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><?php echo $row['results']?></td>      
+          <td style="padding:8px;background-color:#ffffff;border-right: dotted 1px #bfbfbf;border-bottom: dotted 1px #bfbfbf;border-top: dotted 1px #bfbfbf;"><?php echo $row['remarks']?></td>      
+          
           <?php $i++; ?>
-
-      </tr>
-
-      <?php endforeach; ?>
-
+        </tr>
+        <?php endforeach; ?>
+        
         </tbody>
       </table>     
       </td>     

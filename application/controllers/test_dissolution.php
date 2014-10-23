@@ -8,7 +8,7 @@ class Test_Dissolution extends CI_Controller{
 		$data['assignment'] = $this->uri->segment(3);
 		$data['test_request'] = $this->uri->segment(4);
 		$test_request = $this->uri->segment(4);
-		$status=0; $user_type=6;
+		$status=0; $test_type='7a';
 
 		$sql = "SELECT * FROM test_request WHERE id =$test_request";
 		$query = $this->db->query($sql);
@@ -21,18 +21,17 @@ class Test_Dissolution extends CI_Controller{
 
 	    $data['sql_standards']=
     	$this->db->select('standard_register.reference_number,standard_register.potency,standard_register.item_description,standard_register.batch_number,standard_register.manufacturer_supplier,standard_register.status')->get_where('standard_register', array('status' => $status))->result_array();
-		// var_dump($results_e);
-		// die;
-		$data['sql_approved']=
-    	$this->db->select('user.fname,user.lname,user.user_type')->get_where('user', array('user_type' => $user_type))->result_array();
-
-		$this->load->view('test_dissolution_view', $data);		
+		
+		$q = "select * from monograph_specifications where test_request_id = $test_request and test_type = '$test_type' ";
+		$data['specs']=$this->db->query($q)->result_array();
+		
+		$this->load->view('tests/dissolution/test_dissolution_view', $data);		
 	}
 	function index_second_stage_uv(){
 		$data['assignment'] = $this->uri->segment(3);
 		$data['test_request'] = $this->uri->segment(4);
 		$test_request = $this->uri->segment(4);
-		$status=0; $user_type=6;
+		$status=0; $test_type='7a';
 		$status_first_stage =1;
 
 		$sql = "SELECT * FROM test_request WHERE id =$test_request";
@@ -53,19 +52,19 @@ class Test_Dissolution extends CI_Controller{
 		$query_dissolution_det = $this->db->get_where('diss_uv_determinations', array('status' => $status_first_stage))->result_array();
 		$data['sql_dissolution_det']= $query_dissolution_det[0];
 		
-		$data['sql_approved']=
-    	$this->db->select('user.fname,user.lname,user.user_type')->get_where('user', array('user_type' => $user_type))->result_array();
-
+		$q = "select * from monograph_specifications where test_request_id = $test_request and test_type = '$test_type' ";
+		$data['specs']=$this->db->query($q)->result_array();
+		
 		// var_dump($query_dissolution_det);
 		// die;
 
-		$this->load->view('test_dissolution_uv_second_stage_view', $data);		
+		$this->load->view('tests/dissolution/test_dissolution_uv_second_stage_view', $data);		
 	}
 	function index_third_stage_uv(){
 		$data['assignment'] = $this->uri->segment(3);
 		$data['test_request'] = $this->uri->segment(4);
 		$test_request = $this->uri->segment(4);
-		$status=0; $user_type=6;
+		$status=0; $test_type='7a';
 		$status_second_stage =2;
 
 		$sql = "SELECT * FROM test_request WHERE id =$test_request";
@@ -86,13 +85,13 @@ class Test_Dissolution extends CI_Controller{
 		$query_dissolution_det = $this->db->get_where('diss_uv_determinations', array('status' => $status_second_stage))->result_array();
 		$data['sql_dissolution_det']= $query_dissolution_det[0];
 		
-		$data['sql_approved']=
-    	$this->db->select('user.fname,user.lname,user.user_type')->get_where('user', array('user_type' => $user_type))->result_array();
-
+		$q = "select * from monograph_specifications where test_request_id = $test_request and test_type = '$test_type' ";
+		$data['specs']=$this->db->query($q)->result_array();
+		
 		// var_dump($query_dissolution);
 		// die;
 
-		$this->load->view('test_dissolution_uv_third_stage_view', $data);		
+		$this->load->view('tests/dissolution/test_dissolution_uv_third_stage_view', $data);		
 	}
 	function outofspecification(){
     $assignment_id= $this->uri->segment(3);
@@ -142,7 +141,7 @@ class Test_Dissolution extends CI_Controller{
 
     $results=$query->result_array();
     $data['query']=$results[0];
-    $this->load->view('out_of_specification_investigation_view',$data);
+    $this->load->view('tests/dissolution/out_of_specification_investigation_view',$data);
     $this->load->helper(array('form'));
 
     }
@@ -150,7 +149,7 @@ class Test_Dissolution extends CI_Controller{
 		$data['assignment'] = $this->uri->segment(3);
 		$data['test_request'] = $this->uri->segment(4);
 		$test_request = $this->uri->segment(4);
-		$status=0; $user_type=6;
+		$status=0; $test_type='5b';
 
 		$sql = "SELECT * FROM test_request WHERE id =$test_request";
 		$query = $this->db->query($sql);
@@ -167,13 +166,11 @@ class Test_Dissolution extends CI_Controller{
 
 	    $data['sql_standards']=
     	$this->db->select('standard_register.reference_number,standard_register.potency,standard_register.potency,standard_register.item_description,standard_register.batch_number,standard_register.manufacturer_supplier,standard_register.status')->get_where('standard_register', array('status' => $status))->result_array();
-		// var_dump($results_e);
-		// die;
-
-    	$data['sql_approved']=
-    	$this->db->select('user.fname,user.lname,user.user_type')->get_where('user', array('user_type' => $user_type))->result_array();
-
-		$this->load->view('test_dissolution_delayed_release_view', $data);		
+		
+		$q = "select * from monograph_specifications where test_request_id = $test_request and test_type = '$test_type' ";
+		$data['specs']=$this->db->query($q)->result_array();
+		
+		$this->load->view('tests/dissolution/test_dissolution_delayed_release_view', $data);		
 	}
 	function index_titration_other(){
 		$data['assignment'] = $this->uri->segment(3);
@@ -202,7 +199,7 @@ class Test_Dissolution extends CI_Controller{
     	$this->db->select('user.fname,user.lname,user.user_type')->get_where('user', array('user_type' => $user_type))->result_array();
 
 
-		$this->load->view('dissolution_titration_other_view', $data);		
+		$this->load->view('tests/dissolution/dissolution_titration_other_view', $data);		
 	}
 	function index_titration_iodometric(){
 		$data['assignment'] = $this->uri->segment(3);
@@ -228,7 +225,7 @@ class Test_Dissolution extends CI_Controller{
 		// var_dump($results_e);
 		// die;
 
-		$this->load->view('test_dissolution_titration_iodometric', $data);		
+		$this->load->view('tests/dissolution/test_dissolution_titration_iodometric', $data);		
 	}
 	function index_delayed_release_second_stage(){
 		$data['assignment'] = $this->uri->segment(3);
@@ -265,7 +262,7 @@ class Test_Dissolution extends CI_Controller{
 		// var_dump($results_e);
 		// die;
 
-		$this->load->view('test_dissolution_delayed_release_second_view', $data);		
+		$this->load->view('tests/dissolution/test_dissolution_delayed_release_second_view', $data);		
 	}
 	function index_delayed_release_third_stage(){
 		$data['assignment'] = $this->uri->segment(3);
@@ -304,7 +301,7 @@ class Test_Dissolution extends CI_Controller{
 		// var_dump($results_e);
 		// die;
 
-		$this->load->view('test_dissolution_delayed_release_third_view', $data);		
+		$this->load->view('tests/dissolution/test_dissolution_delayed_release_third_view', $data);		
 	}
 	function index_enteric_coated(){
 		$data['assignment'] = $this->uri->segment(3);
@@ -333,7 +330,7 @@ class Test_Dissolution extends CI_Controller{
 		// var_dump($results_e);
 		// die;
 
-		$this->load->view('test_dissolution_enteric_coated_view', $data);		
+		$this->load->view('tests/dissolution/test_dissolution_enteric_coated_view', $data);		
 	}
 	function index_enteric_coated_second_stage(){
 		$data['assignment'] = $this->uri->segment(3);
@@ -371,7 +368,7 @@ class Test_Dissolution extends CI_Controller{
 		$data['sql_approved']=
     	$this->db->select('user.fname,user.lname,user.user_type')->get_where('user', array('user_type' => $user_type))->result_array();
 
-		$this->load->view('test_dissolution_enteric_coated_second_view', $data);		
+		$this->load->view('tests/dissolution/test_dissolution_enteric_coated_second_view', $data);		
 	}
 	function index_enteric_coated_third_stage(){
 		$data['assignment'] = $this->uri->segment(3);
@@ -410,7 +407,7 @@ class Test_Dissolution extends CI_Controller{
 
 		// var_dump($query_dissolution);
 		// die;
-		$this->load->view('test_dissolution_enteric_coated_third_view', $data);		
+		$this->load->view('tests/dissolution/test_dissolution_enteric_coated_third_view', $data);		
 	}
 	function index_normal(){
 		$data['assignment'] = $this->uri->segment(3);
@@ -439,7 +436,7 @@ class Test_Dissolution extends CI_Controller{
 		$data['sql_approved']=
     	$this->db->select('user.fname,user.lname,user.user_type')->get_where('user', array('user_type' => $user_type))->result_array();
 
-		$this->load->view('test_dissolution_hplc_normal_view', $data);		
+		$this->load->view('tests/dissolution/test_dissolution_hplc_normal_view', $data);		
 	}
 	function index_second_normal(){
 		$data['assignment'] = $this->uri->segment(3);
@@ -477,7 +474,7 @@ class Test_Dissolution extends CI_Controller{
 		// print_r($data['sql_approved']);
 		// die;
 
-		$this->load->view('test_dissolution_hplc_normal_second_view', $data);		
+		$this->load->view('tests/dissolution/test_dissolution_hplc_normal_second_view', $data);		
 	}
 	function index_third_normal(){
 		$data['assignment'] = $this->uri->segment(3);
@@ -515,7 +512,7 @@ class Test_Dissolution extends CI_Controller{
 		// var_dump($results_e);
 		// die;
 
-		$this->load->view('test_dissolution_hplc_normal_third_view', $data);		
+		$this->load->view('tests/dissolution/test_dissolution_hplc_normal_third_view', $data);		
 	}
 	function index_two_components(){
 		$data['assignment'] = $this->uri->segment(3);
@@ -545,7 +542,7 @@ class Test_Dissolution extends CI_Controller{
 	    $data['sql_approved']=
     	$this->db->select('user.fname,user.lname,user.user_type')->get_where('user', array('user_type' => $user_type))->result_array();
 
-		$this->load->view('test_dissolution_two_components_view', $data);		
+		$this->load->view('tests/dissolution/test_dissolution_two_components_view', $data);		
 	}
 		function index_two_components_second_stage(){
 		$data['assignment'] = $this->uri->segment(3);
@@ -577,7 +574,7 @@ class Test_Dissolution extends CI_Controller{
 		// var_dump($results_e);
 		// die;
 
-		$this->load->view('test_dissolution_two_components_second_view', $data);		
+		$this->load->view('tests/dissolution/test_dissolution_two_components_second_view', $data);		
 	}
 	function index_two_components_third_stage(){
 		$data['assignment'] = $this->uri->segment(3);
@@ -609,7 +606,7 @@ class Test_Dissolution extends CI_Controller{
 		// var_dump($results_e);
 		// die;
 
-		$this->load->view('test_dissolution_two_components_third_view', $data);		
+		$this->load->view('tests/dissolution/test_dissolution_two_components_third_view', $data);		
 	}
 
 	function worksheet(){
@@ -656,7 +653,7 @@ class Test_Dissolution extends CI_Controller{
 	    
 	    $data['query_e']=$results_e;
 
-		$this->load->view('test_dissolution_hplc_view', $data);
+		$this->load->view('tests/dissolution/test_dissolution_hplc_view', $data);
 	}
 	function worksheet_hplc(){
 		$assignment =$this->uri->segment(3);
@@ -775,7 +772,7 @@ class Test_Dissolution extends CI_Controller{
 
 		$data['results']=$result[0];
 				
-		$this->load->view('test_dissolution_monograph_uv_view',$data);
+		$this->load->view('tests/dissolution/test_dissolution_monograph_uv_view',$data);
 	}
 	function monograph_normal_hplc(){
 		$data['assignment'] = $this->uri->segment(3);
@@ -788,7 +785,7 @@ class Test_Dissolution extends CI_Controller{
 
 		$data['results']=$result[0];
 				
-		$this->load->view('test_dissolution_monograph_normal_hplc_view',$data);
+		$this->load->view('tests/dissolution/test_dissolution_monograph_normal_hplc_view',$data);
 	}
 	function monograph_enteric_coated(){
 		$data['assignment'] = $this->uri->segment(3);
@@ -801,7 +798,7 @@ class Test_Dissolution extends CI_Controller{
 
 		$data['results']=$result[0];
 				
-		$this->load->view('test_dissolution_monograph_enteric_coated_view',$data);
+		$this->load->view('tests/dissolution/test_dissolution_monograph_enteric_coated_view',$data);
 	}
 	function monograph_two_components(){
 		$data['assignment'] = $this->uri->segment(3);
@@ -814,7 +811,7 @@ class Test_Dissolution extends CI_Controller{
 
 		$data['results']=$result[0];
 				
-		$this->load->view('test_dissolution_monograph_two_components_view',$data);
+		$this->load->view('tests/dissolution/test_dissolution_monograph_two_components_view',$data);
 	}
 	function monograph_delayed_release(){
 		$data['assignment'] = $this->uri->segment(3);
@@ -827,7 +824,7 @@ class Test_Dissolution extends CI_Controller{
 
 		$data['results']=$result[0];
 				
-		$this->load->view('test_dissolution_monograph_delayed_release_view',$data);
+		$this->load->view('tests/dissolution/test_dissolution_monograph_delayed_release_view',$data);
 	}
 	function monograph_hplc(){
 		$data['assignment'] = $this->uri->segment(3);
@@ -840,7 +837,7 @@ class Test_Dissolution extends CI_Controller{
 
 		$data['results']=$result[0];
 				
-		$this->load->view('test_dissolution_monograph_hplc_view',$data);
+		$this->load->view('tests/dissolution/test_dissolution_monograph_hplc_view',$data);
 	}
 	function save_delayed_release_monograph(){	
 
@@ -905,12 +902,13 @@ class Test_Dissolution extends CI_Controller{
 	    $results_determination=$query_determination->result_array();
 	    $data['query_determination']=$results_determination[0];
 	    $data['request']=
-    	$this->db->select('assignment.id AS a,assignment.test_request_id,assignment.user_id,assignment.client_id,assignment.reference_number,assignment.assigner_name,assignment.analyst_name,assignment.sample_issued')->get_where('assignment', array('id' => $assignment_id))->result_array();
+    	$this->db->select('assignment.id AS a,assignment.test_request_id,assignment.client_id,assignment.reference_number,assignment.assigner_name,assignment.analyst_name,assignment.sample_issued')->get_where('assignment', array('id' => $assignment_id))->result_array();
+
 
 		//var_dump($results_e);
 		// die;
 
-		$this->load->view('test_dissolution_view_worksheet_uv', $data);	
+		$this->load->view('tests/dissolution/test_dissolution_view_worksheet_uv', $data);	
 	}
 	function view_worksheet_delayed_release(){
 		$data['assignment'] = $this->uri->segment(3);
@@ -936,12 +934,13 @@ class Test_Dissolution extends CI_Controller{
 		//var_dump($results_e);
 		// die;
 
-		$this->load->view('test_dissolution_view_worksheet_delayed_release', $data);	
+		$this->load->view('tests/dissolution/test_dissolution_view_worksheet_delayed_release', $data);	
 	}
 	function view_worksheet_enteric_coated(){
 		$data['assignment'] = $this->uri->segment(3);
 		$data['test_request'] = $this->uri->segment(4);
 		$test_request =$this->uri->segment(4);
+		$status_first_stage = 1;
 
 		$sql = "SELECT * FROM test_request WHERE id =$test_request";
 		$query = $this->db->query($sql);
@@ -953,17 +952,20 @@ class Test_Dissolution extends CI_Controller{
 	    $results_e=$query_e->result_array();
 	    $data['query_e']=$results_e[0];
 
-	    $query_determination=$this->db->get_where('diss_normal_hplc_determinations', array('test_request' =>$test_request));
+	    $query_determination=$this->db->get_where('diss_enteric_coated_determinations', array('test_request' =>$test_request));
 	    $results_determination=$query_determination->result_array();
 	    $data['query_determination']=$results_determination[0];
 
+	    $query_dissolution_sample = $this->db->get_where('diss_enteric_coated_samples', array('status' => $status_first_stage))->result_array();
+		$data['sql_dissolution_sample']= $query_dissolution_sample[0];
+		
 
 	    $result_monograph = $this->db->get_where('diss_enteric_coated_monograph', array('test_request_id' => $test_request))->result_array();
 	    $data['query_monograph'] = $result_monograph[0];
 		//var_dump($results_e);
 		// die;
 
-		$this->load->view('test_dissolution_view_worksheet_enteric_coated', $data);	
+		$this->load->view('tests/dissolution/test_dissolution_view_worksheet_enteric_coated', $data);	
 	}
 	function view_worksheet_normal(){
 		$data['assignment'] = $this->uri->segment(3);
@@ -989,7 +991,7 @@ class Test_Dissolution extends CI_Controller{
 		//var_dump($results_e);
 		// die;
 
-		$this->load->view('test_dissolution_view_worksheet_normal', $data);	
+		$this->load->view('tests/dissolution/test_dissolution_view_worksheet_normal', $data);	
 	}
 	function view_worksheet_two_component(){
 		$data['assignment'] = $this->uri->segment(3);
@@ -1019,7 +1021,7 @@ class Test_Dissolution extends CI_Controller{
 		// var_dump($results_determination);
 		// die;
 
-		$this->load->view('test_dissolution_view_worksheet_two_component', $data);	
+		$this->load->view('tests/dissolution/test_dissolution_view_worksheet_two_component', $data);	
 	}
 }
 ?>

@@ -13,8 +13,16 @@ class Test_Dissolution_Delayed_Release_Model extends CI_Model{
 		$status =1;
 		$test_request=$this->input->post('test_request');
 		$assignment=$this->input->post('assignment');
-		$test_type='Dissolution Test: Delayed Release Capsules';
+		$test_name='Dissolution Test: Delayed Release Capsules';
 		$analyst= $this->input->post('analyst');
+		$test_type = '5b';
+
+		$data=$this->db->select_max('id')->get('diss_delayed_release')->result();
+        $test_id=$data[0]->id;
+        $test_id++;
+
+		$results = 'Range from '.$this->input->post('range_min').' to '.$this->input->post('range_max');
+
 		
 		$data =array(	
 			'dissolution_type'=>$this->input->post('dissolution_type'),		
@@ -34,7 +42,7 @@ class Test_Dissolution_Delayed_Release_Model extends CI_Model{
 			'actual_temperature'=>$this->input->post('actual_temperature'),
 			'temperature_comment'=>$this->input->post('temperature_comment'),
 			
-			'standard_preparation'=>$this->input->post('standard_preparation'),
+			// 'standard_preparation'=>$this->input->post('standard_preparation'),
 			'standard_weight'=>$this->input->post('standard_weight'),
 			'standard_description'=>$this->input->post('standard_description'),
 			'potency'=>$this->input->post('potency'),
@@ -202,19 +210,28 @@ class Test_Dissolution_Delayed_Release_Model extends CI_Model{
 			);
 		$this->db->insert('diss_delayed_release', $data);
 
-		$coa_data = array(
-			'coa_method_used'=>$coa_method_used,
-			'coa_results'=>$coa_results,
-			'coa_specification'=>$coa_specification,
+		$coa_data = array(			
 			'test_request_id'=>$test_request,
 			'assignment_id'=>$assignment,
-			'test_type'=>$test_type,
-			'analyst'=>$analyst,
+			'test_type'=>$test_name,
+			'test_id'=>$test_id,
+			'remarks'=>$this->input->post('choice'),
+			'date_done'=>$this->input->post('date_done'),
+			'done_by'=>$analyst,
 			);
 		$this->db->insert('coa', $coa_data);
 
+		$result_data = array(			
+			'test_request_id'=>$test_request,
+			'test_type'=>$test_type,
+			'test_id'=>$test_id,
+			'results'=>$results,
+			);
+		$this->db->insert('test_results', $result_data);
+
 		$determination_data = array(
 			'test_request'=>$this->input->post('test_request'),
+			'delayed_release_id'=>$test_type,
 			
 			'df_1'=>$this->input->post('df_1'),
 			'df_2'=>$this->input->post('df_2'),
@@ -279,19 +296,21 @@ class Test_Dissolution_Delayed_Release_Model extends CI_Model{
 		$assignment=$this->input->post('assignment');
 		$test_name='Dissolution Test: Delayed Release Capsules';
 		$analyst= $this->input->post('analyst');
-		$diss_delayed_release_id= 1;
+		$test_type ='5b';
+
+		$data=$this->db->select_max('id')->get('diss_delayed_release')->result();
+        $test_id=$data[0]->id;
+        $test_id++;
 
 		$data = array(
-			'monograph' => $this->input->post('delayed_release_monograph'),
 			'test_request_id' => $this->input->post('test_request'),
-			'assignment_id' => $this->input->post('assignment'),
+			'test_id' => $test_id,
+			'test_type' => $test_type,
 			'test_name' => $test_name,
-			'analyst' => $this->input->post('analyst'),
-			'diss_delayed_release_id' => 1,
-
+			'monograph_specifications' => $this->input->post('specification'),
 
 			);
-		$this->db->insert('diss_delayed_release_monograph', $data);
+		$this->db->insert('monograph_specifications', $data);
 		redirect('test/index/'.$assignment.'/'.$test_request);	
 
 	}
